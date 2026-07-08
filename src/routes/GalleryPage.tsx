@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import { AppNav } from '../components/AppNav'
-import { useGalleryStore } from '../stores/useGalleryStore'
+import { MemoryOverlay } from '../components/MemoryOverlay'
+import { type MemoryEntry, useGalleryStore } from '../stores/useGalleryStore'
 
 export function GalleryPage() {
+  const [activeMemory, setActiveMemory] = useState<MemoryEntry | null>(null)
   const memories = useGalleryStore((state) => state.memories)
-  const unlockMemory = useGalleryStore((state) => state.unlockMemory)
   const resetGallery = useGalleryStore((state) => state.resetGallery)
 
   return (
@@ -23,8 +25,17 @@ export function GalleryPage() {
                     <span aria-label="Locked memory">?</span>
                   )}
                 </div>
-                <button type="button" onClick={() => unlockMemory(memory.id)}>
-                  Unlock
+                <div>
+                  <p className="panel-label">{memory.dateLabel}</p>
+                  <strong>{memory.title}</strong>
+                  <p>{memory.unlocked ? memory.caption : 'Collect 100 Memory Shards to unlock.'}</p>
+                </div>
+                <button
+                  type="button"
+                  disabled={!memory.unlocked}
+                  onClick={() => setActiveMemory(memory)}
+                >
+                  Replay memory
                 </button>
               </article>
             ))}
@@ -36,6 +47,9 @@ export function GalleryPage() {
           Reset gallery
         </button>
       </section>
+      {activeMemory ? (
+        <MemoryOverlay memory={activeMemory} onContinue={() => setActiveMemory(null)} />
+      ) : null}
     </main>
   )
 }
