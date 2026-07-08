@@ -8,7 +8,9 @@
 
 - Fluffy mostly white long-haired cat.
 - Black cap-like marking across the head and ears.
-- Black patch on one side of the face.
+- White central blaze from the forehead down between the eyes to the pink nose.
+- Asymmetrical black patch on one side of the face, continuing from the black head
+  cap and ear while the other cheek stays mostly white.
 - Two black bang-like forehead tufts shaped as clean right triangles; they sit above
   the eyes and must not cover either eye.
 - Pale yellow-green eyes and small pink nose.
