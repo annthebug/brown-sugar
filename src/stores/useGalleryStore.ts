@@ -3,13 +3,18 @@ import { persist } from 'zustand/middleware'
 
 export type MemoryEntry = {
   id: string
+  title: string
+  dateLabel: string
+  caption: string
   photoUrl: string
   unlocked: boolean
+  unlockedAt?: string
 }
 
 type GalleryState = {
   memories: MemoryEntry[]
-  unlockMemory: (id: string) => void
+  unlockMemory: (id: string) => MemoryEntry | null
+  unlockNextMemory: () => MemoryEntry | null
   resetGallery: () => void
 }
 
@@ -26,23 +31,46 @@ const getMemoryId = (path: string) => {
 }
 
 const initialMemories: MemoryEntry[] = Object.entries(memoryPhotoModules)
-  .map(([path, photoUrl]) => ({
-    id: getMemoryId(path),
-    photoUrl,
-    unlocked: false,
-  }))
+  .map(([path, photoUrl], index) => {
+    const memoryNumber = index + 1
+
+    return {
+      id: getMemoryId(path),
+      title: `Memory #${memoryNumber}`,
+      dateLabel: 'Date placeholder',
+      caption: 'A soft memory is waiting here.',
+      photoUrl,
+      unlocked: false,
+    }
+  })
   .sort((firstMemory, secondMemory) => firstMemory.id.localeCompare(secondMemory.id))
 
 export const useGalleryStore = create<GalleryState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       memories: initialMemories,
-      unlockMemory: (id) =>
+      unlockMemory: (id) => {
+        const memory = get().memories.find((entry) => entry.id === id) ?? null
+
         set((state) => ({
           memories: state.memories.map((memory) =>
-            memory.id === id ? { ...memory, unlocked: true } : memory,
+            memory.id === id
+              ? { ...memory, unlocked: true, unlockedAt: memory.unlockedAt ?? new Date().toISOString() }
+              : memory,
           ),
-        })),
+        }))
+
+        return memory ? { ...memory, unlocked: true } : null
+      },
+      unlockNextMemory: () => {
+        const nextMemory = get().memories.find((memory) => !memory.unlocked) ?? null
+
+        if (!nextMemory) {
+          return null
+        }
+
+        return get().unlockMemory(nextMemory.id)
+      },
       resetGallery: () => set({ memories: initialMemories }),
     }),
     {
@@ -55,7 +83,7 @@ export const useGalleryStore = create<GalleryState>()(
           Array.isArray(persistedState.memories)
             ? persistedState.memories
             : []
-        const unlockedById = new Map(
+        const persistedById = new Map(
           persistedMemories
             .filter((memory): memory is MemoryEntry => {
               return (
@@ -67,14 +95,15 @@ export const useGalleryStore = create<GalleryState>()(
                 typeof memory.unlocked === 'boolean'
               )
             })
-            .map((memory) => [memory.id, memory.unlocked]),
+            .map((memory) => [memory.id, memory]),
         )
 
         return {
           ...currentState,
           memories: currentState.memories.map((memory) => ({
             ...memory,
-            unlocked: unlockedById.get(memory.id) ?? memory.unlocked,
+            unlocked: persistedById.get(memory.id)?.unlocked ?? memory.unlocked,
+            unlockedAt: persistedById.get(memory.id)?.unlockedAt,
           })),
         }
       },

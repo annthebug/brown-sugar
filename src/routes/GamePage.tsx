@@ -1,15 +1,47 @@
+import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
+import { MemoryOverlay } from '../components/MemoryOverlay'
 import { PhaserGame } from '../components/PhaserGame'
+import { gameEventBus } from '../game/events/eventBus'
+import { type MemoryEntry, useGalleryStore } from '../stores/useGalleryStore'
 import { useGameStore } from '../stores/useGameStore'
 import { useMbtiStore } from '../stores/useMbtiStore'
 
 export function GamePage() {
+  const [memoryQueue, setMemoryQueue] = useState<MemoryEntry[]>([])
   const memoryShards = useGameStore((state) => state.memoryShards)
-  const collectMemoryShard = useGameStore((state) => state.collectMemoryShard)
+  const totalMemoryShards = useGameStore((state) => state.totalMemoryShards)
+  const collectMemoryShards = useGameStore((state) => state.collectMemoryShards)
   const resetProgress = useGameStore((state) => state.resetProgress)
+  const unlockNextMemory = useGalleryStore((state) => state.unlockNextMemory)
   const eiScore = useMbtiStore((state) => state.scores.EI)
   const answerQuestion = useMbtiStore((state) => state.answerQuestion)
+  const activeMemory = memoryQueue[0]
+
+  const collectShards = useCallback(
+    (amount: number) => {
+      const result = collectMemoryShards(amount)
+      const unlockedMemories = Array.from({ length: result.unlockedMemoryCount })
+        .map(() => unlockNextMemory())
+        .filter((memory): memory is MemoryEntry => memory !== null)
+
+      if (unlockedMemories.length > 0) {
+        setMemoryQueue((currentQueue) => [...currentQueue, ...unlockedMemories])
+      }
+    },
+    [collectMemoryShards, unlockNextMemory],
+  )
+
+  useEffect(() => {
+    return gameEventBus.on('memory-shard-collected', (payload) => {
+      collectShards(payload.amount)
+    })
+  }, [collectShards])
+
+  const continueMemory = () => {
+    setMemoryQueue((currentQueue) => currentQueue.slice(1))
+  }
 
   return (
     <main className="game-shell" aria-labelledby="game-title">
@@ -28,9 +60,13 @@ export function GamePage() {
         <div>
           <p className="panel-label">Memory Shards</p>
           <strong>{memoryShards} / 100</strong>
+          <span>{totalMemoryShards} total</span>
         </div>
-        <button type="button" onClick={collectMemoryShard}>
+        <button type="button" onClick={() => collectShards(1)}>
           Collect shard
+        </button>
+        <button type="button" onClick={() => collectShards(100)}>
+          Collect 100 shards
         </button>
         <button type="button" className="secondary-action" onClick={resetProgress}>
           Reset progress
@@ -43,6 +79,7 @@ export function GamePage() {
           Choose lively path
         </button>
       </section>
+      {activeMemory ? <MemoryOverlay memory={activeMemory} onContinue={continueMemory} /> : null}
     </main>
   )
 }
