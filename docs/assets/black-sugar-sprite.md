@@ -8,7 +8,9 @@
 
 - Fluffy mostly white long-haired cat.
 - Black cap-like marking across the head and ears.
-- Dark gray patch on one side of the face.
+- Black patch on one side of the face.
+- Two black bang-like forehead tufts shaped as clean right triangles; they sit above
+  the eyes and must not cover either eye.
 - Pale yellow-green eyes and small pink nose.
 - Large dark gray fluffy tail.
 - Dark green bow tie collar with a small gold tag.
