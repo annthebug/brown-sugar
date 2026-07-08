@@ -21,7 +21,7 @@
 | 遊戲類型 | Pixel RPG / Story Adventure / Visual Novel / Personality Test / Memory Album |
 | 目標受眾 | 專屬兩人（送給對方的禮物型遊戲） |
 | 平台 | Web（Desktop / iPad / iPhone / Android）＋ PWA 可安裝 |
-| 主題調性 | Pixel 16bit、暖色系、柔和、Pokémon Pixel Art 感、不暴力 |
+| 主題調性 | Pixel 16bit、淡藍色天空背景、莫蘭迪色系、柔和、Pokémon Pixel Art 感、不暴力 |
 
 ---
 
