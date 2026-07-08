@@ -54,13 +54,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (!this.isDashing) this.arcadeBody.setVelocityX(0);
   }
 
-  jump(): void {
-    if (!this.controlsEnabled) return;
+  jump(): boolean {
+    if (!this.controlsEnabled) return false;
     if (this.jumpsLeft > 0) {
       this.arcadeBody.setVelocityY(JUMP_VELOCITY);
       this.jumpsLeft -= 1;
       this.squash();
+      return true;
     }
+    return false;
   }
 
   dash(): void {

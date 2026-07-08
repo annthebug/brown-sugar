@@ -69,6 +69,7 @@ export class ForestScene extends Phaser.Scene {
 
   private touchLeft = false;
   private touchRight = false;
+  private moveState = { left: false, right: false };
 
   constructor() {
     super('Forest');
@@ -223,14 +224,24 @@ export class ForestScene extends Phaser.Scene {
       E: kb.addKey(Codes.E),
     };
 
-    // 動作以「按下」事件觸發（比每幀輪詢 JustDown 更可靠）。移動仍以 isDown 輪詢。
+    // 動作以鍵盤外掛的按鍵事件觸發（與對話框相同的可靠路徑）。
     const onJump = () => this.tryJump();
-    this.keys.SPACE.on('down', onJump);
-    this.keys.W.on('down', onJump);
-    this.cursors.up.on('down', onJump);
-    this.keys.SHIFT.on('down', () => this.tryDash());
-    this.keys.M.on('down', () => this.tryMeow());
-    this.keys.E.on('down', () => this.tryTalk());
+    kb.on('keydown-SPACE', onJump);
+    kb.on('keydown-W', onJump);
+    kb.on('keydown-UP', onJump);
+    kb.on('keydown-SHIFT', () => this.tryDash());
+    kb.on('keydown-M', () => this.tryMeow());
+    kb.on('keydown-E', () => this.tryTalk());
+
+    // 移動：同時以事件狀態與 isDown 輪詢（提高可靠度）。
+    kb.on('keydown-LEFT', () => (this.moveState.left = true));
+    kb.on('keyup-LEFT', () => (this.moveState.left = false));
+    kb.on('keydown-A', () => (this.moveState.left = true));
+    kb.on('keyup-A', () => (this.moveState.left = false));
+    kb.on('keydown-RIGHT', () => (this.moveState.right = true));
+    kb.on('keyup-RIGHT', () => (this.moveState.right = false));
+    kb.on('keydown-D', () => (this.moveState.right = true));
+    kb.on('keyup-D', () => (this.moveState.right = false));
   }
 
   private canAct(): boolean {
@@ -262,7 +273,8 @@ export class ForestScene extends Phaser.Scene {
     const h = this.scale.height;
     const makeBtn = (x: number, y: number, label: string) => {
       const circle = this.add
-        .circle(x, y, 30, 0x000000, 0.35)
+        .circle(x, y, 30, 0x2b1d14, 0.5)
+        .setStrokeStyle(2, 0xf6b352, 0.9)
         .setScrollFactor(0)
         .setDepth(95)
         .setInteractive({ useHandCursor: true });
@@ -463,12 +475,14 @@ export class ForestScene extends Phaser.Scene {
       return;
     }
 
-    const left = this.cursors.left.isDown || this.keys.A.isDown || this.touchLeft;
-    const right = this.cursors.right.isDown || this.keys.D.isDown || this.touchRight;
+    const left =
+      this.cursors.left.isDown || this.keys.A.isDown || this.moveState.left || this.touchLeft;
+    const right =
+      this.cursors.right.isDown || this.keys.D.isDown || this.moveState.right || this.touchRight;
 
     if (left) this.player.moveLeft();
     else if (right) this.player.moveRight();
     else this.player.stopHorizontal();
-    // 跳躍 / 衝刺 / 喵 / 對話改由按鍵 down 事件處理（見 bindInput）。
+    // 跳躍 / 衝刺 / 喵 / 對話由鍵盤事件處理（見 bindInput）。
   }
 }
