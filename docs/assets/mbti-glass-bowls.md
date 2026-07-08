@@ -9,8 +9,9 @@
 - Handmade transparent glass matcha bowl.
 - Rounded bowl silhouette with a subtle pouring lip.
 - Hammered / rippled clear-glass texture.
-- Small dark-blue speckles through the bowl body.
-- Powder-blue lower fragments for the source-inspired ISFJ / ISFP bowls.
+- Blue speckles through the bowl body.
+- Pale blue dots and light pink / copper lower fragments for the
+  source-inspired ISFJ / ISFP bowls.
 - No hand, fingers, background, or external prop should be included.
 
 ## MBTI grid order
@@ -27,9 +28,7 @@ The sheet is a 4x4 grid in row-major order:
 ## Fixed design constraints
 
 - ISFJ and ISFP must keep the source design colors and pattern: clear glass,
-  many small dark-blue speckles, powder-blue lower fragments, and blue accents
-  only. They must not include pink, copper, orange, green, purple, or any
-  non-blue accent color.
+  blue speckles, pale blue dots, and light pink / copper lower fragments.
 - Other MBTI bowls may vary color palettes while keeping the same glass bowl
   silhouette and handmade speckled-glass style.
 
