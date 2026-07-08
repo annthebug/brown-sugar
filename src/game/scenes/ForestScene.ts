@@ -20,9 +20,9 @@ const BOSS_TRIGGER_X = 2360;
 const NPC_TALK_RANGE = 56;
 
 const SHARD_POSITIONS: [number, number][] = [
-  [130, 470], [200, 470], [300, 470], [380, 470], [560, 470],
-  [820, 470], [1000, 470], [1120, 470], [1400, 470], [1650, 470],
-  [1900, 470], [2150, 470], [2250, 470], [2380, 470],
+  [130, 486], [200, 486], [300, 486], [380, 486], [560, 486],
+  [820, 486], [1000, 486], [1120, 486], [1400, 486], [1650, 486],
+  [1900, 486], [2150, 486], [2250, 486], [2380, 486],
   [460, 380], [700, 330], [1300, 380], [1520, 330], [1740, 380], [2020, 350],
 ];
 
@@ -210,11 +210,52 @@ export class ForestScene extends Phaser.Scene {
 
   private bindInput(): void {
     this.dialogue = new DialogueBox(this);
-    this.cursors = this.input.keyboard!.createCursorKeys();
-    this.keys = this.input.keyboard!.addKeys('W,A,D,SPACE,SHIFT,M,E') as Record<
-      string,
-      Phaser.Input.Keyboard.Key
-    >;
+    const kb = this.input.keyboard!;
+    this.cursors = kb.createCursorKeys();
+    const Codes = Phaser.Input.Keyboard.KeyCodes;
+    this.keys = {
+      W: kb.addKey(Codes.W),
+      A: kb.addKey(Codes.A),
+      D: kb.addKey(Codes.D),
+      SPACE: kb.addKey(Codes.SPACE),
+      SHIFT: kb.addKey(Codes.SHIFT),
+      M: kb.addKey(Codes.M),
+      E: kb.addKey(Codes.E),
+    };
+
+    // 動作以「按下」事件觸發（比每幀輪詢 JustDown 更可靠）。移動仍以 isDown 輪詢。
+    const onJump = () => this.tryJump();
+    this.keys.SPACE.on('down', onJump);
+    this.keys.W.on('down', onJump);
+    this.cursors.up.on('down', onJump);
+    this.keys.SHIFT.on('down', () => this.tryDash());
+    this.keys.M.on('down', () => this.tryMeow());
+    this.keys.E.on('down', () => this.tryTalk());
+  }
+
+  private canAct(): boolean {
+    return !this.dialogue.isActive() && !this.chapterComplete && this.player.controlsEnabled;
+  }
+
+  private tryJump(): void {
+    if (this.canAct()) this.player.jump();
+  }
+
+  private tryDash(): void {
+    if (this.canAct()) this.player.dash();
+  }
+
+  private tryMeow(): void {
+    if (this.canAct()) this.player.meow();
+  }
+
+  private tryTalk(): void {
+    if (!this.canAct()) return;
+    const near =
+      !this.elderTalked &&
+      Phaser.Math.Distance.Between(this.player.x, this.player.y, this.elder.x, this.elder.y) <
+        NPC_TALK_RANGE;
+    if (near) this.startElderDialogue();
   }
 
   private buildTouchControls(): void {
@@ -428,18 +469,6 @@ export class ForestScene extends Phaser.Scene {
     if (left) this.player.moveLeft();
     else if (right) this.player.moveRight();
     else this.player.stopHorizontal();
-
-    const jumpPressed =
-      Phaser.Input.Keyboard.JustDown(this.keys.SPACE) ||
-      Phaser.Input.Keyboard.JustDown(this.cursors.up) ||
-      Phaser.Input.Keyboard.JustDown(this.keys.W);
-    if (jumpPressed) this.player.jump();
-
-    if (Phaser.Input.Keyboard.JustDown(this.keys.SHIFT)) this.player.dash();
-    if (Phaser.Input.Keyboard.JustDown(this.keys.M)) this.player.meow();
-
-    if (Phaser.Input.Keyboard.JustDown(this.keys.E) && nearElder) {
-      this.startElderDialogue();
-    }
+    // 跳躍 / 衝刺 / 喵 / 對話改由按鍵 down 事件處理（見 bindInput）。
   }
 }
