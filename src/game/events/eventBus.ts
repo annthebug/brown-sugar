@@ -1,6 +1,7 @@
 export type GameEventMap = {
   'phaser:booted': { scene: string }
-  'phaser:preloaded': { scene: string }
+  'phaser:preload-progress': { scene: string; progress: number }
+  'phaser:preloaded': { scene: string; assetCount: number }
   'phaser:ready': { scene: string; message: string }
 }
 
