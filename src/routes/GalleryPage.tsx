@@ -12,21 +12,26 @@ export function GalleryPage() {
       <section className="page-card">
         <p className="eyebrow">Gallery</p>
         <h1 id="gallery-title">Memory Album</h1>
-        <p className="hero-copy">
-          這裡先用佔位回憶驗證 Gallery store 的解鎖與持久化。
-        </p>
-        <div className="memory-grid">
-          {memories.map((memory) => (
-            <article key={memory.id} className="memory-card">
-              <span>{memory.unlocked ? 'Unlocked' : 'Locked'}</span>
-              <h2>{memory.title}</h2>
-              <p>{memory.unlocked ? memory.caption : '收集更多碎片後解鎖。'}</p>
-              <button type="button" onClick={() => unlockMemory(memory.id)}>
-                Unlock
-              </button>
-            </article>
-          ))}
-        </div>
+        {memories.length > 0 ? (
+          <div className="memory-grid">
+            {memories.map((memory, index) => (
+              <article key={memory.id} className="memory-card">
+                <div className="memory-photo-frame">
+                  {memory.unlocked ? (
+                    <img src={memory.photoUrl} alt={`Memory ${index + 1}`} />
+                  ) : (
+                    <span aria-label="Locked memory">?</span>
+                  )}
+                </div>
+                <button type="button" onClick={() => unlockMemory(memory.id)}>
+                  Unlock
+                </button>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p className="hero-copy">把照片放進 assets/memories 後，相簿會自動載入。</p>
+        )}
         <button type="button" className="secondary-action page-action" onClick={resetGallery}>
           Reset gallery
         </button>
