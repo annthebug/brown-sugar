@@ -35,7 +35,8 @@ a {
 }
 
 .home-shell,
-.game-shell {
+.game-shell,
+.page-shell {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
@@ -57,7 +58,9 @@ a {
 .home-shell::before,
 .home-shell::after,
 .game-shell::before,
-.game-shell::after {
+.game-shell::after,
+.page-shell::before,
+.page-shell::after {
   position: absolute;
   z-index: 0;
   display: block;
@@ -81,6 +84,12 @@ a {
   background: #d8c6bd;
 }
 
+.page-shell::before {
+  right: -9rem;
+  bottom: -8rem;
+  background: #d8c6bd;
+}
+
 .home-shell::after {
   top: -9rem;
   left: -8rem;
@@ -93,9 +102,17 @@ a {
   background: #b7c9bd;
 }
 
+.page-shell::after {
+  top: -9rem;
+  left: -8rem;
+  background: #b7c9bd;
+}
+
 .hero-card,
 .journey-panel,
-.game-card {
+.game-card,
+.page-card,
+.store-panel {
   position: relative;
   z-index: 1;
   border: 2px solid rgba(111, 138, 148, 0.34);
@@ -142,9 +159,15 @@ h1 {
   margin-top: 2rem;
 }
 
+.app-nav a,
 .hero-actions a,
 .hero-actions button,
-.back-link {
+.back-link,
+.store-panel button,
+.memory-card button,
+.settings-card button,
+.page-action,
+.page-link {
   min-width: 9rem;
   cursor: pointer;
   border: 2px solid rgba(90, 120, 132, 0.26);
@@ -160,9 +183,23 @@ h1 {
     filter 160ms ease;
 }
 
-.hero-actions a {
+.app-nav a,
+.hero-actions a,
+.page-link {
   display: inline-grid;
   place-items: center;
+}
+
+.app-nav a {
+  min-width: auto;
+  padding: 0.55rem 0.9rem;
+  background: rgba(250, 247, 239, 0.7);
+  color: #4f6065;
+}
+
+.app-nav a.active {
+  background: #9fbfca;
+  color: #f8fbf9;
 }
 
 .back-link {
@@ -171,24 +208,39 @@ h1 {
   color: #4f6065;
 }
 
+.app-nav a:hover,
+.app-nav a:focus-visible,
 .hero-actions a:hover,
 .hero-actions a:focus-visible,
 .hero-actions button:hover,
 .hero-actions button:focus-visible,
 .back-link:hover,
-.back-link:focus-visible {
+.back-link:focus-visible,
+.store-panel button:hover,
+.store-panel button:focus-visible,
+.memory-card button:hover,
+.memory-card button:focus-visible,
+.settings-card button:hover,
+.settings-card button:focus-visible,
+.page-action:hover,
+.page-action:focus-visible,
+.page-link:hover,
+.page-link:focus-visible {
   box-shadow: 0 14px 30px rgba(89, 128, 141, 0.28);
   filter: brightness(1.04);
   transform: translateY(-2px);
 }
 
+.app-nav a:focus-visible,
 .hero-actions a:focus-visible,
 .hero-actions button:focus-visible {
   outline: 3px solid rgba(215, 184, 160, 0.7);
   outline-offset: 4px;
 }
 
-.hero-actions .secondary-action {
+.hero-actions .secondary-action,
+.store-panel .secondary-action,
+.page-action {
   background: #d9c3ba;
   color: #4f6065;
 }
@@ -256,11 +308,25 @@ h1 {
   font-weight: 700;
 }
 
-.game-shell {
+.game-shell,
+.page-shell {
   display: grid;
   gap: 1.25rem;
   align-content: start;
   padding: clamp(1.25rem, 4vw, 3rem);
+}
+
+.app-nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: flex-end;
+}
+
+.home-shell .app-nav {
+  grid-column: 1 / -1;
 }
 
 .game-header {
@@ -304,6 +370,98 @@ h1 {
   text-align: center;
 }
 
+.store-panel {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+}
+
+.panel-label,
+.memory-card span {
+  margin: 0 0 0.35rem;
+  color: #7d8f86;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-card {
+  display: grid;
+  gap: 1.25rem;
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.page-card h1 {
+  max-width: none;
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.memory-card,
+.ending-summary div {
+  border: 2px solid rgba(111, 138, 148, 0.22);
+  border-radius: 22px;
+  padding: 1rem;
+  background: rgba(223, 233, 226, 0.72);
+}
+
+.memory-card h2,
+.memory-card p {
+  margin: 0 0 0.8rem;
+}
+
+.settings-card label {
+  display: grid;
+  gap: 0.5rem;
+  color: #43585f;
+  font-weight: 800;
+}
+
+.settings-card input,
+.settings-card select {
+  accent-color: #8fb2bf;
+  border: 2px solid rgba(111, 138, 148, 0.34);
+  border-radius: 14px;
+  padding: 0.7rem 0.85rem;
+  background: rgba(248, 251, 249, 0.8);
+  color: #334a54;
+  font: inherit;
+}
+
+.ending-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.ending-summary dt,
+.ending-summary dd {
+  margin: 0;
+}
+
+.ending-summary dt {
+  color: #7d8f86;
+  font-weight: 800;
+}
+
+.ending-summary dd {
+  margin-top: 0.35rem;
+  color: #385867;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
 @media (max-width: 820px) {
   .home-shell {
     grid-template-columns: 1fr;
@@ -320,5 +478,11 @@ h1 {
 
   .game-header h1 {
     text-align: left;
+  }
+
+  .store-panel,
+  .memory-grid,
+  .ending-summary {
+    grid-template-columns: 1fr;
   }
 }
