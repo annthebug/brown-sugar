@@ -11,6 +11,12 @@ export type GameEventMap = {
   'phaser:preloaded': { scene: string; assetCount: number; failedAssets: readonly string[] }
   'phaser:ready': { scene: string; message: string }
   'memory-shard-collected': { scene: string; amount: number }
+  'player:meow': { x: number; y: number }
+  'player:collect': { x: number; y: number }
+  'player:talk-start': Record<string, never>
+  'player:talk-end': Record<string, never>
+  'player:dash': { direction: 1 | -1 }
+  'player:double-jump': { x: number; y: number }
 }
 
 type GameEventName = keyof GameEventMap

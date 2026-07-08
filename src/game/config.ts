@@ -18,6 +18,13 @@ export function createGameConfig(parent: HTMLElement): Phaser.Types.Core.GameCon
       mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH,
     },
+    physics: {
+      default: 'arcade',
+      arcade: {
+        gravity: { x: 0, y: 900 },
+        debug: false,
+      },
+    },
     scene: [BootScene, PreloadScene, GameScene],
   }
 }
