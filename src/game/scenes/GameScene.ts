@@ -133,6 +133,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   private addMemoryShard(x: number, y: number) {
+    let collected = false
     const shard = this.add.container(x, y)
     const glow = this.add.circle(0, 0, 34, MORANDI_PALETTE.warmBeige, 0.34)
     const diamond = this.add
@@ -150,7 +151,24 @@ export class GameScene extends Phaser.Scene {
     shard.add([glow, diamond, label])
     shard.setSize(88, 108)
     shard.setInteractive({ useHandCursor: true })
+    const glowTween = this.tweens.add({
+      targets: glow,
+      alpha: 0.58,
+      duration: 950,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
+    })
+
     shard.on('pointerdown', () => {
+      if (collected) {
+        return
+      }
+
+      collected = true
+      shard.disableInteractive()
+      glowTween.stop()
+
       gameEventBus.emit('memory-shard-collected', {
         scene: this.scene.key,
         amount: 1,
@@ -162,16 +180,11 @@ export class GameScene extends Phaser.Scene {
         duration: 120,
         yoyo: true,
         ease: 'Sine.easeInOut',
+        onComplete: () => {
+          shard.setAlpha(0.46)
+          label.setText('Collected')
+        },
       })
-    })
-
-    this.tweens.add({
-      targets: glow,
-      alpha: 0.58,
-      duration: 950,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
     })
   }
 }
