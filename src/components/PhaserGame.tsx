@@ -17,6 +17,17 @@ export function PhaserGame() {
       setStatus(`${payload.scene} started.`)
     })
 
+    const unsubscribePreloadProgress = gameEventBus.on(
+      'phaser:preload-progress',
+      (payload) => {
+        setStatus(`${payload.scene} loading ${payload.progress}%.`)
+      },
+    )
+
+    const unsubscribePreloaded = gameEventBus.on('phaser:preloaded', (payload) => {
+      setStatus(`${payload.scene} loaded ${payload.assetCount} assets.`)
+    })
+
     if (containerRef.current && !gameRef.current) {
       gameRef.current = new Phaser.Game(createGameConfig(containerRef.current))
     }
@@ -24,6 +35,8 @@ export function PhaserGame() {
     return () => {
       unsubscribeReady()
       unsubscribeBooted()
+      unsubscribePreloadProgress()
+      unsubscribePreloaded()
       gameRef.current?.destroy(true)
       gameRef.current = null
     }

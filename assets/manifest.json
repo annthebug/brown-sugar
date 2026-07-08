@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "palette": {
+    "skyTop": "#d8edf4",
+    "skyBottom": "#e8f2ef",
+    "dustyBlue": "#8fb2bf",
+    "sageGreen": "#b7c9bd",
+    "warmBeige": "#f4eadc",
+    "mistPink": "#d9b7b1"
+  },
+  "assets": {
+    "characters": [
+      {
+        "key": "black-sugar",
+        "type": "atlas",
+        "texture": "characters/black-sugar-sprite-sheet-v1.png",
+        "atlas": "characters/black-sugar-sprite-sheet-v1.json",
+        "frames": [
+          "black-sugar-front-idle",
+          "black-sugar-front-blink",
+          "black-sugar-side-idle",
+          "black-sugar-side-walk-1",
+          "black-sugar-side-walk-2",
+          "black-sugar-back-idle",
+          "black-sugar-jump",
+          "black-sugar-dash",
+          "black-sugar-meow",
+          "black-sugar-happy-sparkle",
+          "black-sugar-sad-pleading",
+          "black-sugar-collect-item"
+        ]
+      }
+    ],
+    "scenes": [
+      {
+        "key": "scene-pale-blue-sky",
+        "type": "image",
+        "url": "scenes/pale-blue-sky-placeholder.png"
+      }
+    ],
+    "ui": [
+      {
+        "key": "ui-loading-panel",
+        "type": "image",
+        "url": "ui/loading-panel-placeholder.png"
+      }
+    ],
+    "memories": [],
+    "bowls": [],
+    "audio": [
+      {
+        "key": "audio-soft-chime",
+        "type": "audio",
+        "url": "audio/soft-chime-placeholder.wav"
+      }
+    ]
+  }
+}

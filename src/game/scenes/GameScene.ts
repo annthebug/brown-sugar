@@ -1,12 +1,6 @@
 import Phaser from 'phaser'
+import { ASSET_KEYS, BLACK_SUGAR_FRAMES, MORANDI_PALETTE } from '../assets/assetManifest'
 import { gameEventBus } from '../events/eventBus'
-
-const SKY_TOP = 0xd8edf4
-const SKY_BOTTOM = 0xe8f2ef
-const CLOUD = 0xf8fbf9
-const SAGE_GREEN = 0xb7c9bd
-const WARM_BEIGE = 0xf4eadc
-const DUSTY_BLUE = 0x8fb2bf
 
 export class GameScene extends Phaser.Scene {
   constructor() {
@@ -16,20 +10,27 @@ export class GameScene extends Phaser.Scene {
   create() {
     const { width, height } = this.scale
 
-    this.cameras.main.setBackgroundColor(SKY_TOP)
-    this.add.rectangle(width / 2, height / 2, width, height, SKY_TOP)
-    this.add.rectangle(width / 2, height * 0.62, width, height * 0.76, SKY_BOTTOM, 0.68)
+    this.cameras.main.setBackgroundColor(MORANDI_PALETTE.skyTop)
+    this.add.image(width / 2, height / 2, ASSET_KEYS.paleBlueSky).setDisplaySize(width, height)
+    this.add.rectangle(
+      width / 2,
+      height * 0.62,
+      width,
+      height * 0.76,
+      MORANDI_PALETTE.skyBottom,
+      0.28,
+    )
 
     this.addCloud(width * 0.18, height * 0.2, 1)
     this.addCloud(width * 0.72, height * 0.24, 0.84)
     this.addCloud(width * 0.45, height * 0.34, 0.62)
 
-    this.add.rectangle(width / 2, height - 56, width, 112, SAGE_GREEN)
-    this.add.rectangle(width / 2, height - 22, width, 44, WARM_BEIGE, 0.8)
+    this.add.rectangle(width / 2, height - 56, width, 112, MORANDI_PALETTE.sageGreen)
+    this.add.rectangle(width / 2, height - 22, width, 44, MORANDI_PALETTE.warmBeige, 0.8)
 
     const title = this.add
       .text(width / 2, height * 0.42, 'Brown Sugar begins here', {
-        color: '#385867',
+        color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '28px',
         fontStyle: 'bold',
@@ -38,7 +39,7 @@ export class GameScene extends Phaser.Scene {
 
     this.add
       .text(width / 2, title.y + 42, 'Phaser GameScene · pale blue sky', {
-        color: '#50676f',
+        color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '16px',
       })
@@ -55,25 +56,19 @@ export class GameScene extends Phaser.Scene {
   private addCloud(x: number, y: number, scale: number) {
     const cloud = this.add.container(x, y)
     const circles = [
-      this.add.circle(-44 * scale, 8 * scale, 28 * scale, CLOUD, 0.82),
-      this.add.circle(-12 * scale, -10 * scale, 38 * scale, CLOUD, 0.88),
-      this.add.circle(30 * scale, 4 * scale, 30 * scale, CLOUD, 0.76),
-      this.add.circle(60 * scale, 14 * scale, 20 * scale, CLOUD, 0.64),
+      this.add.circle(-44 * scale, 8 * scale, 28 * scale, MORANDI_PALETTE.cloud, 0.82),
+      this.add.circle(-12 * scale, -10 * scale, 38 * scale, MORANDI_PALETTE.cloud, 0.88),
+      this.add.circle(30 * scale, 4 * scale, 30 * scale, MORANDI_PALETTE.cloud, 0.76),
+      this.add.circle(60 * scale, 14 * scale, 20 * scale, MORANDI_PALETTE.cloud, 0.64),
     ]
 
     cloud.add(circles)
   }
 
   private addBrownSugar(x: number, y: number) {
-    const cat = this.add.container(x, y)
-
-    cat.add([
-      this.add.triangle(-24, -36, 0, 28, 28, 28, 14, -18, 0x5a453d),
-      this.add.triangle(24, -36, 0, 28, -28, 28, -14, -18, 0x5a453d),
-      this.add.circle(0, 0, 44, 0x6a4f45),
-      this.add.circle(-14, -6, 5, CLOUD),
-      this.add.circle(14, -6, 5, CLOUD),
-      this.add.rectangle(0, 20, 52, 8, DUSTY_BLUE, 0.92),
-    ])
+    this.add
+      .sprite(x, y, ASSET_KEYS.blackSugar, BLACK_SUGAR_FRAMES.frontIdle)
+      .setOrigin(0.5, 1)
+      .setScale(0.44)
   }
 }
