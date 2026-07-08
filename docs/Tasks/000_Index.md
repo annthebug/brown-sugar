@@ -10,7 +10,7 @@
 | [002](002.md) | 整合 Phaser 3 與 React | 基礎建設 | ✅ 完成 |
 | [003](003.md) | 狀態管理（Zustand）與路由（React Router） | 基礎建設 | ✅ 完成 |
 | [004](004.md) | 資源預載與美術資源結構 | 資源 | ✅ 完成 |
-| [005](005.md) | 主角黑糖：移動與能力 | 玩法 | ⬜ 未開始 |
+| [005](005.md) | 主角黑糖：移動與能力 | 玩法 | ✅ 完成 |
 | [006](006.md) | Memory 系統（收集與解鎖） | 玩法 | ✅ 完成 |
 | [007](007.md) | 對話系統（Visual Novel） | 玩法 | ✅ 完成 |
 | [008](008.md) | MBTI 系統（題庫與計分） | 系統 | 🟨 進行中 |
@@ -34,7 +34,8 @@
 - `package.json` 已與文件統一為 Phaser 3；目前使用 `phaser@^3.90.0`。
 - 已完成基礎 Vite / React / TypeScript、React Router、Zustand stores、`/game` Phaser 掛載與 event bus。
 - `PreloadScene`、資源 manifest、首頁 / 設定 / 相簿 / 結局預覽與部分 store 狀態已建立；Task 004 的 placeholder 預載流程已完成。
-- 玩家移動能力後續章節整合、章節關卡、Howler 音訊服務、Firebase Sync、PWA、Vercel 部署與成就系統尚未進入核心實作。
+- Task 005（黑糖移動與能力）已實作完成，並修復了 `GameScene` 中殘留的 Task 004 靜態黑糖 placeholder 與 `Player` 重疊造成的「畫面出現兩隻黑糖」視覺問題。
+- Memory Shard 目前仍為點擊拾取（Task 006 遺留待辦：改為與 `Player` 碰撞自動拾取），章節關卡、Howler 音訊服務、Firebase Sync、PWA、Vercel 部署與成就系統尚未進入核心實作。
 
 ## 任務檔案格式
 
