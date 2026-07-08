@@ -8,7 +8,7 @@
 - 一款專屬兩人的 Pixel RPG 網頁遊戲。
 - 主角：貓咪「黑糖」，收集回憶碎片（Memory Shards）找回玻璃抹茶碗。
 - 隱藏式 MBTI 測驗，透過 NPC 對話自然完成，玩家不應察覺在做測驗。
-- 風格：Pixel 16bit、暖色系、柔和、Pokémon Pixel Art 感、不暴力。
+- 風格：Pixel 16bit、淡藍色天空背景、莫蘭迪色系、柔和、Pokémon Pixel Art 感、不暴力。
 
 ## 技術棧（固定，未經討論不得替換）
 - Frontend: React + TypeScript + Vite
@@ -29,6 +29,7 @@
 
 ## 內容規範
 - 溫暖、柔和、不暴力、不血腥。
+- 整體配色以淡藍色為主，背景應呈現淡藍色天空；輔色採低飽和莫蘭迪色系。
 - Boss 象徵情緒（Time Monster、Snow Spirit、Glass Master、Inner Doubt、Perfectionism）。
 - 回憶內容以佔位資源處理，不杜撰真實隱私。
 
