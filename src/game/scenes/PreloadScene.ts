@@ -2,17 +2,21 @@ import Phaser from 'phaser'
 import {
   MORANDI_PALETTE,
   type GameAsset,
+  getAssetLabel,
   getPreloadAssets,
 } from '../assets/assetManifest'
 import { gameEventBus } from '../events/eventBus'
 
 export class PreloadScene extends Phaser.Scene {
+  private failedAssets = new Map<string, string>()
+
   constructor() {
     super('PreloadScene')
   }
 
   preload() {
     const assets = getPreloadAssets()
+    const assetsByKey = new Map(assets.map((asset) => [asset.key, asset]))
     const { width, height } = this.scale
     const barWidth = width * 0.46
     const barHeight = 18
@@ -61,6 +65,15 @@ export class PreloadScene extends Phaser.Scene {
       })
       .setOrigin(0.5)
 
+    const failureText = this.add
+      .text(width / 2, barY + 70, '', {
+        color: MORANDI_PALETTE.errorText,
+        fontFamily: 'monospace',
+        fontSize: '13px',
+      })
+      .setOrigin(0.5)
+      .setVisible(false)
+
     this.load.on('progress', (value: number) => {
       const progress = Math.round(value * 100)
       progressFill.width = Math.max(1, barWidth * value)
@@ -71,10 +84,29 @@ export class PreloadScene extends Phaser.Scene {
       })
     })
 
+    this.load.on('loaderror', (file: Phaser.Loader.File) => {
+      const asset = assetsByKey.get(file.key)
+      const assetLabel = asset ? getAssetLabel(asset) : file.key
+      this.failedAssets.set(file.key, assetLabel)
+      failureText
+        .setText(`Could not load ${assetLabel}. Check assets/manifest.json.`)
+        .setVisible(true)
+
+      gameEventBus.emit('phaser:preload-error', {
+        scene: this.scene.key,
+        key: file.key,
+        assetLabel,
+        fileType: file.type,
+        url: file.src,
+      })
+    })
+
     this.load.on('complete', () => {
+      const failedAssets = [...this.failedAssets.values()]
       gameEventBus.emit('phaser:preloaded', {
         scene: this.scene.key,
         assetCount: assets.length,
+        failedAssets,
       })
     })
 
@@ -84,6 +116,20 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   create() {
+    if (this.failedAssets.size > 0) {
+      const { width, height } = this.scale
+      this.add
+        .text(width / 2, height * 0.77, 'Preload paused until placeholder assets are fixed.', {
+          color: MORANDI_PALETTE.errorText,
+          fontFamily: 'monospace',
+          fontSize: '15px',
+          fontStyle: 'bold',
+        })
+        .setOrigin(0.5)
+
+      return
+    }
+
     this.scene.start('GameScene')
   }
 

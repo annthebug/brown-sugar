@@ -55,6 +55,10 @@
 - 統一存放於 `assets/`，依類型分子資料夾（`characters/`、`scenes/`、`ui/`、`memories/`、`bowls/`、`audio/` 等）。
 - 檔名使用小寫與連字號，例如 `black-sugar-idle.png`。
 - Sprite sheet 附對應 JSON（Phaser Atlas）。
+- 產生型 placeholder 檔名需以 `-placeholder` 結尾；擁有者提供的 memory 原始照片可先保留相機檔名，待相簿資料模型完成後再整理。
+- `src/game/assets/assetManifest.ts` 是 Phaser 預載的執行期來源；`assets/manifest.json` 與 `assets/README.md` 作為資源審閱與替換規範。
+- 替換正式素材時需保留既有 asset key，避免破壞已接好的 Phaser preload 與場景引用。
+- PreloadScene 必須在資源載入失敗時停留在載入畫面並顯示失敗項目，不可靜默進入缺失素材的遊戲場景。
 
 ## 動畫
 

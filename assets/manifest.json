@@ -1,5 +1,11 @@
 {
   "version": 1,
+  "placeholderRules": {
+    "filename": "Generated placeholder assets use lowercase kebab-case and end with -placeholder before the extension.",
+    "palette": "Use pale blue sky as the base with Morandi dusty blue, sage green, warm beige, and mist pink accents.",
+    "privacy": "Memory photos are owner-provided placeholders; do not invent private captions or replacement content.",
+    "replacement": "When final art replaces a placeholder, keep the manifest key stable and update only the file path when needed."
+  },
   "palette": {
     "skyTop": "#d8edf4",
     "skyBottom": "#e8f2ef",
@@ -15,6 +21,9 @@
         "type": "atlas",
         "texture": "characters/black-sugar-sprite-sheet-v1.png",
         "atlas": "characters/black-sugar-sprite-sheet-v1.json",
+        "placeholder": true,
+        "purpose": "preload",
+        "description": "Brown Sugar character placeholder atlas for boot and preview scenes.",
         "frames": [
           "black-sugar-front-idle",
           "black-sugar-front-blink",
@@ -35,23 +44,41 @@
       {
         "key": "scene-pale-blue-sky",
         "type": "image",
-        "url": "scenes/pale-blue-sky-placeholder.png"
+        "url": "scenes/pale-blue-sky-placeholder.png",
+        "placeholder": true,
+        "purpose": "preload",
+        "description": "Pale blue sky placeholder background for the current GameScene."
       }
     ],
     "ui": [
       {
         "key": "ui-loading-panel",
         "type": "image",
-        "url": "ui/loading-panel-placeholder.png"
+        "url": "ui/loading-panel-placeholder.png",
+        "placeholder": true,
+        "purpose": "preload",
+        "description": "Soft loading panel placeholder for Phaser preload UI."
       }
     ],
     "memories": [],
-    "bowls": [],
+    "bowls": [
+      {
+        "key": "bowls-mbti-glass-sheet",
+        "type": "image",
+        "url": "bowls/mbti-glass-bowls-sheet-v1.png",
+        "placeholder": true,
+        "purpose": "preload",
+        "description": "MBTI glass bowl placeholder sheet for future ending previews."
+      }
+    ],
     "audio": [
       {
         "key": "audio-soft-chime",
         "type": "audio",
-        "url": "audio/soft-chime-placeholder.wav"
+        "url": "audio/soft-chime-placeholder.wav",
+        "placeholder": true,
+        "purpose": "preload",
+        "description": "Soft chime placeholder used to validate audio preload plumbing."
       }
     ]
   }
