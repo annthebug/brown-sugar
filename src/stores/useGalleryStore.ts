@@ -3,8 +3,7 @@ import { persist } from 'zustand/middleware'
 
 export type MemoryEntry = {
   id: string
-  title: string
-  caption: string
+  photoUrl: string
   unlocked: boolean
 }
 
@@ -14,20 +13,25 @@ type GalleryState = {
   resetGallery: () => void
 }
 
-const initialMemories: MemoryEntry[] = [
-  {
-    id: 'memory-001',
-    title: 'Memory #1',
-    caption: '一段等待正式照片放入的柔和回憶。',
+const memoryPhotoModules = import.meta.glob<string>('../../assets/memories/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+})
+
+const getMemoryId = (path: string) => {
+  const filename = path.split('/').at(-1) ?? path
+
+  return filename.replace(/\.[^.]+$/, '')
+}
+
+const initialMemories: MemoryEntry[] = Object.entries(memoryPhotoModules)
+  .map(([path, photoUrl]) => ({
+    id: getMemoryId(path),
+    photoUrl,
     unlocked: false,
-  },
-  {
-    id: 'memory-002',
-    title: 'Memory #2',
-    caption: '更多碎片會在旅途中慢慢亮起。',
-    unlocked: false,
-  },
-]
+  }))
+  .sort((firstMemory, secondMemory) => firstMemory.id.localeCompare(secondMemory.id))
 
 export const useGalleryStore = create<GalleryState>()(
   persist(
@@ -43,6 +47,37 @@ export const useGalleryStore = create<GalleryState>()(
     }),
     {
       name: 'perfect-bowl-gallery',
+      merge: (persistedState, currentState) => {
+        const persistedMemories =
+          typeof persistedState === 'object' &&
+          persistedState !== null &&
+          'memories' in persistedState &&
+          Array.isArray(persistedState.memories)
+            ? persistedState.memories
+            : []
+        const unlockedById = new Map(
+          persistedMemories
+            .filter((memory): memory is MemoryEntry => {
+              return (
+                typeof memory === 'object' &&
+                memory !== null &&
+                'id' in memory &&
+                'unlocked' in memory &&
+                typeof memory.id === 'string' &&
+                typeof memory.unlocked === 'boolean'
+              )
+            })
+            .map((memory) => [memory.id, memory.unlocked]),
+        )
+
+        return {
+          ...currentState,
+          memories: currentState.memories.map((memory) => ({
+            ...memory,
+            unlocked: unlockedById.get(memory.id) ?? memory.unlocked,
+          })),
+        }
+      },
     },
   ),
 )
