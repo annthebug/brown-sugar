@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import { ASSET_KEYS, BLACK_SUGAR_FRAMES, MORANDI_PALETTE } from '../assets/assetManifest'
+import { MORANDI_PALETTE } from '../assets/assetManifest'
 import { gameEventBus } from '../events/eventBus'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
@@ -63,7 +63,6 @@ export class GameScene extends Phaser.Scene {
       })
       .setOrigin(0.5)
 
-    this.addBrownSugar(width / 2, height - 136)
     this.addMemoryShard(width * 0.72, height - 152)
     // ── Player ──────────────────────────────────────────────────────────
     const spawnY = groundY - GROUND_HEIGHT / 2  // top surface of ground
@@ -123,13 +122,6 @@ export class GameScene extends Phaser.Scene {
       this.add.circle(60 * scale, 14 * scale, 20 * scale, MORANDI_PALETTE.cloud, 0.64),
     ]
     cloud.add(circles)
-  }
-
-  private addBrownSugar(x: number, y: number) {
-    this.add
-      .sprite(x, y, ASSET_KEYS.blackSugar, BLACK_SUGAR_FRAMES.frontIdle)
-      .setOrigin(0.5, 1)
-      .setScale(0.44)
   }
 
   private addMemoryShard(x: number, y: number) {
