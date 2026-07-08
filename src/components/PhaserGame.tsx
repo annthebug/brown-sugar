@@ -25,7 +25,16 @@ export function PhaserGame() {
     )
 
     const unsubscribePreloaded = gameEventBus.on('phaser:preloaded', (payload) => {
-      setStatus(`${payload.scene} loaded ${payload.assetCount} assets.`)
+      if (payload.failedAssets.length > 0) {
+        setStatus(`${payload.scene} failed: ${payload.failedAssets.join(', ')}.`)
+        return
+      }
+
+      setStatus(`${payload.scene} loaded ${payload.assetCount} placeholder assets.`)
+    })
+
+    const unsubscribePreloadError = gameEventBus.on('phaser:preload-error', (payload) => {
+      setStatus(`${payload.scene} could not load ${payload.assetLabel}.`)
     })
 
     if (containerRef.current && !gameRef.current) {
@@ -37,6 +46,7 @@ export function PhaserGame() {
       unsubscribeBooted()
       unsubscribePreloadProgress()
       unsubscribePreloaded()
+      unsubscribePreloadError()
       gameRef.current?.destroy(true)
       gameRef.current = null
     }

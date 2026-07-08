@@ -21,11 +21,15 @@ export const BLACK_SUGAR_FRAMES = {
   collectItem: 'black-sugar-collect-item',
 } as const
 
-type AssetCategory = 'characters' | 'scenes' | 'ui' | 'memories' | 'bowls' | 'audio'
+export type AssetCategory = 'characters' | 'scenes' | 'ui' | 'memories' | 'bowls' | 'audio'
+type AssetPurpose = 'preload' | 'gallery-source'
 
 type BaseAsset = {
   key: string
   category: AssetCategory
+  placeholder: boolean
+  purpose: AssetPurpose
+  description: string
 }
 
 export type AtlasAsset = BaseAsset & {
@@ -47,7 +51,7 @@ export type AudioAsset = BaseAsset & {
 
 export type GameAsset = AtlasAsset | ImageAsset | AudioAsset
 
-type GameAssetManifest = {
+export type GameAssetManifest = {
   characters: readonly AtlasAsset[]
   scenes: readonly ImageAsset[]
   ui: readonly ImageAsset[]
@@ -55,6 +59,13 @@ type GameAssetManifest = {
   bowls: readonly ImageAsset[]
   audio: readonly AudioAsset[]
 }
+
+export const PLACEHOLDER_RESOURCE_RULES = {
+  filename: 'Use lowercase kebab-case and end temporary assets with `-placeholder`.',
+  palette: 'Keep pale blue sky as the main background with Morandi accent colors.',
+  privacy: 'Memory files are owner-provided placeholders only; do not invent private text.',
+  replacement: 'Keep asset keys stable when replacing placeholder files with final art.',
+} as const
 
 export const MORANDI_PALETTE = {
   skyTop: 0xd8edf4,
@@ -66,6 +77,7 @@ export const MORANDI_PALETTE = {
   mistPink: 0xd9b7b1,
   slateText: '#385867',
   mutedText: '#50676f',
+  errorText: '#8a5d63',
 } as const
 
 export const GAME_ASSET_MANIFEST = {
@@ -74,6 +86,9 @@ export const GAME_ASSET_MANIFEST = {
       kind: 'atlas',
       category: 'characters',
       key: ASSET_KEYS.blackSugar,
+      placeholder: true,
+      purpose: 'preload',
+      description: 'Brown Sugar character placeholder atlas for boot and preview scenes.',
       textureUrl: new URL(
         '../../../assets/characters/black-sugar-sprite-sheet-v1.png',
         import.meta.url,
@@ -90,6 +105,9 @@ export const GAME_ASSET_MANIFEST = {
       kind: 'image',
       category: 'scenes',
       key: ASSET_KEYS.paleBlueSky,
+      placeholder: true,
+      purpose: 'preload',
+      description: 'Pale blue sky placeholder background for the current GameScene.',
       url: new URL('../../../assets/scenes/pale-blue-sky-placeholder.png', import.meta.url)
         .href,
     },
@@ -99,6 +117,9 @@ export const GAME_ASSET_MANIFEST = {
       kind: 'image',
       category: 'ui',
       key: ASSET_KEYS.loadingPanel,
+      placeholder: true,
+      purpose: 'preload',
+      description: 'Soft loading panel placeholder for Phaser preload UI.',
       url: new URL('../../../assets/ui/loading-panel-placeholder.png', import.meta.url).href,
     },
   ],
@@ -108,6 +129,9 @@ export const GAME_ASSET_MANIFEST = {
       kind: 'image',
       category: 'bowls',
       key: ASSET_KEYS.mbtiGlassBowls,
+      placeholder: true,
+      purpose: 'preload',
+      description: 'MBTI glass bowl placeholder sheet for future ending previews.',
       url: new URL('../../../assets/bowls/mbti-glass-bowls-sheet-v1.png', import.meta.url)
         .href,
     },
@@ -117,6 +141,9 @@ export const GAME_ASSET_MANIFEST = {
       kind: 'audio',
       category: 'audio',
       key: ASSET_KEYS.softChime,
+      placeholder: true,
+      purpose: 'preload',
+      description: 'Soft chime placeholder used to validate audio preload plumbing.',
       urls: [
         new URL('../../../assets/audio/soft-chime-placeholder.wav', import.meta.url).href,
       ],
@@ -133,4 +160,20 @@ export function getPreloadAssets(): readonly GameAsset[] {
     ...GAME_ASSET_MANIFEST.bowls,
     ...GAME_ASSET_MANIFEST.audio,
   ]
+}
+
+export function getAssetUrlSummary(asset: GameAsset): readonly string[] {
+  if (asset.kind === 'atlas') {
+    return [asset.textureUrl, asset.atlasUrl]
+  }
+
+  if (asset.kind === 'audio') {
+    return asset.urls
+  }
+
+  return [asset.url]
+}
+
+export function getAssetLabel(asset: GameAsset): string {
+  return `${asset.category}/${asset.key}`
 }

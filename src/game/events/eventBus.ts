@@ -1,7 +1,14 @@
 export type GameEventMap = {
   'phaser:booted': { scene: string }
   'phaser:preload-progress': { scene: string; progress: number }
-  'phaser:preloaded': { scene: string; assetCount: number }
+  'phaser:preload-error': {
+    scene: string
+    key: string
+    assetLabel: string
+    fileType: string
+    url: string
+  }
+  'phaser:preloaded': { scene: string; assetCount: number; failedAssets: readonly string[] }
   'phaser:ready': { scene: string; message: string }
 }
 
