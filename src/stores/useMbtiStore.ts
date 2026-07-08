@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-type Dimension = 'EI' | 'SN' | 'TF' | 'JP'
-type Preference = 'first' | 'second'
+export type Dimension = 'EI' | 'SN' | 'TF' | 'JP'
+export type Preference = 'first' | 'second'
 
 type MbtiScores = Record<Dimension, number>
 

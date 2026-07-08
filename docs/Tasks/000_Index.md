@@ -12,7 +12,7 @@
 | [004](004.md) | 資源預載與美術資源結構 | 資源 | ✅ 完成 |
 | [005](005.md) | 主角黑糖：移動與能力 | 玩法 | ⬜ 未開始 |
 | [006](006.md) | Memory 系統（收集與解鎖） | 玩法 | ✅ 完成 |
-| [007](007.md) | 對話系統（Visual Novel） | 玩法 | ⬜ 未開始 |
+| [007](007.md) | 對話系統（Visual Novel） | 玩法 | ✅ 完成 |
 | [008](008.md) | MBTI 系統（題庫與計分） | 系統 | 🟨 進行中 |
 | [009](009.md) | 關卡：第一章 Forest | 關卡 | ⬜ 未開始 |
 | [010](010.md) | 關卡：第二章 City | 關卡 | ⬜ 未開始 |
@@ -34,7 +34,7 @@
 - `package.json` 已與文件統一為 Phaser 3；目前使用 `phaser@^3.90.0`。
 - 已完成基礎 Vite / React / TypeScript、React Router、Zustand stores、`/game` Phaser 掛載與 event bus。
 - `PreloadScene`、資源 manifest、首頁 / 設定 / 相簿 / 結局預覽與部分 store 狀態已建立；Task 004 的 placeholder 預載流程已完成。
-- 玩家移動能力、對話系統、章節關卡、Howler 音訊服務、Firebase Sync、PWA、Vercel 部署與成就系統尚未進入核心實作。
+- 玩家移動能力後續章節整合、章節關卡、Howler 音訊服務、Firebase Sync、PWA、Vercel 部署與成就系統尚未進入核心實作。
 
 ## 任務檔案格式
 
