@@ -1,0 +1,37 @@
+export type GameEventMap = {
+  'phaser:booted': { scene: string }
+  'phaser:preloaded': { scene: string }
+  'phaser:ready': { scene: string; message: string }
+}
+
+type GameEventName = keyof GameEventMap
+
+type GameEventHandler<TEventName extends GameEventName> = (
+  payload: GameEventMap[TEventName],
+) => void
+
+const target = new EventTarget()
+
+export const gameEventBus = {
+  emit<TEventName extends GameEventName>(
+    eventName: TEventName,
+    payload: GameEventMap[TEventName],
+  ) {
+    target.dispatchEvent(new CustomEvent(eventName, { detail: payload }))
+  },
+
+  on<TEventName extends GameEventName>(
+    eventName: TEventName,
+    handler: GameEventHandler<TEventName>,
+  ) {
+    const listener = (event: Event) => {
+      handler((event as CustomEvent<GameEventMap[TEventName]>).detail)
+    }
+
+    target.addEventListener(eventName, listener)
+
+    return () => {
+      target.removeEventListener(eventName, listener)
+    }
+  },
+}
