@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+import { AppNav } from '../components/AppNav'
+
 const memoryPreviewItems = [
   'Collect Memory Shards',
   'Talk with gentle NPCs',
@@ -7,6 +10,7 @@ const memoryPreviewItems = [
 export function HomePage() {
   return (
     <main className="home-shell" aria-labelledby="home-title">
+      <AppNav />
       <section className="hero-card">
         <p className="eyebrow">Pixel RPG Story Adventure</p>
         <h1 id="home-title">Quest for the Perfect Bowl</h1>
@@ -14,10 +18,10 @@ export function HomePage() {
           跟著黑糖在淡藍天空下旅行，收集回憶碎片，找回那只玻璃抹茶碗。
         </p>
         <div className="hero-actions" aria-label="Game actions">
-          <a href="/game">Start</a>
-          <button type="button" className="secondary-action">
+          <Link to="/game">Start</Link>
+          <Link to="/gallery" className="secondary-action">
             Gallery
-          </button>
+          </Link>
         </div>
       </section>
 
