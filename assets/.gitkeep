@@ -1,0 +1,11 @@
+# assets/
+
+遊戲美術與媒體資源存放處。詳見 docs/09_Assets.md。
+
+建議子結構：
+- characters/  角色（黑糖、NPC、Boss）
+- scenes/      場景與 tilemap
+- ui/          介面元素
+- memories/    回憶照片（佔位）
+- bowls/       16 型 MBTI 玻璃碗
+- audio/       BGM 與音效
