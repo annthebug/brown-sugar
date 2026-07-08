@@ -174,7 +174,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     // ── Dash ─────────────────────────────────────────────────────────────
 
     if (input.dashJustDown && this.dashCooldown <= 0) {
-      this.performDash(delta)
+      this.performDash()
     }
 
     // ── Meow ─────────────────────────────────────────────────────────────
@@ -230,7 +230,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   // ── Private helpers ──────────────────────────────────────────────────
 
-  private performDash(_delta: number) {
+  private performDash() {
     const body = this.body as Phaser.Physics.Arcade.Body
     const dir: 1 | -1 = this.facingRight ? 1 : -1
 

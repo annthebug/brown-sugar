@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import { MORANDI_PALETTE } from '../assets/assetManifest'
+import { ASSET_KEYS, BLACK_SUGAR_FRAMES, MORANDI_PALETTE } from '../assets/assetManifest'
 import { gameEventBus } from '../events/eventBus'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
@@ -41,7 +41,7 @@ export class GameScene extends Phaser.Scene {
     const groundY = height - GROUND_CENTER_Y_OFFSET
     const ground = this.add.rectangle(width / 2, groundY, width, GROUND_HEIGHT, MORANDI_PALETTE.sageGreen)
     this.physics.add.existing(ground, true)   // true = static body
-    ;(ground.body as Phaser.Physics.Arcade.StaticBody).refreshBody()
+    ;(ground.body as Phaser.Physics.Arcade.StaticBody).updateFromGameObject()
 
     // Decorative overlay on top of ground
     this.add.rectangle(width / 2, height - 22, width, 44, MORANDI_PALETTE.warmBeige, 0.8)
