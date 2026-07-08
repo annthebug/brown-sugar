@@ -38,3 +38,10 @@
 - 實作對應 docs/Tasks/ 任務編號。
 - 每個邏輯變更獨立 commit。
 - 不擅自刪除既有文件或資產。
+
+## Development behavior
+- Do not start dev servers.
+- Do not run demos or previews automatically.
+- Do not open browser previews.
+- Only modify code and provide instructions.
+- Before running any command that starts a server, ask for confirmation.

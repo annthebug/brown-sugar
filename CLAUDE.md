@@ -67,6 +67,16 @@
 
 ---
 
+## Development behavior
+
+- Do not start dev servers.
+- Do not run demos or previews automatically.
+- Do not open browser previews.
+- Only modify code and provide instructions.
+- Before running any command that starts a server, ask for confirmation.
+
+---
+
 ## AI 協作優先順序
 
 1. 系統／使用者的直接指示
