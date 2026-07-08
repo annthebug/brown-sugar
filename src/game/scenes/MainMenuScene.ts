@@ -31,13 +31,20 @@ export class MainMenuScene extends Phaser.Scene {
       })
       .setOrigin(0.5);
 
-    this.add
-      .text(width / 2, height / 2 + 60, '（Phaser 場景骨架就緒，尚未實作玩法）', {
+    const start = this.add
+      .text(width / 2, height / 2 + 70, '▶ 開始冒險（第一章：森林）', {
         fontFamily: 'monospace',
-        fontSize: '12px',
-        color: '#8fbf5a',
+        fontSize: '18px',
+        color: '#2b1d14',
+        backgroundColor: '#f6b352',
+        padding: { x: 16, y: 8 },
       })
-      .setOrigin(0.5);
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
+
+    start.on('pointerover', () => start.setScale(1.05));
+    start.on('pointerout', () => start.setScale(1));
+    start.on('pointerdown', () => this.scene.start('Forest'));
 
     // 通知 React 層場景已就緒（示範 EventBus 溝通）。
     EventBus.emit(GameEvents.SceneReady, 'MainMenu');

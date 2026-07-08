@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import { BootScene } from '@/game/scenes/BootScene';
 import { PreloadScene } from '@/game/scenes/PreloadScene';
 import { MainMenuScene } from '@/game/scenes/MainMenuScene';
+import { ForestScene } from '@/game/scenes/ForestScene';
+import { MemoryScene } from '@/game/scenes/MemoryScene';
 
 // 目標設計解析度（16:9）。實際顯示由 Scale.FIT 自適應。
 export const GAME_WIDTH = 960;
@@ -28,6 +30,6 @@ export function createGameConfig(parent: HTMLElement): Phaser.Types.Core.GameCon
         debug: false,
       },
     },
-    scene: [BootScene, PreloadScene, MainMenuScene],
+    scene: [BootScene, PreloadScene, MainMenuScene, ForestScene, MemoryScene],
   };
 }

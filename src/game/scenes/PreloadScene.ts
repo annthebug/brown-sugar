@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
+import { generateTextures } from '@/game/textures';
 
 /**
- * 預載場景：顯示載入畫面並預載資源。
- * 目前無實際資源可載入，直接進入主選單（資源預載於 Task 004 實作）。
+ * 預載場景：顯示載入畫面並準備資源。
+ * 目前以程式化紋理取代美術資源（見 src/game/textures.ts）。
  */
 export class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -19,13 +20,13 @@ export class PreloadScene extends Phaser.Scene {
       })
       .setOrigin(0.5);
 
-    // 顯示載入進度（目前無資源，會立即完成）。
     this.load.on('progress', (value: number) => {
       label.setText(`Loading… ${Math.round(value * 100)}%`);
     });
   }
 
   create(): void {
+    generateTextures(this);
     this.scene.start('MainMenu');
   }
 }
