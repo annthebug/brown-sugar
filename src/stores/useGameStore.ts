@@ -15,11 +15,17 @@ export type MemoryShardCollectionResult = {
   unlockedMemoryCount: number
 }
 
+type StoryFlags = {
+  hasImperfectBowl: boolean
+}
+
 type GameState = {
   currentChapter: Chapter
   forestChapterCleared: boolean
   cityChapterCleared: boolean
   snowChapterCleared: boolean
+  glassChapterCleared: boolean
+  storyFlags: StoryFlags
   memoryShards: number
   totalMemoryShards: number
   collectMemoryShards: (amount?: number) => MemoryShardCollectionResult
@@ -27,6 +33,7 @@ type GameState = {
   completeForestChapter: () => void
   completeCityChapter: () => void
   completeSnowChapter: () => void
+  completeGlassChapter: () => void
   resetProgress: () => void
 }
 
@@ -39,6 +46,10 @@ export const useGameStore = create<GameState>()(
       forestChapterCleared: false,
       cityChapterCleared: false,
       snowChapterCleared: false,
+      glassChapterCleared: false,
+      storyFlags: {
+        hasImperfectBowl: false,
+      },
       memoryShards: 0,
       totalMemoryShards: 0,
       collectMemoryShards: (amount = 1) => {
@@ -87,12 +98,29 @@ export const useGameStore = create<GameState>()(
           currentChapter: 'Glass Studio',
         })
       },
+      completeGlassChapter: () => {
+        if (get().glassChapterCleared) {
+          return
+        }
+
+        set({
+          glassChapterCleared: true,
+          currentChapter: 'Retry',
+          storyFlags: {
+            hasImperfectBowl: true,
+          },
+        })
+      },
       resetProgress: () =>
         set({
           currentChapter: 'Forest',
           forestChapterCleared: false,
           cityChapterCleared: false,
           snowChapterCleared: false,
+          glassChapterCleared: false,
+          storyFlags: {
+            hasImperfectBowl: false,
+          },
           memoryShards: 0,
           totalMemoryShards: 0,
         }),
@@ -127,6 +155,23 @@ export const useGameStore = create<GameState>()(
             typeof persisted.snowChapterCleared === 'boolean'
               ? persisted.snowChapterCleared
               : currentState.snowChapterCleared,
+          glassChapterCleared:
+            typeof persisted === 'object' &&
+            persisted !== null &&
+            'glassChapterCleared' in persisted &&
+            typeof persisted.glassChapterCleared === 'boolean'
+              ? persisted.glassChapterCleared
+              : currentState.glassChapterCleared,
+          storyFlags:
+            typeof persisted === 'object' &&
+            persisted !== null &&
+            'storyFlags' in persisted &&
+            typeof persisted.storyFlags === 'object' &&
+            persisted.storyFlags !== null &&
+            'hasImperfectBowl' in persisted.storyFlags &&
+            typeof persisted.storyFlags.hasImperfectBowl === 'boolean'
+              ? { hasImperfectBowl: persisted.storyFlags.hasImperfectBowl }
+              : currentState.storyFlags,
         }
       },
     },
