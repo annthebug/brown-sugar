@@ -142,6 +142,7 @@ export class PreloadScene extends Phaser.Scene {
       cityChapterCleared: state.cityChapterCleared,
       snowChapterCleared: state.snowChapterCleared,
       glassChapterCleared: state.glassChapterCleared,
+      retryChapterCleared: state.retryChapterCleared,
     })
     const sceneKey = getSceneKeyForChapter(chapter)
     this.scene.start(sceneKey)
