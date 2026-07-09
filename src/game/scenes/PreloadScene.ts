@@ -9,6 +9,33 @@ import {
 } from '../assets/assetManifest'
 import { gameEventBus } from '../events/eventBus'
 
+function getPersistedGameSnapshot() {
+  const fallback = useGameStore.getState()
+
+  try {
+    const raw = window.localStorage.getItem('perfect-bowl-game')
+
+    if (!raw) {
+      return fallback
+    }
+
+    const parsed = JSON.parse(raw) as {
+      state?: Partial<typeof fallback>
+    }
+
+    if (!parsed.state || typeof parsed.state !== 'object') {
+      return fallback
+    }
+
+    return {
+      ...fallback,
+      ...parsed.state,
+    }
+  } catch {
+    return fallback
+  }
+}
+
 export class PreloadScene extends Phaser.Scene {
   private failedAssets = new Map<string, string>()
 
@@ -132,7 +159,7 @@ export class PreloadScene extends Phaser.Scene {
       return
     }
 
-    const state = useGameStore.getState()
+    const state = getPersistedGameSnapshot()
     const requestedParam = new URLSearchParams(window.location.search).get('chapter')
     const requestedChapter = isChapter(requestedParam) ? requestedParam : null
     const chapter = getPlayableChapter({

@@ -22,10 +22,12 @@ export type GameEventMap = {
   'chapter:snow-cleared': { scene: string }
   'chapter:glass-cleared': { scene: string }
   'chapter:retry-cleared': { scene: string }
+  'chapter:final-cleared': { scene: string }
   'boss:time-monster-understood': Record<string, never>
   'boss:snow-spirit-understood': Record<string, never>
   'boss:glass-master-understood': Record<string, never>
   'boss:inner-doubt-understood': Record<string, never>
+  'boss:perfectionism-understood': Record<string, never>
   'player:dash': { direction: 1 | -1 }
   'player:double-jump': { x: number; y: number }
 }

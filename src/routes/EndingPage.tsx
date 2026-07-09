@@ -14,6 +14,7 @@ import { useMbtiStore } from '../stores/useMbtiStore'
 
 export function EndingPage() {
   const memoryShards = useGameStore((state) => state.memoryShards)
+  const gameCompleted = useGameStore((state) => state.gameCompleted)
   const unlockedCount = useGalleryStore(
     (state) => state.memories.filter((memory) => memory.unlocked).length,
   )
@@ -33,6 +34,9 @@ export function EndingPage() {
         <h1 id="ending-title">The Bowl Is Waiting</h1>
         <p className="hero-copy">
           當所有隱藏式對話完成後，黑糖的玻璃抹茶碗會依照內在傾向顯現不同花紋。
+        </p>
+        <p className="hero-copy">
+          {gameCompleted ? '黑糖已經把心意平穩地送到終點。' : '終章尚未完成，這裡先顯示結局預覽。'}
         </p>
 
         <section className="ending-mbti-panel" aria-label="MBTI result">
@@ -82,6 +86,10 @@ export function EndingPage() {
             <dd>
               {answeredCount}/{MBTI_QUESTION_COUNT}
             </dd>
+          </div>
+          <div>
+            <dt>Journey</dt>
+            <dd>{gameCompleted ? 'Completed' : 'In progress'}</dd>
           </div>
         </dl>
 

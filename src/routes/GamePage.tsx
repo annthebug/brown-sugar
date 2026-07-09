@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
 import { DialogueBox } from '../components/DialogueBox'
 import { MemoryOverlay } from '../components/MemoryOverlay'
@@ -39,6 +39,10 @@ const RETRY_NPC_DIALOGUES: Record<string, DialogueScriptId> = {
   innerDoubtBoss: 'innerDoubtBoss',
 }
 
+const FINAL_NPC_DIALOGUES: Record<string, DialogueScriptId> = {
+  perfectionismBoss: 'perfectionismBoss',
+}
+
 function resolveDialogueId(npcId?: string): DialogueScriptId | null {
   if (!npcId) {
     return null
@@ -53,11 +57,13 @@ function resolveDialogueId(npcId?: string): DialogueScriptId | null {
     SNOW_NPC_DIALOGUES[npcId] ??
     GLASS_NPC_DIALOGUES[npcId] ??
     RETRY_NPC_DIALOGUES[npcId] ??
+    FINAL_NPC_DIALOGUES[npcId] ??
     null
   )
 }
 
 export function GamePage() {
+  const navigate = useNavigate()
   const phaserRef = useRef<PhaserGameHandle>(null)
   const [memoryQueue, setMemoryQueue] = useState<MemoryEntry[]>([])
   const [activeDialogueId, setActiveDialogueId] = useState<DialogueScriptId | null>(null)
@@ -71,12 +77,14 @@ export function GamePage() {
   const snowChapterCleared = useGameStore((state) => state.snowChapterCleared)
   const glassChapterCleared = useGameStore((state) => state.glassChapterCleared)
   const retryChapterCleared = useGameStore((state) => state.retryChapterCleared)
+  const gameCompleted = useGameStore((state) => state.gameCompleted)
   const collectMemoryShards = useGameStore((state) => state.collectMemoryShards)
   const completeForestChapter = useGameStore((state) => state.completeForestChapter)
   const completeCityChapter = useGameStore((state) => state.completeCityChapter)
   const completeSnowChapter = useGameStore((state) => state.completeSnowChapter)
   const completeGlassChapter = useGameStore((state) => state.completeGlassChapter)
   const completeRetryChapter = useGameStore((state) => state.completeRetryChapter)
+  const completeFinalStage = useGameStore((state) => state.completeFinalStage)
   const resetProgress = useGameStore((state) => state.resetProgress)
   const unlockNextMemory = useGalleryStore((state) => state.unlockNextMemory)
   const unlockMemoryByNumber = useGalleryStore((state) => state.unlockMemoryByNumber)
@@ -103,8 +111,10 @@ export function GamePage() {
   )
 
   const chapterMeta = CHAPTER_LABELS[playableChapter]
-  const chapterProgressHint = retryChapterCleared
-    ? 'Retry cleared'
+  const chapterProgressHint = gameCompleted
+    ? 'Journey complete'
+    : retryChapterCleared
+      ? chapterMeta.hint
     : glassChapterCleared
       ? chapterMeta.hint
       : snowChapterCleared
@@ -191,6 +201,11 @@ export function GamePage() {
       }
     })
 
+    const unsubscribeFinalChapter = gameEventBus.on('chapter:final-cleared', () => {
+      completeFinalStage()
+      navigate('/ending')
+    })
+
     return () => {
       unsubscribeShard()
       unsubscribeTalk()
@@ -199,14 +214,17 @@ export function GamePage() {
       unsubscribeSnowChapter()
       unsubscribeGlassChapter()
       unsubscribeRetryChapter()
+      unsubscribeFinalChapter()
     }
   }, [
     collectShards,
     completeCityChapter,
     completeForestChapter,
     completeGlassChapter,
+    completeFinalStage,
     completeRetryChapter,
     completeSnowChapter,
+    navigate,
     openDialogue,
     unlockMemoryByNumber,
   ])
@@ -243,6 +261,12 @@ export function GamePage() {
 
       if (result.kind === 'story' && result.trigger === 'inner-doubt-understood') {
         gameEventBus.emit('boss:inner-doubt-understood', {})
+        setLastDialogueChoice(choice.label)
+        return
+      }
+
+      if (result.kind === 'story' && result.trigger === 'perfectionism-understood') {
+        gameEventBus.emit('boss:perfectionism-understood', {})
         setLastDialogueChoice(choice.label)
         return
       }
@@ -380,6 +404,9 @@ export function GamePage() {
         </button>
         <button type="button" onClick={() => openDialogue('innerDoubtBoss')}>
           Talk to Inner Doubt (Boss)
+        </button>
+        <button type="button" onClick={() => openDialogue('perfectionismBoss')}>
+          Talk to Perfectionism (Boss)
         </button>
         <button type="button" className="secondary-action" onClick={resetMbtiScores}>
           Reset MBTI

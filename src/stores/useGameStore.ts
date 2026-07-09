@@ -27,6 +27,7 @@ type GameState = {
   snowChapterCleared: boolean
   glassChapterCleared: boolean
   retryChapterCleared: boolean
+  gameCompleted: boolean
   storyFlags: StoryFlags
   memoryShards: number
   totalMemoryShards: number
@@ -37,6 +38,7 @@ type GameState = {
   completeSnowChapter: () => void
   completeGlassChapter: () => void
   completeRetryChapter: () => void
+  completeFinalStage: () => void
   resetProgress: () => void
 }
 
@@ -51,6 +53,7 @@ export const useGameStore = create<GameState>()(
       snowChapterCleared: false,
       glassChapterCleared: false,
       retryChapterCleared: false,
+      gameCompleted: false,
       storyFlags: {
         hasImperfectBowl: false,
         hasTrueBowl: false,
@@ -131,6 +134,16 @@ export const useGameStore = create<GameState>()(
           },
         })
       },
+      completeFinalStage: () => {
+        if (get().gameCompleted) {
+          return
+        }
+
+        set({
+          currentChapter: 'Final Stage',
+          gameCompleted: true,
+        })
+      },
       resetProgress: () =>
         set({
           currentChapter: 'Forest',
@@ -139,6 +152,7 @@ export const useGameStore = create<GameState>()(
           snowChapterCleared: false,
           glassChapterCleared: false,
           retryChapterCleared: false,
+          gameCompleted: false,
           storyFlags: {
             hasImperfectBowl: false,
             hasTrueBowl: false,
@@ -210,6 +224,13 @@ export const useGameStore = create<GameState>()(
             typeof persisted.retryChapterCleared === 'boolean'
               ? persisted.retryChapterCleared
               : currentState.retryChapterCleared,
+          gameCompleted:
+            typeof persisted === 'object' &&
+            persisted !== null &&
+            'gameCompleted' in persisted &&
+            typeof persisted.gameCompleted === 'boolean'
+              ? persisted.gameCompleted
+              : currentState.gameCompleted,
         }
       },
     },
