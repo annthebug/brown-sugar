@@ -153,6 +153,22 @@
         ]
       },
       {
+        "key": "inner-guide",
+        "type": "atlas",
+        "texture": "characters/inner-guide-side-sprite-sheet-v1.png",
+        "atlas": "characters/inner-guide-side-sprite-sheet-v1.json",
+        "portrait": "characters/inner-guide-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Inner Guide side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "inner-guide-side-idle",
+          "inner-guide-side-walk-1",
+          "inner-guide-side-walk-2",
+          "inner-guide-side-walk-3"
+        ]
+      },
+      {
         "key": "npc-characters",
         "type": "atlas",
         "texture": "characters/npc-sprite-sheet-v1.png",
