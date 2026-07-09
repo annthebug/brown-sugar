@@ -1015,16 +1015,33 @@ h1 {
   width: min(100%, 24rem);
 }
 
-.ending-bowl-bed-frame {
-  width: 100%;
-  max-width: 24rem;
-  margin: 0 auto;
+.ending-rest-scene {
+  position: relative;
+  width: min(100%, 24rem);
+  height: 16rem;
+}
+
+.ending-rest-bowl {
+  position: absolute;
+  left: 50%;
+  bottom: 1.2rem;
+  width: 18rem;
+  height: 7rem;
+  border: 3px solid rgba(143, 178, 191, 0.36);
+  border-top: 0;
+  border-bottom-left-radius: 10rem 4.8rem;
+  border-bottom-right-radius: 10rem 4.8rem;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.72), transparent 60%),
+    linear-gradient(180deg, rgba(216, 237, 244, 0.48), rgba(216, 237, 244, 0.14));
+  transform: translateX(-50%);
+  box-shadow: 0 14px 24px rgba(72, 101, 112, 0.1);
 }
 
 .ending-black-sugar-sleep {
   position: absolute;
   left: 50%;
-  bottom: 1.7rem;
+  bottom: 3.1rem;
   width: 12.5rem;
   height: 7.6rem;
   transform: translateX(-50%);

@@ -76,7 +76,7 @@ export function EndingPage() {
         y: 18,
       })
       gsap.set(chestLidRef.current, {
-        rotateX: 0,
+        rotate: 0,
         transformOrigin: '50% 100%',
       })
 
@@ -93,7 +93,7 @@ export function EndingPage() {
           '-=0.18',
         )
         .to(chestRef.current, { y: -8, duration: 0.28, yoyo: true, repeat: 1, ease: 'sine.inOut' })
-        .to(chestLidRef.current, { rotateX: -118, duration: 0.65, ease: 'power3.out' })
+        .to(chestLidRef.current, { rotate: -22, y: -22, x: -8, duration: 0.65, ease: 'power3.out' })
         .to(photoRef.current, { opacity: 1, y: 0, duration: 0.75 }, '-=0.2')
         .to(sleepRef.current, { opacity: 1, y: 0, duration: 0.7 }, '-=0.1')
 
@@ -189,13 +189,8 @@ export function EndingPage() {
           </section>
 
           <section ref={sleepRef} className="ending-sleep-section" aria-label="Black Sugar resting">
-            <div className="ending-bowl-bed">
-              <div
-                className="ending-bowl-bed-frame"
-                role="img"
-                aria-label={mbtiResult ? `${mbtiResult} resting bowl` : 'Resting bowl'}
-                style={generatedBowlStyle}
-              />
+            <div className="ending-rest-scene">
+              <div className="ending-rest-bowl" aria-hidden="true" />
               <div className="ending-black-sugar-sleep" aria-hidden="true">
                 <span className="sleep-ear sleep-ear--left" />
                 <span className="sleep-ear sleep-ear--right" />
