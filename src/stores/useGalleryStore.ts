@@ -18,25 +18,11 @@ type GalleryState = {
   resetGallery: () => void
 }
 
-const memoryPhotoModules = import.meta.glob<string>('../../assets/memories/*.{jpg,jpeg,png,webp}', {
-  eager: true,
-  import: 'default',
-  query: '?url',
-})
-
-const photoUrlByFilename = new Map(
-  Object.entries(memoryPhotoModules).map(([path, photoUrl]) => {
-    const filename = path.split('/').at(-1) ?? path
-
-    return [filename, photoUrl]
-  }),
-)
-
 function buildMemoryEntries(): MemoryEntry[] {
   return MEMORY_DEFINITIONS.map((definition) => ({
     id: definition.id,
     order: definition.order,
-    photoUrl: photoUrlByFilename.get(definition.filename) ?? '',
+    photoUrl: definition.photoUrl,
     unlocked: false,
   }))
 }
