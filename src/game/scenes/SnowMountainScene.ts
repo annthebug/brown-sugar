@@ -1,6 +1,11 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, BOSS_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import {
+  ASSET_KEYS,
+  BOSS_FRAMES,
+  MORANDI_PALETTE,
+  SNOW_GUIDE_FRAMES,
+} from '../assets/assetManifest'
 import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
@@ -316,10 +321,32 @@ export class SnowMountainScene extends Phaser.Scene {
   }
 
   private placeMountainGuide() {
-    this.guideNpc = placeCharacterSprite(this, GUIDE_X, GROUND_TOP, {
-      atlas: 'npc',
-      frame: NPC_FRAMES.snowGuide,
-      label: '嚮導',
+    const container = this.add.container(GUIDE_X, GROUND_TOP) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.snowGuide, SNOW_GUIDE_FRAMES.sideIdle)
+    sprite.setOrigin(0.5, 1).setScale(0.44)
+
+    const label = this.add
+      .text(0, 8, '嚮導', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+      .setVisible(false)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.guideNpc = container
+
+    this.tweens.add({
+      targets: sprite,
+      y: -2,
+      duration: 1200,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
     })
   }
 
@@ -432,11 +459,13 @@ export class SnowMountainScene extends Phaser.Scene {
     }
 
     let promptText: string | null = null
+    this.guideNpc?.label.setVisible(false)
 
     if (!this.bossCleared && this.isNearSnowSpirit()) {
       promptText = '按 E 遇見雪靈'
     } else if (this.isNearGuide()) {
       promptText = '按 E 與雪山嚮導對話'
+      this.guideNpc?.label.setVisible(true)
     } else if (this.spiritTrailActive && !this.bossCleared) {
       promptText = '跟著靈光前進'
     }

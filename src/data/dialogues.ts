@@ -36,7 +36,7 @@ export type DialogueNode = {
   choices?: readonly DialogueChoice[]
 }
 
-export type DialoguePortraitId = 'forestElder' | 'cityBarista' | 'parkTraveler'
+export type DialoguePortraitId = 'forestElder' | 'cityBarista' | 'parkTraveler' | 'snowGuide'
 
 export type DialogueScript = {
   id: string
@@ -53,6 +53,10 @@ export const NPC_PORTRAIT_URLS = {
   ).href,
   parkTraveler: new URL(
     '../../assets/characters/park-traveler-portrait-v1.png',
+    import.meta.url,
+  ).href,
+  snowGuide: new URL(
+    '../../assets/characters/snow-guide-portrait-v1.png',
     import.meta.url,
   ).href,
 } as const
@@ -90,6 +94,10 @@ export function resolveDialogueAvatarUrl(
 
   if (script?.portraitId === 'parkTraveler') {
     return NPC_PORTRAIT_URLS.parkTraveler
+  }
+
+  if (script?.portraitId === 'snowGuide') {
+    return NPC_PORTRAIT_URLS.snowGuide
   }
 
   return undefined
@@ -747,6 +755,7 @@ export const DIALOGUE_SCRIPTS = {
   snowSpirit: {
     id: 'snow-spirit',
     title: '雪靈',
+    portraitId: 'snowGuide',
     startNodeId: 'snow-sn-01',
     nodes: {
       'snow-sn-01': {
