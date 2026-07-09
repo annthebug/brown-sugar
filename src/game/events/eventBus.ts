@@ -12,6 +12,7 @@ export type GameEventMap = {
   'phaser:ready': { scene: string; message: string }
   'memory-shard-collected': { scene: string; amount: number }
   'player:meow': { x: number; y: number }
+  'player:jump': { x: number; y: number }
   'player:collect': { x: number; y: number }
   'player:talk-start': { npcId?: string }
   'player:talk-end': Record<string, never>
