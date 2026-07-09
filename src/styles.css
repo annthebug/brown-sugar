@@ -111,8 +111,7 @@ a {
 .hero-card,
 .journey-panel,
 .game-card,
-.page-card,
-.store-panel {
+.page-card {
   position: relative;
   z-index: 1;
   border: 2px solid rgba(111, 138, 148, 0.34);
@@ -163,7 +162,6 @@ h1 {
 .hero-actions a,
 .hero-actions button,
 .back-link,
-.store-panel button,
 .memory-card button,
 .memory-overlay-card button,
 .dialogue-box button,
@@ -218,8 +216,6 @@ h1 {
 .hero-actions button:focus-visible,
 .back-link:hover,
 .back-link:focus-visible,
-.store-panel button:hover,
-.store-panel button:focus-visible,
 .memory-card button:hover,
 .memory-card button:focus-visible,
 .memory-overlay-card button:hover,
@@ -245,7 +241,6 @@ h1 {
 }
 
 .hero-actions .secondary-action,
-.store-panel .secondary-action,
 .page-action {
   background: #d9c3ba;
   color: #4f6065;
@@ -428,22 +423,6 @@ h1 {
   color: #50676f;
   font-weight: 700;
   text-align: center;
-}
-
-.store-panel {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
-  gap: 1rem;
-  align-items: center;
-  padding: 1rem;
-}
-
-.store-panel span {
-  display: block;
-  margin-top: 0.2rem;
-  color: #7d8f86;
-  font-size: 0.78rem;
-  font-weight: 800;
 }
 
 .panel-label,
@@ -1270,7 +1249,6 @@ h1 {
     text-align: left;
   }
 
-  .store-panel,
   .memory-grid,
   .ending-summary,
   .ending-score-grid,

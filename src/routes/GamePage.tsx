@@ -6,8 +6,7 @@ import { DialogueBox } from '../components/DialogueBox'
 import { MemoryOverlay } from '../components/MemoryOverlay'
 import { PauseMenu } from '../components/PauseMenu'
 import { PhaserGame, type PhaserGameHandle } from '../components/PhaserGame'
-import { CHAPTER_DISPLAY_NAMES, CHAPTER_LABELS, getPlayableChapter } from '../data/chapters'
-import { MBTI_QUESTION_COUNT } from '../data/mbti'
+import { CHAPTER_LABELS, getPlayableChapter } from '../data/chapters'
 import {
   DIALOGUE_SCRIPTS,
   type DialogueChoice,
@@ -15,7 +14,6 @@ import {
   type DialogueScriptId,
 } from '../data/dialogues'
 import { gameEventBus } from '../game/events/eventBus'
-import { ACHIEVEMENT_DEFINITIONS } from '../data/achievements'
 import { type MemoryEntry, useGalleryStore } from '../stores/useGalleryStore'
 import { useAchievementStore } from '../stores/useAchievementStore'
 import { useGameStore } from '../stores/useGameStore'
@@ -70,9 +68,7 @@ export function GamePage() {
   const phaserRef = useRef<PhaserGameHandle>(null)
   const [memoryQueue, setMemoryQueue] = useState<MemoryEntry[]>([])
   const [activeDialogueId, setActiveDialogueId] = useState<DialogueScriptId | null>(null)
-  const [lastDialogueChoice, setLastDialogueChoice] = useState<string>('尚未做出對話選擇')
   const [isPaused, setIsPaused] = useState(false)
-  const memoryShards = useGameStore((state) => state.memoryShards)
   const totalMemoryShards = useGameStore((state) => state.totalMemoryShards)
   const currentChapter = useGameStore((state) => state.currentChapter)
   const forestChapterCleared = useGameStore((state) => state.forestChapterCleared)
@@ -88,19 +84,14 @@ export function GamePage() {
   const completeGlassChapter = useGameStore((state) => state.completeGlassChapter)
   const completeRetryChapter = useGameStore((state) => state.completeRetryChapter)
   const completeFinalStage = useGameStore((state) => state.completeFinalStage)
-  const resetProgress = useGameStore((state) => state.resetProgress)
   const unlockNextMemory = useGalleryStore((state) => state.unlockNextMemory)
   const unlockMemoryByNumber = useGalleryStore((state) => state.unlockMemoryByNumber)
   const memories = useGalleryStore((state) => state.memories)
-  const unlockedAchievementIds = useAchievementStore((state) => state.unlockedIds)
   const toastQueue = useAchievementStore((state) => state.toastQueue)
   const unlockAchievement = useAchievementStore((state) => state.unlockAchievement)
   const dismissToast = useAchievementStore((state) => state.dismissToast)
-  const answeredQuestionIds = useMbtiStore((state) => state.answeredQuestionIds)
   const answerQuestion = useMbtiStore((state) => state.answerQuestion)
-  const resetMbtiScores = useMbtiStore((state) => state.resetScores)
   const isMbtiComplete = useMbtiStore((state) => state.isComplete())
-  const mbtiResult = useMbtiStore((state) => state.getMbtiResult())
   const activeMemory = memoryQueue[0]
   const activeDialogue = activeDialogueId ? DIALOGUE_SCRIPTS[activeDialogueId] : null
 
@@ -119,19 +110,6 @@ export function GamePage() {
   )
 
   const chapterMeta = CHAPTER_LABELS[playableChapter]
-  const chapterProgressHint = gameCompleted
-    ? '旅程完成'
-    : retryChapterCleared
-      ? chapterMeta.hint
-    : glassChapterCleared
-      ? chapterMeta.hint
-      : snowChapterCleared
-        ? chapterMeta.hint
-        : cityChapterCleared
-          ? chapterMeta.hint
-          : forestChapterCleared
-            ? chapterMeta.hint
-            : chapterMeta.hint
 
   const collectShards = useCallback(
     (amount: number) => {
@@ -271,48 +249,35 @@ export function GamePage() {
   ])
 
   const handleChoiceResult = useCallback(
-    (result: DialogueChoiceResult, choice: DialogueChoice) => {
+    (result: DialogueChoiceResult, _choice: DialogueChoice) => {
       if (result.kind === 'mbti') {
-        const recorded = answerQuestion(result.questionId, result.preference)
-        setLastDialogueChoice(
-          recorded
-            ? choice.label
-            : `${choice.label}（已回答，不重複計分）`,
-        )
+        answerQuestion(result.questionId, result.preference)
         return
       }
 
       if (result.kind === 'story' && result.trigger === 'time-monster-understood') {
         gameEventBus.emit('boss:time-monster-understood', {})
-        setLastDialogueChoice(choice.label)
         return
       }
 
       if (result.kind === 'story' && result.trigger === 'snow-spirit-understood') {
         gameEventBus.emit('boss:snow-spirit-understood', {})
-        setLastDialogueChoice(choice.label)
         return
       }
 
       if (result.kind === 'story' && result.trigger === 'glass-master-understood') {
         gameEventBus.emit('boss:glass-master-understood', {})
-        setLastDialogueChoice(choice.label)
         return
       }
 
       if (result.kind === 'story' && result.trigger === 'inner-doubt-understood') {
         gameEventBus.emit('boss:inner-doubt-understood', {})
-        setLastDialogueChoice(choice.label)
         return
       }
 
       if (result.kind === 'story' && result.trigger === 'perfectionism-understood') {
         gameEventBus.emit('boss:perfectionism-understood', {})
-        setLastDialogueChoice(choice.label)
-        return
       }
-
-      setLastDialogueChoice(choice.label)
     },
     [answerQuestion],
   )
@@ -389,77 +354,6 @@ export function GamePage() {
           暫停
         </button>
       </div>
-      <section className="store-panel" aria-label="遊戲控制面板">
-        <div>
-          <p className="panel-label">回憶碎片</p>
-          <strong>{memoryShards} / 100</strong>
-          <span>{totalMemoryShards} 累計</span>
-        </div>
-        <div>
-          <p className="panel-label">章節進度</p>
-          <strong>{CHAPTER_DISPLAY_NAMES[currentChapter]}</strong>
-          <span>{chapterProgressHint}</span>
-        </div>
-        <button type="button" onClick={() => collectShards(1)}>
-          收集 1 片
-        </button>
-        <button type="button" onClick={() => collectShards(100)}>
-          收集 100 片
-        </button>
-        <button type="button" className="secondary-action" onClick={resetProgress}>
-          重設進度
-        </button>
-        <div>
-          <p className="panel-label">MBTI 進度</p>
-          <strong>
-            {answeredQuestionIds.length} / {MBTI_QUESTION_COUNT}
-          </strong>
-          <span>{isMbtiComplete && mbtiResult ? `結果：${mbtiResult}` : lastDialogueChoice}</span>
-        </div>
-        <div>
-          <p className="panel-label">成就</p>
-          <strong>
-            {unlockedAchievementIds.length} / {ACHIEVEMENT_DEFINITIONS.length}
-          </strong>
-          <span>這趟旅程的溫柔里程碑。</span>
-        </div>
-        <button type="button" onClick={() => openDialogue('forestElder')}>
-          與森林長者對話
-        </button>
-        <button type="button" onClick={() => openDialogue('cityBarista')}>
-          與咖啡師對話
-        </button>
-        <button type="button" onClick={() => openDialogue('cityTraveler')}>
-          與旅人對話
-        </button>
-        <button type="button" onClick={() => openDialogue('timeMonster')}>
-          與時間怪物對話
-        </button>
-        <button type="button" onClick={() => openDialogue('snowSpirit')}>
-          與雪山嚮導對話
-        </button>
-        <button type="button" onClick={() => openDialogue('snowSpiritBoss')}>
-          與雪靈對話（首領）
-        </button>
-        <button type="button" onClick={() => openDialogue('glassMaster')}>
-          與玻璃師傅對話
-        </button>
-        <button type="button" onClick={() => openDialogue('glassMasterBoss')}>
-          與玻璃師傅對話（首領）
-        </button>
-        <button type="button" onClick={() => openDialogue('innerGuide')}>
-          與內在嚮導對話
-        </button>
-        <button type="button" onClick={() => openDialogue('innerDoubtBoss')}>
-          與內在懷疑對話（首領）
-        </button>
-        <button type="button" onClick={() => openDialogue('perfectionismBoss')}>
-          與完美主義對話（首領）
-        </button>
-        <button type="button" className="secondary-action" onClick={resetMbtiScores}>
-          重設 MBTI
-        </button>
-      </section>
       {activeDialogue ? (
         <DialogueBox
           script={activeDialogue}
