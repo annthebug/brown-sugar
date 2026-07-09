@@ -3,7 +3,6 @@ export const ASSET_KEYS = {
   paleBlueSky: 'scene-pale-blue-sky',
   loadingPanel: 'ui-loading-panel',
   mbtiGlassBowls: 'bowls-mbti-glass-sheet',
-  softChime: 'audio-soft-chime',
 } as const
 
 export const BLACK_SUGAR_FRAMES = {
@@ -21,7 +20,7 @@ export const BLACK_SUGAR_FRAMES = {
   collectItem: 'black-sugar-collect-item',
 } as const
 
-export type AssetCategory = 'characters' | 'scenes' | 'ui' | 'memories' | 'bowls' | 'audio'
+export type AssetCategory = 'characters' | 'scenes' | 'ui' | 'memories' | 'bowls'
 type AssetPurpose = 'preload' | 'gallery-source'
 
 type BaseAsset = {
@@ -44,12 +43,7 @@ export type ImageAsset = BaseAsset & {
   url: string
 }
 
-export type AudioAsset = BaseAsset & {
-  kind: 'audio'
-  urls: readonly string[]
-}
-
-export type GameAsset = AtlasAsset | ImageAsset | AudioAsset
+export type GameAsset = AtlasAsset | ImageAsset
 
 export type GameAssetManifest = {
   characters: readonly AtlasAsset[]
@@ -57,7 +51,6 @@ export type GameAssetManifest = {
   ui: readonly ImageAsset[]
   memories: readonly ImageAsset[]
   bowls: readonly ImageAsset[]
-  audio: readonly AudioAsset[]
 }
 
 export const PLACEHOLDER_RESOURCE_RULES = {
@@ -136,19 +129,6 @@ export const GAME_ASSET_MANIFEST = {
         .href,
     },
   ],
-  audio: [
-    {
-      kind: 'audio',
-      category: 'audio',
-      key: ASSET_KEYS.softChime,
-      placeholder: true,
-      purpose: 'preload',
-      description: 'Soft chime placeholder used to validate audio preload plumbing.',
-      urls: [
-        new URL('../../../assets/audio/soft-chime-placeholder.wav', import.meta.url).href,
-      ],
-    },
-  ],
 } as const satisfies GameAssetManifest
 
 export function getPreloadAssets(): readonly GameAsset[] {
@@ -158,17 +138,12 @@ export function getPreloadAssets(): readonly GameAsset[] {
     ...GAME_ASSET_MANIFEST.ui,
     ...GAME_ASSET_MANIFEST.memories,
     ...GAME_ASSET_MANIFEST.bowls,
-    ...GAME_ASSET_MANIFEST.audio,
   ]
 }
 
 export function getAssetUrlSummary(asset: GameAsset): readonly string[] {
   if (asset.kind === 'atlas') {
     return [asset.textureUrl, asset.atlasUrl]
-  }
-
-  if (asset.kind === 'audio') {
-    return asset.urls
   }
 
   return [asset.url]

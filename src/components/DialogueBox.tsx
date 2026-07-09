@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { audioService } from '../services/audio'
 import type { DialogueChoice, DialogueChoiceResult, DialogueScript } from '../data/dialogues'
 
 type DialogueBoxProps = {
@@ -62,8 +61,6 @@ export function DialogueBox({ script, onChoiceResult, onClose }: DialogueBoxProp
       return
     }
 
-    audioService.playSfx('dialogueAdvance')
-
     if (currentNode.nextNodeId) {
       setIsTextRevealed(false)
       setNodeId(currentNode.nextNodeId)
@@ -82,8 +79,6 @@ export function DialogueBox({ script, onChoiceResult, onClose }: DialogueBoxProp
     if (choice.result) {
       onChoiceResult(choice.result, choice)
     }
-
-    audioService.playSfx('dialogueAdvance')
 
     setIsTextRevealed(false)
     setNodeId(choice.nextNodeId)

@@ -1,14 +1,9 @@
 import { AppNav } from '../components/AppNav'
-import { audioService } from '../services/audio'
 import { useSettingsStore } from '../stores/useSettingsStore'
 
 export function SettingsPage() {
-  const bgmVolume = useSettingsStore((state) => state.bgmVolume)
-  const soundVolume = useSettingsStore((state) => state.soundVolume)
   const language = useSettingsStore((state) => state.language)
   const fullscreen = useSettingsStore((state) => state.fullscreen)
-  const setBgmVolume = useSettingsStore((state) => state.setBgmVolume)
-  const setSoundVolume = useSettingsStore((state) => state.setSoundVolume)
   const setLanguage = useSettingsStore((state) => state.setLanguage)
   const toggleFullscreen = useSettingsStore((state) => state.toggleFullscreen)
 
@@ -18,34 +13,6 @@ export function SettingsPage() {
       <section className="page-card settings-card">
         <p className="eyebrow">Settings</p>
         <h1 id="settings-title">Gentle Controls</h1>
-
-        <label>
-          BGM Volume: {bgmVolume}
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={bgmVolume}
-            onChange={(event) => {
-              audioService.unlock()
-              setBgmVolume(event.currentTarget.valueAsNumber)
-            }}
-          />
-        </label>
-
-        <label>
-          Sound Volume: {soundVolume}
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={soundVolume}
-            onChange={(event) => {
-              audioService.unlock()
-              setSoundVolume(event.currentTarget.valueAsNumber)
-            }}
-          />
-        </label>
 
         <label>
           Language

@@ -31,7 +31,6 @@ Web（Desktop / iPad / iPhone / Android），PWA 可安裝。
 | Animation | GSAP |
 | State | Zustand |
 | Routing | React Router |
-| Audio | Howler.js |
 | Database | Firebase |
 | Storage | Firebase Storage |
 | Deployment | Vercel |
@@ -58,7 +57,7 @@ Web（Desktop / iPad / iPhone / Android），PWA 可安裝。
 - 存檔：Auto Save、LocalStorage、Firebase Sync。
 - 相簿：每張照片含日期、一句話、動畫。
 - 成就：收集全部照片、全 MBTI、全部 Memory、Speed Run、No Damage。
-- 設定：BGM、Sound、Language、Fullscreen。
+- 設定：Language、Fullscreen。
 
 ## 非功能需求（Non-Functional Requirements）
 

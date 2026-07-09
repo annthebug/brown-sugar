@@ -151,11 +151,6 @@ export class PreloadScene extends Phaser.Scene {
       return
     }
 
-    if (asset.kind === 'audio') {
-      this.load.audio(asset.key, [...asset.urls])
-      return
-    }
-
     this.load.image(asset.key, asset.url)
   }
 

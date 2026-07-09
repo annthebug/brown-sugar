@@ -70,16 +70,6 @@
         "purpose": "preload",
         "description": "MBTI glass bowl placeholder sheet for future ending previews."
       }
-    ],
-    "audio": [
-      {
-        "key": "audio-soft-chime",
-        "type": "audio",
-        "url": "audio/soft-chime-placeholder.wav",
-        "placeholder": true,
-        "purpose": "preload",
-        "description": "Soft chime placeholder used to validate audio preload plumbing."
-      }
     ]
   }
 }

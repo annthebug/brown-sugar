@@ -9,7 +9,6 @@
 | Animation | GSAP |
 | State | Zustand |
 | Routing | React Router |
-| Audio | Howler.js |
 | Backend / DB | Firebase（Firestore） |
 | Storage | Firebase Storage |
 | Deployment | Vercel |
@@ -29,7 +28,6 @@
 ├─────────────────────────────────────────┤
 │  Services                                 │
 │   - Save Service（LocalStorage + Firebase）│
-│   - Audio Service（Howler.js）            │
 │   - MBTI Service（計分）                  │
 ├─────────────────────────────────────────┤
 │  Firebase（Firestore + Storage）          │
@@ -48,7 +46,7 @@
 
 - `useGameStore`：進度、章節、Memory Shards。
 - `useMbtiStore`：MBTI 計分與結果。
-- `useSettingsStore`：BGM、Sound、Language、Fullscreen。
+- `useSettingsStore`：Language、Fullscreen。
 - `useGalleryStore`：已解鎖回憶。
 
 ## 路由（React Router）
@@ -74,7 +72,7 @@ src/
 │   ├── objects/
 │   └── config.ts
 ├── stores/            # Zustand
-├── services/          # save / audio / mbti / firebase
+├── services/          # save / mbti / firebase
 ├── data/              # MBTI 題庫、關卡設定、回憶內容
 └── assets/            # 引用（實體檔於根 assets/）
 ```

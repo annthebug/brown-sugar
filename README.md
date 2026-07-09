@@ -34,7 +34,6 @@
 | Animation | GSAP |
 | State | Zustand |
 | Routing | React Router |
-| Audio | Howler.js |
 | Database | Firebase |
 | Storage | Firebase Storage |
 | Deployment | Vercel |
