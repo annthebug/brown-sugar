@@ -39,7 +39,7 @@ a {
 .page-shell {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.88) 0 5rem, transparent 5.2rem),
     radial-gradient(circle at 28% 16%, rgba(255, 255, 255, 0.72) 0 3.5rem, transparent 3.7rem),
@@ -419,6 +419,10 @@ h1 {
   grid-column: 1 / -1;
 }
 
+.home-shell .achievement-panel {
+  grid-column: 1 / -1;
+}
+
 .game-header {
   position: relative;
   z-index: 1;
@@ -497,6 +501,62 @@ h1 {
 .page-card h1 {
   max-width: none;
   font-size: clamp(2.6rem, 7vw, 5.5rem);
+}
+
+.achievement-panel {
+  gap: 1.5rem;
+}
+
+.achievement-panel-header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.achievement-panel-header h2 {
+  margin: 0;
+  color: #385867;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+}
+
+.achievement-panel-header strong {
+  color: #50676f;
+  font-size: 1rem;
+}
+
+.achievement-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+.achievement-card {
+  border: 2px solid rgba(111, 138, 148, 0.22);
+  border-radius: 22px;
+  padding: 1rem;
+  background: rgba(248, 251, 249, 0.68);
+}
+
+.achievement-card--unlocked {
+  background: rgba(223, 233, 226, 0.82);
+}
+
+.achievement-card--locked {
+  opacity: 0.78;
+}
+
+.achievement-card strong,
+.achievement-toast strong {
+  color: #385867;
+  font-size: 1.05rem;
+}
+
+.achievement-card p:last-child,
+.achievement-toast p:last-of-type {
+  margin: 0.75rem 0 0;
+  color: #50676f;
+  line-height: 1.6;
 }
 
 .memory-grid {
@@ -634,6 +694,38 @@ h1 {
     radial-gradient(circle at 20% 20%, rgba(248, 251, 249, 0.72), transparent 16rem),
     rgba(56, 88, 103, 0.42);
   backdrop-filter: blur(12px);
+}
+
+.achievement-toast-stack {
+  position: fixed;
+  right: clamp(1rem, 4vw, 2rem);
+  bottom: clamp(1rem, 4vw, 2rem);
+  z-index: 12;
+  display: grid;
+  gap: 0.75rem;
+  width: min(100% - 2rem, 22rem);
+}
+
+.achievement-toast {
+  display: grid;
+  gap: 0.35rem;
+  border: 2px solid rgba(143, 178, 191, 0.46);
+  border-radius: 22px;
+  padding: 1rem;
+  background: rgba(250, 247, 239, 0.94);
+  box-shadow: 0 20px 50px rgba(56, 88, 103, 0.22);
+  backdrop-filter: blur(14px);
+}
+
+.achievement-toast-close {
+  justify-self: end;
+  min-width: auto;
+  margin-top: 0.75rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(159, 191, 202, 0.9);
+  color: #f8fbf9;
+  font-weight: 800;
 }
 
 .memory-overlay-card {

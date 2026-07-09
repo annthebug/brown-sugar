@@ -1,6 +1,8 @@
+import { AchievementPanel } from '../components/AchievementPanel'
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
 import { getGameRouteForChapter, hasContinuableProgress } from '../data/chapters'
+import { useAchievementStore } from '../stores/useAchievementStore'
 import { useGameStore } from '../stores/useGameStore'
 
 const memoryPreviewItems = [
@@ -14,6 +16,7 @@ export function HomePage() {
   const memoryShards = useGameStore((state) => state.memoryShards)
   const totalMemoryShards = useGameStore((state) => state.totalMemoryShards)
   const forestChapterCleared = useGameStore((state) => state.forestChapterCleared)
+  const unlockedAchievementIds = useAchievementStore((state) => state.unlockedIds)
   const canContinue = hasContinuableProgress({
     currentChapter,
     memoryShards,
@@ -62,6 +65,7 @@ export function HomePage() {
           ))}
         </ul>
       </section>
+      <AchievementPanel unlockedIds={unlockedAchievementIds} />
     </main>
   )
 }
