@@ -89,6 +89,22 @@
         ]
       },
       {
+        "key": "city-barista",
+        "type": "atlas",
+        "texture": "characters/city-barista-side-sprite-sheet-v1.png",
+        "atlas": "characters/city-barista-side-sprite-sheet-v1.json",
+        "portrait": "characters/city-barista-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "City Barista side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "city-barista-side-idle",
+          "city-barista-side-walk-1",
+          "city-barista-side-walk-2",
+          "city-barista-side-walk-3"
+        ]
+      },
+      {
         "key": "npc-characters",
         "type": "atlas",
         "texture": "characters/npc-sprite-sheet-v1.png",

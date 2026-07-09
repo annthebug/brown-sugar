@@ -4,6 +4,8 @@ import forestElderTextureUrl from '../../../assets/characters/forest-elder-sprit
 import forestElderAtlasUrl from '../../../assets/characters/forest-elder-sprite-sheet-v1.json?url'
 import forestElderSideTextureUrl from '../../../assets/characters/forest-elder-side-sprite-sheet-v1.png'
 import forestElderSideAtlasUrl from '../../../assets/characters/forest-elder-side-sprite-sheet-v1.json?url'
+import cityBaristaTextureUrl from '../../../assets/characters/city-barista-side-sprite-sheet-v1.png'
+import cityBaristaAtlasUrl from '../../../assets/characters/city-barista-side-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -16,6 +18,7 @@ export const ASSET_KEYS = {
   blackSugar: 'black-sugar',
   forestElder: 'forest-elder',
   forestElderSide: 'forest-elder-side',
+  cityBarista: 'city-barista',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -62,6 +65,13 @@ export const FOREST_ELDER_SIDE_FRAMES = {
   sideWalk1: 'forest-elder-side-walk-1',
   sideWalk2: 'forest-elder-side-walk-2',
   sideWalk3: 'forest-elder-side-walk-3',
+} as const
+
+export const CITY_BARISTA_FRAMES = {
+  sideIdle: 'city-barista-side-idle',
+  sideWalk1: 'city-barista-side-walk-1',
+  sideWalk2: 'city-barista-side-walk-2',
+  sideWalk3: 'city-barista-side-walk-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -169,6 +179,17 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: forestElderSideTextureUrl,
       atlasUrl: forestElderSideAtlasUrl,
       frames: Object.values(FOREST_ELDER_SIDE_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.cityBarista,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'City Barista side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: cityBaristaTextureUrl,
+      atlasUrl: cityBaristaAtlasUrl,
+      frames: Object.values(CITY_BARISTA_FRAMES),
     },
     {
       kind: 'atlas',
