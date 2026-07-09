@@ -76,6 +76,5 @@ python3 scripts/generate-forest-elder-sprite.py
 
 ## Next asset tasks
 
-- Wire portrait into `DialogueBox` for `forestElder` dialogue script.
+- Switch `ForestScene.placeForestElder()` to the side-view atlas — see [forest-elder-side-sprite.md](./forest-elder-side-sprite.md).
 - Add Phaser walk animations per direction when a top-down or hybrid map mode is introduced.
-- Optional side-view variant if Forest chapter adopts platformer-facing NPC art.

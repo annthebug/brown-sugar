@@ -2,6 +2,8 @@ import blackSugarTextureUrl from '../../../assets/characters/black-sugar-sprite-
 import blackSugarAtlasUrl from '../../../assets/characters/black-sugar-sprite-sheet-v1.json?url'
 import forestElderTextureUrl from '../../../assets/characters/forest-elder-sprite-sheet-v1.png'
 import forestElderAtlasUrl from '../../../assets/characters/forest-elder-sprite-sheet-v1.json?url'
+import forestElderSideTextureUrl from '../../../assets/characters/forest-elder-side-sprite-sheet-v1.png'
+import forestElderSideAtlasUrl from '../../../assets/characters/forest-elder-side-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -13,6 +15,7 @@ import mbtiGlassBowlsUrl from '../../../assets/bowls/mbti-glass-bowls-sheet-v1.p
 export const ASSET_KEYS = {
   blackSugar: 'black-sugar',
   forestElder: 'forest-elder',
+  forestElderSide: 'forest-elder-side',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -52,6 +55,13 @@ export const FOREST_ELDER_FRAMES = {
   rightWalk1: 'forest-elder-right-walk-1',
   rightWalk2: 'forest-elder-right-walk-2',
   rightWalk3: 'forest-elder-right-walk-3',
+} as const
+
+export const FOREST_ELDER_SIDE_FRAMES = {
+  sideIdle: 'forest-elder-side-idle',
+  sideWalk1: 'forest-elder-side-walk-1',
+  sideWalk2: 'forest-elder-side-walk-2',
+  sideWalk3: 'forest-elder-side-walk-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -148,6 +158,17 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: forestElderTextureUrl,
       atlasUrl: forestElderAtlasUrl,
       frames: Object.values(FOREST_ELDER_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.forestElderSide,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Forest Elder side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: forestElderSideTextureUrl,
+      atlasUrl: forestElderSideAtlasUrl,
+      frames: Object.values(FOREST_ELDER_SIDE_FRAMES),
     },
     {
       kind: 'atlas',

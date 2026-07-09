@@ -68,6 +68,22 @@
         ]
       },
       {
+        "key": "forest-elder-side",
+        "type": "atlas",
+        "texture": "characters/forest-elder-side-sprite-sheet-v1.png",
+        "atlas": "characters/forest-elder-side-sprite-sheet-v1.json",
+        "portrait": "characters/forest-elder-side-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Forest Elder side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "forest-elder-side-idle",
+          "forest-elder-side-walk-1",
+          "forest-elder-side-walk-2",
+          "forest-elder-side-walk-3"
+        ]
+      },
+      {
         "key": "npc-characters",
         "type": "atlas",
         "texture": "characters/npc-sprite-sheet-v1.png",
