@@ -44,7 +44,12 @@
         "type": "atlas",
         "texture": "characters/forest-elder-sprite-sheet-v1.png",
         "atlas": "characters/forest-elder-sprite-sheet-v1.json",
-        "portrait": "characters/forest-elder-portrait-v1.png",
+        "portrait": "characters/forest-elder-portrait-calm-v1.png",
+        "portraits": {
+          "calm": "characters/forest-elder-portrait-calm-v1.png",
+          "thoughtful": "characters/forest-elder-portrait-thoughtful-v1.png",
+          "warm": "characters/forest-elder-portrait-warm-v1.png"
+        },
         "placeholder": false,
         "purpose": "preload",
         "description": "Forest Elder NPC top-down sprite atlas and dialogue portrait.",
@@ -65,6 +70,102 @@
           "forest-elder-right-walk-1",
           "forest-elder-right-walk-2",
           "forest-elder-right-walk-3"
+        ]
+      },
+      {
+        "key": "forest-elder-side",
+        "type": "atlas",
+        "texture": "characters/forest-elder-side-sprite-sheet-v1.png",
+        "atlas": "characters/forest-elder-side-sprite-sheet-v1.json",
+        "portrait": "characters/forest-elder-side-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Forest Elder side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "forest-elder-side-idle",
+          "forest-elder-side-walk-1",
+          "forest-elder-side-walk-2",
+          "forest-elder-side-walk-3"
+        ]
+      },
+      {
+        "key": "city-barista",
+        "type": "atlas",
+        "texture": "characters/city-barista-side-sprite-sheet-v1.png",
+        "atlas": "characters/city-barista-side-sprite-sheet-v1.json",
+        "portrait": "characters/city-barista-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "City Barista side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "city-barista-side-idle",
+          "city-barista-side-walk-1",
+          "city-barista-side-walk-2",
+          "city-barista-side-walk-3"
+        ]
+      },
+      {
+        "key": "park-traveler",
+        "type": "atlas",
+        "texture": "characters/park-traveler-side-sprite-sheet-v1.png",
+        "atlas": "characters/park-traveler-side-sprite-sheet-v1.json",
+        "portrait": "characters/park-traveler-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Park Traveler side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "park-traveler-side-idle",
+          "park-traveler-side-walk-1",
+          "park-traveler-side-walk-2",
+          "park-traveler-side-walk-3"
+        ]
+      },
+      {
+        "key": "snow-guide",
+        "type": "atlas",
+        "texture": "characters/snow-guide-side-sprite-sheet-v1.png",
+        "atlas": "characters/snow-guide-side-sprite-sheet-v1.json",
+        "portrait": "characters/snow-guide-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Snow Guide side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "snow-guide-side-idle",
+          "snow-guide-side-walk-1",
+          "snow-guide-side-walk-2",
+          "snow-guide-side-walk-3"
+        ]
+      },
+      {
+        "key": "glass-master",
+        "type": "atlas",
+        "texture": "characters/glass-master-side-sprite-sheet-v1.png",
+        "atlas": "characters/glass-master-side-sprite-sheet-v1.json",
+        "portrait": "characters/glass-master-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Glass Master side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "glass-master-side-idle",
+          "glass-master-side-walk-1",
+          "glass-master-side-walk-2",
+          "glass-master-side-walk-3"
+        ]
+      },
+      {
+        "key": "inner-guide",
+        "type": "atlas",
+        "texture": "characters/inner-guide-side-sprite-sheet-v1.png",
+        "atlas": "characters/inner-guide-side-sprite-sheet-v1.json",
+        "portrait": "characters/inner-guide-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Inner Guide side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "inner-guide-side-idle",
+          "inner-guide-side-walk-1",
+          "inner-guide-side-walk-2",
+          "inner-guide-side-walk-3"
         ]
       },
       {

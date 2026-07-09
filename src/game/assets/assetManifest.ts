@@ -2,6 +2,18 @@ import blackSugarTextureUrl from '../../../assets/characters/black-sugar-sprite-
 import blackSugarAtlasUrl from '../../../assets/characters/black-sugar-sprite-sheet-v1.json?url'
 import forestElderTextureUrl from '../../../assets/characters/forest-elder-sprite-sheet-v1.png'
 import forestElderAtlasUrl from '../../../assets/characters/forest-elder-sprite-sheet-v1.json?url'
+import forestElderSideTextureUrl from '../../../assets/characters/forest-elder-side-sprite-sheet-v1.png'
+import forestElderSideAtlasUrl from '../../../assets/characters/forest-elder-side-sprite-sheet-v1.json?url'
+import cityBaristaTextureUrl from '../../../assets/characters/city-barista-side-sprite-sheet-v1.png'
+import cityBaristaAtlasUrl from '../../../assets/characters/city-barista-side-sprite-sheet-v1.json?url'
+import parkTravelerTextureUrl from '../../../assets/characters/park-traveler-side-sprite-sheet-v1.png'
+import parkTravelerAtlasUrl from '../../../assets/characters/park-traveler-side-sprite-sheet-v1.json?url'
+import snowGuideTextureUrl from '../../../assets/characters/snow-guide-side-sprite-sheet-v1.png'
+import snowGuideAtlasUrl from '../../../assets/characters/snow-guide-side-sprite-sheet-v1.json?url'
+import glassMasterTextureUrl from '../../../assets/characters/glass-master-side-sprite-sheet-v1.png'
+import glassMasterAtlasUrl from '../../../assets/characters/glass-master-side-sprite-sheet-v1.json?url'
+import innerGuideTextureUrl from '../../../assets/characters/inner-guide-side-sprite-sheet-v1.png'
+import innerGuideAtlasUrl from '../../../assets/characters/inner-guide-side-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -13,6 +25,12 @@ import mbtiGlassBowlsUrl from '../../../assets/bowls/mbti-glass-bowls-sheet-v1.p
 export const ASSET_KEYS = {
   blackSugar: 'black-sugar',
   forestElder: 'forest-elder',
+  forestElderSide: 'forest-elder-side',
+  cityBarista: 'city-barista',
+  parkTraveler: 'park-traveler',
+  snowGuide: 'snow-guide',
+  glassMaster: 'glass-master',
+  innerGuide: 'inner-guide',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -52,6 +70,48 @@ export const FOREST_ELDER_FRAMES = {
   rightWalk1: 'forest-elder-right-walk-1',
   rightWalk2: 'forest-elder-right-walk-2',
   rightWalk3: 'forest-elder-right-walk-3',
+} as const
+
+export const FOREST_ELDER_SIDE_FRAMES = {
+  sideIdle: 'forest-elder-side-idle',
+  sideWalk1: 'forest-elder-side-walk-1',
+  sideWalk2: 'forest-elder-side-walk-2',
+  sideWalk3: 'forest-elder-side-walk-3',
+} as const
+
+export const CITY_BARISTA_FRAMES = {
+  sideIdle: 'city-barista-side-idle',
+  sideWalk1: 'city-barista-side-walk-1',
+  sideWalk2: 'city-barista-side-walk-2',
+  sideWalk3: 'city-barista-side-walk-3',
+} as const
+
+export const PARK_TRAVELER_FRAMES = {
+  sideIdle: 'park-traveler-side-idle',
+  sideWalk1: 'park-traveler-side-walk-1',
+  sideWalk2: 'park-traveler-side-walk-2',
+  sideWalk3: 'park-traveler-side-walk-3',
+} as const
+
+export const SNOW_GUIDE_FRAMES = {
+  sideIdle: 'snow-guide-side-idle',
+  sideWalk1: 'snow-guide-side-walk-1',
+  sideWalk2: 'snow-guide-side-walk-2',
+  sideWalk3: 'snow-guide-side-walk-3',
+} as const
+
+export const GLASS_MASTER_FRAMES = {
+  sideIdle: 'glass-master-side-idle',
+  sideWalk1: 'glass-master-side-walk-1',
+  sideWalk2: 'glass-master-side-walk-2',
+  sideWalk3: 'glass-master-side-walk-3',
+} as const
+
+export const INNER_GUIDE_FRAMES = {
+  sideIdle: 'inner-guide-side-idle',
+  sideWalk1: 'inner-guide-side-walk-1',
+  sideWalk2: 'inner-guide-side-walk-2',
+  sideWalk3: 'inner-guide-side-walk-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -148,6 +208,72 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: forestElderTextureUrl,
       atlasUrl: forestElderAtlasUrl,
       frames: Object.values(FOREST_ELDER_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.forestElderSide,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Forest Elder side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: forestElderSideTextureUrl,
+      atlasUrl: forestElderSideAtlasUrl,
+      frames: Object.values(FOREST_ELDER_SIDE_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.cityBarista,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'City Barista side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: cityBaristaTextureUrl,
+      atlasUrl: cityBaristaAtlasUrl,
+      frames: Object.values(CITY_BARISTA_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.parkTraveler,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Park Traveler side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: parkTravelerTextureUrl,
+      atlasUrl: parkTravelerAtlasUrl,
+      frames: Object.values(PARK_TRAVELER_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.snowGuide,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Snow Guide side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: snowGuideTextureUrl,
+      atlasUrl: snowGuideAtlasUrl,
+      frames: Object.values(SNOW_GUIDE_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.glassMaster,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Glass Master side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: glassMasterTextureUrl,
+      atlasUrl: glassMasterAtlasUrl,
+      frames: Object.values(GLASS_MASTER_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.innerGuide,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Inner Guide side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: innerGuideTextureUrl,
+      atlasUrl: innerGuideAtlasUrl,
+      frames: Object.values(INNER_GUIDE_FRAMES),
     },
     {
       kind: 'atlas',

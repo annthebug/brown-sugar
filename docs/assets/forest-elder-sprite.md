@@ -49,11 +49,23 @@ Four rows × four columns. Each row is one facing direction; columns are idle + 
 - `forest-elder-right-idle`
 - `forest-elder-right-walk-1` … `forest-elder-right-walk-3`
 
-## Emotion portrait
+## Emotion portrait series
 
-- File: `forest-elder-portrait-v1.png` (64×64, nearest-neighbor upscale from 32×32 bust).
-- Expression: calm, kind, wise — small relaxed eyes and gentle smile.
-- Use in dialogue UI avatar slot when portrait images replace text labels.
+| Mood | File | Expression |
+| --- | --- | --- |
+| calm | `forest-elder-portrait-calm-v1.png` | Relaxed eyes, gentle small smile |
+| thoughtful | `forest-elder-portrait-thoughtful-v1.png` | Slight squint, contemplative |
+| warm | `forest-elder-portrait-warm-v1.png` | Soft happy eyes, wider smile |
+
+- All portraits: 64×64, transparent background, warm pastel pixel art.
+- `DialogueNode.mood` selects portrait in `dialogues.ts`; `DialogueBox` resolves via `resolveDialogueAvatarUrl()`.
+- Legacy `forest-elder-portrait-v1.png` retained; calm mood supersedes it in dialogue.
+
+Regenerate:
+
+```bash
+python3 scripts/generate-forest-elder-portraits.py
+```
 
 ## Palette reference
 
@@ -76,6 +88,5 @@ python3 scripts/generate-forest-elder-sprite.py
 
 ## Next asset tasks
 
-- Wire portrait into `DialogueBox` for `forestElder` dialogue script.
+- Switch `ForestScene.placeForestElder()` to the side-view atlas — see [forest-elder-side-sprite.md](./forest-elder-side-sprite.md).
 - Add Phaser walk animations per direction when a top-down or hybrid map mode is introduced.
-- Optional side-view variant if Forest chapter adopts platformer-facing NPC art.

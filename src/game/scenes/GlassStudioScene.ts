@@ -1,6 +1,11 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, BOSS_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import {
+  ASSET_KEYS,
+  BOSS_FRAMES,
+  GLASS_MASTER_FRAMES,
+  MORANDI_PALETTE,
+} from '../assets/assetManifest'
 import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
@@ -313,10 +318,32 @@ export class GlassStudioScene extends Phaser.Scene {
   }
 
   private placeGlassMasterNpc() {
-    this.glassMasterNpc = placeCharacterSprite(this, MASTER_NPC_X, GROUND_TOP, {
-      atlas: 'npc',
-      frame: NPC_FRAMES.glassMaster,
-      label: '玻璃師傅',
+    const container = this.add.container(MASTER_NPC_X, GROUND_TOP) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.glassMaster, GLASS_MASTER_FRAMES.sideIdle)
+    sprite.setOrigin(0.5, 1).setScale(0.44)
+
+    const label = this.add
+      .text(0, 8, '玻璃師傅', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+      .setVisible(false)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.glassMasterNpc = container
+
+    this.tweens.add({
+      targets: sprite,
+      y: -2,
+      duration: 1200,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
     })
   }
 
@@ -525,6 +552,7 @@ export class GlassStudioScene extends Phaser.Scene {
     }
 
     let promptText: string | null = null
+    this.glassMasterNpc?.label.setVisible(false)
 
     if (!this.bossCleared && this.blowGlassState === 'success' && this.isNearGlassMasterBoss()) {
       promptText = '按 E 與玻璃師傅完成這一步'
@@ -536,6 +564,7 @@ export class GlassStudioScene extends Phaser.Scene {
       promptText = '按 E 感受溫暖爐火'
     } else if (this.isNearGlassMasterNpc()) {
       promptText = '按 E 與玻璃師傅對話'
+      this.glassMasterNpc?.label.setVisible(true)
     }
 
     if (promptText) {

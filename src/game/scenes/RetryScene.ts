@@ -1,6 +1,11 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, BOSS_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import {
+  ASSET_KEYS,
+  BOSS_FRAMES,
+  INNER_GUIDE_FRAMES,
+  MORANDI_PALETTE,
+} from '../assets/assetManifest'
 import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
@@ -317,10 +322,32 @@ export class RetryScene extends Phaser.Scene {
   }
 
   private placeInnerGuide() {
-    this.innerGuideNpc = placeCharacterSprite(this, INNER_GUIDE_X, GROUND_TOP, {
-      atlas: 'npc',
-      frame: NPC_FRAMES.innerVoice,
-      label: '內在嚮導',
+    const container = this.add.container(INNER_GUIDE_X, GROUND_TOP) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.innerGuide, INNER_GUIDE_FRAMES.sideIdle)
+    sprite.setOrigin(0.5, 1).setScale(0.44)
+
+    const label = this.add
+      .text(0, 8, '內在嚮導', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+      .setVisible(false)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.innerGuideNpc = container
+
+    this.tweens.add({
+      targets: sprite,
+      y: -2,
+      duration: 1200,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
     })
   }
 
@@ -524,6 +551,7 @@ export class RetryScene extends Phaser.Scene {
     }
 
     let promptText: string | null = null
+    this.innerGuideNpc?.label.setVisible(false)
 
     if (this.bossUnlocked && !this.bossCleared && this.isNearInnerDoubt()) {
       promptText = '按 E 面對內在懷疑'
@@ -531,6 +559,7 @@ export class RetryScene extends Phaser.Scene {
       promptText = '按 E 收集材料'
     } else if (this.isNearInnerGuide()) {
       promptText = '按 E 聆聽內在嚮導'
+      this.innerGuideNpc?.label.setVisible(true)
     } else {
       const whisper = MATERIALS.find((material) => material.mode === 'meow')
       if (
