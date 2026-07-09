@@ -22,7 +22,7 @@
 | [014](014.md) | Final Stage 與 Boss：Perfectionism | 關卡 | ⬜ 未開始 |
 | [015](015.md) | 音訊系統（Howler.js） | 系統 | ⬜ 未開始 |
 | [016](016.md) | UI：首頁 / 暫停 / 設定 | UI | 🟨 進行中 |
-| [017](017.md) | 相簿（Gallery） | UI | 🟨 進行中 |
+| [017](017.md) | 相簿（Gallery） | UI | ✅ 完成 |
 | [018](018.md) | 存檔系統（LocalStorage + Firebase Sync） | 系統 | 🟨 進行中 |
 | [019](019.md) | 結局：玻璃碗生成、寶箱、Credits | 玩法 | 🟨 進行中 |
 | [020](020.md) | 成就系統 | 系統 | ⬜ 未開始 |

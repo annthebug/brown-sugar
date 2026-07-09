@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { AppNav } from '../components/AppNav'
+import { MemoryCard } from '../components/MemoryCard'
 import { MemoryOverlay } from '../components/MemoryOverlay'
+import { MEMORY_COUNT } from '../data/memories'
 import { type MemoryEntry, useGalleryStore } from '../stores/useGalleryStore'
 
 export function GalleryPage() {
   const [activeMemory, setActiveMemory] = useState<MemoryEntry | null>(null)
   const memories = useGalleryStore((state) => state.memories)
   const resetGallery = useGalleryStore((state) => state.resetGallery)
+  const unlockedCount = memories.filter((memory) => memory.unlocked).length
 
   return (
     <main className="page-shell" aria-labelledby="gallery-title">
@@ -14,35 +17,18 @@ export function GalleryPage() {
       <section className="page-card">
         <p className="eyebrow">Gallery</p>
         <h1 id="gallery-title">Memory Album</h1>
-        {memories.length > 0 ? (
-          <div className="memory-grid">
-            {memories.map((memory, index) => (
-              <article key={memory.id} className="memory-card">
-                <div className="memory-photo-frame">
-                  {memory.unlocked ? (
-                    <img src={memory.photoUrl} alt={`Memory ${index + 1}`} />
-                  ) : (
-                    <span aria-label="Locked memory">?</span>
-                  )}
-                </div>
-                <div>
-                  <p className="panel-label">{memory.dateLabel}</p>
-                  <strong>{memory.title}</strong>
-                  <p>{memory.unlocked ? memory.caption : 'Collect 100 Memory Shards to unlock.'}</p>
-                </div>
-                <button
-                  type="button"
-                  disabled={!memory.unlocked}
-                  onClick={() => setActiveMemory(memory)}
-                >
-                  Replay memory
-                </button>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <p className="hero-copy">把照片放進 assets/memories 後，相簿會自動載入。</p>
-        )}
+        <p className="hero-copy gallery-summary">
+          {unlockedCount} / {MEMORY_COUNT} memories unlocked
+        </p>
+        <div className="memory-grid">
+          {memories.map((memory) => (
+            <MemoryCard
+              key={memory.id}
+              memory={memory}
+              onReplay={() => setActiveMemory(memory)}
+            />
+          ))}
+        </div>
         <button type="button" className="secondary-action page-action" onClick={resetGallery}>
           Reset gallery
         </button>
