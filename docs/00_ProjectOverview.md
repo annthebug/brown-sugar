@@ -54,7 +54,7 @@
 
 ## 技術總覽
 
-React + TypeScript + Vite / Phaser 3 / GSAP / Zustand / React Router / Howler.js / Firebase / Vercel。
+React + TypeScript + Vite / Phaser 3 / GSAP / Zustand / React Router / Firebase / Vercel（**無音訊**）。
 
 ## 相關文件
 

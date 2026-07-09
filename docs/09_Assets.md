@@ -47,12 +47,12 @@
 
 ### UI 元素
 - 按鈕、對話框、HUD、相簿框、設定面板。
-- 圖示：Sound / Language / Fullscreen。
+- 圖示：Language / Fullscreen。
 - UI 素材需使用半透明淺色面板、灰藍描邊與莫蘭迪輔色狀態。
 
 ## 命名與存放規範
 
-- 統一存放於 `assets/`，依類型分子資料夾（`characters/`、`scenes/`、`ui/`、`memories/`、`bowls/`、`audio/` 等）。
+- 統一存放於 `assets/`，依類型分子資料夾（`characters/`、`scenes/`、`ui/`、`memories/`、`bowls/` 等）。
 - 檔名使用小寫與連字號，例如 `black-sugar-idle.png`。
 - Sprite sheet 附對應 JSON（Phaser Atlas）。
 - 產生型 placeholder 檔名需以 `-placeholder` 結尾；擁有者提供的 memory 原始照片可先保留相機檔名，待相簿資料模型完成後再整理。

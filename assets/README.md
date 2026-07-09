@@ -11,7 +11,6 @@ This folder contains runtime assets used by Phaser and gallery imports.
 | `ui/` | Loading panels, HUD elements, buttons, and dialog frames. |
 | `memories/` | Owner-provided memory photos. Do not invent replacement content. |
 | `bowls/` | MBTI glass bowl sheets and ending bowl placeholders. |
-| `audio/` | SFX placeholders. |
 
 ## Placeholder rules
 

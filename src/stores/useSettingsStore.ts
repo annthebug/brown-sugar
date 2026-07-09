@@ -4,18 +4,14 @@ import { persist } from 'zustand/middleware'
 type Language = 'zh-Hant' | 'en'
 
 type SettingsState = {
-  soundVolume: number
   language: Language
   fullscreen: boolean
-  setSoundVolume: (volume: number) => void
   setLanguage: (language: Language) => void
   setFullscreen: (enabled: boolean) => void
   syncFullscreenFromDocument: () => void
   applyFullscreenPreference: () => Promise<void>
   toggleFullscreen: () => Promise<void>
 }
-
-const clampVolume = (volume: number) => Math.min(Math.max(volume, 0), 100)
 
 async function requestAppFullscreen() {
   if (!document.fullscreenElement) {
@@ -32,10 +28,8 @@ async function exitAppFullscreen() {
 export const useSettingsStore = create<SettingsState>()(
   persist(
     (set, get) => ({
-      soundVolume: 80,
       language: 'zh-Hant',
       fullscreen: false,
-      setSoundVolume: (volume) => set({ soundVolume: clampVolume(volume) }),
       setLanguage: (language) => set({ language }),
       setFullscreen: (enabled) => set({ fullscreen: enabled }),
       syncFullscreenFromDocument: () => {

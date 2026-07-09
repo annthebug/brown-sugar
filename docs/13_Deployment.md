@@ -55,7 +55,6 @@ merge 到主分支 → Vercel 產出 Production
 - [ ] Firestore / Storage Security Rules 已設定
 - [ ] PWA 可安裝且離線可啟動
 - [ ] 桌機與行動裝置操作皆正常
-- [ ] 音訊在行動裝置可正常播放
 - [ ] 存檔與雲端同步正常
 
 ## 相關文件

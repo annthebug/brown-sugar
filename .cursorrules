@@ -16,9 +16,9 @@
 - Animation: GSAP
 - State: Zustand
 - Routing: React Router
-- Audio: Howler.js
 - Backend/DB: Firebase (Firestore + Storage)
 - Deploy: Vercel
+- 本遊戲 **無音訊**（無 BGM、無 SFX）；請勿引入音訊函式庫。
 
 ## 程式規範
 - 一律使用 TypeScript，禁止濫用 any。

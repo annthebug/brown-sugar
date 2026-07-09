@@ -29,9 +29,10 @@
 | Animation | GSAP | ✅ |
 | State | Zustand | ✅ |
 | Routing | React Router | ✅ |
-| Audio | Howler.js | ✅ |
 | Backend / DB | Firebase（Firestore + Storage） | ✅ |
 | Deploy | Vercel | ✅ |
+
+- 本遊戲 **無音訊**（無 BGM、無 SFX）；請勿引入 Howler.js 或其他音訊函式庫。
 
 - 未經討論，**不得**引入上表以外的框架或替代方案。
 - 一律使用 TypeScript，避免 `any`。
