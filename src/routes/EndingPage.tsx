@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, type CSSProperties } from 'react'
+import { useLayoutEffect, useMemo, useRef } from 'react'
 import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
@@ -13,15 +13,13 @@ import {
 import { useGalleryStore } from '../stores/useGalleryStore'
 import { useGameStore } from '../stores/useGameStore'
 import { useMbtiStore } from '../stores/useMbtiStore'
-import { ENDING_BLACK_SUGAR_SLEEP_URL, ENDING_CHEST_LAYER_URLS } from '../game/assets/assetManifest'
+import { ENDING_BLACK_SUGAR_SLEEP_URL } from '../game/assets/assetManifest'
 
 export function EndingPage() {
   const memoryShards = useGameStore((state) => state.memoryShards)
   const gameCompleted = useGameStore((state) => state.gameCompleted)
   const endingRef = useRef<HTMLElement | null>(null)
   const revealRef = useRef<HTMLDivElement | null>(null)
-  const chestRef = useRef<HTMLDivElement | null>(null)
-  const chestLidRef = useRef<HTMLDivElement | null>(null)
   const photoRef = useRef<HTMLDivElement | null>(null)
   const sleepRef = useRef<HTMLDivElement | null>(null)
   const creditsViewportRef = useRef<HTMLDivElement | null>(null)
@@ -68,17 +66,13 @@ export function EndingPage() {
 
   useLayoutEffect(() => {
     const context = gsap.context(() => {
-      if (!revealRef.current || !chestRef.current || !chestLidRef.current || !photoRef.current || !sleepRef.current) {
+      if (!revealRef.current || !photoRef.current || !sleepRef.current) {
         return
       }
 
       gsap.set([revealRef.current, photoRef.current, sleepRef.current], {
         opacity: 0,
         y: 18,
-      })
-      gsap.set(chestLidRef.current, {
-        rotate: 0,
-        transformOrigin: '50% 100%',
       })
 
       const timeline = gsap.timeline({
@@ -87,15 +81,7 @@ export function EndingPage() {
 
       timeline
         .to(revealRef.current, { opacity: 1, y: 0, duration: 0.6 })
-        .fromTo(
-          chestRef.current,
-          { scale: 0.92, y: 12 },
-          { scale: 1, y: 0, duration: 0.6, ease: 'back.out(1.6)' },
-          '-=0.18',
-        )
-        .to(chestRef.current, { y: -8, duration: 0.28, yoyo: true, repeat: 1, ease: 'sine.inOut' })
-        .to(chestLidRef.current, { rotate: -22, y: -22, x: -8, duration: 0.65, ease: 'power3.out' })
-        .to(photoRef.current, { opacity: 1, y: 0, duration: 0.75 }, '-=0.2')
+        .to(photoRef.current, { opacity: 1, y: 0, duration: 0.75 }, '-=0.18')
         .to(sleepRef.current, { opacity: 1, y: 0, duration: 0.7 }, '-=0.1')
 
       if (creditsViewportRef.current && creditsTrackRef.current) {
@@ -165,24 +151,7 @@ export function EndingPage() {
             )}
           </section>
 
-          <section className="ending-chest-section" aria-label="寶箱揭示">
-            <div
-              ref={chestRef}
-              className="ending-chest"
-              style={
-                {
-                  '--ending-chest-body-url': `url(${ENDING_CHEST_LAYER_URLS.body})`,
-                  '--ending-chest-lid-url': `url(${ENDING_CHEST_LAYER_URLS.lid})`,
-                  '--ending-chest-lock-url': `url(${ENDING_CHEST_LAYER_URLS.lock})`,
-                  '--ending-chest-glow-url': `url(${ENDING_CHEST_LAYER_URLS.glow})`,
-                } as CSSProperties
-              }
-            >
-              <div className="ending-chest-glow" aria-hidden="true" />
-              <div className="ending-chest-body" aria-hidden="true" />
-              <div className="ending-chest-lock" aria-hidden="true" />
-              <div ref={chestLidRef} className="ending-chest-lid" aria-hidden="true" />
-            </div>
+          <section className="ending-photo-section" aria-label="玻璃碗揭示">
             <div ref={photoRef} className="ending-photo-card">
               <div className="ending-photo-header">
                 <span>真正的玻璃碗</span>
@@ -195,7 +164,7 @@ export function EndingPage() {
                 style={generatedBowlStyle}
               />
               <p className="ending-photo-copy">
-                寶箱打開後，留下的不是更完美的形狀，而是終於願意停下來珍惜的心意。
+                留下的不是更完美的形狀，而是終於願意停下來珍惜的心意。
               </p>
             </div>
           </section>
