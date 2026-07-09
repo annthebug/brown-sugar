@@ -932,7 +932,7 @@ h1 {
   font-size: 0.88rem;
 }
 
-.ending-chest-section,
+.ending-photo-section,
 .ending-sleep-section,
 .ending-credits-card {
   border: 2px solid rgba(111, 138, 148, 0.22);
@@ -941,62 +941,15 @@ h1 {
   background: rgba(248, 251, 249, 0.76);
 }
 
-.ending-chest-section {
+.ending-photo-section {
   display: grid;
-  grid-template-columns: minmax(11rem, 16rem) minmax(0, 1fr);
-  gap: 1.25rem;
-  align-items: center;
-}
-
-.ending-chest {
-  position: relative;
-  width: min(100%, 16rem);
-  aspect-ratio: 1;
-  margin: 0 auto;
-  perspective: 900px;
-}
-
-.ending-chest-lid,
-.ending-chest-body,
-.ending-chest-lock,
-.ending-chest-glow {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-  pointer-events: none;
-  user-select: none;
-}
-
-.ending-chest-glow {
-  z-index: 1;
-  background-image: var(--ending-chest-glow-url);
-}
-
-.ending-chest-body {
-  z-index: 2;
-  background-image: var(--ending-chest-body-url);
-}
-
-.ending-chest-lock {
-  z-index: 3;
-  background-image: var(--ending-chest-lock-url);
-}
-
-.ending-chest-lid {
-  z-index: 4;
-  background-image: var(--ending-chest-lid-url);
-  transform-origin: 50% 100%;
+  place-items: center;
 }
 
 .ending-photo-card {
   display: grid;
   gap: 0.85rem;
+  width: min(100%, 24rem);
   border-radius: 24px;
   padding: 1rem;
   background:
@@ -1018,6 +971,8 @@ h1 {
 
 .ending-photo-bowl,
 .ending-bowl-bed-frame {
+  width: 50%;
+  margin-inline: auto;
   aspect-ratio: 1;
   border-radius: 28px;
   border: 2px solid rgba(111, 138, 148, 0.24);
@@ -1150,8 +1105,7 @@ h1 {
   .memory-grid,
   .ending-summary,
   .ending-score-grid,
-  .ending-bowl-reveal,
-  .ending-chest-section {
+  .ending-bowl-reveal {
     grid-template-columns: 1fr;
   }
 
