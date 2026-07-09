@@ -380,14 +380,6 @@ export function GamePage() {
       </header>
       <div className="game-playfield">
         <PhaserGame ref={phaserRef} isPaused={isPaused} />
-        <button
-          type="button"
-          className="game-pause-button"
-          aria-label="暫停遊戲"
-          onClick={openPauseMenu}
-        >
-          暫停
-        </button>
       </div>
       <section className="store-panel" aria-label="遊戲控制面板">
         <div>
