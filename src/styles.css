@@ -964,7 +964,9 @@ h1 {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   pointer-events: none;
@@ -973,18 +975,22 @@ h1 {
 
 .ending-chest-glow {
   z-index: 1;
+  background-image: var(--ending-chest-glow-url);
 }
 
 .ending-chest-body {
   z-index: 2;
+  background-image: var(--ending-chest-body-url);
 }
 
 .ending-chest-lock {
   z-index: 3;
+  background-image: var(--ending-chest-lock-url);
 }
 
 .ending-chest-lid {
   z-index: 4;
+  background-image: var(--ending-chest-lid-url);
   transform-origin: 50% 100%;
 }
 

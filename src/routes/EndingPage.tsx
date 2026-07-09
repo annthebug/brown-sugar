@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef } from 'react'
+import { useLayoutEffect, useMemo, useRef, type CSSProperties } from 'react'
 import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
@@ -21,7 +21,7 @@ export function EndingPage() {
   const endingRef = useRef<HTMLElement | null>(null)
   const revealRef = useRef<HTMLDivElement | null>(null)
   const chestRef = useRef<HTMLDivElement | null>(null)
-  const chestLidRef = useRef<HTMLImageElement | null>(null)
+  const chestLidRef = useRef<HTMLDivElement | null>(null)
   const photoRef = useRef<HTMLDivElement | null>(null)
   const sleepRef = useRef<HTMLDivElement | null>(null)
   const creditsViewportRef = useRef<HTMLDivElement | null>(null)
@@ -166,36 +166,22 @@ export function EndingPage() {
           </section>
 
           <section className="ending-chest-section" aria-label="寶箱揭示">
-            <div ref={chestRef} className="ending-chest">
-              <img
-                className="ending-chest-glow"
-                src={ENDING_CHEST_LAYER_URLS.glow}
-                alt=""
-                aria-hidden="true"
-                draggable={false}
-              />
-              <img
-                className="ending-chest-body"
-                src={ENDING_CHEST_LAYER_URLS.body}
-                alt=""
-                aria-hidden="true"
-                draggable={false}
-              />
-              <img
-                className="ending-chest-lock"
-                src={ENDING_CHEST_LAYER_URLS.lock}
-                alt=""
-                aria-hidden="true"
-                draggable={false}
-              />
-              <img
-                ref={chestLidRef}
-                className="ending-chest-lid"
-                src={ENDING_CHEST_LAYER_URLS.lid}
-                alt=""
-                aria-hidden="true"
-                draggable={false}
-              />
+            <div
+              ref={chestRef}
+              className="ending-chest"
+              style={
+                {
+                  '--ending-chest-body-url': `url(${ENDING_CHEST_LAYER_URLS.body})`,
+                  '--ending-chest-lid-url': `url(${ENDING_CHEST_LAYER_URLS.lid})`,
+                  '--ending-chest-lock-url': `url(${ENDING_CHEST_LAYER_URLS.lock})`,
+                  '--ending-chest-glow-url': `url(${ENDING_CHEST_LAYER_URLS.glow})`,
+                } as CSSProperties
+              }
+            >
+              <div className="ending-chest-glow" aria-hidden="true" />
+              <div className="ending-chest-body" aria-hidden="true" />
+              <div className="ending-chest-lock" aria-hidden="true" />
+              <div ref={chestLidRef} className="ending-chest-lid" aria-hidden="true" />
             </div>
             <div ref={photoRef} className="ending-photo-card">
               <div className="ending-photo-header">
