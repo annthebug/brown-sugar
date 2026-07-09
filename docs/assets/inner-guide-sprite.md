@@ -58,7 +58,7 @@ sprite.setOrigin(0.5, 1).setScale(0.44)
 python3 scripts/generate-inner-guide-sprite.py
 ```
 
-## Next asset tasks
+## Integration
 
-- Switch `RetryScene` and `FinalScene` guide NPC from `npc-characters` atlas to this sheet.
-- Add `portraitId: 'innerGuide'` for `innerGuide` dialogue script.
+- `RetryScene.placeInnerGuide()` and `FinalScene.placeInnerGuide()` use `ASSET_KEYS.innerGuide` + `INNER_GUIDE_FRAMES.sideIdle`.
+- `innerGuide` dialogue script uses `portraitId: 'innerGuide'`.

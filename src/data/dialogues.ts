@@ -36,7 +36,13 @@ export type DialogueNode = {
   choices?: readonly DialogueChoice[]
 }
 
-export type DialoguePortraitId = 'forestElder' | 'cityBarista' | 'parkTraveler' | 'snowGuide' | 'glassMaster'
+export type DialoguePortraitId =
+  | 'forestElder'
+  | 'cityBarista'
+  | 'parkTraveler'
+  | 'snowGuide'
+  | 'glassMaster'
+  | 'innerGuide'
 
 export type DialogueScript = {
   id: string
@@ -61,6 +67,10 @@ export const NPC_PORTRAIT_URLS = {
   ).href,
   glassMaster: new URL(
     '../../assets/characters/glass-master-portrait-v1.png',
+    import.meta.url,
+  ).href,
+  innerGuide: new URL(
+    '../../assets/characters/inner-guide-portrait-v1.png',
     import.meta.url,
   ).href,
 } as const
@@ -106,6 +116,10 @@ export function resolveDialogueAvatarUrl(
 
   if (script?.portraitId === 'glassMaster') {
     return NPC_PORTRAIT_URLS.glassMaster
+  }
+
+  if (script?.portraitId === 'innerGuide') {
+    return NPC_PORTRAIT_URLS.innerGuide
   }
 
   return undefined
@@ -1187,6 +1201,7 @@ export const DIALOGUE_SCRIPTS = {
   innerGuide: {
     id: 'inner-guide',
     title: '內在嚮導',
+    portraitId: 'innerGuide',
     startNodeId: 'final-tf-01',
     nodes: {
       'final-tf-01': {
