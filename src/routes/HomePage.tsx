@@ -55,7 +55,12 @@ export function HomePage() {
       </section>
 
       <section className="journey-panel" aria-label="旅程預覽">
-        <BlackSugarSprite />
+        <BlackSugarSprite
+          styleOverrides={{
+            backgroundSize: '700px 600px',
+            backgroundPosition: '-10px 0',
+          }}
+        />
         <ul>
           {memoryPreviewItems.map((item) => (
             <li key={item}>{item}</li>
