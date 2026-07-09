@@ -1,5 +1,6 @@
 export const ASSET_KEYS = {
   blackSugar: 'black-sugar',
+  forestElder: 'forest-elder',
   paleBlueSky: 'scene-pale-blue-sky',
   loadingPanel: 'ui-loading-panel',
   mbtiGlassBowls: 'bowls-mbti-glass-sheet',
@@ -18,6 +19,25 @@ export const BLACK_SUGAR_FRAMES = {
   happySparkle: 'black-sugar-happy-sparkle',
   sadPleading: 'black-sugar-sad-pleading',
   collectItem: 'black-sugar-collect-item',
+} as const
+
+export const FOREST_ELDER_FRAMES = {
+  downIdle: 'forest-elder-down-idle',
+  downWalk1: 'forest-elder-down-walk-1',
+  downWalk2: 'forest-elder-down-walk-2',
+  downWalk3: 'forest-elder-down-walk-3',
+  upIdle: 'forest-elder-up-idle',
+  upWalk1: 'forest-elder-up-walk-1',
+  upWalk2: 'forest-elder-up-walk-2',
+  upWalk3: 'forest-elder-up-walk-3',
+  leftIdle: 'forest-elder-left-idle',
+  leftWalk1: 'forest-elder-left-walk-1',
+  leftWalk2: 'forest-elder-left-walk-2',
+  leftWalk3: 'forest-elder-left-walk-3',
+  rightIdle: 'forest-elder-right-idle',
+  rightWalk1: 'forest-elder-right-walk-1',
+  rightWalk2: 'forest-elder-right-walk-2',
+  rightWalk3: 'forest-elder-right-walk-3',
 } as const
 
 export type AssetCategory = 'characters' | 'scenes' | 'ui' | 'memories' | 'bowls'
@@ -91,6 +111,23 @@ export const GAME_ASSET_MANIFEST = {
         import.meta.url,
       ).href,
       frames: Object.values(BLACK_SUGAR_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.forestElder,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Forest Elder NPC top-down sprite atlas (idle + 3-frame walk, four directions).',
+      textureUrl: new URL(
+        '../../../assets/characters/forest-elder-sprite-sheet-v1.png',
+        import.meta.url,
+      ).href,
+      atlasUrl: new URL(
+        '../../../assets/characters/forest-elder-sprite-sheet-v1.json',
+        import.meta.url,
+      ).href,
+      frames: Object.values(FOREST_ELDER_FRAMES),
     },
   ],
   scenes: [

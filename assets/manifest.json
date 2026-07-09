@@ -38,6 +38,34 @@
           "black-sugar-sad-pleading",
           "black-sugar-collect-item"
         ]
+      },
+      {
+        "key": "forest-elder",
+        "type": "atlas",
+        "texture": "characters/forest-elder-sprite-sheet-v1.png",
+        "atlas": "characters/forest-elder-sprite-sheet-v1.json",
+        "portrait": "characters/forest-elder-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Forest Elder NPC top-down sprite atlas and dialogue portrait.",
+        "frames": [
+          "forest-elder-down-idle",
+          "forest-elder-down-walk-1",
+          "forest-elder-down-walk-2",
+          "forest-elder-down-walk-3",
+          "forest-elder-up-idle",
+          "forest-elder-up-walk-1",
+          "forest-elder-up-walk-2",
+          "forest-elder-up-walk-3",
+          "forest-elder-left-idle",
+          "forest-elder-left-walk-1",
+          "forest-elder-left-walk-2",
+          "forest-elder-left-walk-3",
+          "forest-elder-right-idle",
+          "forest-elder-right-walk-1",
+          "forest-elder-right-walk-2",
+          "forest-elder-right-walk-3"
+        ]
       }
     ],
     "scenes": [
