@@ -19,6 +19,7 @@ This folder contains runtime assets used by Phaser and gallery imports.
 - Placeholder art should use the pale blue sky base and Morandi accents from `assets/manifest.json`.
 - Keep manifest keys stable when replacing placeholder files with final assets.
 - Sprite sheets must include a matching Phaser atlas JSON beside the texture.
+- Regenerate chapter NPC/Boss placeholders with `python3 scripts/generate-character-assets.py` (see `docs/assets/character-sprites.md`).
 
 ## Preload manifest
 

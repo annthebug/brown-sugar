@@ -149,13 +149,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (input.left) {
       velX = -WALK_SPEED
       this.facingRight = false
-      this.setFlipX(true)
     } else if (input.right) {
       velX = WALK_SPEED
       this.facingRight = true
-      this.setFlipX(false)
     }
     body.setVelocityX(velX)
+    this.syncFacingFlip()
 
     // ── Jump / Double-Jump ───────────────────────────────────────────────
 
@@ -248,6 +247,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.dashCooldown = DASH_COOLDOWN_MS
     this._state = 'dash'
     this.play('bs-dash', true)
+    this.syncFacingFlip()
 
     body.setVelocityX(dir * DASH_VEL)
     body.setVelocityY(0)
@@ -275,6 +275,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     })
   }
 
+  private syncFacingFlip() {
+    const animKey = this.anims.currentAnim?.key
+    // Jump art faces left; side walk/dash art faces right.
+    const facesLeft = animKey === 'bs-jump'
+    this.setFlipX(facesLeft ? this.facingRight : !this.facingRight)
+  }
+
   private syncAnim(onGround: boolean, velX: number) {
     // Locked states control their own animation
     if (this._state === 'dash') return
@@ -283,22 +290,24 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this._state === 'talk') return
 
     if (!onGround) {
-      // In the air — show jump frame regardless of horizontal vel
       if (this.anims.currentAnim?.key !== 'bs-jump') {
         this.play('bs-jump', true)
+        this.syncFacingFlip()
       }
       return
     }
 
     if (velX !== 0) {
       this._state = 'walk'
-      this.play('bs-walk', true)
+      if (this.anims.currentAnim?.key !== 'bs-walk') {
+        this.play('bs-walk', true)
+        this.syncFacingFlip()
+      }
     } else {
       this._state = 'idle'
-      // After walking use side-idle; after landing from air use front-idle
-      const cur = this.anims.currentAnim?.key
-      if (cur !== 'bs-idle' && cur !== 'bs-side-idle') {
-        this.play('bs-idle', true)
+      if (this.anims.currentAnim?.key !== 'bs-side-idle') {
+        this.play('bs-side-idle', true)
+        this.syncFacingFlip()
       }
     }
   }

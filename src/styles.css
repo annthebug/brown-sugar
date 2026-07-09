@@ -342,43 +342,9 @@ h1 {
   padding: clamp(1.5rem, 4vw, 3rem);
 }
 
-.pixel-cat {
-  position: relative;
-  display: grid;
-  width: 11rem;
-  height: 9rem;
-  place-items: center;
-  border: 8px solid #5a453d;
-  border-radius: 38% 38% 44% 44%;
-  background: #6a4f45;
-  box-shadow:
-    inset 0 -18px 0 rgba(61, 42, 36, 0.18),
-    0 18px 0 rgba(132, 155, 149, 0.18);
-}
-
-.cat-ear {
-  position: absolute;
-  top: -2.15rem;
-  width: 4rem;
-  height: 4rem;
-  border: 8px solid #5a453d;
-  background: #6a4f45;
-  transform: rotate(45deg);
-}
-
-.left-ear {
-  left: 1.3rem;
-}
-
-.right-ear {
-  right: 1.3rem;
-}
-
-.cat-face {
-  z-index: 1;
-  color: #f5eee5;
-  font-size: 4rem;
-  line-height: 1;
+.black-sugar-sprite {
+  display: block;
+  filter: drop-shadow(0 14px 0 rgba(132, 155, 149, 0.16));
 }
 
 .journey-panel ul {

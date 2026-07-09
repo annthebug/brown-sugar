@@ -66,6 +66,40 @@
           "forest-elder-right-walk-2",
           "forest-elder-right-walk-3"
         ]
+      },
+      {
+        "key": "npc-characters",
+        "type": "atlas",
+        "texture": "characters/npc-sprite-sheet-v1.png",
+        "atlas": "characters/npc-sprite-sheet-v1.json",
+        "placeholder": true,
+        "purpose": "preload",
+        "description": "Ghibli-inspired Morandi NPC atlas v2 (Kamaji-style elder, café barista, Kiki-style traveler, hooded guide, glass artisan, river spirit).",
+        "frames": [
+          "forest-elder-idle",
+          "coffee-barista-idle",
+          "park-traveler-idle",
+          "snow-guide-idle",
+          "glass-master-idle",
+          "inner-voice-idle"
+        ]
+      },
+      {
+        "key": "boss-characters",
+        "type": "atlas",
+        "texture": "characters/boss-sprite-sheet-v1.png",
+        "atlas": "characters/boss-sprite-sheet-v1.json",
+        "placeholder": true,
+        "purpose": "preload",
+        "description": "Ghibli-inspired Morandi boss atlas v2 (jar spirit, clock spirit, kodama, furnace artisan, soot sprites, mask mist).",
+        "frames": [
+          "giant-can-idle",
+          "time-monster-idle",
+          "snow-spirit-idle",
+          "glass-master-boss-idle",
+          "inner-doubt-idle",
+          "perfectionism-idle"
+        ]
       }
     ],
     "scenes": [

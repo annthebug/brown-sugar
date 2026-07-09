@@ -1,0 +1,135 @@
+{
+  "frames": {
+    "forest-elder-idle": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 130,
+        "h": 185
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 68,
+        "y": 67,
+        "w": 130,
+        "h": 185
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "coffee-barista-idle": {
+      "frame": {
+        "x": 132,
+        "y": 0,
+        "w": 89,
+        "h": 169
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 91,
+        "y": 83,
+        "w": 89,
+        "h": 169
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "park-traveler-idle": {
+      "frame": {
+        "x": 223,
+        "y": 0,
+        "w": 91,
+        "h": 155
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 79,
+        "y": 97,
+        "w": 91,
+        "h": 155
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "snow-guide-idle": {
+      "frame": {
+        "x": 316,
+        "y": 0,
+        "w": 79,
+        "h": 167
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 93,
+        "y": 85,
+        "w": 79,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "glass-master-idle": {
+      "frame": {
+        "x": 397,
+        "y": 0,
+        "w": 115,
+        "h": 177
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 80,
+        "y": 75,
+        "w": 115,
+        "h": 177
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "inner-voice-idle": {
+      "frame": {
+        "x": 514,
+        "y": 0,
+        "w": 83,
+        "h": 173
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 87,
+        "y": 83,
+        "w": 83,
+        "h": 173
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    }
+  },
+  "meta": {
+    "app": "quest-for-the-perfect-bowl-ghibli-placeholder",
+    "version": "3.0",
+    "image": "npc-sprite-sheet-v1.png",
+    "size": {
+      "w": 1024,
+      "h": 256
+    },
+    "scale": "1",
+    "style": "Ghibli-inspired 16-bit Morandi pixel art (detailed NPC)"
+  }
+}
