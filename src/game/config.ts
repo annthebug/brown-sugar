@@ -4,6 +4,7 @@ import { CityScene } from './scenes/CityScene'
 import { ForestScene } from './scenes/ForestScene'
 import { GameScene } from './scenes/GameScene'
 import { PreloadScene } from './scenes/PreloadScene'
+import { SnowMountainScene } from './scenes/SnowMountainScene'
 
 export const GAME_WIDTH = 960
 export const GAME_HEIGHT = 540
@@ -27,6 +28,6 @@ export function createGameConfig(parent: HTMLElement): Phaser.Types.Core.GameCon
         debug: false,
       },
     },
-    scene: [BootScene, PreloadScene, ForestScene, CityScene, GameScene],
+    scene: [BootScene, PreloadScene, ForestScene, CityScene, SnowMountainScene, GameScene],
   }
 }

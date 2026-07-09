@@ -19,12 +19,14 @@ type GameState = {
   currentChapter: Chapter
   forestChapterCleared: boolean
   cityChapterCleared: boolean
+  snowChapterCleared: boolean
   memoryShards: number
   totalMemoryShards: number
   collectMemoryShards: (amount?: number) => MemoryShardCollectionResult
   collectMemoryShard: () => MemoryShardCollectionResult
   completeForestChapter: () => void
   completeCityChapter: () => void
+  completeSnowChapter: () => void
   resetProgress: () => void
 }
 
@@ -36,6 +38,7 @@ export const useGameStore = create<GameState>()(
       currentChapter: 'Forest',
       forestChapterCleared: false,
       cityChapterCleared: false,
+      snowChapterCleared: false,
       memoryShards: 0,
       totalMemoryShards: 0,
       collectMemoryShards: (amount = 1) => {
@@ -74,11 +77,22 @@ export const useGameStore = create<GameState>()(
           currentChapter: 'Snow Mountain',
         })
       },
+      completeSnowChapter: () => {
+        if (get().snowChapterCleared) {
+          return
+        }
+
+        set({
+          snowChapterCleared: true,
+          currentChapter: 'Glass Studio',
+        })
+      },
       resetProgress: () =>
         set({
           currentChapter: 'Forest',
           forestChapterCleared: false,
           cityChapterCleared: false,
+          snowChapterCleared: false,
           memoryShards: 0,
           totalMemoryShards: 0,
         }),
@@ -106,6 +120,13 @@ export const useGameStore = create<GameState>()(
             typeof persisted.cityChapterCleared === 'boolean'
               ? persisted.cityChapterCleared
               : currentState.cityChapterCleared,
+          snowChapterCleared:
+            typeof persisted === 'object' &&
+            persisted !== null &&
+            'snowChapterCleared' in persisted &&
+            typeof persisted.snowChapterCleared === 'boolean'
+              ? persisted.snowChapterCleared
+              : currentState.snowChapterCleared,
         }
       },
     },

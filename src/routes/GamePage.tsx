@@ -25,6 +25,11 @@ const CITY_NPC_DIALOGUES: Record<string, DialogueScriptId> = {
   timeMonster: 'timeMonster',
 }
 
+const SNOW_NPC_DIALOGUES: Record<string, DialogueScriptId> = {
+  snowSpirit: 'snowSpirit',
+  snowSpiritBoss: 'snowSpiritBoss',
+}
+
 function resolveDialogueId(npcId?: string): DialogueScriptId | null {
   if (!npcId) {
     return null
@@ -34,7 +39,7 @@ function resolveDialogueId(npcId?: string): DialogueScriptId | null {
     return 'forestElder'
   }
 
-  return CITY_NPC_DIALOGUES[npcId] ?? null
+  return CITY_NPC_DIALOGUES[npcId] ?? SNOW_NPC_DIALOGUES[npcId] ?? null
 }
 
 export function GamePage() {
@@ -48,9 +53,11 @@ export function GamePage() {
   const currentChapter = useGameStore((state) => state.currentChapter)
   const forestChapterCleared = useGameStore((state) => state.forestChapterCleared)
   const cityChapterCleared = useGameStore((state) => state.cityChapterCleared)
+  const snowChapterCleared = useGameStore((state) => state.snowChapterCleared)
   const collectMemoryShards = useGameStore((state) => state.collectMemoryShards)
   const completeForestChapter = useGameStore((state) => state.completeForestChapter)
   const completeCityChapter = useGameStore((state) => state.completeCityChapter)
+  const completeSnowChapter = useGameStore((state) => state.completeSnowChapter)
   const resetProgress = useGameStore((state) => state.resetProgress)
   const unlockNextMemory = useGalleryStore((state) => state.unlockNextMemory)
   const unlockMemoryByNumber = useGalleryStore((state) => state.unlockMemoryByNumber)
@@ -69,16 +76,19 @@ export function GamePage() {
         currentChapter,
         forestChapterCleared,
         cityChapterCleared,
+        snowChapterCleared,
       }),
-    [cityChapterCleared, currentChapter, forestChapterCleared],
+    [cityChapterCleared, currentChapter, forestChapterCleared, snowChapterCleared],
   )
 
   const chapterMeta = CHAPTER_LABELS[playableChapter]
-  const chapterProgressHint = cityChapterCleared
-    ? 'City cleared'
-    : forestChapterCleared
+  const chapterProgressHint = snowChapterCleared
+    ? 'Snow Mountain cleared'
+    : cityChapterCleared
       ? chapterMeta.hint
-      : chapterMeta.hint
+      : forestChapterCleared
+        ? chapterMeta.hint
+        : chapterMeta.hint
 
   const collectShards = useCallback(
     (amount: number) => {
@@ -143,6 +153,15 @@ export function GamePage() {
       }
     })
 
+    const unsubscribeSnowChapter = gameEventBus.on('chapter:snow-cleared', () => {
+      completeSnowChapter()
+      const unlockedMemory = unlockMemoryByNumber(3)
+
+      if (unlockedMemory) {
+        setMemoryQueue((currentQueue) => [...currentQueue, unlockedMemory])
+      }
+    })
+
     return () => {
       unsubscribeReady()
       unsubscribeJump()
@@ -152,8 +171,16 @@ export function GamePage() {
       unsubscribeTalk()
       unsubscribeForestChapter()
       unsubscribeCityChapter()
+      unsubscribeSnowChapter()
     }
-  }, [collectShards, completeCityChapter, completeForestChapter, openDialogue, unlockMemoryByNumber])
+  }, [
+    collectShards,
+    completeCityChapter,
+    completeForestChapter,
+    completeSnowChapter,
+    openDialogue,
+    unlockMemoryByNumber,
+  ])
 
   const handleChoiceResult = useCallback(
     (result: DialogueChoiceResult, choice: DialogueChoice) => {
@@ -169,6 +196,12 @@ export function GamePage() {
 
       if (result.kind === 'story' && result.trigger === 'time-monster-understood') {
         gameEventBus.emit('boss:time-monster-understood', {})
+        setLastDialogueChoice(choice.label)
+        return
+      }
+
+      if (result.kind === 'story' && result.trigger === 'snow-spirit-understood') {
+        gameEventBus.emit('boss:snow-spirit-understood', {})
         setLastDialogueChoice(choice.label)
         return
       }
@@ -290,7 +323,10 @@ export function GamePage() {
           Talk to Time Monster
         </button>
         <button type="button" onClick={() => openDialogue('snowSpirit')}>
-          Talk to Snow Spirit
+          Talk to Mountain Guide
+        </button>
+        <button type="button" onClick={() => openDialogue('snowSpiritBoss')}>
+          Talk to Snow Spirit (Boss)
         </button>
         <button type="button" onClick={() => openDialogue('glassMaster')}>
           Talk to Glass Master

@@ -1,11 +1,11 @@
 import type { Chapter } from '../stores/useGameStore'
 
-export type SceneKey = 'ForestScene' | 'CityScene' | 'GameScene'
+export type SceneKey = 'ForestScene' | 'CityScene' | 'SnowMountainScene' | 'GameScene'
 
 export const CHAPTER_SCENE_MAP: Record<Chapter, SceneKey> = {
   Forest: 'ForestScene',
   City: 'CityScene',
-  'Snow Mountain': 'ForestScene',
+  'Snow Mountain': 'SnowMountainScene',
   'Glass Studio': 'ForestScene',
   Retry: 'ForestScene',
   'Final Stage': 'ForestScene',
@@ -33,6 +33,7 @@ export function getPlayableChapter(input: {
   currentChapter: Chapter
   forestChapterCleared: boolean
   cityChapterCleared: boolean
+  snowChapterCleared: boolean
 }): Chapter {
   if (!input.forestChapterCleared) {
     return 'Forest'
@@ -44,6 +45,14 @@ export function getPlayableChapter(input: {
     }
 
     return 'City'
+  }
+
+  if (!input.snowChapterCleared) {
+    if (input.requestedChapter === 'Snow Mountain') {
+      return 'Snow Mountain'
+    }
+
+    return 'Snow Mountain'
   }
 
   if (input.requestedChapter && isChapter(input.requestedChapter)) {
@@ -63,12 +72,14 @@ export function hasContinuableProgress(input: {
   totalMemoryShards: number
   forestChapterCleared: boolean
   cityChapterCleared?: boolean
+  snowChapterCleared?: boolean
 }) {
   return (
     input.totalMemoryShards > 0 ||
     input.memoryShards > 0 ||
     input.forestChapterCleared ||
     input.cityChapterCleared === true ||
+    input.snowChapterCleared === true ||
     input.currentChapter !== 'Forest'
   )
 }
@@ -87,7 +98,7 @@ export const CHAPTER_LABELS: Record<Chapter, { eyebrow: string; title: string; h
   'Snow Mountain': {
     eyebrow: 'Chapter 3 · Snow Mountain',
     title: 'Pale Blue Sky Snow',
-    hint: 'Find the Snow Spirit',
+    hint: 'Follow the spirit light to Snow Spirit',
   },
   'Glass Studio': {
     eyebrow: 'Chapter 4 · Glass Studio',
