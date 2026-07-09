@@ -565,7 +565,8 @@ h1 {
   gap: 1rem;
 }
 
-.gallery-summary {
+.gallery-summary,
+.gallery-empty-state {
   margin: 0 0 1rem;
 }
 

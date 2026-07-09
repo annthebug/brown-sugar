@@ -13,7 +13,7 @@ export function MemoryCard({ memory, onReplay }: MemoryCardProps) {
       <button
         type="button"
         className="memory-card-button"
-        disabled={!memory.unlocked}
+        disabled={!memory.unlocked || !memory.photoUrl}
         aria-label={memory.unlocked ? `重播${label}` : `${label}尚未解鎖`}
         onClick={onReplay}
       >
