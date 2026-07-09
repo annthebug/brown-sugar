@@ -130,7 +130,7 @@ export class PreloadScene extends Phaser.Scene {
       return
     }
 
-    this.scene.start('GameScene')
+    this.scene.start('ForestScene')
   }
 
   private loadAsset(asset: GameAsset) {

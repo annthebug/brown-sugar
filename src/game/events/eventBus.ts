@@ -13,8 +13,10 @@ export type GameEventMap = {
   'memory-shard-collected': { scene: string; amount: number }
   'player:meow': { x: number; y: number }
   'player:collect': { x: number; y: number }
-  'player:talk-start': Record<string, never>
+  'player:talk-start': { npcId?: string }
   'player:talk-end': Record<string, never>
+  'dialogue:closed': Record<string, never>
+  'chapter:forest-cleared': { scene: string }
   'player:dash': { direction: 1 | -1 }
   'player:double-jump': { x: number; y: number }
 }
