@@ -4,132 +4,132 @@
       "frame": {
         "x": 0,
         "y": 0,
-        "w": 128,
-        "h": 128
+        "w": 19,
+        "h": 21
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 118,
+        "y": 231,
+        "w": 19,
+        "h": 21
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     },
     "time-monster-idle": {
       "frame": {
-        "x": 128,
+        "x": 21,
         "y": 0,
-        "w": 128,
-        "h": 128
+        "w": 14,
+        "h": 19
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 121,
+        "y": 233,
+        "w": 14,
+        "h": 19
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     },
     "snow-spirit-idle": {
       "frame": {
-        "x": 256,
+        "x": 37,
         "y": 0,
-        "w": 128,
-        "h": 128
+        "w": 19,
+        "h": 17
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 118,
+        "y": 235,
+        "w": 19,
+        "h": 17
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     },
     "glass-master-boss-idle": {
       "frame": {
-        "x": 384,
+        "x": 58,
         "y": 0,
-        "w": 128,
-        "h": 128
+        "w": 16,
+        "h": 18
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 120,
+        "y": 234,
+        "w": 16,
+        "h": 18
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     },
     "inner-doubt-idle": {
       "frame": {
-        "x": 0,
-        "y": 128,
-        "w": 128,
-        "h": 128
+        "x": 76,
+        "y": 0,
+        "w": 26,
+        "h": 20
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 115,
+        "y": 232,
+        "w": 26,
+        "h": 20
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     },
     "perfectionism-idle": {
       "frame": {
-        "x": 128,
-        "y": 128,
-        "w": 128,
-        "h": 128
+        "x": 104,
+        "y": 0,
+        "w": 15,
+        "h": 18
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 120,
+        "y": 234,
+        "w": 15,
+        "h": 18
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     }
   },
   "meta": {
     "app": "quest-for-the-perfect-bowl-ghibli-placeholder",
-    "version": "2.0",
+    "version": "3.0",
     "image": "boss-sprite-sheet-v1.png",
     "size": {
-      "w": 512,
+      "w": 1024,
       "h": 256
     },
     "scale": "1",
-    "style": "Ghibli-inspired 16-bit Morandi pixel art"
+    "style": "Ghibli-inspired 16-bit Morandi pixel art (detailed NPC)"
   }
 }

@@ -320,7 +320,6 @@ export class SnowMountainScene extends Phaser.Scene {
       atlas: 'npc',
       frame: NPC_FRAMES.snowGuide,
       label: '嚮導',
-      scale: 0.9,
     })
   }
 
@@ -346,7 +345,6 @@ export class SnowMountainScene extends Phaser.Scene {
       atlas: 'boss',
       frame: BOSS_FRAMES.snowSpirit,
       label: '雪靈',
-      scale: 1.05,
       alpha: this.bossCleared ? 0.35 : 1,
     })
 

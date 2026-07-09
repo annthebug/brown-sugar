@@ -9,52 +9,142 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from ghibli_character_art import GRID_MAP, draw_character_frame
+from ghibli_character_art import draw_character_frame
+from ghibli_npc_detailed import DETAILED_NPC_PAINTERS
 
 ROOT = Path(__file__).resolve().parents[1]
 CHAR_DIR = ROOT / "assets" / "characters"
 
-CELL_SIZE = 128
-PIXEL_SCALE = 2
-FOOT_PADDING = 4
+NPC_CELL = 256
+BOSS_CELL = 256
+BOSS_SCALE = 1
+NPC_FOOT_PADDING = 10
 
 
-def build_sheet(frame_names: list[str], sheet_name: str) -> tuple[Image.Image, dict]:
+def _frame_to_image(
+    frame_name: str,
+    cell: int,
+    *,
+    pixel_scale: int = 1,
+) -> Image.Image:
+    frame_img = Image.new("RGBA", (cell, cell), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(frame_img)
+    draw_character_frame(
+        draw,
+        frame_name,
+        cell,
+        pixel_scale=pixel_scale,
+        foot_y=cell - NPC_FOOT_PADDING if frame_name in DETAILED_NPC_PAINTERS else None,
+    )
+    return frame_img
+
+
+def _trim_frame(frame_img: Image.Image, source_size: int) -> tuple[Image.Image, dict]:
+    pixels = frame_img.load()
+    w, h = frame_img.size
+    min_x, min_y, max_x, max_y = w, h, 0, 0
+    for py in range(h):
+        for px in range(w):
+            if pixels[px, py][3] > 10:
+                min_x = min(min_x, px)
+                min_y = min(min_y, py)
+                max_x = max(max_x, px)
+                max_y = max(max_y, py)
+
+    if max_x < min_x:
+        min_x, min_y, max_x, max_y = 0, 0, w - 1, h - 1
+
+    trimmed = frame_img.crop((min_x, min_y, max_x + 1, max_y + 1))
+    tw, th = trimmed.size
+    return trimmed, {
+        "frame": {"x": 0, "y": 0, "w": tw, "h": th},
+        "rotated": False,
+        "trimmed": True,
+        "spriteSourceSize": {"x": min_x, "y": min_y, "w": tw, "h": th},
+        "sourceSize": {"w": source_size, "h": source_size},
+    }
+
+
+def build_sheet(
+    frame_names: list[str],
+    sheet_name: str,
+    *,
+    cell: int,
+    pixel_scale: int = 1,
+    trim: bool = False,
+) -> tuple[Image.Image, dict]:
     cols = 4
     rows = (len(frame_names) + cols - 1) // cols
-    sheet = Image.new("RGBA", (cols * CELL_SIZE, rows * CELL_SIZE), (0, 0, 0, 0))
+
+    if trim:
+        packed: list[tuple[str, Image.Image, dict]] = []
+        for name in frame_names:
+            frame_img = _frame_to_image(name, cell, pixel_scale=pixel_scale)
+            trimmed, atlas_entry = _trim_frame(frame_img, cell)
+            packed.append((name, trimmed, atlas_entry))
+
+        sheet_width = max(256, cols * 180)
+        x_cursor = 0
+        y_cursor = 0
+        row_height = 0
+        atlas_frames: dict[str, dict] = {}
+        placed: list[tuple[Image.Image, int, int]] = []
+
+        for name, trimmed, entry in packed:
+            tw, th = trimmed.size
+            if x_cursor + tw > sheet_width:
+                x_cursor = 0
+                y_cursor += row_height + 2
+                row_height = 0
+
+            atlas_frames[name] = {
+                **entry,
+                "frame": {"x": x_cursor, "y": y_cursor, "w": tw, "h": th},
+            }
+            placed.append((trimmed, x_cursor, y_cursor))
+            x_cursor += tw + 2
+            row_height = max(row_height, th)
+
+        sheet_h = y_cursor + row_height + 2
+        sheet_w = max(256, 1 << (max(sheet_width, x_cursor) - 1).bit_length())
+        sheet_h = max(256, 1 << (sheet_h - 1).bit_length())
+        sheet = Image.new("RGBA", (sheet_w, sheet_h), (0, 0, 0, 0))
+        for trimmed, px, py in placed:
+            sheet.paste(trimmed, (px, py), trimmed)
+
+        meta = {
+            "app": "quest-for-the-perfect-bowl-ghibli-placeholder",
+            "version": "3.0",
+            "image": sheet_name,
+            "size": {"w": sheet_w, "h": sheet_h},
+            "scale": "1",
+            "style": "Ghibli-inspired 16-bit Morandi pixel art (detailed NPC)",
+        }
+        return sheet, {"frames": atlas_frames, "meta": meta}
+
+    sheet = Image.new("RGBA", (cols * cell, rows * cell), (0, 0, 0, 0))
     atlas_frames: dict[str, dict] = {}
 
     for index, name in enumerate(frame_names):
         col = index % cols
         row = index // cols
-        frame_img = Image.new("RGBA", (CELL_SIZE, CELL_SIZE), (0, 0, 0, 0))
-        draw = ImageDraw.Draw(frame_img)
-        draw_character_frame(
-            draw,
-            name,
-            CELL_SIZE,
-            pixel_scale=PIXEL_SCALE,
-            foot_y=(CELL_SIZE // PIXEL_SCALE) - FOOT_PADDING,
-        )
-
-        x = col * CELL_SIZE
-        y = row * CELL_SIZE
+        frame_img = _frame_to_image(name, cell, pixel_scale=pixel_scale)
+        x = col * cell
+        y = row * cell
         sheet.paste(frame_img, (x, y), frame_img)
-
         atlas_frames[name] = {
-            "frame": {"x": x, "y": y, "w": CELL_SIZE, "h": CELL_SIZE},
+            "frame": {"x": x, "y": y, "w": cell, "h": cell},
             "rotated": False,
             "trimmed": False,
-            "spriteSourceSize": {"x": 0, "y": 0, "w": CELL_SIZE, "h": CELL_SIZE},
-            "sourceSize": {"w": CELL_SIZE, "h": CELL_SIZE},
+            "spriteSourceSize": {"x": 0, "y": 0, "w": cell, "h": cell},
+            "sourceSize": {"w": cell, "h": cell},
         }
 
     meta = {
         "app": "quest-for-the-perfect-bowl-ghibli-placeholder",
-        "version": "2.0",
+        "version": "3.0",
         "image": sheet_name,
-        "size": {"w": cols * CELL_SIZE, "h": rows * CELL_SIZE},
+        "size": {"w": cols * cell, "h": rows * cell},
         "scale": "1",
         "style": "Ghibli-inspired 16-bit Morandi pixel art",
     }
@@ -138,14 +228,7 @@ def main() -> None:
 
     CHAR_DIR.mkdir(parents=True, exist_ok=True)
 
-    npc_frames = [
-        "forest-elder-idle",
-        "coffee-barista-idle",
-        "park-traveler-idle",
-        "snow-guide-idle",
-        "glass-master-idle",
-        "inner-voice-idle",
-    ]
+    npc_frames = list(DETAILED_NPC_PAINTERS.keys())
     boss_frames = [
         "giant-can-idle",
         "time-monster-idle",
@@ -158,8 +241,20 @@ def main() -> None:
     npc_sheet_name = "npc-sprite-sheet-v1.png"
     boss_sheet_name = "boss-sprite-sheet-v1.png"
 
-    npc_img, npc_atlas = build_sheet(npc_frames, npc_sheet_name)
-    boss_img, boss_atlas = build_sheet(boss_frames, boss_sheet_name)
+    npc_img, npc_atlas = build_sheet(
+        npc_frames,
+        npc_sheet_name,
+        cell=NPC_CELL,
+        pixel_scale=1,
+        trim=True,
+    )
+    boss_img, boss_atlas = build_sheet(
+        boss_frames,
+        boss_sheet_name,
+        cell=BOSS_CELL,
+        pixel_scale=BOSS_SCALE,
+        trim=True,
+    )
 
     npc_img.save(CHAR_DIR / npc_sheet_name)
     (CHAR_DIR / "npc-sprite-sheet-v1.json").write_text(
@@ -173,8 +268,8 @@ def main() -> None:
         encoding="utf-8",
     )
 
-    print(f"Generated {npc_sheet_name} ({len(npc_frames)} NPC frames)")
-    print(f"Generated {boss_sheet_name} ({len(boss_frames)} boss frames)")
+    print(f"Generated {npc_sheet_name} ({len(npc_frames)} detailed NPC frames @ {NPC_CELL}px)")
+    print(f"Generated {boss_sheet_name} ({len(boss_frames)} boss frames @ {BOSS_CELL}px)")
 
     if args.repack_black_sugar:
         rebuild_black_sugar_atlas()

@@ -24,7 +24,9 @@ export function placeCharacterSprite(
   options: CharacterSpriteOptions,
 ): CharacterMarker {
   const textureKey = options.atlas === 'npc' ? ASSET_KEYS.npcCharacters : ASSET_KEYS.bossCharacters
-  const scale = options.scale ?? 0.9
+  // Match Black Sugar on-screen height (256px frame × 0.44 scale).
+  const defaultScale = options.atlas === 'npc' ? 0.44 : 0.48
+  const scale = options.scale ?? defaultScale
 
   const container = scene.add.container(x, y) as CharacterMarker
   const sprite = scene.add.sprite(0, 0, textureKey, options.frame)

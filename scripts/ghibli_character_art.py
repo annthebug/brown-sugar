@@ -399,6 +399,13 @@ def draw_character_frame(
     pixel_scale: int = 2,
     foot_y: int | None = None,
 ) -> None:
+    from ghibli_npc_detailed import DETAILED_NPC_PAINTERS, paint_detailed_npc
+
+    if frame_name in DETAILED_NPC_PAINTERS:
+        canvas = paint_detailed_npc(frame_name, cell=cell)
+        canvas.render(draw, 0, 0, scale=1)
+        return
+
     grid = GRID_MAP[frame_name]
     canvas = PixelCanvas(cell // pixel_scale, cell // pixel_scale)
     foot = foot_y if foot_y is not None else (cell // pixel_scale) - 4

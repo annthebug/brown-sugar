@@ -304,7 +304,6 @@ export class CityScene extends Phaser.Scene {
       atlas: 'npc',
       frame: NPC_FRAMES.coffeeBarista,
       label: '咖啡師',
-      scale: 0.9,
     })
   }
 
@@ -313,7 +312,6 @@ export class CityScene extends Phaser.Scene {
       atlas: 'npc',
       frame: NPC_FRAMES.parkTraveler,
       label: '旅人',
-      scale: 0.9,
     })
   }
 
@@ -325,7 +323,6 @@ export class CityScene extends Phaser.Scene {
       atlas: 'boss',
       frame: BOSS_FRAMES.timeMonster,
       label: '時間怪物',
-      scale: 1,
       alpha: this.bossCleared ? 0.35 : 1,
     })
   }

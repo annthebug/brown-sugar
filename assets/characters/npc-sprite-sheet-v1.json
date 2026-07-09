@@ -4,132 +4,132 @@
       "frame": {
         "x": 0,
         "y": 0,
-        "w": 128,
-        "h": 128
+        "w": 130,
+        "h": 185
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 68,
+        "y": 67,
+        "w": 130,
+        "h": 185
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     },
     "coffee-barista-idle": {
       "frame": {
-        "x": 128,
+        "x": 132,
         "y": 0,
-        "w": 128,
-        "h": 128
+        "w": 89,
+        "h": 169
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 91,
+        "y": 83,
+        "w": 89,
+        "h": 169
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     },
     "park-traveler-idle": {
       "frame": {
-        "x": 256,
+        "x": 223,
         "y": 0,
-        "w": 128,
-        "h": 128
+        "w": 91,
+        "h": 155
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 79,
+        "y": 97,
+        "w": 91,
+        "h": 155
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     },
     "snow-guide-idle": {
       "frame": {
-        "x": 384,
+        "x": 316,
         "y": 0,
-        "w": 128,
-        "h": 128
+        "w": 79,
+        "h": 167
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 93,
+        "y": 85,
+        "w": 79,
+        "h": 167
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     },
     "glass-master-idle": {
       "frame": {
-        "x": 0,
-        "y": 128,
-        "w": 128,
-        "h": 128
+        "x": 397,
+        "y": 0,
+        "w": 115,
+        "h": 177
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 80,
+        "y": 75,
+        "w": 115,
+        "h": 177
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     },
     "inner-voice-idle": {
       "frame": {
-        "x": 128,
-        "y": 128,
-        "w": 128,
-        "h": 128
+        "x": 514,
+        "y": 0,
+        "w": 83,
+        "h": 173
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
+        "x": 87,
+        "y": 83,
+        "w": 83,
+        "h": 173
       },
       "sourceSize": {
-        "w": 128,
-        "h": 128
+        "w": 256,
+        "h": 256
       }
     }
   },
   "meta": {
     "app": "quest-for-the-perfect-bowl-ghibli-placeholder",
-    "version": "2.0",
+    "version": "3.0",
     "image": "npc-sprite-sheet-v1.png",
     "size": {
-      "w": 512,
+      "w": 1024,
       "h": 256
     },
     "scale": "1",
-    "style": "Ghibli-inspired 16-bit Morandi pixel art"
+    "style": "Ghibli-inspired 16-bit Morandi pixel art (detailed NPC)"
   }
 }

@@ -216,7 +216,6 @@ export class ForestScene extends Phaser.Scene {
       atlas: 'npc',
       frame: NPC_FRAMES.forestElder,
       label: '森林長者',
-      scale: 0.95,
     })
   }
 
@@ -269,7 +268,6 @@ export class ForestScene extends Phaser.Scene {
       atlas: 'boss',
       frame: BOSS_FRAMES.giantCan,
       label: '巨罐',
-      scale: 1.1,
     })
 
     this.bossPrompt = this.add

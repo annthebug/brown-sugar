@@ -321,7 +321,6 @@ export class RetryScene extends Phaser.Scene {
       atlas: 'npc',
       frame: NPC_FRAMES.innerVoice,
       label: '內在嚮導',
-      scale: 0.9,
     })
   }
 
@@ -330,7 +329,6 @@ export class RetryScene extends Phaser.Scene {
       atlas: 'boss',
       frame: BOSS_FRAMES.innerDoubt,
       label: '內在懷疑',
-      scale: 1,
       alpha: this.bossCleared ? 0.3 : this.bossUnlocked ? 1 : 0.45,
     })
   }

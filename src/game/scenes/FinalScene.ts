@@ -269,7 +269,6 @@ export class FinalScene extends Phaser.Scene {
       atlas: 'npc',
       frame: NPC_FRAMES.innerVoice,
       label: '內在嚮導',
-      scale: 0.9,
     })
   }
 
@@ -278,7 +277,6 @@ export class FinalScene extends Phaser.Scene {
       atlas: 'boss',
       frame: BOSS_FRAMES.perfectionism,
       label: '完美主義',
-      scale: 1.05,
       alpha: 0.7,
     })
   }

@@ -32,10 +32,10 @@ Ghibli-inspired placeholder pixel art for NPCs and bosses. Style: **16-bit Poké
 | --- | --- |
 | Sheet files | `assets/characters/npc-sprite-sheet-v1.png`, `boss-sprite-sheet-v1.png` |
 | Atlas JSON | Matching `*-v1.json` beside each texture |
-| Frame size | 128 × 128 px per cell |
-| Pixel scale | 2× (logical pixels rendered at 2 px each) |
+| Frame size | 256 × 256 px logical canvas, trimmed atlas packing |
+| Pixel density | 1:1 px with soft outline + ground shadow pass |
 | Origin in game | `(0.5, 1)` foot anchor via `CharacterSprite` |
-| Default scale | NPC `0.9`, Boss `1.0–1.1` (tuned per scene) |
+| Default scale | NPC `0.44`, Boss `0.48` (matches Black Sugar height) |
 
 ## Regeneration
 

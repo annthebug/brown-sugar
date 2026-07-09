@@ -317,7 +317,6 @@ export class GlassStudioScene extends Phaser.Scene {
       atlas: 'npc',
       frame: NPC_FRAMES.glassMaster,
       label: '玻璃師傅',
-      scale: 0.9,
     })
   }
 
@@ -375,7 +374,6 @@ export class GlassStudioScene extends Phaser.Scene {
       atlas: 'boss',
       frame: BOSS_FRAMES.glassMasterBoss,
       label: '玻璃師傅',
-      scale: 1,
       alpha: this.bossCleared ? 0.35 : 1,
     })
   }
