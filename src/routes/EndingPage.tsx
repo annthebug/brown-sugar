@@ -13,6 +13,7 @@ import {
 import { useGalleryStore } from '../stores/useGalleryStore'
 import { useGameStore } from '../stores/useGameStore'
 import { useMbtiStore } from '../stores/useMbtiStore'
+import { ENDING_CHEST_LAYER_URLS } from '../game/assets/assetManifest'
 
 export function EndingPage() {
   const memoryShards = useGameStore((state) => state.memoryShards)
@@ -20,7 +21,7 @@ export function EndingPage() {
   const endingRef = useRef<HTMLElement | null>(null)
   const revealRef = useRef<HTMLDivElement | null>(null)
   const chestRef = useRef<HTMLDivElement | null>(null)
-  const chestLidRef = useRef<HTMLDivElement | null>(null)
+  const chestLidRef = useRef<HTMLImageElement | null>(null)
   const photoRef = useRef<HTMLDivElement | null>(null)
   const sleepRef = useRef<HTMLDivElement | null>(null)
   const creditsViewportRef = useRef<HTMLDivElement | null>(null)
@@ -166,10 +167,35 @@ export function EndingPage() {
 
           <section className="ending-chest-section" aria-label="寶箱揭示">
             <div ref={chestRef} className="ending-chest">
-              <div ref={chestLidRef} className="ending-chest-lid" />
-              <div className="ending-chest-body" />
-              <div className="ending-chest-lock" />
-              <div className="ending-chest-glow" />
+              <img
+                className="ending-chest-glow"
+                src={ENDING_CHEST_LAYER_URLS.glow}
+                alt=""
+                aria-hidden="true"
+                draggable={false}
+              />
+              <img
+                className="ending-chest-body"
+                src={ENDING_CHEST_LAYER_URLS.body}
+                alt=""
+                aria-hidden="true"
+                draggable={false}
+              />
+              <img
+                className="ending-chest-lock"
+                src={ENDING_CHEST_LAYER_URLS.lock}
+                alt=""
+                aria-hidden="true"
+                draggable={false}
+              />
+              <img
+                ref={chestLidRef}
+                className="ending-chest-lid"
+                src={ENDING_CHEST_LAYER_URLS.lid}
+                alt=""
+                aria-hidden="true"
+                draggable={false}
+              />
             </div>
             <div ref={photoRef} className="ending-photo-card">
               <div className="ending-photo-header">
