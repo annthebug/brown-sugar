@@ -216,6 +216,21 @@
         ]
       },
       {
+        "key": "snow-spirit",
+        "type": "atlas",
+        "texture": "characters/snow-spirit-sprite-sheet-v1.png",
+        "atlas": "characters/snow-spirit-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Snow Spirit summit boss atlas (idle + 3-frame head bob / white glow pulse, kodama spirit).",
+        "frames": [
+          "snow-spirit-idle",
+          "snow-spirit-pulse-1",
+          "snow-spirit-pulse-2",
+          "snow-spirit-pulse-3"
+        ]
+      },
+      {
         "key": "boss-characters",
         "type": "atlas",
         "texture": "characters/boss-sprite-sheet-v1.png",

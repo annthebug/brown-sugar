@@ -18,6 +18,8 @@ import giantCanTextureUrl from '../../../assets/characters/giant-can-sprite-shee
 import giantCanAtlasUrl from '../../../assets/characters/giant-can-sprite-sheet-v1.json?url'
 import timeMonsterTextureUrl from '../../../assets/characters/time-monster-sprite-sheet-v1.png'
 import timeMonsterAtlasUrl from '../../../assets/characters/time-monster-sprite-sheet-v1.json?url'
+import snowSpiritTextureUrl from '../../../assets/characters/snow-spirit-sprite-sheet-v1.png'
+import snowSpiritAtlasUrl from '../../../assets/characters/snow-spirit-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -37,6 +39,7 @@ export const ASSET_KEYS = {
   innerGuide: 'inner-guide',
   giantCan: 'giant-can',
   timeMonster: 'time-monster',
+  snowSpirit: 'snow-spirit',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -132,6 +135,13 @@ export const TIME_MONSTER_FRAMES = {
   pulse1: 'time-monster-pulse-1',
   pulse2: 'time-monster-pulse-2',
   pulse3: 'time-monster-pulse-3',
+} as const
+
+export const SNOW_SPIRIT_FRAMES = {
+  idle: 'snow-spirit-idle',
+  pulse1: 'snow-spirit-pulse-1',
+  pulse2: 'snow-spirit-pulse-2',
+  pulse3: 'snow-spirit-pulse-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -316,6 +326,17 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: timeMonsterTextureUrl,
       atlasUrl: timeMonsterAtlasUrl,
       frames: Object.values(TIME_MONSTER_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.snowSpirit,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Snow Spirit summit boss atlas (idle + 3-frame head bob / white glow pulse, kodama spirit).',
+      textureUrl: snowSpiritTextureUrl,
+      atlasUrl: snowSpiritAtlasUrl,
+      frames: Object.values(SNOW_SPIRIT_FRAMES),
     },
     {
       kind: 'atlas',
