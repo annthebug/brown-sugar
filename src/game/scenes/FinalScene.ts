@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import { useMbtiStore } from '../../stores/useMbtiStore'
-import { ASSET_KEYS, MORANDI_PALETTE } from '../assets/assetManifest'
+import { ASSET_KEYS, BOSS_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { MemoryShard } from '../entities/MemoryShard'
 import { gameEventBus } from '../events/eventBus'
 import { Player } from '../entities/Player'
@@ -41,8 +42,8 @@ export class FinalScene extends Phaser.Scene {
   private touchCtrl?: TouchControls
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
-  private innerGuide?: Phaser.GameObjects.Container
-  private perfectionism?: Phaser.GameObjects.Container
+  private innerGuide?: CharacterMarker
+  private perfectionism?: CharacterMarker
   private resonanceBloom?: Phaser.GameObjects.Container
   private interactPrompt?: Phaser.GameObjects.Text
   private cutsceneText?: Phaser.GameObjects.Text
@@ -264,45 +265,19 @@ export class FinalScene extends Phaser.Scene {
   }
 
   private placeInnerGuide() {
-    this.innerGuide = this.add.container(INNER_GUIDE_X, GROUND_TOP)
-    const glow = this.add.ellipse(0, -40, 68, 84, MORANDI_PALETTE.warmBeige, 0.14)
-    const robe = this.add.rectangle(0, -34, 46, 62, MORANDI_PALETTE.mistPink, 0.4)
-    const head = this.add.circle(0, -72, 17, MORANDI_PALETTE.cloud, 0.92)
-    const label = this.add
-      .text(0, 10, '內在嚮導', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-    this.innerGuide.add([glow, robe, head, label])
+    this.innerGuide = placeCharacterSprite(this, INNER_GUIDE_X, GROUND_TOP, {
+      atlas: 'npc',
+      frame: NPC_FRAMES.innerVoice,
+      label: '內在嚮導',
+    })
   }
 
   private placePerfectionism() {
-    this.perfectionism = this.add.container(PERFECTIONISM_X, 260)
-    const aura = this.add.ellipse(0, -40, 96, 118, 0xd2c8d6, 0.24)
-    aura.setStrokeStyle(2, MORANDI_PALETTE.dustyBlue, 0.4)
-    const core = this.add.circle(0, -50, 22, MORANDI_PALETTE.cloud, 0.5)
-    const label = this.add
-      .text(0, 16, '完美主義', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-    this.perfectionism.add([aura, core, label])
-    this.perfectionism.setAlpha(0.7)
-
-    this.tweens.add({
-      targets: aura,
-      alpha: 0.34,
-      scale: 1.08,
-      duration: 1200,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
+    this.perfectionism = placeCharacterSprite(this, PERFECTIONISM_X, 312, {
+      atlas: 'boss',
+      frame: BOSS_FRAMES.perfectionism,
+      label: '完美主義',
+      alpha: 0.7,
     })
   }
 

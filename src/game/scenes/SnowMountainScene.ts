@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, MORANDI_PALETTE } from '../assets/assetManifest'
+import { ASSET_KEYS, BOSS_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
@@ -52,8 +53,8 @@ export class SnowMountainScene extends Phaser.Scene {
   private touchCtrl?: TouchControls
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
-  private guideNpc?: Phaser.GameObjects.Container
-  private snowSpirit?: Phaser.GameObjects.Container
+  private guideNpc?: CharacterMarker
+  private snowSpirit?: CharacterMarker
   private spiritLight?: Phaser.GameObjects.Arc
   private interactPrompt?: Phaser.GameObjects.Text
   private bossCleared = false
@@ -315,29 +316,16 @@ export class SnowMountainScene extends Phaser.Scene {
   }
 
   private placeMountainGuide() {
-    const npcX = GUIDE_X
-    const npcY = GROUND_TOP
-
-    this.guideNpc = this.add.container(npcX, npcY)
-    const coat = this.add.rectangle(0, -34, 48, 64, MORANDI_PALETTE.dustyBlue, 0.5)
-    const scarf = this.add.rectangle(0, -58, 32, 14, MORANDI_PALETTE.mistPink, 0.45)
-    const head = this.add.circle(0, -72, 18, MORANDI_PALETTE.cloud, 0.92)
-    const staff = this.add.rectangle(24, -30, 6, 68, MORANDI_PALETTE.warmBeige, 0.8)
-    const label = this.add
-      .text(0, 10, '嚮導', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.guideNpc.add([coat, scarf, head, staff, label])
+    this.guideNpc = placeCharacterSprite(this, GUIDE_X, GROUND_TOP, {
+      atlas: 'npc',
+      frame: NPC_FRAMES.snowGuide,
+      label: '嚮導',
+    })
   }
 
   private placeSnowSpiritBoss() {
     const bossX = SUMMIT_X
-    const bossY = 248
+    const bossY = 300
 
     this.spiritLight = this.add.circle(bossX - 120, bossY - 20, 14, MORANDI_PALETTE.warmBeige, 0.42)
     this.spiritLight.setStrokeStyle(2, MORANDI_PALETTE.cloud, 0.7)
@@ -353,23 +341,14 @@ export class SnowMountainScene extends Phaser.Scene {
       ease: 'Sine.easeInOut',
     })
 
-    this.snowSpirit = this.add.container(bossX, bossY)
-    const aura = this.add.ellipse(0, -40, 96, 112, MORANDI_PALETTE.cloud, 0.28)
-    aura.setStrokeStyle(3, MORANDI_PALETTE.dustyBlue, 0.45)
-    const core = this.add.circle(0, -52, 24, MORANDI_PALETTE.warmBeige, 0.55)
-    const label = this.add
-      .text(0, 16, '雪靈', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.snowSpirit.add([aura, core, label])
+    this.snowSpirit = placeCharacterSprite(this, bossX, bossY, {
+      atlas: 'boss',
+      frame: BOSS_FRAMES.snowSpirit,
+      label: '雪靈',
+      alpha: this.bossCleared ? 0.35 : 1,
+    })
 
     if (this.bossCleared) {
-      this.snowSpirit.setAlpha(0.35)
       this.spiritLight?.setAlpha(0.2)
     }
   }

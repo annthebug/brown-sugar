@@ -8,6 +8,7 @@
 - 柔和
 - Pokémon Pixel Art 感
 - 不暴力
+- 吉卜力作品 archetype 為靈感來源，轉譯為原創 16bit 剪影（見 [character-sprites](assets/character-sprites.md)）
 
 ## 色彩規範
 
@@ -21,8 +22,8 @@
 
 ### 角色
 - 黑糖（主角）：走路、跳躍、Dash、Meow、待機、情緒表情（含 🥺）。
-- NPC：森林老人、咖啡店店員、公園旅人、雪山嚮導、玻璃師傅、內心之聲。
-- Boss：巨大罐罐、Time Monster、Snow Spirit、Glass Master、Inner Doubt、Perfectionism。
+- NPC：森林老人、咖啡店店員、公園旅人、雪山嚮導、玻璃師傅、內心之聲（`npc-characters` atlas，128px 幀，吉卜力靈感佔位）。
+- Boss：巨大罐罐、Time Monster、Snow Spirit、Glass Master、Inner Doubt、Perfectionism（`boss-characters` atlas，128px 幀，吉卜力靈感佔位）。
 
 ### 場景 / Tilemap
 | 章節 | 場景元素 |
@@ -68,4 +69,5 @@
 ## 相關文件
 
 - UI/UX：[08_UIUX](08_UIUX.md)
+- 角色精靈規格：[assets/character-sprites](assets/character-sprites.md)
 - 音效：[10_Audio](10_Audio.md)

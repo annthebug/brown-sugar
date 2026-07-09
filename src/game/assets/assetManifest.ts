@@ -1,5 +1,17 @@
+import blackSugarTextureUrl from '../../../assets/characters/black-sugar-sprite-sheet-v1.png'
+import blackSugarAtlasUrl from '../../../assets/characters/black-sugar-sprite-sheet-v1.json?url'
+import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
+import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
+import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
+import bossAtlasUrl from '../../../assets/characters/boss-sprite-sheet-v1.json?url'
+import paleBlueSkyUrl from '../../../assets/scenes/pale-blue-sky-placeholder.png'
+import loadingPanelUrl from '../../../assets/ui/loading-panel-placeholder.png'
+import mbtiGlassBowlsUrl from '../../../assets/bowls/mbti-glass-bowls-sheet-v1.png'
+
 export const ASSET_KEYS = {
   blackSugar: 'black-sugar',
+  npcCharacters: 'npc-characters',
+  bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
   loadingPanel: 'ui-loading-panel',
   mbtiGlassBowls: 'bowls-mbti-glass-sheet',
@@ -18,6 +30,24 @@ export const BLACK_SUGAR_FRAMES = {
   happySparkle: 'black-sugar-happy-sparkle',
   sadPleading: 'black-sugar-sad-pleading',
   collectItem: 'black-sugar-collect-item',
+} as const
+
+export const NPC_FRAMES = {
+  forestElder: 'forest-elder-idle',
+  coffeeBarista: 'coffee-barista-idle',
+  parkTraveler: 'park-traveler-idle',
+  snowGuide: 'snow-guide-idle',
+  glassMaster: 'glass-master-idle',
+  innerVoice: 'inner-voice-idle',
+} as const
+
+export const BOSS_FRAMES = {
+  giantCan: 'giant-can-idle',
+  timeMonster: 'time-monster-idle',
+  snowSpirit: 'snow-spirit-idle',
+  glassMasterBoss: 'glass-master-boss-idle',
+  innerDoubt: 'inner-doubt-idle',
+  perfectionism: 'perfectionism-idle',
 } as const
 
 export type AssetCategory = 'characters' | 'scenes' | 'ui' | 'memories' | 'bowls'
@@ -82,15 +112,31 @@ export const GAME_ASSET_MANIFEST = {
       placeholder: true,
       purpose: 'preload',
       description: 'Brown Sugar character placeholder atlas for boot and preview scenes.',
-      textureUrl: new URL(
-        '../../../assets/characters/black-sugar-sprite-sheet-v1.png',
-        import.meta.url,
-      ).href,
-      atlasUrl: new URL(
-        '../../../assets/characters/black-sugar-sprite-sheet-v1.json',
-        import.meta.url,
-      ).href,
+      textureUrl: blackSugarTextureUrl,
+      atlasUrl: blackSugarAtlasUrl,
       frames: Object.values(BLACK_SUGAR_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.npcCharacters,
+      placeholder: true,
+      purpose: 'preload',
+      description: 'Ghibli-inspired Morandi NPC atlas v2 (Kamaji-style elder, café barista, Kiki-style traveler, hooded guide, glass artisan, river spirit).',
+      textureUrl: npcTextureUrl,
+      atlasUrl: npcAtlasUrl,
+      frames: Object.values(NPC_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.bossCharacters,
+      placeholder: true,
+      purpose: 'preload',
+      description: 'Ghibli-inspired Morandi boss atlas v2 (jar spirit, clock spirit, kodama, furnace artisan, soot sprites, mask mist).',
+      textureUrl: bossTextureUrl,
+      atlasUrl: bossAtlasUrl,
+      frames: Object.values(BOSS_FRAMES),
     },
   ],
   scenes: [
@@ -101,8 +147,7 @@ export const GAME_ASSET_MANIFEST = {
       placeholder: true,
       purpose: 'preload',
       description: 'Pale blue sky placeholder background for the current GameScene.',
-      url: new URL('../../../assets/scenes/pale-blue-sky-placeholder.png', import.meta.url)
-        .href,
+      url: paleBlueSkyUrl,
     },
   ],
   ui: [
@@ -113,7 +158,7 @@ export const GAME_ASSET_MANIFEST = {
       placeholder: true,
       purpose: 'preload',
       description: 'Soft loading panel placeholder for Phaser preload UI.',
-      url: new URL('../../../assets/ui/loading-panel-placeholder.png', import.meta.url).href,
+      url: loadingPanelUrl,
     },
   ],
   memories: [],
@@ -125,8 +170,7 @@ export const GAME_ASSET_MANIFEST = {
       placeholder: true,
       purpose: 'preload',
       description: 'MBTI glass bowl placeholder sheet for future ending previews.',
-      url: new URL('../../../assets/bowls/mbti-glass-bowls-sheet-v1.png', import.meta.url)
-        .href,
+      url: mbtiGlassBowlsUrl,
     },
   ],
 } as const satisfies GameAssetManifest

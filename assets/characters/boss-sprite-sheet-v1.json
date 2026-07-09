@@ -1,0 +1,135 @@
+{
+  "frames": {
+    "giant-can-idle": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 19,
+        "h": 21
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 118,
+        "y": 231,
+        "w": 19,
+        "h": 21
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "time-monster-idle": {
+      "frame": {
+        "x": 21,
+        "y": 0,
+        "w": 14,
+        "h": 19
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 121,
+        "y": 233,
+        "w": 14,
+        "h": 19
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "snow-spirit-idle": {
+      "frame": {
+        "x": 37,
+        "y": 0,
+        "w": 19,
+        "h": 17
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 118,
+        "y": 235,
+        "w": 19,
+        "h": 17
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "glass-master-boss-idle": {
+      "frame": {
+        "x": 58,
+        "y": 0,
+        "w": 16,
+        "h": 18
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 120,
+        "y": 234,
+        "w": 16,
+        "h": 18
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "inner-doubt-idle": {
+      "frame": {
+        "x": 76,
+        "y": 0,
+        "w": 26,
+        "h": 20
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 115,
+        "y": 232,
+        "w": 26,
+        "h": 20
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    },
+    "perfectionism-idle": {
+      "frame": {
+        "x": 104,
+        "y": 0,
+        "w": 15,
+        "h": 18
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 120,
+        "y": 234,
+        "w": 15,
+        "h": 18
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      }
+    }
+  },
+  "meta": {
+    "app": "quest-for-the-perfect-bowl-ghibli-placeholder",
+    "version": "3.0",
+    "image": "boss-sprite-sheet-v1.png",
+    "size": {
+      "w": 1024,
+      "h": 256
+    },
+    "scale": "1",
+    "style": "Ghibli-inspired 16-bit Morandi pixel art (detailed NPC)"
+  }
+}
