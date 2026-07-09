@@ -231,6 +231,21 @@
         ]
       },
       {
+        "key": "glass-master-boss",
+        "type": "atlas",
+        "texture": "characters/glass-master-boss-sprite-sheet-v1.png",
+        "atlas": "characters/glass-master-boss-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Glass Master Boss workshop atlas (idle + 3-frame furnace glow pulse, front-facing artisan).",
+        "frames": [
+          "glass-master-boss-idle",
+          "glass-master-boss-pulse-1",
+          "glass-master-boss-pulse-2",
+          "glass-master-boss-pulse-3"
+        ]
+      },
+      {
         "key": "boss-characters",
         "type": "atlas",
         "texture": "characters/boss-sprite-sheet-v1.png",

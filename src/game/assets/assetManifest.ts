@@ -20,6 +20,8 @@ import timeMonsterTextureUrl from '../../../assets/characters/time-monster-sprit
 import timeMonsterAtlasUrl from '../../../assets/characters/time-monster-sprite-sheet-v1.json?url'
 import snowSpiritTextureUrl from '../../../assets/characters/snow-spirit-sprite-sheet-v1.png'
 import snowSpiritAtlasUrl from '../../../assets/characters/snow-spirit-sprite-sheet-v1.json?url'
+import glassMasterBossTextureUrl from '../../../assets/characters/glass-master-boss-sprite-sheet-v1.png'
+import glassMasterBossAtlasUrl from '../../../assets/characters/glass-master-boss-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -40,6 +42,7 @@ export const ASSET_KEYS = {
   giantCan: 'giant-can',
   timeMonster: 'time-monster',
   snowSpirit: 'snow-spirit',
+  glassMasterBoss: 'glass-master-boss',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -142,6 +145,13 @@ export const SNOW_SPIRIT_FRAMES = {
   pulse1: 'snow-spirit-pulse-1',
   pulse2: 'snow-spirit-pulse-2',
   pulse3: 'snow-spirit-pulse-3',
+} as const
+
+export const GLASS_MASTER_BOSS_FRAMES = {
+  idle: 'glass-master-boss-idle',
+  pulse1: 'glass-master-boss-pulse-1',
+  pulse2: 'glass-master-boss-pulse-2',
+  pulse3: 'glass-master-boss-pulse-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -337,6 +347,17 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: snowSpiritTextureUrl,
       atlasUrl: snowSpiritAtlasUrl,
       frames: Object.values(SNOW_SPIRIT_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.glassMasterBoss,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Glass Master Boss workshop atlas (idle + 3-frame furnace glow pulse, front-facing artisan).',
+      textureUrl: glassMasterBossTextureUrl,
+      atlasUrl: glassMasterBossAtlasUrl,
+      frames: Object.values(GLASS_MASTER_BOSS_FRAMES),
     },
     {
       kind: 'atlas',
