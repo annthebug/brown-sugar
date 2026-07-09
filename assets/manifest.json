@@ -137,6 +137,22 @@
         ]
       },
       {
+        "key": "glass-master",
+        "type": "atlas",
+        "texture": "characters/glass-master-side-sprite-sheet-v1.png",
+        "atlas": "characters/glass-master-side-sprite-sheet-v1.json",
+        "portrait": "characters/glass-master-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Glass Master side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "glass-master-side-idle",
+          "glass-master-side-walk-1",
+          "glass-master-side-walk-2",
+          "glass-master-side-walk-3"
+        ]
+      },
+      {
         "key": "npc-characters",
         "type": "atlas",
         "texture": "characters/npc-sprite-sheet-v1.png",

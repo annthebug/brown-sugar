@@ -10,6 +10,8 @@ import parkTravelerTextureUrl from '../../../assets/characters/park-traveler-sid
 import parkTravelerAtlasUrl from '../../../assets/characters/park-traveler-side-sprite-sheet-v1.json?url'
 import snowGuideTextureUrl from '../../../assets/characters/snow-guide-side-sprite-sheet-v1.png'
 import snowGuideAtlasUrl from '../../../assets/characters/snow-guide-side-sprite-sheet-v1.json?url'
+import glassMasterTextureUrl from '../../../assets/characters/glass-master-side-sprite-sheet-v1.png'
+import glassMasterAtlasUrl from '../../../assets/characters/glass-master-side-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -25,6 +27,7 @@ export const ASSET_KEYS = {
   cityBarista: 'city-barista',
   parkTraveler: 'park-traveler',
   snowGuide: 'snow-guide',
+  glassMaster: 'glass-master',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -92,6 +95,13 @@ export const SNOW_GUIDE_FRAMES = {
   sideWalk1: 'snow-guide-side-walk-1',
   sideWalk2: 'snow-guide-side-walk-2',
   sideWalk3: 'snow-guide-side-walk-3',
+} as const
+
+export const GLASS_MASTER_FRAMES = {
+  sideIdle: 'glass-master-side-idle',
+  sideWalk1: 'glass-master-side-walk-1',
+  sideWalk2: 'glass-master-side-walk-2',
+  sideWalk3: 'glass-master-side-walk-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -232,6 +242,17 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: snowGuideTextureUrl,
       atlasUrl: snowGuideAtlasUrl,
       frames: Object.values(SNOW_GUIDE_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.glassMaster,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Glass Master side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: glassMasterTextureUrl,
+      atlasUrl: glassMasterAtlasUrl,
+      frames: Object.values(GLASS_MASTER_FRAMES),
     },
     {
       kind: 'atlas',
