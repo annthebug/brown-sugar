@@ -23,7 +23,7 @@ const DASH_COOLDOWN_MS = 900
 const MEOW_LOCK_MS = 600
 const COLLECT_LOCK_MS = 500
 const PLAYER_SCALE = 0.44
-const PLAYER_DISPLAY_FRAME_TRIM_PX = 1
+const PLAYER_DISPLAY_FRAME_TRIM_PX = 0.5
 
 function applyPlayerDisplayFrameTrim(sprite: Phaser.Physics.Arcade.Sprite) {
   const cropInset = PLAYER_DISPLAY_FRAME_TRIM_PX / PLAYER_SCALE
