@@ -115,33 +115,42 @@ export function hasContinuableProgress(input: {
 
 export const CHAPTER_LABELS: Record<Chapter, { eyebrow: string; title: string; hint: string }> = {
   Forest: {
-    eyebrow: 'Chapter 1 · Forest',
-    title: 'Pale Blue Sky Forest',
-    hint: 'Find the Giant Jar',
+    eyebrow: '第一章・森林',
+    title: '淡藍天空森林',
+    hint: '找到巨罐並理解它',
   },
   City: {
-    eyebrow: 'Chapter 2 · City',
-    title: 'Pale Blue Sky City',
-    hint: 'Meet Time Monster at the metro',
+    eyebrow: '第二章・城市',
+    title: '淡藍天空城市',
+    hint: '在月台遇見時間怪物',
   },
   'Snow Mountain': {
-    eyebrow: 'Chapter 3 · Snow Mountain',
-    title: 'Pale Blue Sky Snow',
-    hint: 'Follow the spirit light to Snow Spirit',
+    eyebrow: '第三章・雪山',
+    title: '淡藍天空雪原',
+    hint: '跟著靈光找到雪靈',
   },
   'Glass Studio': {
-    eyebrow: 'Chapter 4 · Glass Studio',
-    title: 'Pale Blue Sky Studio',
-    hint: 'Shape the first bowl',
+    eyebrow: '第四章・玻璃工坊',
+    title: '淡藍天空工坊',
+    hint: '吹出第一只碗',
   },
   Retry: {
-    eyebrow: 'Chapter 5 · Retry',
-    title: 'Pale Blue Sky Retry',
-    hint: 'Face Inner Doubt',
+    eyebrow: '第五章・再試一次',
+    title: '淡藍天空再試一次',
+    hint: '面對內在懷疑',
   },
   'Final Stage': {
-    eyebrow: 'Final Stage',
-    title: 'Pale Blue Sky Finale',
-    hint: 'Release Perfectionism',
+    eyebrow: '最終章',
+    title: '淡藍天空終章',
+    hint: '放下完美主義',
   },
+}
+
+export const CHAPTER_DISPLAY_NAMES: Record<Chapter, string> = {
+  Forest: '森林',
+  City: '城市',
+  'Snow Mountain': '雪山',
+  'Glass Studio': '玻璃工坊',
+  Retry: '再試一次',
+  'Final Stage': '最終章',
 }

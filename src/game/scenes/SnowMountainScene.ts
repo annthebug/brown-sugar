@@ -105,7 +105,7 @@ export class SnowMountainScene extends Phaser.Scene {
     this.cameras.main.setDeadzone(120, 40)
 
     this.interactPrompt = this.add
-      .text(0, 0, 'Press E to talk', {
+      .text(0, 0, '按 E 對話', {
         color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -117,7 +117,7 @@ export class SnowMountainScene extends Phaser.Scene {
       .setDepth(15)
 
     this.add
-      .text(16, 16, 'Chapter 3 · Snow Mountain', {
+      .text(16, 16, '第三章・雪山', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '14px',
@@ -130,7 +130,7 @@ export class SnowMountainScene extends Phaser.Scene {
 
     if (!isTouch) {
       this.add
-        .text(this.scale.width / 2, 16, '← → Move   Space Jump   Shift Dash   E Talk / Interact', {
+        .text(this.scale.width / 2, 16, '← → 移動　Space 跳躍　Shift 衝刺　E 對話／互動', {
           color: MORANDI_PALETTE.mutedText,
           fontFamily: 'monospace',
           fontSize: '12px',
@@ -144,7 +144,7 @@ export class SnowMountainScene extends Phaser.Scene {
 
     gameEventBus.emit('phaser:ready', {
       scene: this.scene.key,
-      message: 'Snow Mountain chapter ready.',
+      message: '雪山章節已就緒。',
     })
 
     this.unsubscribeDialogueClosed = gameEventBus.on('dialogue:closed', () => {
@@ -324,7 +324,7 @@ export class SnowMountainScene extends Phaser.Scene {
     const head = this.add.circle(0, -72, 18, MORANDI_PALETTE.cloud, 0.92)
     const staff = this.add.rectangle(24, -30, 6, 68, MORANDI_PALETTE.warmBeige, 0.8)
     const label = this.add
-      .text(0, 10, 'Guide', {
+      .text(0, 10, '嚮導', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -358,7 +358,7 @@ export class SnowMountainScene extends Phaser.Scene {
     aura.setStrokeStyle(3, MORANDI_PALETTE.dustyBlue, 0.45)
     const core = this.add.circle(0, -52, 24, MORANDI_PALETTE.warmBeige, 0.55)
     const label = this.add
-      .text(0, 16, 'Snow Spirit', {
+      .text(0, 16, '雪靈', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -455,11 +455,11 @@ export class SnowMountainScene extends Phaser.Scene {
     let promptText: string | null = null
 
     if (!this.bossCleared && this.isNearSnowSpirit()) {
-      promptText = 'Press E to meet Snow Spirit'
+      promptText = '按 E 遇見雪靈'
     } else if (this.isNearGuide()) {
-      promptText = 'Press E to talk with Mountain Guide'
+      promptText = '按 E 與雪山嚮導對話'
     } else if (this.spiritTrailActive && !this.bossCleared) {
-      promptText = 'Follow the spirit light'
+      promptText = '跟著靈光前進'
     }
 
     if (promptText) {

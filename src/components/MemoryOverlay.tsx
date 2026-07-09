@@ -54,10 +54,10 @@ export function MemoryOverlay({ memory, onContinue }: MemoryOverlayProps) {
       <div className="memory-overlay-card memory-overlay-card--photo-only">
         <div ref={pixelRef} className="memory-pixel-veil" aria-hidden="true" />
         <div ref={photoRef} className="memory-overlay-photo">
-          <img src={memory.photoUrl} alt={`Memory ${memory.order}`} />
+          <img src={memory.photoUrl} alt={`回憶 ${memory.order}`} />
         </div>
         <button ref={buttonRef} type="button" onClick={handleContinue}>
-          Continue
+          繼續
         </button>
       </div>
     </div>

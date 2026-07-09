@@ -29,12 +29,12 @@ export function AchievementToastStack({ toasts, onDismiss }: AchievementToastSta
   return (
     <div className="achievement-toast-stack" aria-live="polite" aria-atomic="true">
       {toasts.map((toast) => (
-        <section key={toast.id} className="achievement-toast" aria-label={`Achievement unlocked: ${toast.title}`}>
-          <p className="panel-label">Achievement unlocked</p>
+        <section key={toast.id} className="achievement-toast" aria-label={`成就已解鎖：${toast.title}`}>
+          <p className="panel-label">成就已解鎖</p>
           <strong>{toast.title}</strong>
           <p>{toast.description}</p>
           <button type="button" className="achievement-toast-close" onClick={() => onDismiss(toast.id)}>
-            Close
+            關閉
           </button>
         </section>
       ))}

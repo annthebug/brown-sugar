@@ -45,22 +45,22 @@ export function EndingPage() {
 
   const credits = useMemo(
     () => [
-      'Quest for the Perfect Bowl',
+      '尋找完美的碗',
       '',
-      'Black Sugar',
-      'The memories you gathered',
-      'The bowl that became enough',
+      '黑糖',
+      '一路收集的回憶',
+      '終於足夠的那只碗',
       '',
-      `MBTI Result · ${mbtiResult ?? 'Pending'}`,
-      bowlName ?? 'Your glass bowl is still waiting',
+      `MBTI 結果 · ${mbtiResult ?? '尚未完成'}`,
+      bowlName ?? '你的玻璃碗還在等待顯現',
       '',
-      `Memory Shards · ${memoryShards}`,
-      `Unlocked Memories · ${unlockedCount}`,
+      `回憶碎片 · ${memoryShards}`,
+      `已解鎖回憶 · ${unlockedCount}`,
       '',
-      'Some gifts do not need perfection.',
-      'What matters is the heart inside them.',
+      '有些禮物，不需要完美。',
+      '真正重要的是裡面的心意。',
       '',
-      'Thank you for walking gently to the end.',
+      '謝謝你溫柔地走到最後。',
     ],
     [bowlName, mbtiResult, memoryShards, unlockedCount],
   )
@@ -124,36 +124,36 @@ export function EndingPage() {
     <main ref={endingRef} className="page-shell" aria-labelledby="ending-title">
       <AppNav />
       <section className="page-card ending-card">
-        <p className="eyebrow">{gameCompleted ? 'Ending' : 'Ending Preview'}</p>
-        <h1 id="ending-title">The Bowl Is Home</h1>
+        <p className="eyebrow">{gameCompleted ? '結局' : '結局預覽'}</p>
+        <h1 id="ending-title">玻璃碗回家了</h1>
         <p className="hero-copy">
           當所有隱藏式對話完成後，黑糖的玻璃抹茶碗會依照內在傾向顯現不同花紋。
         </p>
         <p className="hero-copy">
-          {gameCompleted ? '黑糖已經把心意平穩地送到終點。' : '終章尚未完成，這裡先顯示結局預覽。'}
+          {gameCompleted ? '黑糖已經把心意安穩地送到了終點。' : '終章尚未完成，這裡先顯示結局預覽。'}
         </p>
 
-        <section ref={revealRef} className="ending-reveal-flow" aria-label="Ending reveal flow">
-          <section className="ending-mbti-panel" aria-label="MBTI result">
-            <p className="panel-label">Hidden journey answers</p>
+        <section ref={revealRef} className="ending-reveal-flow" aria-label="結局揭示流程">
+          <section className="ending-mbti-panel" aria-label="MBTI 結果">
+            <p className="panel-label">旅途中悄悄留下的答案</p>
             <p className="ending-mbti-progress">
-              {answeredCount} / {MBTI_QUESTION_COUNT} questions answered
+              {answeredCount} / {MBTI_QUESTION_COUNT} 題已回答
             </p>
 
             {isComplete && mbtiResult && bowlId && bowlName ? (
               <div className="ending-bowl-reveal">
                 <div
-                  className="ending-bowl-frame"
+                  className="ending-bowl-影格"
                   role="img"
                   aria-label={`${mbtiResult} glass bowl`}
                   style={generatedBowlStyle}
                 />
                 <div className="ending-bowl-meta">
-                  <p className="panel-label">Your bowl pattern</p>
+                  <p className="panel-label">你的碗紋樣</p>
                   <strong className="ending-mbti-type">{mbtiResult}</strong>
                   <p className="ending-bowl-name">{bowlName}</p>
                   <p className="ending-bowl-asset">
-                    Asset key: <code>{getBowlAssetKey()}</code> · frame <code>{bowlId}</code>
+                    素材鍵： <code>{getBowlAssetKey()}</code> · 影格 <code>{bowlId}</code>
                   </p>
                 </div>
               </div>
@@ -164,7 +164,7 @@ export function EndingPage() {
             )}
           </section>
 
-          <section className="ending-chest-section" aria-label="Treasure chest reveal">
+          <section className="ending-chest-section" aria-label="寶箱揭示">
             <div ref={chestRef} className="ending-chest">
               <div ref={chestLidRef} className="ending-chest-lid" />
               <div className="ending-chest-body" />
@@ -173,8 +173,8 @@ export function EndingPage() {
             </div>
             <div ref={photoRef} className="ending-photo-card">
               <div className="ending-photo-header">
-                <span>True Bowl Keepsake</span>
-                <span>{mbtiResult ?? 'Pending'}</span>
+                <span>真正的玻璃碗</span>
+                <span>{mbtiResult ?? '尚未完成'}</span>
               </div>
               <div
                 className="ending-photo-bowl"
@@ -188,7 +188,7 @@ export function EndingPage() {
             </div>
           </section>
 
-          <section ref={sleepRef} className="ending-sleep-section" aria-label="Black Sugar resting">
+          <section ref={sleepRef} className="ending-sleep-section" aria-label="黑糖休息中">
             <div className="ending-rest-scene">
               <div className="ending-rest-bowl" aria-hidden="true" />
               <div className="ending-black-sugar-sleep" aria-hidden="true">
@@ -203,8 +203,8 @@ export function EndingPage() {
             </div>
           </section>
 
-          <section className="ending-credits-card" aria-label="Credits">
-            <p className="panel-label">Credits</p>
+          <section className="ending-credits-card" aria-label="製作名單">
+            <p className="panel-label">製作名單</p>
             <div ref={creditsViewportRef} className="ending-credits-viewport">
               <div ref={creditsTrackRef} className="ending-credits-track">
                 {credits.map((line, index) => (
@@ -219,26 +219,26 @@ export function EndingPage() {
 
         <dl className="ending-summary">
           <div>
-            <dt>Memory Shards</dt>
+            <dt>回憶碎片</dt>
             <dd>{memoryShards}</dd>
           </div>
           <div>
-            <dt>Unlocked Memories</dt>
+            <dt>已解鎖回憶</dt>
             <dd>{unlockedCount}</dd>
           </div>
           <div>
-            <dt>MBTI Progress</dt>
+            <dt>MBTI 進度</dt>
             <dd>
               {answeredCount}/{MBTI_QUESTION_COUNT}
             </dd>
           </div>
           <div>
-            <dt>Journey</dt>
-            <dd>{gameCompleted ? 'Completed' : 'In progress'}</dd>
+            <dt>旅程</dt>
+            <dd>{gameCompleted ? '已完成' : '進行中'}</dd>
           </div>
         </dl>
 
-        <dl className="ending-score-grid" aria-label="Dimension scores">
+        <dl className="ending-score-grid" aria-label="向度分數">
           <div>
             <dt>E / I</dt>
             <dd>{scores.EI}</dd>
@@ -258,7 +258,7 @@ export function EndingPage() {
         </dl>
 
         <Link to="/game" className="page-link">
-          Continue journey
+          繼續旅程
         </Link>
       </section>
     </main>

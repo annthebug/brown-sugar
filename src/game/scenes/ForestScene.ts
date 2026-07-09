@@ -69,7 +69,7 @@ export class ForestScene extends Phaser.Scene {
     this.placeGiantJarBoss()
 
     if (this.bossCleared) {
-      this.bossPrompt?.setText('The Giant Jar already shared its gentle lesson.').setVisible(false)
+      this.bossPrompt?.setText('巨罐已經把溫柔的提醒說完了。').setVisible(false)
     }
 
     this.inputCtrl = new InputController(this)
@@ -85,7 +85,7 @@ export class ForestScene extends Phaser.Scene {
     this.cameras.main.setDeadzone(120, 40)
 
     this.add
-      .text(16, 16, 'Chapter 1 · Forest', {
+      .text(16, 16, '第一章・森林', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '14px',
@@ -98,7 +98,7 @@ export class ForestScene extends Phaser.Scene {
 
     if (!isTouch) {
       this.add
-        .text(this.scale.width / 2, 16, '← → Move   Space Jump   Shift Dash   E Talk / Interact', {
+        .text(this.scale.width / 2, 16, '← → 移動　Space 跳躍　Shift 衝刺　E 對話／互動', {
           color: MORANDI_PALETTE.mutedText,
           fontFamily: 'monospace',
           fontSize: '12px',
@@ -112,7 +112,7 @@ export class ForestScene extends Phaser.Scene {
 
     gameEventBus.emit('phaser:ready', {
       scene: this.scene.key,
-      message: 'Forest chapter ready.',
+      message: '森林章節已就緒。',
     })
 
     this.unsubscribeDialogueClosed = gameEventBus.on('dialogue:closed', () => {
@@ -219,7 +219,7 @@ export class ForestScene extends Phaser.Scene {
     const hood = this.add.circle(0, -72, 22, MORANDI_PALETTE.cloud, 0.92)
     const staff = this.add.rectangle(28, -28, 8, 72, MORANDI_PALETTE.warmBeige, 0.95)
     const label = this.add
-      .text(0, 12, 'Forest Elder', {
+      .text(0, 12, '森林長者', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -286,7 +286,7 @@ export class ForestScene extends Phaser.Scene {
     jarBody.setStrokeStyle(4, MORANDI_PALETTE.cloud, 0.88)
     const jarLid = this.add.rectangle(0, -118, 84, 18, MORANDI_PALETTE.warmBeige, 0.92)
     const label = this.add
-      .text(0, 24, 'Giant Jar', {
+      .text(0, 24, '巨罐', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -297,7 +297,7 @@ export class ForestScene extends Phaser.Scene {
     this.bossJar.add([jarBody, jarLid, label])
 
     this.bossPrompt = this.add
-      .text(jarX, jarY - 150, 'Press E to share a gentle moment', {
+      .text(jarX, jarY - 150, '按 E 分享一個溫柔片刻', {
         color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -331,7 +331,7 @@ export class ForestScene extends Phaser.Scene {
     this.bossCleared = true
     this.player.playEmote('happy')
 
-    this.bossPrompt?.setText('The jar hums softly. The forest path opens.').setVisible(true)
+    this.bossPrompt?.setText('巨罐輕輕嗡鳴，森林的路打開了。').setVisible(true)
 
     this.tweens.add({
       targets: this.bossJar,
@@ -367,14 +367,14 @@ export class ForestScene extends Phaser.Scene {
 
     if (nearBoss) {
       this.bossPrompt.setPosition(this.player.x, this.player.y - 88)
-      this.bossPrompt.setText('Press E to understand the Giant Jar')
+      this.bossPrompt.setText('按 E 理解巨罐')
       this.bossPrompt.setVisible(true)
       return
     }
 
     if (nearElder) {
       this.bossPrompt.setPosition(this.player.x, this.player.y - 88)
-      this.bossPrompt.setText('Press E to talk with Forest Elder')
+      this.bossPrompt.setText('按 E 與森林長者對話')
       this.bossPrompt.setVisible(true)
       return
     }

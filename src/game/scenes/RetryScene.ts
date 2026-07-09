@@ -46,11 +46,11 @@ const RETRY_PLATFORMS: PlatformSpec[] = [
 ]
 
 const MATERIALS: MaterialSpec[] = [
-  { id: 'sand', x: 460, y: GROUND_TOP - 20, label: 'Soft sand', mode: 'overlap' },
-  { id: 'crystal', x: 760, y: 308, label: 'Pale crystal', mode: 'interact' },
-  { id: 'fiber', x: 1120, y: 336, label: 'Glass fiber', mode: 'overlap' },
-  { id: 'ember', x: 1480, y: 280, label: 'Warm ember', mode: 'interact' },
-  { id: 'whisper', x: 1980, y: GROUND_TOP - 24, label: 'Hidden whisper', mode: 'meow' },
+  { id: 'sand', x: 460, y: GROUND_TOP - 20, label: '柔軟細沙', mode: 'overlap' },
+  { id: 'crystal', x: 760, y: 308, label: '淡色水晶', mode: 'interact' },
+  { id: 'fiber', x: 1120, y: 336, label: '玻璃纖維', mode: 'overlap' },
+  { id: 'ember', x: 1480, y: 280, label: '溫暖餘燼', mode: 'interact' },
+  { id: 'whisper', x: 1980, y: GROUND_TOP - 24, label: '隱藏低語', mode: 'meow' },
 ]
 
 export class RetryScene extends Phaser.Scene {
@@ -117,7 +117,7 @@ export class RetryScene extends Phaser.Scene {
     this.cameras.main.setDeadzone(120, 40)
 
     this.interactPrompt = this.add
-      .text(0, 0, 'Press E to talk', {
+      .text(0, 0, '按 E 對話', {
         color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -129,7 +129,7 @@ export class RetryScene extends Phaser.Scene {
       .setDepth(15)
 
     this.progressText = this.add
-      .text(this.scale.width - 16, 16, `Materials 0 / ${MATERIAL_TARGET}`, {
+      .text(this.scale.width - 16, 16, `材料 0 / ${MATERIAL_TARGET}`, {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -156,7 +156,7 @@ export class RetryScene extends Phaser.Scene {
       .setScrollFactor(0)
 
     this.add
-      .text(16, 16, 'Chapter 5 · Retry', {
+      .text(16, 16, '第五章・再試一次', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '14px',
@@ -169,7 +169,7 @@ export class RetryScene extends Phaser.Scene {
 
     if (!isTouch) {
       this.add
-        .text(this.scale.width / 2, 16, '← → Move   Space Jump   Shift Dash   M Meow   E Talk / Interact', {
+        .text(this.scale.width / 2, 16, '← → 移動　Space 跳躍　Shift 衝刺　M 喵叫　E 對話／互動', {
           color: MORANDI_PALETTE.mutedText,
           fontFamily: 'monospace',
           fontSize: '12px',
@@ -183,7 +183,7 @@ export class RetryScene extends Phaser.Scene {
 
     gameEventBus.emit('phaser:ready', {
       scene: this.scene.key,
-      message: 'Retry chapter ready.',
+      message: '再試一次章節已就緒。',
     })
 
     this.unsubscribeDialogueClosed = gameEventBus.on('dialogue:closed', () => {
@@ -324,7 +324,7 @@ export class RetryScene extends Phaser.Scene {
     const head = this.add.circle(0, -72, 17, MORANDI_PALETTE.cloud, 0.9)
     const glow = this.add.ellipse(0, -40, 64, 80, MORANDI_PALETTE.warmBeige, 0.14)
     const label = this.add
-      .text(0, 10, 'Inner Guide', {
+      .text(0, 10, '內在嚮導', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -343,7 +343,7 @@ export class RetryScene extends Phaser.Scene {
     aura.setStrokeStyle(2, MORANDI_PALETTE.dustyBlue, 0.35)
     const core = this.add.circle(0, -48, 20, MORANDI_PALETTE.cloud, 0.45)
     const label = this.add
-      .text(0, 16, 'Inner Doubt', {
+      .text(0, 16, '內在懷疑', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -487,7 +487,7 @@ export class RetryScene extends Phaser.Scene {
   }
 
   private updateMaterialProgress() {
-    this.progressText?.setText(`Materials ${this.collectedMaterials.size} / ${MATERIAL_TARGET}`)
+    this.progressText?.setText(`材料 ${this.collectedMaterials.size} / ${MATERIAL_TARGET}`)
   }
 
   private unlockBoss() {
@@ -562,11 +562,11 @@ export class RetryScene extends Phaser.Scene {
     let promptText: string | null = null
 
     if (this.bossUnlocked && !this.bossCleared && this.isNearInnerDoubt()) {
-      promptText = 'Press E to face Inner Doubt'
+      promptText = '按 E 面對內在懷疑'
     } else if (this.getNearbyInteractMaterial()) {
-      promptText = 'Press E to gather material'
+      promptText = '按 E 收集材料'
     } else if (this.isNearInnerGuide()) {
-      promptText = 'Press E to listen to Inner Guide'
+      promptText = '按 E 聆聽內在嚮導'
     } else {
       const whisper = MATERIALS.find((material) => material.mode === 'meow')
       if (
@@ -575,7 +575,7 @@ export class RetryScene extends Phaser.Scene {
         !this.collectedMaterials.has(whisper.id) &&
         Phaser.Math.Distance.Between(this.player.x, this.player.y, whisper.x, whisper.y) <= INTERACT_RADIUS + 20
       ) {
-        promptText = 'Press M to meow — something may answer'
+        promptText = '按 M 喵叫——也許會有回應'
       }
     }
 

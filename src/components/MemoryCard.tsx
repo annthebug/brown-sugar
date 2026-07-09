@@ -6,7 +6,7 @@ type MemoryCardProps = {
 }
 
 export function MemoryCard({ memory, onReplay }: MemoryCardProps) {
-  const label = `Memory ${memory.order}`
+  const label = `回憶 ${memory.order}`
 
   return (
     <article className={`memory-card${memory.unlocked ? '' : ' memory-card--locked'}`}>
@@ -14,7 +14,7 @@ export function MemoryCard({ memory, onReplay }: MemoryCardProps) {
         type="button"
         className="memory-card-button"
         disabled={!memory.unlocked}
-        aria-label={memory.unlocked ? `Replay ${label}` : `${label} locked`}
+        aria-label={memory.unlocked ? `重播${label}` : `${label}尚未解鎖`}
         onClick={onReplay}
       >
         <div className="memory-photo-frame">

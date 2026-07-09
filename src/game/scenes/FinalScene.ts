@@ -92,7 +92,7 @@ export class FinalScene extends Phaser.Scene {
     this.cameras.main.setDeadzone(120, 40)
 
     this.interactPrompt = this.add
-      .text(0, 0, 'Press E to talk', {
+      .text(0, 0, '按 E 對話', {
         color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -118,7 +118,7 @@ export class FinalScene extends Phaser.Scene {
       .setScrollFactor(0)
 
     this.add
-      .text(16, 16, 'Final Stage', {
+      .text(16, 16, '最終章', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '14px',
@@ -131,7 +131,7 @@ export class FinalScene extends Phaser.Scene {
 
     if (!isTouch) {
       this.add
-        .text(this.scale.width / 2, 16, '← → Move   Space Jump   Shift Dash   M Meow   E Talk / Interact', {
+        .text(this.scale.width / 2, 16, '← → 移動　Space 跳躍　Shift 衝刺　M 喵叫　E 對話／互動', {
           color: MORANDI_PALETTE.mutedText,
           fontFamily: 'monospace',
           fontSize: '12px',
@@ -145,7 +145,7 @@ export class FinalScene extends Phaser.Scene {
 
     gameEventBus.emit('phaser:ready', {
       scene: this.scene.key,
-      message: 'Final Stage ready.',
+      message: '最終章已就緒。',
     })
 
     this.unsubscribeDialogueClosed = gameEventBus.on('dialogue:closed', () => {
@@ -253,7 +253,7 @@ export class FinalScene extends Phaser.Scene {
     ring.setStrokeStyle(2, MORANDI_PALETTE.dustyBlue, 0.32)
     const core = this.add.circle(0, 0, 8, MORANDI_PALETTE.cloud, 0.68)
     const label = this.add
-      .text(0, 28, 'Resonance', {
+      .text(0, 28, '共鳴', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -269,7 +269,7 @@ export class FinalScene extends Phaser.Scene {
     const robe = this.add.rectangle(0, -34, 46, 62, MORANDI_PALETTE.mistPink, 0.4)
     const head = this.add.circle(0, -72, 17, MORANDI_PALETTE.cloud, 0.92)
     const label = this.add
-      .text(0, 10, 'Inner Guide', {
+      .text(0, 10, '內在嚮導', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -285,7 +285,7 @@ export class FinalScene extends Phaser.Scene {
     aura.setStrokeStyle(2, MORANDI_PALETTE.dustyBlue, 0.4)
     const core = this.add.circle(0, -50, 22, MORANDI_PALETTE.cloud, 0.5)
     const label = this.add
-      .text(0, 16, 'Perfectionism', {
+      .text(0, 16, '完美主義', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -406,16 +406,16 @@ export class FinalScene extends Phaser.Scene {
 
     if (this.isNearPerfectionism()) {
       if (!this.resonanceAwakened) {
-        promptText = 'A soft echo still needs your meow'
+        promptText = '還有一聲輕柔回音在等你的喵叫'
       } else if (!this.guidanceReceived && !useMbtiStore.getState().isComplete()) {
-        promptText = 'Press E to talk with Inner Guide first'
+        promptText = '先按 E 與內在嚮導對話'
       } else {
-        promptText = 'Press E to face Perfectionism'
+        promptText = '按 E 面對完美主義'
       }
     } else if (this.isNearInnerGuide()) {
-      promptText = 'Press E to listen inward'
+      promptText = '按 E 聽聽內心'
     } else if (!this.resonanceAwakened && this.isNearResonancePoint()) {
-      promptText = 'Press M to let the mist answer'
+      promptText = '按 M 讓霧氣回應你'
     }
 
     if (promptText) {
