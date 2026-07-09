@@ -311,6 +311,38 @@
         "placeholder": true,
         "purpose": "preload",
         "description": "Soft loading panel placeholder for Phaser preload UI."
+      },
+      {
+        "key": "ui-ending-chest-body",
+        "type": "image",
+        "url": "ui/ending-chest-body-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Ending treasure chest body layer (Morandi wood box, inner glass rim)."
+      },
+      {
+        "key": "ui-ending-chest-lid",
+        "type": "image",
+        "url": "ui/ending-chest-lid-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Ending treasure chest lid layer (GSAP rotate hinge at bottom center)."
+      },
+      {
+        "key": "ui-ending-chest-lock",
+        "type": "image",
+        "url": "ui/ending-chest-lock-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Ending treasure chest soft gold lock plate layer."
+      },
+      {
+        "key": "ui-ending-chest-glow",
+        "type": "image",
+        "url": "ui/ending-chest-glow-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Ending treasure chest inner pale blue glass glow layer."
       }
     ],
     "memories": [],

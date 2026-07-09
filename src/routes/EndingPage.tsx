@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef } from 'react'
+import { useLayoutEffect, useMemo, useRef, type CSSProperties } from 'react'
 import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
@@ -13,6 +13,7 @@ import {
 import { useGalleryStore } from '../stores/useGalleryStore'
 import { useGameStore } from '../stores/useGameStore'
 import { useMbtiStore } from '../stores/useMbtiStore'
+import { ENDING_CHEST_LAYER_URLS } from '../game/assets/assetManifest'
 
 export function EndingPage() {
   const memoryShards = useGameStore((state) => state.memoryShards)
@@ -165,11 +166,22 @@ export function EndingPage() {
           </section>
 
           <section className="ending-chest-section" aria-label="寶箱揭示">
-            <div ref={chestRef} className="ending-chest">
-              <div ref={chestLidRef} className="ending-chest-lid" />
-              <div className="ending-chest-body" />
-              <div className="ending-chest-lock" />
-              <div className="ending-chest-glow" />
+            <div
+              ref={chestRef}
+              className="ending-chest"
+              style={
+                {
+                  '--ending-chest-body-url': `url(${ENDING_CHEST_LAYER_URLS.body})`,
+                  '--ending-chest-lid-url': `url(${ENDING_CHEST_LAYER_URLS.lid})`,
+                  '--ending-chest-lock-url': `url(${ENDING_CHEST_LAYER_URLS.lock})`,
+                  '--ending-chest-glow-url': `url(${ENDING_CHEST_LAYER_URLS.glow})`,
+                } as CSSProperties
+              }
+            >
+              <div className="ending-chest-glow" aria-hidden="true" />
+              <div className="ending-chest-body" aria-hidden="true" />
+              <div className="ending-chest-lock" aria-hidden="true" />
+              <div ref={chestLidRef} className="ending-chest-lid" aria-hidden="true" />
             </div>
             <div ref={photoRef} className="ending-photo-card">
               <div className="ending-photo-header">

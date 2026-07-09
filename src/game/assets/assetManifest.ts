@@ -32,6 +32,10 @@ import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
 import bossAtlasUrl from '../../../assets/characters/boss-sprite-sheet-v1.json?url'
 import paleBlueSkyUrl from '../../../assets/scenes/pale-blue-sky-placeholder.png'
 import loadingPanelUrl from '../../../assets/ui/loading-panel-placeholder.png'
+import endingChestBodyUrl from '../../../assets/ui/ending-chest-body-v1.png'
+import endingChestLidUrl from '../../../assets/ui/ending-chest-lid-v1.png'
+import endingChestLockUrl from '../../../assets/ui/ending-chest-lock-v1.png'
+import endingChestGlowUrl from '../../../assets/ui/ending-chest-glow-v1.png'
 import mbtiGlassBowlsUrl from '../../../assets/bowls/mbti-glass-bowls-sheet-v1.png'
 
 export const ASSET_KEYS = {
@@ -53,7 +57,18 @@ export const ASSET_KEYS = {
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
   loadingPanel: 'ui-loading-panel',
+  endingChestBody: 'ui-ending-chest-body',
+  endingChestLid: 'ui-ending-chest-lid',
+  endingChestLock: 'ui-ending-chest-lock',
+  endingChestGlow: 'ui-ending-chest-glow',
   mbtiGlassBowls: 'bowls-mbti-glass-sheet',
+} as const
+
+export const ENDING_CHEST_LAYER_URLS = {
+  body: endingChestBodyUrl,
+  lid: endingChestLidUrl,
+  lock: endingChestLockUrl,
+  glow: endingChestGlowUrl,
 } as const
 
 export const BLACK_SUGAR_FRAMES = {
@@ -444,6 +459,42 @@ export const GAME_ASSET_MANIFEST = {
       purpose: 'preload',
       description: 'Soft loading panel placeholder for Phaser preload UI.',
       url: loadingPanelUrl,
+    },
+    {
+      kind: 'image',
+      category: 'ui',
+      key: ASSET_KEYS.endingChestBody,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Ending treasure chest body layer (Morandi wood box, inner glass rim).',
+      url: endingChestBodyUrl,
+    },
+    {
+      kind: 'image',
+      category: 'ui',
+      key: ASSET_KEYS.endingChestLid,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Ending treasure chest lid layer (GSAP rotate hinge at bottom center).',
+      url: endingChestLidUrl,
+    },
+    {
+      kind: 'image',
+      category: 'ui',
+      key: ASSET_KEYS.endingChestLock,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Ending treasure chest soft gold lock plate layer.',
+      url: endingChestLockUrl,
+    },
+    {
+      kind: 'image',
+      category: 'ui',
+      key: ASSET_KEYS.endingChestGlow,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Ending treasure chest inner pale blue glass glow layer.',
+      url: endingChestGlowUrl,
     },
   ],
   memories: [],
