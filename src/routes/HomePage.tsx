@@ -1,4 +1,5 @@
 import { AchievementPanel } from '../components/AchievementPanel'
+import { BlackSugarSprite } from '../components/BlackSugarSprite'
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
 import { CHAPTER_DISPLAY_NAMES, getGameRouteForChapter, hasContinuableProgress } from '../data/chapters'
@@ -54,11 +55,7 @@ export function HomePage() {
       </section>
 
       <section className="journey-panel" aria-label="旅程預覽">
-        <div className="pixel-cat" aria-hidden="true">
-          <span className="cat-ear left-ear" />
-          <span className="cat-ear right-ear" />
-          <span className="cat-face">ฅ</span>
-        </div>
+        <BlackSugarSprite />
         <ul>
           {memoryPreviewItems.map((item) => (
             <li key={item}>{item}</li>
