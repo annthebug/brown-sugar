@@ -4,7 +4,13 @@ import { AppNav } from '../components/AppNav'
 import { DialogueBox } from '../components/DialogueBox'
 import { MemoryOverlay } from '../components/MemoryOverlay'
 import { PhaserGame } from '../components/PhaserGame'
-import { DIALOGUE_SCRIPTS, type DialogueChoice, type DialogueChoiceResult } from '../data/dialogues'
+import { MBTI_QUESTION_COUNT } from '../data/mbti'
+import {
+  DIALOGUE_SCRIPTS,
+  type DialogueChoice,
+  type DialogueChoiceResult,
+  type DialogueScriptId,
+} from '../data/dialogues'
 import { gameEventBus } from '../game/events/eventBus'
 import { type MemoryEntry, useGalleryStore } from '../stores/useGalleryStore'
 import { useGameStore } from '../stores/useGameStore'
@@ -12,15 +18,18 @@ import { useMbtiStore } from '../stores/useMbtiStore'
 
 export function GamePage() {
   const [memoryQueue, setMemoryQueue] = useState<MemoryEntry[]>([])
-  const [activeDialogueId, setActiveDialogueId] = useState<keyof typeof DIALOGUE_SCRIPTS | null>(null)
+  const [activeDialogueId, setActiveDialogueId] = useState<DialogueScriptId | null>(null)
   const [lastDialogueChoice, setLastDialogueChoice] = useState<string>('No dialogue choice yet')
   const memoryShards = useGameStore((state) => state.memoryShards)
   const totalMemoryShards = useGameStore((state) => state.totalMemoryShards)
   const collectMemoryShards = useGameStore((state) => state.collectMemoryShards)
   const resetProgress = useGameStore((state) => state.resetProgress)
   const unlockNextMemory = useGalleryStore((state) => state.unlockNextMemory)
-  const eiScore = useMbtiStore((state) => state.scores.EI)
+  const answeredQuestionIds = useMbtiStore((state) => state.answeredQuestionIds)
   const answerQuestion = useMbtiStore((state) => state.answerQuestion)
+  const resetMbtiScores = useMbtiStore((state) => state.resetScores)
+  const isMbtiComplete = useMbtiStore((state) => state.isComplete())
+  const mbtiResult = useMbtiStore((state) => state.getMbtiResult())
   const activeMemory = memoryQueue[0]
   const activeDialogue = activeDialogueId ? DIALOGUE_SCRIPTS[activeDialogueId] : null
 
@@ -38,8 +47,8 @@ export function GamePage() {
     [collectMemoryShards, unlockNextMemory],
   )
 
-  const openForestDialogue = useCallback(() => {
-    setActiveDialogueId('forestElder')
+  const openDialogue = useCallback((dialogueId: DialogueScriptId) => {
+    setActiveDialogueId(dialogueId)
   }, [])
 
   useEffect(() => {
@@ -48,19 +57,25 @@ export function GamePage() {
     })
 
     const unsubscribeTalk = gameEventBus.on('player:talk-start', () => {
-      openForestDialogue()
+      openDialogue('forestElder')
     })
 
     return () => {
       unsubscribeShard()
       unsubscribeTalk()
     }
-  }, [collectShards, openForestDialogue])
+  }, [collectShards, openDialogue])
 
   const handleChoiceResult = useCallback(
     (result: DialogueChoiceResult, choice: DialogueChoice) => {
       if (result.kind === 'mbti') {
-        answerQuestion(result.dimension, result.preference)
+        const recorded = answerQuestion(result.questionId, result.preference)
+        setLastDialogueChoice(
+          recorded
+            ? choice.label
+            : `${choice.label} (already answered — score unchanged)`,
+        )
+        return
       }
 
       setLastDialogueChoice(choice.label)
@@ -105,12 +120,29 @@ export function GamePage() {
           Reset progress
         </button>
         <div>
-          <p className="panel-label">Dialogue signal</p>
-          <strong>{eiScore}</strong>
-          <span>{lastDialogueChoice}</span>
+          <p className="panel-label">MBTI progress</p>
+          <strong>
+            {answeredQuestionIds.length} / {MBTI_QUESTION_COUNT}
+          </strong>
+          <span>{isMbtiComplete && mbtiResult ? `Result: ${mbtiResult}` : lastDialogueChoice}</span>
         </div>
-        <button type="button" onClick={openForestDialogue}>
+        <button type="button" onClick={() => openDialogue('forestElder')}>
           Talk to Forest Elder
+        </button>
+        <button type="button" onClick={() => openDialogue('cityGuide')}>
+          Talk to City Guide
+        </button>
+        <button type="button" onClick={() => openDialogue('snowSpirit')}>
+          Talk to Snow Spirit
+        </button>
+        <button type="button" onClick={() => openDialogue('glassMaster')}>
+          Talk to Glass Master
+        </button>
+        <button type="button" onClick={() => openDialogue('innerGuide')}>
+          Talk to Inner Guide
+        </button>
+        <button type="button" className="secondary-action" onClick={resetMbtiScores}>
+          Reset MBTI
         </button>
       </section>
       {activeDialogue ? (
