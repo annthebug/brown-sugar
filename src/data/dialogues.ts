@@ -8,7 +8,7 @@ export type DialogueChoiceResult =
     }
   | {
       kind: 'story'
-      trigger: 'time-monster-understood' | 'snow-spirit-understood' | 'glass-master-understood'
+      trigger: 'time-monster-understood' | 'snow-spirit-understood' | 'glass-master-understood' | 'inner-doubt-understood'
     }
 
 export type DialogueChoice = {
@@ -1204,6 +1204,85 @@ export const DIALOGUE_SCRIPTS = {
         speakerName: 'Inner Guide',
         avatarLabel: 'IG',
         text: 'The bowl was never only glass. It was always the shape of who you are.',
+      },
+    },
+  },
+  innerDoubtBoss: {
+    id: 'inner-doubt-boss',
+    title: 'Inner Doubt',
+    startNodeId: 'doubt-intro',
+    nodes: {
+      'doubt-intro': {
+        id: 'doubt-intro',
+        speakerName: 'Inner Doubt',
+        avatarLabel: 'ID',
+        text: 'You gathered everything again. Are you sure this bowl will be any different?',
+        nextNodeId: 'doubt-round-1',
+      },
+      'doubt-round-1': {
+        id: 'doubt-round-1',
+        speakerName: 'Inner Doubt',
+        avatarLabel: 'ID',
+        text: 'Last time the rim wobbled. What if you only repeat the same mistake?',
+        nextNodeId: 'doubt-round-2',
+      },
+      'doubt-round-2': {
+        id: 'doubt-round-2',
+        speakerName: 'Brown Sugar',
+        avatarLabel: 'BS',
+        text: 'The doubt feels heavy. How do I answer it gently?',
+        choices: [
+          {
+            id: 'doubt-round-2-a',
+            label: 'I am not trying to be perfect — I am trying to be present.',
+            nextNodeId: 'doubt-round-3',
+          },
+          {
+            id: 'doubt-round-2-b',
+            label: 'Each try taught me something the last bowl could not.',
+            nextNodeId: 'doubt-round-3',
+          },
+        ],
+      },
+      'doubt-round-3': {
+        id: 'doubt-round-3',
+        speakerName: 'Inner Doubt',
+        avatarLabel: 'ID',
+        text: 'Presence is soft. But soft things break easily.',
+        nextNodeId: 'doubt-choice',
+      },
+      'doubt-choice': {
+        id: 'doubt-choice',
+        speakerName: 'Brown Sugar',
+        avatarLabel: 'BS',
+        text: 'What do I want to believe while the glass cools?',
+        choices: [
+          {
+            id: 'doubt-choice-a',
+            label: 'That effort itself is already a gift.',
+            nextNodeId: 'doubt-understand',
+            result: { kind: 'story', trigger: 'inner-doubt-understood' },
+          },
+          {
+            id: 'doubt-choice-b',
+            label: 'That meaning does not need a flawless shape.',
+            nextNodeId: 'doubt-understand',
+            result: { kind: 'story', trigger: 'inner-doubt-understood' },
+          },
+        ],
+      },
+      'doubt-understand': {
+        id: 'doubt-understand',
+        speakerName: 'Inner Doubt',
+        avatarLabel: 'ID',
+        text: 'Then I will step aside. The bowl can finish in your own time.',
+        nextNodeId: 'doubt-farewell',
+      },
+      'doubt-farewell': {
+        id: 'doubt-farewell',
+        speakerName: 'Inner Doubt',
+        avatarLabel: 'ID',
+        text: 'Keep going. The true shape is already forming.',
       },
     },
   },

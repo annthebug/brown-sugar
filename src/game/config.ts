@@ -3,6 +3,7 @@ import { BootScene } from './scenes/BootScene'
 import { CityScene } from './scenes/CityScene'
 import { ForestScene } from './scenes/ForestScene'
 import { GameScene } from './scenes/GameScene'
+import { FinalScene } from './scenes/FinalScene'
 import { GlassStudioScene } from './scenes/GlassStudioScene'
 import { PreloadScene } from './scenes/PreloadScene'
 import { RetryScene } from './scenes/RetryScene'
@@ -30,6 +31,6 @@ export function createGameConfig(parent: HTMLElement): Phaser.Types.Core.GameCon
         debug: false,
       },
     },
-    scene: [BootScene, PreloadScene, ForestScene, CityScene, SnowMountainScene, GlassStudioScene, RetryScene, GameScene],
+    scene: [BootScene, PreloadScene, ForestScene, CityScene, SnowMountainScene, GlassStudioScene, RetryScene, FinalScene, GameScene],
   }
 }

@@ -17,6 +17,7 @@ export type MemoryShardCollectionResult = {
 
 type StoryFlags = {
   hasImperfectBowl: boolean
+  hasTrueBowl: boolean
 }
 
 type GameState = {
@@ -25,6 +26,7 @@ type GameState = {
   cityChapterCleared: boolean
   snowChapterCleared: boolean
   glassChapterCleared: boolean
+  retryChapterCleared: boolean
   storyFlags: StoryFlags
   memoryShards: number
   totalMemoryShards: number
@@ -34,6 +36,7 @@ type GameState = {
   completeCityChapter: () => void
   completeSnowChapter: () => void
   completeGlassChapter: () => void
+  completeRetryChapter: () => void
   resetProgress: () => void
 }
 
@@ -47,8 +50,10 @@ export const useGameStore = create<GameState>()(
       cityChapterCleared: false,
       snowChapterCleared: false,
       glassChapterCleared: false,
+      retryChapterCleared: false,
       storyFlags: {
         hasImperfectBowl: false,
+        hasTrueBowl: false,
       },
       memoryShards: 0,
       totalMemoryShards: 0,
@@ -107,7 +112,22 @@ export const useGameStore = create<GameState>()(
           glassChapterCleared: true,
           currentChapter: 'Retry',
           storyFlags: {
+            ...get().storyFlags,
             hasImperfectBowl: true,
+          },
+        })
+      },
+      completeRetryChapter: () => {
+        if (get().retryChapterCleared) {
+          return
+        }
+
+        set({
+          retryChapterCleared: true,
+          currentChapter: 'Final Stage',
+          storyFlags: {
+            ...get().storyFlags,
+            hasTrueBowl: true,
           },
         })
       },
@@ -118,8 +138,10 @@ export const useGameStore = create<GameState>()(
           cityChapterCleared: false,
           snowChapterCleared: false,
           glassChapterCleared: false,
+          retryChapterCleared: false,
           storyFlags: {
             hasImperfectBowl: false,
+            hasTrueBowl: false,
           },
           memoryShards: 0,
           totalMemoryShards: 0,
@@ -167,11 +189,27 @@ export const useGameStore = create<GameState>()(
             persisted !== null &&
             'storyFlags' in persisted &&
             typeof persisted.storyFlags === 'object' &&
-            persisted.storyFlags !== null &&
-            'hasImperfectBowl' in persisted.storyFlags &&
-            typeof persisted.storyFlags.hasImperfectBowl === 'boolean'
-              ? { hasImperfectBowl: persisted.storyFlags.hasImperfectBowl }
+            persisted.storyFlags !== null
+              ? {
+                  hasImperfectBowl:
+                    'hasImperfectBowl' in persisted.storyFlags &&
+                    typeof persisted.storyFlags.hasImperfectBowl === 'boolean'
+                      ? persisted.storyFlags.hasImperfectBowl
+                      : currentState.storyFlags.hasImperfectBowl,
+                  hasTrueBowl:
+                    'hasTrueBowl' in persisted.storyFlags &&
+                    typeof persisted.storyFlags.hasTrueBowl === 'boolean'
+                      ? persisted.storyFlags.hasTrueBowl
+                      : currentState.storyFlags.hasTrueBowl,
+                }
               : currentState.storyFlags,
+          retryChapterCleared:
+            typeof persisted === 'object' &&
+            persisted !== null &&
+            'retryChapterCleared' in persisted &&
+            typeof persisted.retryChapterCleared === 'boolean'
+              ? persisted.retryChapterCleared
+              : currentState.retryChapterCleared,
         }
       },
     },
