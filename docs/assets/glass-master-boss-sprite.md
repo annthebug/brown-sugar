@@ -66,7 +66,7 @@ sprite.play('glass-master-boss-glow')
 python3 scripts/generate-glass-master-boss-sprite.py
 ```
 
-## Next asset tasks
+## Integration
 
-- Switch `GlassStudioScene.placeGlassMasterBoss()` from `boss-characters` atlas to this sheet.
-- Play `glass-master-boss-glow` animation on the boss sprite.
+- `GlassStudioScene.placeGlassMasterBoss()` uses `ASSET_KEYS.glassMasterBoss` + `GLASS_MASTER_BOSS_FRAMES.idle`.
+- Boss sprite plays `glass-master-boss-glow` animation (3 fps loop).
