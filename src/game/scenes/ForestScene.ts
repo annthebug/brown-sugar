@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, BOSS_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import { ASSET_KEYS, BOSS_FRAMES, FOREST_ELDER_FRAMES, MORANDI_PALETTE } from '../assets/assetManifest'
 import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
@@ -212,11 +212,28 @@ export class ForestScene extends Phaser.Scene {
   }
 
   private placeForestElder() {
-    this.elderNpc = placeCharacterSprite(this, 1080, 354, {
-      atlas: 'npc',
-      frame: NPC_FRAMES.forestElder,
-      label: '森林長者',
-    })
+    const elderX = 1080
+    const elderY = 354
+
+    // Top-down down-idle frame until a side-view Forest Elder variant exists.
+    const container = this.add.container(elderX, elderY) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.forestElder, FOREST_ELDER_FRAMES.downIdle)
+    sprite.setOrigin(0.5, 1).setScale(2.5)
+
+    const label = this.add
+      .text(0, 8, '森林長者', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+      .setVisible(false)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.elderNpc = container
   }
 
   private placePatrolCritters() {
@@ -340,6 +357,7 @@ export class ForestScene extends Phaser.Scene {
     const nearElder = this.isNearElder()
 
     if (nearBoss) {
+      this.elderNpc?.label.setVisible(false)
       this.bossPrompt.setPosition(this.player.x, this.player.y - 88)
       this.bossPrompt.setText('按 E 理解巨罐')
       this.bossPrompt.setVisible(true)
@@ -347,12 +365,14 @@ export class ForestScene extends Phaser.Scene {
     }
 
     if (nearElder) {
+      this.elderNpc?.label.setVisible(true)
       this.bossPrompt.setPosition(this.player.x, this.player.y - 88)
       this.bossPrompt.setText('按 E 與森林長者對話')
       this.bossPrompt.setVisible(true)
       return
     }
 
+    this.elderNpc?.label.setVisible(false)
     this.bossPrompt.setVisible(false)
   }
 
