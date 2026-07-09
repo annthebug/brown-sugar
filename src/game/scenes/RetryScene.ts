@@ -2,11 +2,11 @@ import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
 import {
   ASSET_KEYS,
-  BOSS_FRAMES,
+  INNER_DOUBT_FRAMES,
   INNER_GUIDE_FRAMES,
   MORANDI_PALETTE,
 } from '../assets/assetManifest'
-import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
+import { type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
@@ -352,11 +352,44 @@ export class RetryScene extends Phaser.Scene {
   }
 
   private placeInnerDoubtBoss() {
-    this.innerDoubtBoss = placeCharacterSprite(this, INNER_DOUBT_X, 308, {
-      atlas: 'boss',
-      frame: BOSS_FRAMES.innerDoubt,
-      label: '內在懷疑',
-      alpha: this.bossCleared ? 0.3 : this.bossUnlocked ? 1 : 0.45,
+    this.registerInnerDoubtAnimation()
+
+    const container = this.add.container(INNER_DOUBT_X, 308) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.innerDoubt, INNER_DOUBT_FRAMES.idle)
+    sprite.setOrigin(0.5, 1).setScale(0.48)
+    sprite.setAlpha(this.bossCleared ? 0.3 : this.bossUnlocked ? 1 : 0.45)
+    sprite.play('inner-doubt-wobble')
+
+    const label = this.add
+      .text(0, 8, '內在懷疑', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.innerDoubtBoss = container
+  }
+
+  private registerInnerDoubtAnimation() {
+    if (this.anims.exists('inner-doubt-wobble')) {
+      return
+    }
+
+    this.anims.create({
+      key: 'inner-doubt-wobble',
+      frames: [
+        { key: ASSET_KEYS.innerDoubt, frame: INNER_DOUBT_FRAMES.pulse1 },
+        { key: ASSET_KEYS.innerDoubt, frame: INNER_DOUBT_FRAMES.pulse2 },
+        { key: ASSET_KEYS.innerDoubt, frame: INNER_DOUBT_FRAMES.pulse3 },
+        { key: ASSET_KEYS.innerDoubt, frame: INNER_DOUBT_FRAMES.idle },
+      ],
+      frameRate: 3,
+      repeat: -1,
     })
   }
 
@@ -483,7 +516,7 @@ export class RetryScene extends Phaser.Scene {
 
   private unlockBoss() {
     this.bossUnlocked = true
-    this.innerDoubtBoss?.setAlpha(1)
+    this.innerDoubtBoss?.sprite.setAlpha(1)
 
     this.cutsceneText
       ?.setText('All materials gathered.\nInner Doubt waits at the far edge.')

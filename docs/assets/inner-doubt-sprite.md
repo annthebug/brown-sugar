@@ -65,7 +65,7 @@ sprite.play('inner-doubt-wobble')
 python3 scripts/generate-inner-doubt-sprite.py
 ```
 
-## Next asset tasks
+## Integration
 
-- Switch `RetryScene.placeInnerDoubtBoss()` from `boss-characters` atlas to this sheet.
-- Play `inner-doubt-wobble` animation on the boss sprite.
+- `RetryScene.placeInnerDoubtBoss()` uses `ASSET_KEYS.innerDoubt` + `INNER_DOUBT_FRAMES.idle`.
+- Boss sprite plays `inner-doubt-wobble` animation (3 fps loop).
