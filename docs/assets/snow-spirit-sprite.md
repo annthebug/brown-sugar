@@ -66,7 +66,7 @@ sprite.play('snow-spirit-pulse')
 python3 scripts/generate-snow-spirit-sprite.py
 ```
 
-## Next asset tasks
+## Integration
 
-- Switch `SnowMountainScene.placeSnowSpiritBoss()` from `boss-characters` atlas to this sheet.
-- Play `snow-spirit-pulse` animation on the boss sprite.
+- `SnowMountainScene.placeSnowSpiritBoss()` uses `ASSET_KEYS.snowSpirit` + `SNOW_SPIRIT_FRAMES.idle`.
+- Boss sprite plays `snow-spirit-pulse` animation (3 fps loop).
