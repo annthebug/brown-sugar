@@ -49,11 +49,23 @@ Four rows × four columns. Each row is one facing direction; columns are idle + 
 - `forest-elder-right-idle`
 - `forest-elder-right-walk-1` … `forest-elder-right-walk-3`
 
-## Emotion portrait
+## Emotion portrait series
 
-- File: `forest-elder-portrait-v1.png` (64×64, nearest-neighbor upscale from 32×32 bust).
-- Expression: calm, kind, wise — small relaxed eyes and gentle smile.
-- Use in dialogue UI avatar slot when portrait images replace text labels.
+| Mood | File | Expression |
+| --- | --- | --- |
+| calm | `forest-elder-portrait-calm-v1.png` | Relaxed eyes, gentle small smile |
+| thoughtful | `forest-elder-portrait-thoughtful-v1.png` | Slight squint, contemplative |
+| warm | `forest-elder-portrait-warm-v1.png` | Soft happy eyes, wider smile |
+
+- All portraits: 64×64, transparent background, warm pastel pixel art.
+- `DialogueNode.mood` selects portrait in `dialogues.ts`; `DialogueBox` resolves via `resolveDialogueAvatarUrl()`.
+- Legacy `forest-elder-portrait-v1.png` retained; calm mood supersedes it in dialogue.
+
+Regenerate:
+
+```bash
+python3 scripts/generate-forest-elder-portraits.py
+```
 
 ## Palette reference
 

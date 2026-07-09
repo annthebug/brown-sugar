@@ -44,7 +44,12 @@
         "type": "atlas",
         "texture": "characters/forest-elder-sprite-sheet-v1.png",
         "atlas": "characters/forest-elder-sprite-sheet-v1.json",
-        "portrait": "characters/forest-elder-portrait-v1.png",
+        "portrait": "characters/forest-elder-portrait-calm-v1.png",
+        "portraits": {
+          "calm": "characters/forest-elder-portrait-calm-v1.png",
+          "thoughtful": "characters/forest-elder-portrait-thoughtful-v1.png",
+          "warm": "characters/forest-elder-portrait-warm-v1.png"
+        },
         "placeholder": false,
         "purpose": "preload",
         "description": "Forest Elder NPC top-down sprite atlas and dialogue portrait.",

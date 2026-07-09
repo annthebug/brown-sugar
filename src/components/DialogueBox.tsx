@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import type { DialogueChoice, DialogueChoiceResult, DialogueScript } from '../data/dialogues'
+import {
+  resolveDialogueAvatarUrl,
+  type DialogueChoice,
+  type DialogueChoiceResult,
+  type DialogueScript,
+} from '../data/dialogues'
 
 type DialogueBoxProps = {
   script: DialogueScript
@@ -85,14 +90,16 @@ export function DialogueBox({ script, onChoiceResult, onClose }: DialogueBoxProp
   }
 
   const showChoices = isTextRevealed && currentNode.choices && currentNode.choices.length > 0
+  const avatarImageUrl = resolveDialogueAvatarUrl(currentNode)
 
   return (
     <section className="dialogue-overlay" aria-label={script.title}>
       <article className="dialogue-box">
         <div className="dialogue-avatar" aria-hidden="true">
-          {currentNode.avatarImageUrl ? (
+          {avatarImageUrl ? (
             <img
-              src={currentNode.avatarImageUrl}
+              key={currentNode.id}
+              src={avatarImageUrl}
               alt=""
               className="dialogue-avatar-image"
               width={64}
