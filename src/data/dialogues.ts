@@ -36,7 +36,7 @@ export type DialogueNode = {
   choices?: readonly DialogueChoice[]
 }
 
-export type DialoguePortraitId = 'forestElder' | 'cityBarista'
+export type DialoguePortraitId = 'forestElder' | 'cityBarista' | 'parkTraveler'
 
 export type DialogueScript = {
   id: string
@@ -49,6 +49,10 @@ export type DialogueScript = {
 export const NPC_PORTRAIT_URLS = {
   cityBarista: new URL(
     '../../assets/characters/city-barista-portrait-v1.png',
+    import.meta.url,
+  ).href,
+  parkTraveler: new URL(
+    '../../assets/characters/park-traveler-portrait-v1.png',
     import.meta.url,
   ).href,
 } as const
@@ -82,6 +86,10 @@ export function resolveDialogueAvatarUrl(
 
   if (script?.portraitId === 'cityBarista') {
     return NPC_PORTRAIT_URLS.cityBarista
+  }
+
+  if (script?.portraitId === 'parkTraveler') {
+    return NPC_PORTRAIT_URLS.parkTraveler
   }
 
   return undefined
@@ -442,6 +450,7 @@ export const DIALOGUE_SCRIPTS = {
   cityTraveler: {
     id: 'city-traveler',
     title: '旅人',
+    portraitId: 'parkTraveler',
     startNodeId: 'city-jp-01',
     nodes: {
       'city-jp-01': {

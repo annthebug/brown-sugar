@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, BOSS_FRAMES, CITY_BARISTA_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import { ASSET_KEYS, BOSS_FRAMES, CITY_BARISTA_FRAMES, MORANDI_PALETTE, PARK_TRAVELER_FRAMES } from '../assets/assetManifest'
 import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
@@ -333,10 +333,35 @@ export class CityScene extends Phaser.Scene {
   }
 
   private placeParkTraveler() {
-    this.travelerNpc = placeCharacterSprite(this, PARK_X, GROUND_TOP, {
-      atlas: 'npc',
-      frame: NPC_FRAMES.parkTraveler,
-      label: '旅人',
+    const travelerX = PARK_X
+    const travelerY = GROUND_TOP
+
+    const container = this.add.container(travelerX, travelerY) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.parkTraveler, PARK_TRAVELER_FRAMES.sideIdle)
+    sprite.setOrigin(0.5, 1).setScale(0.44)
+
+    const label = this.add
+      .text(0, 8, '旅人', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+      .setVisible(false)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.travelerNpc = container
+
+    this.tweens.add({
+      targets: sprite,
+      y: -2,
+      duration: 1200,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
     })
   }
 
@@ -443,12 +468,15 @@ export class CityScene extends Phaser.Scene {
 
     if (!this.bossCleared && this.isNearTimeMonster()) {
       this.baristaNpc?.label.setVisible(false)
+      this.travelerNpc?.label.setVisible(false)
       promptText = '按 E 遇見時間怪物'
     } else if (this.isNearBarista()) {
       this.baristaNpc?.label.setVisible(true)
+      this.travelerNpc?.label.setVisible(false)
       promptText = '按 E 與咖啡師對話'
     } else if (this.isNearTraveler()) {
       this.baristaNpc?.label.setVisible(false)
+      this.travelerNpc?.label.setVisible(true)
       promptText = '按 E 與旅人對話'
     }
 
@@ -461,6 +489,7 @@ export class CityScene extends Phaser.Scene {
 
     this.interactPrompt.setVisible(false)
     this.baristaNpc?.label.setVisible(false)
+    this.travelerNpc?.label.setVisible(false)
   }
 
   private isNearBarista() {
