@@ -90,7 +90,17 @@ export function DialogueBox({ script, onChoiceResult, onClose }: DialogueBoxProp
     <section className="dialogue-overlay" aria-label={script.title}>
       <article className="dialogue-box">
         <div className="dialogue-avatar" aria-hidden="true">
-          {currentNode.avatarLabel}
+          {currentNode.avatarImageUrl ? (
+            <img
+              src={currentNode.avatarImageUrl}
+              alt=""
+              className="dialogue-avatar-image"
+              width={64}
+              height={64}
+            />
+          ) : (
+            currentNode.avatarLabel
+          )}
         </div>
         <div className="dialogue-content">
           <p className="dialogue-speaker">{currentNode.speakerName}</p>
