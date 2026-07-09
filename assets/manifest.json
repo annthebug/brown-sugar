@@ -343,6 +343,14 @@
         "placeholder": false,
         "purpose": "preload",
         "description": "Ending treasure chest inner pale blue glass glow layer."
+      },
+      {
+        "key": "ui-ending-black-sugar-sleep",
+        "type": "image",
+        "url": "ui/ending-black-sugar-sleep-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Ending rest scene illustration of Black Sugar sleeping on a floral rug."
       }
     ],
     "memories": [],

@@ -13,7 +13,7 @@ import {
 import { useGalleryStore } from '../stores/useGalleryStore'
 import { useGameStore } from '../stores/useGameStore'
 import { useMbtiStore } from '../stores/useMbtiStore'
-import { ENDING_CHEST_LAYER_URLS } from '../game/assets/assetManifest'
+import { ENDING_BLACK_SUGAR_SLEEP_URL, ENDING_CHEST_LAYER_URLS } from '../game/assets/assetManifest'
 
 export function EndingPage() {
   const memoryShards = useGameStore((state) => state.memoryShards)
@@ -202,16 +202,12 @@ export function EndingPage() {
 
           <section ref={sleepRef} className="ending-sleep-section" aria-label="黑糖休息中">
             <div className="ending-rest-scene">
-              <div className="ending-rest-bowl" aria-hidden="true" />
-              <div className="ending-black-sugar-sleep" aria-hidden="true">
-                <span className="sleep-ear sleep-ear--left" />
-                <span className="sleep-ear sleep-ear--right" />
-                <span className="sleep-body" />
-                <span className="sleep-tail" />
-                <span className="sleep-paw sleep-paw--left" />
-                <span className="sleep-paw sleep-paw--right" />
-                <span className="sleep-zzz">zZ</span>
-              </div>
+              <img
+                className="ending-black-sugar-sleep-art"
+                src={ENDING_BLACK_SUGAR_SLEEP_URL}
+                alt="黑糖在地毯上安穩地睡著"
+                draggable={false}
+              />
             </div>
           </section>
 
