@@ -484,6 +484,14 @@ export class SnowMountainScene extends Phaser.Scene {
     })
 
     gameEventBus.emit('chapter:snow-cleared', { scene: this.scene.key })
+
+    this.time.delayedCall(2200, () => {
+      if (!this.scene.isActive()) {
+        return
+      }
+
+      this.scene.start('GlassStudioScene')
+    })
   }
 
   private updateInteractPrompt() {
