@@ -67,7 +67,7 @@ export const DIALOGUE_SCRIPTS = {
       'forest-ei-01': {
         id: 'forest-ei-01',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '今天的小徑很柔軟。黑糖，如果森林忽然安靜下來，你會怎麼找到前行的方向呢？',
         choices: [
           mbtiChoice(
@@ -89,21 +89,21 @@ export const DIALOGUE_SCRIPTS = {
       'forest-ei-01-r1': {
         id: 'forest-ei-01-r1',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '聲音也能成為一盞小燈。森林會記得那些願意溫柔開口的貓咪。',
         nextNodeId: 'forest-ei-02',
       },
       'forest-ei-01-r2': {
         id: 'forest-ei-01-r2',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '安靜的停頓也能成為指南針。森林會記得那些先傾聽再邁步的貓咪。',
         nextNodeId: 'forest-ei-02',
       },
       'forest-ei-02': {
         id: 'forest-ei-02',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '當眼前出現一條新的小路時，你最先會怎麼做？',
         choices: [
           mbtiChoice(
@@ -125,21 +125,21 @@ export const DIALOGUE_SCRIPTS = {
       'forest-ei-02-r1': {
         id: 'forest-ei-02-r1',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '有人走過的步伐，能讓路顯得更溫暖。繼續聽見你身邊的世界吧。',
         nextNodeId: 'forest-sn-01',
       },
       'forest-ei-02-r2': {
         id: 'forest-ei-02-r2',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '按照自己的節奏也很好。森林信任懂得自己步調的貓咪。',
         nextNodeId: 'forest-sn-01',
       },
       'forest-sn-01': {
         id: 'forest-sn-01',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '一塊覆著青苔的石頭標記著路徑。你最先注意到什麼呢？',
         choices: [
           mbtiChoice(
@@ -161,21 +161,21 @@ export const DIALOGUE_SCRIPTS = {
       'forest-sn-01-r1': {
         id: 'forest-sn-01-r1',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '小小的細節裡，也能藏著完整的地圖。你很會看見眼前真實存在的事物。',
         nextNodeId: 'forest-sn-02',
       },
       'forest-sn-01-r2': {
         id: 'forest-sn-01-r2',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '故事常常住在安靜的地方。你能感受到石頭記得的那些片刻。',
         nextNodeId: 'forest-sn-02',
       },
       'forest-sn-02': {
         id: 'forest-sn-02',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '長者攤開兩顆漿果。你的第一個念頭會是什麼？',
         choices: [
           mbtiChoice(
@@ -197,21 +197,21 @@ export const DIALOGUE_SCRIPTS = {
       'forest-sn-02-r1': {
         id: 'forest-sn-02-r1',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '你會先留意真實存在的樣子，再去想像更多。這會讓腳步更安心。',
         nextNodeId: 'forest-sn-03',
       },
       'forest-sn-02-r2': {
         id: 'forest-sn-02-r2',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '你總能很快感受到其中的意義。森林很喜歡這樣柔軟的心。',
         nextNodeId: 'forest-sn-03',
       },
       'forest-sn-03': {
         id: 'forest-sn-03',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '雨水讓前方的腳印變得模糊柔軟。你會怎麼讀懂它們呢？',
         choices: [
           mbtiChoice(
@@ -233,21 +233,21 @@ export const DIALOGUE_SCRIPTS = {
       'forest-sn-03-r1': {
         id: 'forest-sn-03-r1',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '當路徑不太明朗時，清楚的事實也能是一種溫柔。',
         nextNodeId: 'farewell',
       },
       'forest-sn-03-r2': {
         id: 'forest-sn-03-r2',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '當路徑不太明朗時，留給可能性的空間也能是一種溫柔。',
         nextNodeId: 'farewell',
       },
       farewell: {
         id: 'farewell',
         speakerName: '森林長者',
-        avatarLabel: 'FE',
+        avatarLabel: '森',
         text: '把這句話帶著走吧。不是每個真實的答案，都需要很大聲。',
       },
     },
@@ -260,7 +260,7 @@ export const DIALOGUE_SCRIPTS = {
       'city-tf-01': {
         id: 'city-tf-01',
         speakerName: '咖啡師',
-        avatarLabel: 'BR',
+        avatarLabel: '咖',
         text: '最後一班列車剛離開，朋友還站在月台上等著。你會先說什麼呢？',
         choices: [
           mbtiChoice(
@@ -282,21 +282,21 @@ export const DIALOGUE_SCRIPTS = {
       'city-tf-01-r1': {
         id: 'city-tf-01-r1',
         speakerName: '咖啡師',
-        avatarLabel: 'BR',
+        avatarLabel: '咖',
         text: '清楚的安排，能讓忙碌的街道也安靜一點。',
         nextNodeId: 'city-tf-02',
       },
       'city-tf-01-r2': {
         id: 'city-tf-01-r2',
         speakerName: '咖啡師',
-        avatarLabel: 'BR',
+        avatarLabel: '咖',
         text: '溫暖的話語，能讓忙碌的街道也安靜一點。',
         nextNodeId: 'city-tf-02',
       },
       'city-tf-02': {
         id: 'city-tf-02',
         speakerName: '咖啡師',
-        avatarLabel: 'BR',
+        avatarLabel: '咖',
         text: '眼前有兩個都行得通的方案，你會怎麼選呢？',
         choices: [
           mbtiChoice(
@@ -318,21 +318,21 @@ export const DIALOGUE_SCRIPTS = {
       'city-tf-02-r1': {
         id: 'city-tf-02-r1',
         speakerName: '咖啡師',
-        avatarLabel: 'BR',
+        avatarLabel: '咖',
         text: '在城市裡，效率本身也有它溫柔的一面。',
         nextNodeId: 'city-tf-03',
       },
       'city-tf-02-r2': {
         id: 'city-tf-02-r2',
         speakerName: '咖啡師',
-        avatarLabel: 'BR',
+        avatarLabel: '咖',
         text: '在城市裡，體貼本身也有它細膩的智慧。',
         nextNodeId: 'city-tf-03',
       },
       'city-tf-03': {
         id: 'city-tf-03',
         speakerName: '咖啡師',
-        avatarLabel: 'BR',
+        avatarLabel: '咖',
         text: '深夜收到一則訊息時，什麼對你來說更重要呢？',
         choices: [
           mbtiChoice(
@@ -354,21 +354,21 @@ export const DIALOGUE_SCRIPTS = {
       'city-tf-03-r1': {
         id: 'city-tf-03-r1',
         speakerName: '咖啡師',
-        avatarLabel: 'BR',
+        avatarLabel: '咖',
         text: '真誠本身，也能是一種安靜的安慰。',
         nextNodeId: 'city-barista-farewell',
       },
       'city-tf-03-r2': {
         id: 'city-tf-03-r2',
         speakerName: '咖啡師',
-        avatarLabel: 'BR',
+        avatarLabel: '咖',
         text: '溫度本身，也能是一種安靜的安慰。',
         nextNodeId: 'city-barista-farewell',
       },
       'city-barista-farewell': {
         id: 'city-barista-farewell',
         speakerName: '咖啡師',
-        avatarLabel: 'BR',
+        avatarLabel: '咖',
         text: '距離會把時間拉長，但一杯飲品裡，依然可以裝下你們彼此的想念。',
       },
     },
@@ -381,7 +381,7 @@ export const DIALOGUE_SCRIPTS = {
       'city-jp-01': {
         id: 'city-jp-01',
         speakerName: '旅人',
-        avatarLabel: 'TR',
+        avatarLabel: '旅',
         text: '午後忽然多出一段自由時間，你覺得怎樣最剛好呢？',
         choices: [
           mbtiChoice(
@@ -403,21 +403,21 @@ export const DIALOGUE_SCRIPTS = {
       'city-jp-01-r1': {
         id: 'city-jp-01-r1',
         speakerName: '旅人',
-        avatarLabel: 'TR',
+        avatarLabel: '旅',
         text: '有條理的小清單，會讓空下來的一小時顯得很充裕。',
         nextNodeId: 'city-jp-02',
       },
       'city-jp-01-r2': {
         id: 'city-jp-01-r2',
         speakerName: '旅人',
-        avatarLabel: 'TR',
+        avatarLabel: '旅',
         text: '隨意漫遊的一小時，本身就像一份禮物。',
         nextNodeId: 'city-jp-02',
       },
       'city-jp-02': {
         id: 'city-jp-02',
         speakerName: '旅人',
-        avatarLabel: 'TR',
+        avatarLabel: '旅',
         text: '一家舒服的小咖啡館裡只剩一個空位，你會怎麼決定呢？',
         choices: [
           mbtiChoice(
@@ -439,21 +439,21 @@ export const DIALOGUE_SCRIPTS = {
       'city-jp-02-r1': {
         id: 'city-jp-02-r1',
         speakerName: '旅人',
-        avatarLabel: 'TR',
+        avatarLabel: '旅',
         text: '早一點做決定，會留下更多餘裕去好好享受這一杯。',
         nextNodeId: 'city-traveler-farewell',
       },
       'city-jp-02-r2': {
         id: 'city-jp-02-r2',
         speakerName: '旅人',
-        avatarLabel: 'TR',
+        avatarLabel: '旅',
         text: '替當下留一點空白，會讓這一杯的味道更柔和。',
         nextNodeId: 'city-traveler-farewell',
       },
       'city-traveler-farewell': {
         id: 'city-traveler-farewell',
         speakerName: '旅人',
-        avatarLabel: 'TR',
+        avatarLabel: '旅',
         text: '有些路不會畫在地圖上，但依然很值得走一趟。',
       },
     },
@@ -466,21 +466,21 @@ export const DIALOGUE_SCRIPTS = {
       'time-intro': {
         id: 'time-intro',
         speakerName: '時間怪物',
-        avatarLabel: 'TM',
+        avatarLabel: '時',
         text: '你一路追著我跑過月台。別害怕，我不是來嚇你的。我只是兩個地方之間，被拉長的那些時光。',
         nextNodeId: 'time-wait',
       },
       'time-wait': {
         id: 'time-wait',
         speakerName: '時間怪物',
-        avatarLabel: 'TM',
+        avatarLabel: '時',
         text: '當在意的人離得很遠時，等待總會顯得有些沉重。我也一直背著那份重量。',
         nextNodeId: 'time-choice',
       },
       'time-choice': {
         id: 'time-choice',
         speakerName: '黑糖',
-        avatarLabel: 'BS',
+        avatarLabel: '糖',
         text: '你想對這段等待說些什麼呢？',
         choices: [
           {
@@ -500,14 +500,14 @@ export const DIALOGUE_SCRIPTS = {
       'time-understand': {
         id: 'time-understand',
         speakerName: '時間怪物',
-        avatarLabel: 'TM',
+        avatarLabel: '時',
         text: '這樣一來，我就不必再那麼龐大了。我也許可以變成一座橋。',
         nextNodeId: 'time-farewell',
       },
       'time-farewell': {
         id: 'time-farewell',
         speakerName: '時間怪物',
-        avatarLabel: 'TM',
+        avatarLabel: '時',
         text: '繼續往前吧，小貓。等你抵達之前，城市會替你把位置暖著。',
       },
     },
@@ -520,7 +520,7 @@ export const DIALOGUE_SCRIPTS = {
       'city-tf-01': {
         id: 'city-tf-01',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '如果朋友錯過了最後一班電車，你會先說什麼呢？',
         choices: [
           mbtiChoice(
@@ -542,21 +542,21 @@ export const DIALOGUE_SCRIPTS = {
       'city-tf-01-r1': {
         id: 'city-tf-01-r1',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '清楚的安排，能讓忙碌的街道也安靜一點。',
         nextNodeId: 'city-tf-02',
       },
       'city-tf-01-r2': {
         id: 'city-tf-01-r2',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '溫暖的話語，能讓忙碌的街道也安靜一點。',
         nextNodeId: 'city-tf-02',
       },
       'city-tf-02': {
         id: 'city-tf-02',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '眼前有兩個都行得通的方案，你會怎麼選呢？',
         choices: [
           mbtiChoice(
@@ -578,21 +578,21 @@ export const DIALOGUE_SCRIPTS = {
       'city-tf-02-r1': {
         id: 'city-tf-02-r1',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '在城市裡，效率本身也有它溫柔的一面。',
         nextNodeId: 'city-jp-01',
       },
       'city-tf-02-r2': {
         id: 'city-tf-02-r2',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '在城市裡，體貼本身也有它細膩的智慧。',
         nextNodeId: 'city-jp-01',
       },
       'city-jp-01': {
         id: 'city-jp-01',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '午後忽然多出一段自由時間，你覺得怎樣最剛好呢？',
         choices: [
           mbtiChoice(
@@ -614,21 +614,21 @@ export const DIALOGUE_SCRIPTS = {
       'city-jp-01-r1': {
         id: 'city-jp-01-r1',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '有條理的小清單，會讓空下來的一小時顯得很充裕。',
         nextNodeId: 'city-jp-02',
       },
       'city-jp-01-r2': {
         id: 'city-jp-01-r2',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '隨意漫遊的一小時，本身就像一份禮物。',
         nextNodeId: 'city-jp-02',
       },
       'city-jp-02': {
         id: 'city-jp-02',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '一家舒服的小咖啡館裡只剩一個空位，你會怎麼決定呢？',
         choices: [
           mbtiChoice(
@@ -650,21 +650,21 @@ export const DIALOGUE_SCRIPTS = {
       'city-jp-02-r1': {
         id: 'city-jp-02-r1',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '早一點做決定，會留下更多餘裕去好好享受這一杯。',
         nextNodeId: 'city-farewell',
       },
       'city-jp-02-r2': {
         id: 'city-jp-02-r2',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '替當下留一點空白，會讓這一杯的味道更柔和。',
         nextNodeId: 'city-farewell',
       },
       'city-farewell': {
         id: 'city-farewell',
         speakerName: '城市嚮導',
-        avatarLabel: 'CG',
+        avatarLabel: '城',
         text: '城市走得很快，但你的步伐依然可以保持溫柔。',
       },
     },
@@ -677,7 +677,7 @@ export const DIALOGUE_SCRIPTS = {
       'snow-sn-01': {
         id: 'snow-sn-01',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '白雪蓋住了舊有的腳印。這時候，你會相信什麼呢？',
         choices: [
           mbtiChoice(
@@ -699,21 +699,21 @@ export const DIALOGUE_SCRIPTS = {
       'snow-sn-01-r1': {
         id: 'snow-sn-01-r1',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '那些還看得見的痕跡，能替冰冷的腳步帶路。',
         nextNodeId: 'snow-sn-02',
       },
       'snow-sn-01-r2': {
         id: 'snow-sn-01-r2',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '那些心裡感受到的東西，也能替冰冷的腳步帶路。',
         nextNodeId: 'snow-sn-02',
       },
       'snow-sn-02': {
         id: 'snow-sn-02',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '山風悄悄改變了雪堆的形狀。你會注意到什麼呢？',
         choices: [
           mbtiChoice(
@@ -735,21 +735,21 @@ export const DIALOGUE_SCRIPTS = {
       'snow-sn-02-r1': {
         id: 'snow-sn-02-r1',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '你會從山真正展現出的樣子裡讀懂它。',
         nextNodeId: 'snow-ei-01',
       },
       'snow-sn-02-r2': {
         id: 'snow-sn-02-r2',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '你會從山帶出的氣息與暗示裡讀懂它。',
         nextNodeId: 'snow-ei-01',
       },
       'snow-ei-01': {
         id: 'snow-ei-01',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '遠方亮著一盞小燈。你會怎麼做呢？',
         choices: [
           mbtiChoice(
@@ -771,21 +771,21 @@ export const DIALOGUE_SCRIPTS = {
       'snow-ei-01-r1': {
         id: 'snow-ei-01-r1',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '小小的聲音，也能越過這片廣闊的白雪。',
         nextNodeId: 'snow-ei-02',
       },
       'snow-ei-01-r2': {
         id: 'snow-ei-01-r2',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '小小的停頓，也能越過這片廣闊的白雪。',
         nextNodeId: 'snow-ei-02',
       },
       'snow-ei-02': {
         id: 'snow-ei-02',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '山中的小屋暖暖的。你會選擇坐在哪裡呢？',
         choices: [
           mbtiChoice(
@@ -807,21 +807,21 @@ export const DIALOGUE_SCRIPTS = {
       'snow-ei-02-r1': {
         id: 'snow-ei-02-r1',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '被分享出去的溫暖，會慢慢長大。',
         nextNodeId: 'snow-farewell',
       },
       'snow-ei-02-r2': {
         id: 'snow-ei-02-r2',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '被安靜照料著的溫暖，也會慢慢長大。',
         nextNodeId: 'snow-farewell',
       },
       'snow-farewell': {
         id: 'snow-farewell',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '雪會記得每一步輕輕走過的痕跡。',
       },
     },
@@ -834,21 +834,21 @@ export const DIALOGUE_SCRIPTS = {
       'snow-boss-intro': {
         id: 'snow-boss-intro',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '你追著那道光，穿過一片片雪地。這座山收著許多離家很遠的旅程。',
         nextNodeId: 'snow-boss-travel',
       },
       'snow-boss-travel': {
         id: 'snow-boss-travel',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '有些路會有點冷，可是只要一起走，距離就會變得柔和一些。',
         nextNodeId: 'snow-boss-choice',
       },
       'snow-boss-choice': {
         id: 'snow-boss-choice',
         speakerName: '黑糖',
-        avatarLabel: 'BS',
+        avatarLabel: '糖',
         text: '你想從這片遙遠的雪裡，帶走什麼呢？',
         choices: [
           {
@@ -868,14 +868,14 @@ export const DIALOGUE_SCRIPTS = {
       'snow-boss-understand': {
         id: 'snow-boss-understand',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '那麼，這座山就不是阻擋你的高牆，而是你一直沒有停下來的證明。',
         nextNodeId: 'snow-boss-farewell',
       },
       'snow-boss-farewell': {
         id: 'snow-boss-farewell',
         speakerName: '雪靈',
-        avatarLabel: 'SS',
+        avatarLabel: '雪',
         text: '把這份安靜帶著走吧。下一座山谷已經在等你了。',
       },
     },
@@ -888,7 +888,7 @@ export const DIALOGUE_SCRIPTS = {
       'glass-tf-01': {
         id: 'glass-tf-01',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '一只碗出現了一道細細的小裂痕。對你來說，最重要的是什麼呢？',
         choices: [
           mbtiChoice(
@@ -910,21 +910,21 @@ export const DIALOGUE_SCRIPTS = {
       'glass-tf-01-r1': {
         id: 'glass-tf-01-r1',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '實用與在乎，可以同時住在同一口呼吸裡。',
         nextNodeId: 'glass-tf-02',
       },
       'glass-tf-01-r2': {
         id: 'glass-tf-01-r2',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '意義與在乎，可以同時住在同一口呼吸裡。',
         nextNodeId: 'glass-tf-02',
       },
       'glass-tf-02': {
         id: 'glass-tf-02',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '有兩種釉色都能完成這只碗，你會怎麼決定呢？',
         choices: [
           mbtiChoice(
@@ -946,21 +946,21 @@ export const DIALOGUE_SCRIPTS = {
       'glass-tf-02-r1': {
         id: 'glass-tf-02-r1',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '清澈本身，也能是一種溫柔。',
         nextNodeId: 'glass-jp-01',
       },
       'glass-tf-02-r2': {
         id: 'glass-tf-02-r2',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '回憶本身，也能是一種溫柔。',
         nextNodeId: 'glass-jp-01',
       },
       'glass-jp-01': {
         id: 'glass-jp-01',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '窯燒的時程忽然改變了。你會怎麼回應呢？',
         choices: [
           mbtiChoice(
@@ -982,21 +982,21 @@ export const DIALOGUE_SCRIPTS = {
       'glass-jp-01-r1': {
         id: 'glass-jp-01-r1',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '有條理的安排，能保護脆弱而珍貴的作品。',
         nextNodeId: 'glass-jp-02',
       },
       'glass-jp-01-r2': {
         id: 'glass-jp-01-r2',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '保有彈性，也能保護脆弱而珍貴的作品。',
         nextNodeId: 'glass-jp-02',
       },
       'glass-jp-02': {
         id: 'glass-jp-02',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '玻璃上浮現了新的紋路。你會怎麼做呢？',
         choices: [
           mbtiChoice(
@@ -1018,21 +1018,21 @@ export const DIALOGUE_SCRIPTS = {
       'glass-jp-02-r1': {
         id: 'glass-jp-02-r1',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '穩穩的專注，能把驚喜慢慢磨成美麗的樣子。',
         nextNodeId: 'glass-farewell',
       },
       'glass-jp-02-r2': {
         id: 'glass-jp-02-r2',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '好奇心，能把驚喜慢慢磨成美麗的樣子。',
         nextNodeId: 'glass-farewell',
       },
       'glass-farewell': {
         id: 'glass-farewell',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '每一只碗都會一路學習，直到它準備好被誰遇見。',
       },
     },
@@ -1045,21 +1045,21 @@ export const DIALOGUE_SCRIPTS = {
       'glass-boss-intro': {
         id: 'glass-boss-intro',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '你讓呼吸穩了下來。那團熔融的玻璃，正安靜地聽著你。',
         nextNodeId: 'glass-boss-shape',
       },
       'glass-boss-shape': {
         id: 'glass-boss-shape',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '一只碗不只是形狀而已。它也是你在塑形時，心裡帶著的那份耐心。',
         nextNodeId: 'glass-boss-choice',
       },
       'glass-boss-choice': {
         id: 'glass-boss-choice',
         speakerName: '黑糖',
-        avatarLabel: 'BS',
+        avatarLabel: '糖',
         text: '在玻璃慢慢冷卻的時候，我該握住什麼呢？',
         choices: [
           {
@@ -1079,14 +1079,14 @@ export const DIALOGUE_SCRIPTS = {
       'glass-boss-understand': {
         id: 'glass-boss-understand',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '那就先把這第一只碗收下吧。它或許還不像記憶中的模樣，但它會陪你慢慢學會更多。',
         nextNodeId: 'glass-boss-farewell',
       },
       'glass-boss-farewell': {
         id: 'glass-boss-farewell',
         speakerName: '玻璃師傅',
-        avatarLabel: 'GM',
+        avatarLabel: '玻',
         text: '等你準備好了，我們再一起試一次。',
       },
     },
@@ -1099,7 +1099,7 @@ export const DIALOGUE_SCRIPTS = {
       'final-tf-01': {
         id: 'final-tf-01',
         speakerName: '內在嚮導',
-        avatarLabel: 'IG',
+        avatarLabel: '心',
         text: '你已經快要找回那只碗了。是什麼讓你的腳步穩下來呢？',
         choices: [
           mbtiChoice(
@@ -1121,21 +1121,21 @@ export const DIALOGUE_SCRIPTS = {
       'final-tf-01-r1': {
         id: 'final-tf-01-r1',
         speakerName: '內在嚮導',
-        avatarLabel: 'IG',
+        avatarLabel: '心',
         text: '認真而細心的努力，會慢慢長成安靜的勇氣。',
         nextNodeId: 'final-jp-01',
       },
       'final-tf-01-r2': {
         id: 'final-tf-01-r2',
         speakerName: '內在嚮導',
-        avatarLabel: 'IG',
+        avatarLabel: '心',
         text: '柔和而緩慢的成長，會慢慢長成安靜的勇氣。',
         nextNodeId: 'final-jp-01',
       },
       'final-jp-01': {
         id: 'final-jp-01',
         speakerName: '內在嚮導',
-        avatarLabel: 'IG',
+        avatarLabel: '心',
         text: '最後一段路分成了兩個方向。你會怎麼繼續往前呢？',
         choices: [
           mbtiChoice(
@@ -1157,21 +1157,21 @@ export const DIALOGUE_SCRIPTS = {
       'final-jp-01-r1': {
         id: 'final-jp-01-r1',
         speakerName: '內在嚮導',
-        avatarLabel: 'IG',
+        avatarLabel: '心',
         text: '堅定地走下去，會讓結尾顯得更完整。',
         nextNodeId: 'final-ei-01',
       },
       'final-jp-01-r2': {
         id: 'final-jp-01-r2',
         speakerName: '內在嚮導',
-        avatarLabel: 'IG',
+        avatarLabel: '心',
         text: '保有開放的心，也會讓結尾顯得更完整。',
         nextNodeId: 'final-ei-01',
       },
       'final-ei-01': {
         id: 'final-ei-01',
         speakerName: '內在嚮導',
-        avatarLabel: 'IG',
+        avatarLabel: '心',
         text: '在那只碗回到你身邊之前，你想讓誰陪著你呢？',
         choices: [
           mbtiChoice(
@@ -1193,21 +1193,21 @@ export const DIALOGUE_SCRIPTS = {
       'final-ei-01-r1': {
         id: 'final-ei-01-r1',
         speakerName: '內在嚮導',
-        avatarLabel: 'IG',
+        avatarLabel: '心',
         text: '能與人分享的喜悅，會讓一段旅程真正圓滿。',
         nextNodeId: 'final-farewell',
       },
       'final-ei-01-r2': {
         id: 'final-ei-01-r2',
         speakerName: '內在嚮導',
-        avatarLabel: 'IG',
+        avatarLabel: '心',
         text: '安靜留給自己的喜悅，也能讓一段旅程真正圓滿。',
         nextNodeId: 'final-farewell',
       },
       'final-farewell': {
         id: 'final-farewell',
         speakerName: '內在嚮導',
-        avatarLabel: 'IG',
+        avatarLabel: '心',
         text: '那只碗從來不只是玻璃。它一直都是你心裡模樣的輪廓。',
       },
     },
@@ -1220,21 +1220,21 @@ export const DIALOGUE_SCRIPTS = {
       'doubt-intro': {
         id: 'doubt-intro',
         speakerName: '內在懷疑',
-        avatarLabel: 'ID',
+        avatarLabel: '疑',
         text: '你又把一切重新拾起來了。你真的相信，這一次的碗會有什麼不同嗎？',
         nextNodeId: 'doubt-round-1',
       },
       'doubt-round-1': {
         id: 'doubt-round-1',
         speakerName: '內在懷疑',
-        avatarLabel: 'ID',
+        avatarLabel: '疑',
         text: '上一次的碗口還搖搖晃晃的。要是你只是再次重複同樣的失誤呢？',
         nextNodeId: 'doubt-round-2',
       },
       'doubt-round-2': {
         id: 'doubt-round-2',
         speakerName: '黑糖',
-        avatarLabel: 'BS',
+        avatarLabel: '糖',
         text: '這份懷疑好沉重。我該怎麼溫柔地回應它呢？',
         choices: [
           {
@@ -1252,14 +1252,14 @@ export const DIALOGUE_SCRIPTS = {
       'doubt-round-3': {
         id: 'doubt-round-3',
         speakerName: '內在懷疑',
-        avatarLabel: 'ID',
+        avatarLabel: '疑',
         text: '當下很柔軟。可柔軟的東西，總像是很容易碎掉。',
         nextNodeId: 'doubt-choice',
       },
       'doubt-choice': {
         id: 'doubt-choice',
         speakerName: '黑糖',
-        avatarLabel: 'BS',
+        avatarLabel: '糖',
         text: '在玻璃慢慢冷卻的時候，我想相信什麼呢？',
         choices: [
           {
@@ -1279,14 +1279,14 @@ export const DIALOGUE_SCRIPTS = {
       'doubt-understand': {
         id: 'doubt-understand',
         speakerName: '內在懷疑',
-        avatarLabel: 'ID',
+        avatarLabel: '疑',
         text: '那麼，我就先退到一旁吧。這只碗可以照著你的時間慢慢完成。',
         nextNodeId: 'doubt-farewell',
       },
       'doubt-farewell': {
         id: 'doubt-farewell',
         speakerName: '內在懷疑',
-        avatarLabel: 'ID',
+        avatarLabel: '疑',
         text: '繼續走下去吧。真正的輪廓，其實已經在慢慢成形了。',
       },
     },
@@ -1299,28 +1299,28 @@ export const DIALOGUE_SCRIPTS = {
       'perfectionism-intro': {
         id: 'perfectionism-intro',
         speakerName: '完美主義',
-        avatarLabel: 'PF',
+        avatarLabel: '完',
         text: '還不夠好。',
         nextNodeId: 'perfectionism-round-1',
       },
       'perfectionism-round-1': {
         id: 'perfectionism-round-1',
         speakerName: '完美主義',
-        avatarLabel: 'PF',
+        avatarLabel: '完',
         text: '再來一次。',
         nextNodeId: 'perfectionism-round-2',
       },
       'perfectionism-round-2': {
         id: 'perfectionism-round-2',
         speakerName: '完美主義',
-        avatarLabel: 'PF',
+        avatarLabel: '完',
         text: '再一次。',
         nextNodeId: 'perfectionism-choice-1',
       },
       'perfectionism-choice-1': {
         id: 'perfectionism-choice-1',
         speakerName: '黑糖',
-        avatarLabel: 'BS',
+        avatarLabel: '糖',
         text: '我聽見你了。可是我不需要把自己困在沒有盡頭的反覆嘗試裡。',
         choices: [
           {
@@ -1338,14 +1338,14 @@ export const DIALOGUE_SCRIPTS = {
       'perfectionism-soften': {
         id: 'perfectionism-soften',
         speakerName: '完美主義',
-        avatarLabel: 'PF',
+        avatarLabel: '完',
         text: '如果你停下來了……還會剩下什麼？',
         nextNodeId: 'perfectionism-choice-2',
       },
       'perfectionism-choice-2': {
         id: 'perfectionism-choice-2',
         speakerName: '黑糖',
-        avatarLabel: 'BS',
+        avatarLabel: '糖',
         text: '當那些壓力終於安靜下來之後，還會留下什麼呢？',
         choices: [
           {
@@ -1365,14 +1365,14 @@ export const DIALOGUE_SCRIPTS = {
       'perfectionism-understand': {
         id: 'perfectionism-understand',
         speakerName: '完美主義',
-        avatarLabel: 'PF',
+        avatarLabel: '完',
         text: '那麼，我也不需要再一直大聲催促了。',
         nextNodeId: 'perfectionism-farewell',
       },
       'perfectionism-farewell': {
         id: 'perfectionism-farewell',
         speakerName: '完美主義',
-        avatarLabel: 'PF',
+        avatarLabel: '完',
         text: '讓這份禮物，就這樣已經足夠。',
       },
     },
