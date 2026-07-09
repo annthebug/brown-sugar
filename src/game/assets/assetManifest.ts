@@ -16,6 +16,8 @@ import innerGuideTextureUrl from '../../../assets/characters/inner-guide-side-sp
 import innerGuideAtlasUrl from '../../../assets/characters/inner-guide-side-sprite-sheet-v1.json?url'
 import giantCanTextureUrl from '../../../assets/characters/giant-can-sprite-sheet-v1.png'
 import giantCanAtlasUrl from '../../../assets/characters/giant-can-sprite-sheet-v1.json?url'
+import timeMonsterTextureUrl from '../../../assets/characters/time-monster-sprite-sheet-v1.png'
+import timeMonsterAtlasUrl from '../../../assets/characters/time-monster-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -34,6 +36,7 @@ export const ASSET_KEYS = {
   glassMaster: 'glass-master',
   innerGuide: 'inner-guide',
   giantCan: 'giant-can',
+  timeMonster: 'time-monster',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -122,6 +125,13 @@ export const GIANT_CAN_FRAMES = {
   pulse1: 'giant-can-pulse-1',
   pulse2: 'giant-can-pulse-2',
   pulse3: 'giant-can-pulse-3',
+} as const
+
+export const TIME_MONSTER_FRAMES = {
+  idle: 'time-monster-idle',
+  pulse1: 'time-monster-pulse-1',
+  pulse2: 'time-monster-pulse-2',
+  pulse3: 'time-monster-pulse-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -295,6 +305,17 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: giantCanTextureUrl,
       atlasUrl: giantCanAtlasUrl,
       frames: Object.values(GIANT_CAN_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.timeMonster,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Time Monster City boss atlas (idle + 3-frame pendulum sway / tick glow).',
+      textureUrl: timeMonsterTextureUrl,
+      atlasUrl: timeMonsterAtlasUrl,
+      frames: Object.values(TIME_MONSTER_FRAMES),
     },
     {
       kind: 'atlas',

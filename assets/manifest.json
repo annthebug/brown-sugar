@@ -201,6 +201,21 @@
         ]
       },
       {
+        "key": "time-monster",
+        "type": "atlas",
+        "texture": "characters/time-monster-sprite-sheet-v1.png",
+        "atlas": "characters/time-monster-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Time Monster City boss atlas (idle + 3-frame pendulum sway / tick glow).",
+        "frames": [
+          "time-monster-idle",
+          "time-monster-pulse-1",
+          "time-monster-pulse-2",
+          "time-monster-pulse-3"
+        ]
+      },
+      {
         "key": "boss-characters",
         "type": "atlas",
         "texture": "characters/boss-sprite-sheet-v1.png",
