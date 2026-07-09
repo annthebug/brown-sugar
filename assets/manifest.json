@@ -261,6 +261,21 @@
         ]
       },
       {
+        "key": "perfectionism",
+        "type": "atlas",
+        "texture": "characters/perfectionism-sprite-sheet-v1.png",
+        "atlas": "characters/perfectionism-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Perfectionism Final boss atlas (idle + 3-frame paper drift / mist pulse, mask spirit).",
+        "frames": [
+          "perfectionism-idle",
+          "perfectionism-pulse-1",
+          "perfectionism-pulse-2",
+          "perfectionism-pulse-3"
+        ]
+      },
+      {
         "key": "boss-characters",
         "type": "atlas",
         "texture": "characters/boss-sprite-sheet-v1.png",

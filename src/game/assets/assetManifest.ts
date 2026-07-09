@@ -24,6 +24,8 @@ import glassMasterBossTextureUrl from '../../../assets/characters/glass-master-b
 import glassMasterBossAtlasUrl from '../../../assets/characters/glass-master-boss-sprite-sheet-v1.json?url'
 import innerDoubtTextureUrl from '../../../assets/characters/inner-doubt-sprite-sheet-v1.png'
 import innerDoubtAtlasUrl from '../../../assets/characters/inner-doubt-sprite-sheet-v1.json?url'
+import perfectionismTextureUrl from '../../../assets/characters/perfectionism-sprite-sheet-v1.png'
+import perfectionismAtlasUrl from '../../../assets/characters/perfectionism-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -46,6 +48,7 @@ export const ASSET_KEYS = {
   snowSpirit: 'snow-spirit',
   glassMasterBoss: 'glass-master-boss',
   innerDoubt: 'inner-doubt',
+  perfectionism: 'perfectionism',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -162,6 +165,13 @@ export const INNER_DOUBT_FRAMES = {
   pulse1: 'inner-doubt-pulse-1',
   pulse2: 'inner-doubt-pulse-2',
   pulse3: 'inner-doubt-pulse-3',
+} as const
+
+export const PERFECTIONISM_FRAMES = {
+  idle: 'perfectionism-idle',
+  pulse1: 'perfectionism-pulse-1',
+  pulse2: 'perfectionism-pulse-2',
+  pulse3: 'perfectionism-pulse-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -379,6 +389,17 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: innerDoubtTextureUrl,
       atlasUrl: innerDoubtAtlasUrl,
       frames: Object.values(INNER_DOUBT_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.perfectionism,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Perfectionism Final boss atlas (idle + 3-frame paper drift / mist pulse, mask spirit).',
+      textureUrl: perfectionismTextureUrl,
+      atlasUrl: perfectionismAtlasUrl,
+      frames: Object.values(PERFECTIONISM_FRAMES),
     },
     {
       kind: 'atlas',
