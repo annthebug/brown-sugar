@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title>Quest for the Perfect Bowl icon</title>
+  <desc>A gentle pixel bowl beneath a pale blue sky.</desc>
+  <rect width="512" height="512" rx="112" fill="#d8edf4" />
+  <circle cx="138" cy="122" r="36" fill="#f8fbf9" opacity="0.95" />
+  <circle cx="226" cy="102" r="26" fill="#f8fbf9" opacity="0.78" />
+  <circle cx="324" cy="136" r="32" fill="#f8fbf9" opacity="0.86" />
+  <rect x="120" y="246" width="272" height="42" rx="21" fill="#8fb2bf" />
+  <path
+    d="M142 266c0 70 51 126 114 126s114-56 114-126"
+    fill="#f4eadc"
+    stroke="#6f8a94"
+    stroke-width="22"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <circle cx="256" cy="292" r="30" fill="#b7c9bd" />
+  <path d="M228 292h56" stroke="#50676f" stroke-width="16" stroke-linecap="round" />
+  <path d="M256 264v56" stroke="#50676f" stroke-width="16" stroke-linecap="round" />
+</svg>

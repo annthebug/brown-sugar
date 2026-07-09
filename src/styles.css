@@ -152,6 +152,30 @@ h1 {
   line-height: 1.8;
 }
 
+.pwa-install-panel {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 30rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border: 2px solid rgba(111, 138, 148, 0.22);
+  border-radius: 22px;
+  background: rgba(223, 233, 226, 0.66);
+}
+
+.pwa-install-panel strong {
+  color: #385867;
+}
+
+.pwa-install-panel span {
+  color: #50676f;
+  line-height: 1.6;
+}
+
+.pwa-install-panel button {
+  justify-self: start;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;

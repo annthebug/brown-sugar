@@ -2,6 +2,7 @@ import { AchievementPanel } from '../components/AchievementPanel'
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
 import { getGameRouteForChapter, hasContinuableProgress } from '../data/chapters'
+import { usePwaInstall } from '../services/pwa'
 import { useAchievementStore } from '../stores/useAchievementStore'
 import { useGameStore } from '../stores/useGameStore'
 
@@ -17,6 +18,7 @@ export function HomePage() {
   const totalMemoryShards = useGameStore((state) => state.totalMemoryShards)
   const forestChapterCleared = useGameStore((state) => state.forestChapterCleared)
   const unlockedAchievementIds = useAchievementStore((state) => state.unlockedIds)
+  const { canInstall, isInstalled, install } = usePwaInstall()
   const canContinue = hasContinuableProgress({
     currentChapter,
     memoryShards,
@@ -50,6 +52,30 @@ export function HomePage() {
           <Link to="/settings" className="secondary-action">
             Settings
           </Link>
+        </div>
+        <div className="pwa-install-panel" aria-label="Install game">
+          <p className="panel-label">PWA</p>
+          <strong>{isInstalled ? 'Installed on this device' : 'Install to your home screen'}</strong>
+          <span>
+            {isInstalled
+              ? 'Launch the journey like an app, even when the network is quiet.'
+              : 'Save the game as a standalone app and keep core assets ready for offline launch.'}
+          </span>
+          {canInstall ? (
+            <button
+              type="button"
+              className="secondary-action"
+              onClick={() => {
+                void install()
+              }}
+            >
+              Install App
+            </button>
+          ) : (
+            <button type="button" className="secondary-action" disabled>
+              {isInstalled ? 'Installed' : 'Install available on supported devices'}
+            </button>
+          )}
         </div>
       </section>
 
