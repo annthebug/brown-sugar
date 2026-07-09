@@ -446,6 +446,14 @@ export class CityScene extends Phaser.Scene {
     })
 
     gameEventBus.emit('chapter:city-cleared', { scene: this.scene.key })
+
+    this.time.delayedCall(2200, () => {
+      if (!this.scene.isActive()) {
+        return
+      }
+
+      this.scene.start('SnowMountainScene')
+    })
   }
 
   private updateInteractPrompt() {

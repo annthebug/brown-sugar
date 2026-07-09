@@ -8,7 +8,7 @@ export type DialogueChoiceResult =
     }
   | {
       kind: 'story'
-      trigger: 'time-monster-understood'
+      trigger: 'time-monster-understood' | 'snow-spirit-understood'
     }
 
 export type DialogueChoice = {
@@ -818,6 +818,60 @@ export const DIALOGUE_SCRIPTS = {
         speakerName: 'Snow Spirit',
         avatarLabel: 'SS',
         text: 'The snow remembers every gentle step.',
+      },
+    },
+  },
+  snowSpiritBoss: {
+    id: 'snow-spirit-boss',
+    title: 'Snow Spirit',
+    startNodeId: 'snow-boss-intro',
+    nodes: {
+      'snow-boss-intro': {
+        id: 'snow-boss-intro',
+        speakerName: 'Snow Spirit',
+        avatarLabel: 'SS',
+        text: 'You followed the light across the drifts. This mountain holds journeys taken far from home.',
+        nextNodeId: 'snow-boss-travel',
+      },
+      'snow-boss-travel': {
+        id: 'snow-boss-travel',
+        speakerName: 'Snow Spirit',
+        avatarLabel: 'SS',
+        text: 'Some paths are cold, but walking them together makes the distance softer.',
+        nextNodeId: 'snow-boss-choice',
+      },
+      'snow-boss-choice': {
+        id: 'snow-boss-choice',
+        speakerName: 'Brown Sugar',
+        avatarLabel: 'BS',
+        text: 'What do you want to carry from this faraway snow?',
+        choices: [
+          {
+            id: 'snow-boss-choice-a',
+            label: 'The memory of choosing to go, even when it was far.',
+            nextNodeId: 'snow-boss-understand',
+            result: { kind: 'story', trigger: 'snow-spirit-understood' },
+          },
+          {
+            id: 'snow-boss-choice-b',
+            label: 'The warmth we found along the way, not only at the end.',
+            nextNodeId: 'snow-boss-understand',
+            result: { kind: 'story', trigger: 'snow-spirit-understood' },
+          },
+        ],
+      },
+      'snow-boss-understand': {
+        id: 'snow-boss-understand',
+        speakerName: 'Snow Spirit',
+        avatarLabel: 'SS',
+        text: 'Then the mountain is not a wall. It is proof that you kept going.',
+        nextNodeId: 'snow-boss-farewell',
+      },
+      'snow-boss-farewell': {
+        id: 'snow-boss-farewell',
+        speakerName: 'Snow Spirit',
+        avatarLabel: 'SS',
+        text: 'Take this quiet with you. The next valley is already waiting.',
       },
     },
   },

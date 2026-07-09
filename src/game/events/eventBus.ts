@@ -19,7 +19,9 @@ export type GameEventMap = {
   'dialogue:closed': Record<string, never>
   'chapter:forest-cleared': { scene: string }
   'chapter:city-cleared': { scene: string }
+  'chapter:snow-cleared': { scene: string }
   'boss:time-monster-understood': Record<string, never>
+  'boss:snow-spirit-understood': Record<string, never>
   'player:dash': { direction: 1 | -1 }
   'player:double-jump': { x: number; y: number }
 }
