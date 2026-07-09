@@ -1,4 +1,6 @@
 import Phaser from 'phaser'
+import { getSceneKeyForChapter } from '../../data/chapters'
+import { useGameStore } from '../../stores/useGameStore'
 import {
   MORANDI_PALETTE,
   type GameAsset,
@@ -130,7 +132,9 @@ export class PreloadScene extends Phaser.Scene {
       return
     }
 
-    this.scene.start('ForestScene')
+    const chapter = useGameStore.getState().currentChapter
+    const sceneKey = getSceneKeyForChapter(chapter)
+    this.scene.start(sceneKey)
   }
 
   private loadAsset(asset: GameAsset) {

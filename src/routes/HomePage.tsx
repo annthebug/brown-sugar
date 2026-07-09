@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
+import { getGameRouteForChapter, hasContinuableProgress } from '../data/chapters'
+import { useGameStore } from '../stores/useGameStore'
 
 const memoryPreviewItems = [
   'Collect Memory Shards',
@@ -8,6 +10,17 @@ const memoryPreviewItems = [
 ]
 
 export function HomePage() {
+  const currentChapter = useGameStore((state) => state.currentChapter)
+  const memoryShards = useGameStore((state) => state.memoryShards)
+  const totalMemoryShards = useGameStore((state) => state.totalMemoryShards)
+  const forestChapterCleared = useGameStore((state) => state.forestChapterCleared)
+  const canContinue = hasContinuableProgress({
+    currentChapter,
+    memoryShards,
+    totalMemoryShards,
+    forestChapterCleared,
+  })
+
   return (
     <main className="home-shell" aria-labelledby="home-title">
       <AppNav />
@@ -19,8 +32,20 @@ export function HomePage() {
         </p>
         <div className="hero-actions" aria-label="Game actions">
           <Link to="/game">Start</Link>
+          {canContinue ? (
+            <Link to={getGameRouteForChapter(currentChapter)} className="secondary-action">
+              Continue · {currentChapter}
+            </Link>
+          ) : (
+            <button type="button" className="secondary-action" disabled>
+              Continue
+            </button>
+          )}
           <Link to="/gallery" className="secondary-action">
             Gallery
+          </Link>
+          <Link to="/settings" className="secondary-action">
+            Settings
           </Link>
         </div>
       </section>
