@@ -121,6 +121,22 @@
         ]
       },
       {
+        "key": "snow-guide",
+        "type": "atlas",
+        "texture": "characters/snow-guide-side-sprite-sheet-v1.png",
+        "atlas": "characters/snow-guide-side-sprite-sheet-v1.json",
+        "portrait": "characters/snow-guide-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Snow Guide side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "snow-guide-side-idle",
+          "snow-guide-side-walk-1",
+          "snow-guide-side-walk-2",
+          "snow-guide-side-walk-3"
+        ]
+      },
+      {
         "key": "npc-characters",
         "type": "atlas",
         "texture": "characters/npc-sprite-sheet-v1.png",

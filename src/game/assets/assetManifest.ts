@@ -8,6 +8,8 @@ import cityBaristaTextureUrl from '../../../assets/characters/city-barista-side-
 import cityBaristaAtlasUrl from '../../../assets/characters/city-barista-side-sprite-sheet-v1.json?url'
 import parkTravelerTextureUrl from '../../../assets/characters/park-traveler-side-sprite-sheet-v1.png'
 import parkTravelerAtlasUrl from '../../../assets/characters/park-traveler-side-sprite-sheet-v1.json?url'
+import snowGuideTextureUrl from '../../../assets/characters/snow-guide-side-sprite-sheet-v1.png'
+import snowGuideAtlasUrl from '../../../assets/characters/snow-guide-side-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -22,6 +24,7 @@ export const ASSET_KEYS = {
   forestElderSide: 'forest-elder-side',
   cityBarista: 'city-barista',
   parkTraveler: 'park-traveler',
+  snowGuide: 'snow-guide',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -82,6 +85,13 @@ export const PARK_TRAVELER_FRAMES = {
   sideWalk1: 'park-traveler-side-walk-1',
   sideWalk2: 'park-traveler-side-walk-2',
   sideWalk3: 'park-traveler-side-walk-3',
+} as const
+
+export const SNOW_GUIDE_FRAMES = {
+  sideIdle: 'snow-guide-side-idle',
+  sideWalk1: 'snow-guide-side-walk-1',
+  sideWalk2: 'snow-guide-side-walk-2',
+  sideWalk3: 'snow-guide-side-walk-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -211,6 +221,17 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: parkTravelerTextureUrl,
       atlasUrl: parkTravelerAtlasUrl,
       frames: Object.values(PARK_TRAVELER_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.snowGuide,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Snow Guide side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: snowGuideTextureUrl,
+      atlasUrl: snowGuideAtlasUrl,
+      frames: Object.values(SNOW_GUIDE_FRAMES),
     },
     {
       kind: 'atlas',
