@@ -64,7 +64,7 @@ sprite.play('perfectionism-mist')
 python3 scripts/generate-perfectionism-sprite.py
 ```
 
-## Next asset tasks
+## Integration
 
-- Switch `FinalScene.placePerfectionism()` from `boss-characters` atlas to this sheet.
-- Play `perfectionism-mist` animation on the boss sprite.
+- `FinalScene.placePerfectionism()` uses `ASSET_KEYS.perfectionism` + `PERFECTIONISM_FRAMES.idle`.
+- Boss sprite plays `perfectionism-mist` animation (3 fps loop).
