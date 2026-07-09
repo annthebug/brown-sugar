@@ -67,6 +67,16 @@
 
 ---
 
+## 瀏覽器驗證
+
+- Do not repeatedly verify the UI.
+- Make all requested code changes first.
+- Run browser verification only once after all code changes are complete.
+- If browser verification fails, report the error instead of entering an endless fix-and-verify loop.
+- Stop after one verification attempt unless the user explicitly asks for another.
+
+---
+
 ## AI 協作優先順序
 
 1. 系統／使用者的直接指示
