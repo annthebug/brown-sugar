@@ -7,23 +7,23 @@ type PauseMenuProps = {
 
 export function PauseMenu({ onResume, onRestart }: PauseMenuProps) {
   return (
-    <section className="pause-overlay" aria-label="Pause menu">
+    <section className="pause-overlay" aria-label="暫停選單">
       <article className="pause-menu">
-        <p className="eyebrow">Paused</p>
-        <h2>Take a gentle breath</h2>
+        <p className="eyebrow">已暫停</p>
+        <h2>先慢慢呼吸一下</h2>
         <p className="hero-copy">黑糖也在這裡等你，準備好再繼續旅程。</p>
         <div className="pause-menu-actions">
           <button type="button" onClick={onResume}>
-            Resume
+            繼續
           </button>
           <Link to="/settings" className="secondary-action">
-            Settings
+            設定
           </Link>
           <button type="button" className="secondary-action" onClick={onRestart}>
-            Restart
+            重新開始本章
           </button>
           <Link to="/" className="secondary-action">
-            Exit to Home
+            返回首頁
           </Link>
         </div>
       </article>

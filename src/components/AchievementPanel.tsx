@@ -10,8 +10,8 @@ export function AchievementPanel({ unlockedIds }: AchievementPanelProps) {
     <section className="page-card achievement-panel" aria-labelledby="achievement-panel-title">
       <div className="achievement-panel-header">
         <div>
-          <p className="eyebrow">Achievements</p>
-          <h2 id="achievement-panel-title">Gentle Milestones</h2>
+          <p className="eyebrow">成就</p>
+          <h2 id="achievement-panel-title">溫柔里程碑</h2>
         </div>
         <strong>
           {unlockedIds.length} / {ACHIEVEMENT_DEFINITIONS.length}
@@ -26,7 +26,7 @@ export function AchievementPanel({ unlockedIds }: AchievementPanelProps) {
               key={achievement.id}
               className={`achievement-card ${unlocked ? 'achievement-card--unlocked' : 'achievement-card--locked'}`}
             >
-              <p className="panel-label">{unlocked ? 'Unlocked' : 'Waiting'}</p>
+              <p className="panel-label">{unlocked ? '已解鎖' : '等待中'}</p>
               <strong>{achievement.title}</strong>
               <p>{achievement.description}</p>
             </article>

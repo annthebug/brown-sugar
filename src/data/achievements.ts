@@ -15,33 +15,33 @@ export type AchievementDefinition = {
 export const ACHIEVEMENT_DEFINITIONS: AchievementDefinition[] = [
   {
     id: 'first-shard',
-    title: 'Morning Spark',
-    description: 'Collect the first Memory Shard beneath the gentle sky.',
+    title: '晨光微亮',
+    description: '在溫柔天空下收集第一片回憶碎片。',
   },
   {
     id: 'first-memory',
-    title: 'Soft Reflection',
-    description: 'Unlock the first memory and let a warm scene return.',
+    title: '柔軟倒影',
+    description: '解鎖第一段回憶，讓溫暖畫面慢慢回來。',
   },
   {
     id: 'forest-chapter',
-    title: 'Forest Promise',
-    description: 'Complete the forest chapter and continue the journey with Black Sugar.',
+    title: '森林約定',
+    description: '完成森林章節，和黑糖繼續往前走。',
   },
   {
     id: 'all-memories',
-    title: 'Album of Us',
-    description: 'Unlock every memory and fill the album with shared moments.',
+    title: '我們的相簿',
+    description: '解鎖所有回憶，讓相簿裝滿共同片刻。',
   },
   {
     id: 'mbti-complete',
-    title: 'Heart in Full Bloom',
-    description: 'Finish every hidden MBTI conversation along the road.',
+    title: '心意盛開',
+    description: '完成旅途中所有隱藏的 MBTI 對話。',
   },
   {
     id: 'journey-complete',
-    title: 'Perfect Bowl, Gentle Home',
-    description: 'Reach the ending and bring the glass matcha bowl home.',
+    title: '溫柔歸來的碗',
+    description: '抵達結局，把玻璃抹茶碗帶回家。',
   },
 ]
 

@@ -15,10 +15,10 @@ export function GalleryPage() {
     <main className="page-shell" aria-labelledby="gallery-title">
       <AppNav />
       <section className="page-card">
-        <p className="eyebrow">Gallery</p>
-        <h1 id="gallery-title">Memory Album</h1>
+        <p className="eyebrow">相簿</p>
+        <h1 id="gallery-title">回憶相簿</h1>
         <p className="hero-copy gallery-summary">
-          {unlockedCount} / {MEMORY_COUNT} memories unlocked
+          {unlockedCount} / {MEMORY_COUNT} 張回憶已解鎖
         </p>
         <div className="memory-grid">
           {memories.map((memory) => (
@@ -30,7 +30,7 @@ export function GalleryPage() {
           ))}
         </div>
         <button type="button" className="secondary-action page-action" onClick={resetGallery}>
-          Reset gallery
+          重設相簿
         </button>
       </section>
       {activeMemory ? (

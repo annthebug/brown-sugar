@@ -32,22 +32,22 @@ const MBTI_GRID_ORDER: readonly (readonly MbtiType[])[] = [
 ]
 
 export const MBTI_BOWL_NAMES: Record<MbtiType, string> = {
-  ISTJ: 'Logistician Bowl',
-  ISFJ: 'Guardian Bowl',
-  INFJ: 'Advocate Bowl',
-  INTJ: 'Strategist Bowl',
-  ISTP: 'Virtuoso Bowl',
-  ISFP: 'Adventurer Bowl',
-  INFP: 'Dream Bowl',
-  INTP: 'Logician Bowl',
-  ESTP: 'Entrepreneur Bowl',
-  ESFP: 'Entertainer Bowl',
-  ENFP: 'Campaigner Bowl',
-  ENTP: 'Debater Bowl',
-  ESTJ: 'Executive Bowl',
-  ESFJ: 'Consul Bowl',
-  ENFJ: 'Protagonist Bowl',
-  ENTJ: 'Commander Bowl',
+  ISTJ: '物流師之碗',
+  ISFJ: '守護者之碗',
+  INFJ: '提倡者之碗',
+  INTJ: '策士之碗',
+  ISTP: '巧匠之碗',
+  ISFP: '冒險家之碗',
+  INFP: '夢想家之碗',
+  INTP: '思考者之碗',
+  ESTP: '企業家之碗',
+  ESFP: '表演者之碗',
+  ENFP: '競選者之碗',
+  ENTP: '辯論家之碗',
+  ESTJ: '總經理之碗',
+  ESFJ: '執政官之碗',
+  ENFJ: '主人公之碗',
+  ENTJ: '指揮官之碗',
 }
 
 export const MBTI_BOWL_SHEET_URL = new URL(

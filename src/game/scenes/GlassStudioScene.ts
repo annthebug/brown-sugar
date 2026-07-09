@@ -110,7 +110,7 @@ export class GlassStudioScene extends Phaser.Scene {
     this.cameras.main.setDeadzone(120, 40)
 
     this.interactPrompt = this.add
-      .text(0, 0, 'Press E to talk', {
+      .text(0, 0, '按 E 對話', {
         color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -148,7 +148,7 @@ export class GlassStudioScene extends Phaser.Scene {
       .setScrollFactor(0)
 
     this.add
-      .text(16, 16, 'Chapter 4 · Glass Studio', {
+      .text(16, 16, '第四章・玻璃工坊', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '14px',
@@ -161,7 +161,7 @@ export class GlassStudioScene extends Phaser.Scene {
 
     if (!isTouch) {
       this.add
-        .text(this.scale.width / 2, 16, '← → Move   Space Jump   Shift Dash   E Talk / Interact', {
+        .text(this.scale.width / 2, 16, '← → 移動　Space 跳躍　Shift 衝刺　E 對話／互動', {
           color: MORANDI_PALETTE.mutedText,
           fontFamily: 'monospace',
           fontSize: '12px',
@@ -175,7 +175,7 @@ export class GlassStudioScene extends Phaser.Scene {
 
     gameEventBus.emit('phaser:ready', {
       scene: this.scene.key,
-      message: 'Glass Studio chapter ready.',
+      message: '玻璃工坊章節已就緒。',
     })
 
     this.unsubscribeDialogueClosed = gameEventBus.on('dialogue:closed', () => {
@@ -319,7 +319,7 @@ export class GlassStudioScene extends Phaser.Scene {
     const head = this.add.circle(0, -72, 18, MORANDI_PALETTE.cloud, 0.92)
     const goggles = this.add.rectangle(0, -74, 36, 10, GLASS_TUBE_BLUE, 0.55)
     const label = this.add
-      .text(0, 10, 'Glass Master', {
+      .text(0, 10, '玻璃師傅', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -387,7 +387,7 @@ export class GlassStudioScene extends Phaser.Scene {
     const head = this.add.circle(0, -72, 18, MORANDI_PALETTE.cloud, 0.92)
     const glow = this.add.ellipse(0, -40, 72, 88, SOFT_ORANGE, 0.12)
     const label = this.add
-      .text(0, 16, 'Glass Master', {
+      .text(0, 16, '玻璃師傅', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -432,7 +432,7 @@ export class GlassStudioScene extends Phaser.Scene {
     this.blowGlassHits = 0
     this.blowGlassPhase = 0
     this.blowGlassGlow?.setVisible(true)
-    this.blowGlassHint?.setText('Press E when the glow peaks (0/3)').setVisible(true)
+    this.blowGlassHint?.setText('在光芒最亮時按下 E（0/3）').setVisible(true)
   }
 
   private updateBlowGlassMinigame(talkJustDown: boolean) {
@@ -453,7 +453,9 @@ export class GlassStudioScene extends Phaser.Scene {
 
     if (this.blowGlassPhase >= BLOW_GLASS_TIMING_THRESHOLD) {
       this.blowGlassHits += 1
-      this.blowGlassHint?.setText(`Press E when the glow peaks (${this.blowGlassHits}/${BLOW_GLASS_TARGET_HITS})`)
+      this.blowGlassHint?.setText(
+        `在光芒最亮時按下 E（${this.blowGlassHits}/${BLOW_GLASS_TARGET_HITS}）`,
+      )
 
       if (this.blowGlassHits >= BLOW_GLASS_TARGET_HITS) {
         this.completeBlowGlassMinigame()
@@ -463,13 +465,13 @@ export class GlassStudioScene extends Phaser.Scene {
     }
 
     this.blowGlassHits = 0
-    this.blowGlassHint?.setText('Gentle breath — try again (0/3)')
+    this.blowGlassHint?.setText('溫柔呼吸，再試一次（0/3）')
   }
 
   private completeBlowGlassMinigame() {
     this.blowGlassState = 'success'
     this.blowGlassGlow?.setVisible(false)
-    this.blowGlassHint?.setText('The glass holds its breath. Talk to Glass Master.').setVisible(true)
+    this.blowGlassHint?.setText('玻璃正屏住呼吸，去和玻璃師傅說話吧。').setVisible(true)
 
     this.time.delayedCall(3200, () => {
       this.blowGlassHint?.setVisible(false)
@@ -481,7 +483,7 @@ export class GlassStudioScene extends Phaser.Scene {
       return
     }
 
-    this.interactPrompt.setText('The furnace breathes warm, patient air.')
+    this.interactPrompt.setText('爐火吐出溫暖而耐心的氣息。')
     this.interactPrompt.setPosition(FURNACE_X, GROUND_TOP - 130)
     this.interactPrompt.setVisible(true)
 
@@ -549,15 +551,15 @@ export class GlassStudioScene extends Phaser.Scene {
     let promptText: string | null = null
 
     if (!this.bossCleared && this.blowGlassState === 'success' && this.isNearGlassMasterBoss()) {
-      promptText = 'Press E to finish with Glass Master'
+      promptText = '按 E 與玻璃師傅完成這一步'
     } else if (!this.bossCleared && this.blowGlassState === 'active' && this.isNearBlowGlass()) {
-      promptText = 'Press E when the glow peaks'
+      promptText = '在光芒最亮時按下 E'
     } else if (!this.bossCleared && this.blowGlassState === 'idle' && this.isNearBlowGlass()) {
-      promptText = 'Press E to try blowing glass'
+      promptText = '按 E 試著吹製玻璃'
     } else if (this.isNearFurnace()) {
-      promptText = 'Press E — warm furnace'
+      promptText = '按 E 感受溫暖爐火'
     } else if (this.isNearGlassMasterNpc()) {
-      promptText = 'Press E to talk with Glass Master'
+      promptText = '按 E 與玻璃師傅對話'
     }
 
     if (promptText) {

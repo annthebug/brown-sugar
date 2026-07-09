@@ -11,19 +11,16 @@ export function SettingsPage() {
     <main className="page-shell" aria-labelledby="settings-title">
       <AppNav />
       <section className="page-card settings-card">
-        <p className="eyebrow">Settings</p>
-        <h1 id="settings-title">Gentle Controls</h1>
+        <p className="eyebrow">設定</p>
+        <h1 id="settings-title">溫柔設定</h1>
 
         <label>
-          Language
+          語言
           <select
             value={language}
-            onChange={(event) =>
-              setLanguage(event.currentTarget.value === 'en' ? 'en' : 'zh-Hant')
-            }
+            onChange={() => setLanguage('zh-Hant')}
           >
             <option value="zh-Hant">繁體中文</option>
-            <option value="en">English</option>
           </select>
         </label>
 
@@ -33,7 +30,7 @@ export function SettingsPage() {
             void toggleFullscreen()
           }}
         >
-          Fullscreen: {fullscreen ? 'On' : 'Off'}
+          全螢幕：{fullscreen ? '開啟' : '關閉'}
         </button>
       </section>
     </main>

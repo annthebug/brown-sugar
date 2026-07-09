@@ -6,7 +6,7 @@ import { DialogueBox } from '../components/DialogueBox'
 import { MemoryOverlay } from '../components/MemoryOverlay'
 import { PauseMenu } from '../components/PauseMenu'
 import { PhaserGame, type PhaserGameHandle } from '../components/PhaserGame'
-import { CHAPTER_LABELS, getPlayableChapter } from '../data/chapters'
+import { CHAPTER_DISPLAY_NAMES, CHAPTER_LABELS, getPlayableChapter } from '../data/chapters'
 import { MBTI_QUESTION_COUNT } from '../data/mbti'
 import {
   DIALOGUE_SCRIPTS,
@@ -70,7 +70,7 @@ export function GamePage() {
   const phaserRef = useRef<PhaserGameHandle>(null)
   const [memoryQueue, setMemoryQueue] = useState<MemoryEntry[]>([])
   const [activeDialogueId, setActiveDialogueId] = useState<DialogueScriptId | null>(null)
-  const [lastDialogueChoice, setLastDialogueChoice] = useState<string>('No dialogue choice yet')
+  const [lastDialogueChoice, setLastDialogueChoice] = useState<string>('尚未做出對話選擇')
   const [isPaused, setIsPaused] = useState(false)
   const memoryShards = useGameStore((state) => state.memoryShards)
   const totalMemoryShards = useGameStore((state) => state.totalMemoryShards)
@@ -120,7 +120,7 @@ export function GamePage() {
 
   const chapterMeta = CHAPTER_LABELS[playableChapter]
   const chapterProgressHint = gameCompleted
-    ? 'Journey complete'
+    ? '旅程完成'
     : retryChapterCleared
       ? chapterMeta.hint
     : glassChapterCleared
@@ -277,7 +277,7 @@ export function GamePage() {
         setLastDialogueChoice(
           recorded
             ? choice.label
-            : `${choice.label} (already answered — score unchanged)`,
+            : `${choice.label}（已回答，不重複計分）`,
         )
         return
       }
@@ -371,7 +371,7 @@ export function GamePage() {
       <AppNav />
       <header className="game-header">
         <Link to="/" className="back-link">
-          Home
+          首頁
         </Link>
         <div>
           <p className="eyebrow">{chapterMeta.eyebrow}</p>
@@ -383,81 +383,81 @@ export function GamePage() {
         <button
           type="button"
           className="game-pause-button"
-          aria-label="Pause game"
+          aria-label="暫停遊戲"
           onClick={openPauseMenu}
         >
-          Pause
+          暫停
         </button>
       </div>
-      <section className="store-panel" aria-label="Game store controls">
+      <section className="store-panel" aria-label="遊戲控制面板">
         <div>
-          <p className="panel-label">Memory Shards</p>
+          <p className="panel-label">回憶碎片</p>
           <strong>{memoryShards} / 100</strong>
-          <span>{totalMemoryShards} total</span>
+          <span>{totalMemoryShards} 累計</span>
         </div>
         <div>
-          <p className="panel-label">Chapter progress</p>
-          <strong>{currentChapter}</strong>
+          <p className="panel-label">章節進度</p>
+          <strong>{CHAPTER_DISPLAY_NAMES[currentChapter]}</strong>
           <span>{chapterProgressHint}</span>
         </div>
         <button type="button" onClick={() => collectShards(1)}>
-          Collect shard
+          收集 1 片
         </button>
         <button type="button" onClick={() => collectShards(100)}>
-          Collect 100 shards
+          收集 100 片
         </button>
         <button type="button" className="secondary-action" onClick={resetProgress}>
-          Reset progress
+          重設進度
         </button>
         <div>
-          <p className="panel-label">MBTI progress</p>
+          <p className="panel-label">MBTI 進度</p>
           <strong>
             {answeredQuestionIds.length} / {MBTI_QUESTION_COUNT}
           </strong>
-          <span>{isMbtiComplete && mbtiResult ? `Result: ${mbtiResult}` : lastDialogueChoice}</span>
+          <span>{isMbtiComplete && mbtiResult ? `結果：${mbtiResult}` : lastDialogueChoice}</span>
         </div>
         <div>
-          <p className="panel-label">Achievements</p>
+          <p className="panel-label">成就</p>
           <strong>
             {unlockedAchievementIds.length} / {ACHIEVEMENT_DEFINITIONS.length}
           </strong>
-          <span>Gentle milestones for this journey.</span>
+          <span>這趟旅程的溫柔里程碑。</span>
         </div>
         <button type="button" onClick={() => openDialogue('forestElder')}>
-          Talk to Forest Elder
+          與森林長者對話
         </button>
         <button type="button" onClick={() => openDialogue('cityBarista')}>
-          Talk to Barista
+          與咖啡師對話
         </button>
         <button type="button" onClick={() => openDialogue('cityTraveler')}>
-          Talk to Traveler
+          與旅人對話
         </button>
         <button type="button" onClick={() => openDialogue('timeMonster')}>
-          Talk to Time Monster
+          與時間怪物對話
         </button>
         <button type="button" onClick={() => openDialogue('snowSpirit')}>
-          Talk to Mountain Guide
+          與雪山嚮導對話
         </button>
         <button type="button" onClick={() => openDialogue('snowSpiritBoss')}>
-          Talk to Snow Spirit (Boss)
+          與雪靈對話（首領）
         </button>
         <button type="button" onClick={() => openDialogue('glassMaster')}>
-          Talk to Glass Master
+          與玻璃師傅對話
         </button>
         <button type="button" onClick={() => openDialogue('glassMasterBoss')}>
-          Talk to Glass Master (Boss)
+          與玻璃師傅對話（首領）
         </button>
         <button type="button" onClick={() => openDialogue('innerGuide')}>
-          Talk to Inner Guide
+          與內在嚮導對話
         </button>
         <button type="button" onClick={() => openDialogue('innerDoubtBoss')}>
-          Talk to Inner Doubt (Boss)
+          與內在懷疑對話（首領）
         </button>
         <button type="button" onClick={() => openDialogue('perfectionismBoss')}>
-          Talk to Perfectionism (Boss)
+          與完美主義對話（首領）
         </button>
         <button type="button" className="secondary-action" onClick={resetMbtiScores}>
-          Reset MBTI
+          重設 MBTI
         </button>
       </section>
       {activeDialogue ? (

@@ -1,14 +1,14 @@
 import { AchievementPanel } from '../components/AchievementPanel'
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
-import { getGameRouteForChapter, hasContinuableProgress } from '../data/chapters'
+import { CHAPTER_DISPLAY_NAMES, getGameRouteForChapter, hasContinuableProgress } from '../data/chapters'
 import { useAchievementStore } from '../stores/useAchievementStore'
 import { useGameStore } from '../stores/useGameStore'
 
 const memoryPreviewItems = [
-  'Collect Memory Shards',
-  'Talk with gentle NPCs',
-  'Find the glass matcha bowl',
+  '收集回憶碎片',
+  '和溫柔的 NPC 對話',
+  '找回玻璃抹茶碗',
 ]
 
 export function HomePage() {
@@ -28,32 +28,32 @@ export function HomePage() {
     <main className="home-shell" aria-labelledby="home-title">
       <AppNav />
       <section className="hero-card">
-        <p className="eyebrow">Pixel RPG Story Adventure</p>
-        <h1 id="home-title">Quest for the Perfect Bowl</h1>
+        <p className="eyebrow">像素 RPG 故事冒險</p>
+        <h1 id="home-title">尋找完美的碗</h1>
         <p className="hero-copy">
           跟著黑糖在淡藍天空下旅行，收集回憶碎片，找回那只玻璃抹茶碗。
         </p>
-        <div className="hero-actions" aria-label="Game actions">
-          <Link to="/game">Start</Link>
+        <div className="hero-actions" aria-label="遊戲操作">
+          <Link to="/game">開始旅程</Link>
           {canContinue ? (
             <Link to={getGameRouteForChapter(currentChapter)} className="secondary-action">
-              Continue · {currentChapter}
+              繼續旅程 · {CHAPTER_DISPLAY_NAMES[currentChapter]}
             </Link>
           ) : (
             <button type="button" className="secondary-action" disabled>
-              Continue
+              繼續旅程
             </button>
           )}
           <Link to="/gallery" className="secondary-action">
-            Gallery
+            回憶相簿
           </Link>
           <Link to="/settings" className="secondary-action">
-            Settings
+            設定
           </Link>
         </div>
       </section>
 
-      <section className="journey-panel" aria-label="Journey preview">
+      <section className="journey-panel" aria-label="旅程預覽">
         <div className="pixel-cat" aria-hidden="true">
           <span className="cat-ear left-ear" />
           <span className="cat-ear right-ear" />

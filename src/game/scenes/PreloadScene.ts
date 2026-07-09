@@ -63,7 +63,7 @@ export class PreloadScene extends Phaser.Scene {
       .setStrokeStyle(3, MORANDI_PALETTE.dustyBlue, 0.48)
 
     this.add
-      .text(width / 2, height * 0.43, 'Gathering soft memories...', {
+      .text(width / 2, height * 0.43, '正在收攏溫柔回憶...', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '24px',
@@ -72,7 +72,7 @@ export class PreloadScene extends Phaser.Scene {
       .setOrigin(0.5)
 
     this.add
-      .text(width / 2, height * 0.5, 'Loading Brown Sugar and the pale blue sky', {
+      .text(width / 2, height * 0.5, '正在載入黑糖與淡藍天空', {
         color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '15px',
@@ -118,7 +118,7 @@ export class PreloadScene extends Phaser.Scene {
       const assetLabel = asset ? getAssetLabel(asset) : file.key
       this.failedAssets.set(file.key, assetLabel)
       failureText
-        .setText(`Could not load ${assetLabel}. Check assets/manifest.json.`)
+        .setText(`無法載入 ${assetLabel}。請檢查 assets/manifest.json。`)
         .setVisible(true)
 
       gameEventBus.emit('phaser:preload-error', {
@@ -148,7 +148,7 @@ export class PreloadScene extends Phaser.Scene {
     if (this.failedAssets.size > 0) {
       const { width, height } = this.scale
       this.add
-        .text(width / 2, height * 0.77, 'Preload paused until placeholder assets are fixed.', {
+        .text(width / 2, height * 0.77, '素材載入已暫停，請先修正佔位素材。', {
           color: MORANDI_PALETTE.errorText,
           fontFamily: 'monospace',
           fontSize: '15px',

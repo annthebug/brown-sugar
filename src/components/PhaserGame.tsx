@@ -27,7 +27,7 @@ export const PhaserGame = forwardRef<PhaserGameHandle, PhaserGameProps>(function
 ) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const gameRef = useRef<Phaser.Game | null>(null)
-  const [status, setStatus] = useState('Preparing Phaser...')
+  const [status, setStatus] = useState('正在準備遊戲場景...')
 
   useImperativeHandle(ref, () => ({
     pauseActiveScene: () => {
@@ -72,27 +72,27 @@ export const PhaserGame = forwardRef<PhaserGameHandle, PhaserGameProps>(function
     })
 
     const unsubscribeBooted = gameEventBus.on('phaser:booted', (payload) => {
-      setStatus(`${payload.scene} started.`)
+      setStatus(`${payload.scene} 已啟動。`)
     })
 
     const unsubscribePreloadProgress = gameEventBus.on(
       'phaser:preload-progress',
       (payload) => {
-        setStatus(`${payload.scene} loading ${payload.progress}%.`)
+        setStatus(`${payload.scene} 載入中 ${payload.progress}%。`)
       },
     )
 
     const unsubscribePreloaded = gameEventBus.on('phaser:preloaded', (payload) => {
       if (payload.failedAssets.length > 0) {
-        setStatus(`${payload.scene} failed: ${payload.failedAssets.join(', ')}.`)
+        setStatus(`${payload.scene} 載入失敗：${payload.failedAssets.join('、')}。`)
         return
       }
 
-      setStatus(`${payload.scene} loaded ${payload.assetCount} placeholder assets.`)
+      setStatus(`${payload.scene} 已載入 ${payload.assetCount} 個佔位素材。`)
     })
 
     const unsubscribePreloadError = gameEventBus.on('phaser:preload-error', (payload) => {
-      setStatus(`${payload.scene} could not load ${payload.assetLabel}.`)
+      setStatus(`${payload.scene} 無法載入 ${payload.assetLabel}。`)
     })
 
     if (containerRef.current && !gameRef.current) {
@@ -126,7 +126,7 @@ export const PhaserGame = forwardRef<PhaserGameHandle, PhaserGameProps>(function
   }, [isPaused])
 
   return (
-    <section className="game-card" aria-label="Phaser game preview">
+    <section className="game-card" aria-label="Phaser 遊戲預覽">
       <div ref={containerRef} className="phaser-container" />
       <p className="game-status" role="status">
         {status}

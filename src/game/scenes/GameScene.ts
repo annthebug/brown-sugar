@@ -47,7 +47,7 @@ export class GameScene extends Phaser.Scene {
     this.add.rectangle(width / 2, height - 22, width, 44, MORANDI_PALETTE.warmBeige, 0.8)
 
     const title = this.add
-      .text(width / 2, height * 0.42, 'Brown Sugar begins here', {
+      .text(width / 2, height * 0.42, '黑糖的旅程從這裡開始', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '28px',
@@ -56,7 +56,7 @@ export class GameScene extends Phaser.Scene {
       .setOrigin(0.5)
 
     this.add
-      .text(width / 2, title.y + 42, 'Phaser GameScene · pale blue sky', {
+      .text(width / 2, title.y + 42, 'Phaser 遊戲場景・淡藍天空', {
         color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '16px',
@@ -86,7 +86,7 @@ export class GameScene extends Phaser.Scene {
         .text(
           width / 2,
           height * 0.08,
-          '← → Move   Space / ↑ Jump   Shift Dash   M Meow   E Talk',
+          '← → 移動　Space / ↑ 跳躍　Shift 衝刺　M 喵叫　E 對話',
           {
             color: MORANDI_PALETTE.mutedText,
             fontFamily: 'monospace',
@@ -99,7 +99,7 @@ export class GameScene extends Phaser.Scene {
 
     gameEventBus.emit('phaser:ready', {
       scene: this.scene.key,
-      message: 'GameScene ready — Player active.',
+      message: '遊戲場景已就緒，黑糖可以出發了。',
     })
   }
 
@@ -140,7 +140,7 @@ export class GameScene extends Phaser.Scene {
       .polygon(0, 0, [0, -30, 22, 0, 0, 30, -22, 0], MORANDI_PALETTE.dustyBlue, 0.92)
       .setStrokeStyle(3, MORANDI_PALETTE.cloud, 0.78)
     const label = this.add
-      .text(0, 48, 'Memory Shard', {
+      .text(0, 48, '回憶碎片', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '13px',
@@ -182,7 +182,7 @@ export class GameScene extends Phaser.Scene {
         ease: 'Sine.easeInOut',
         onComplete: () => {
           shard.setAlpha(0.46)
-          label.setText('Collected')
+          label.setText('已收集')
         },
       })
     })

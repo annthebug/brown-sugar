@@ -89,7 +89,7 @@ export class CityScene extends Phaser.Scene {
     this.cameras.main.setDeadzone(120, 40)
 
     this.interactPrompt = this.add
-      .text(0, 0, 'Press E to talk', {
+      .text(0, 0, '按 E 對話', {
         color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -101,7 +101,7 @@ export class CityScene extends Phaser.Scene {
       .setDepth(15)
 
     this.add
-      .text(16, 16, 'Chapter 2 · City', {
+      .text(16, 16, '第二章・城市', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '14px',
@@ -114,7 +114,7 @@ export class CityScene extends Phaser.Scene {
 
     if (!isTouch) {
       this.add
-        .text(this.scale.width / 2, 16, '← → Move   Space Jump   Shift Dash   E Talk / Interact', {
+        .text(this.scale.width / 2, 16, '← → 移動　Space 跳躍　Shift 衝刺　E 對話／互動', {
           color: MORANDI_PALETTE.mutedText,
           fontFamily: 'monospace',
           fontSize: '12px',
@@ -128,7 +128,7 @@ export class CityScene extends Phaser.Scene {
 
     gameEventBus.emit('phaser:ready', {
       scene: this.scene.key,
-      message: 'City chapter ready.',
+      message: '城市章節已就緒。',
     })
 
     this.unsubscribeDialogueClosed = gameEventBus.on('dialogue:closed', () => {
@@ -219,7 +219,7 @@ export class CityScene extends Phaser.Scene {
     const lampGlow = this.add.circle(PARK_X + 120, GROUND_Y - 104, 14, MORANDI_PALETTE.warmBeige, 0.35)
 
     const sign = this.add
-      .text(PARK_X, GROUND_Y - 148, 'Park', {
+      .text(PARK_X, GROUND_Y - 148, '公園', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -243,7 +243,7 @@ export class CityScene extends Phaser.Scene {
     }
 
     const sign = this.add
-      .text(METRO_X, GROUND_Y - 168, 'Metro', {
+      .text(METRO_X, GROUND_Y - 168, '月台', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -307,7 +307,7 @@ export class CityScene extends Phaser.Scene {
     const head = this.add.circle(0, -68, 18, MORANDI_PALETTE.cloud, 0.9)
     const cup = this.add.rectangle(22, -38, 16, 22, MORANDI_PALETTE.warmBeige, 0.88)
     const label = this.add
-      .text(0, 10, 'Barista', {
+      .text(0, 10, '咖啡師', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -328,7 +328,7 @@ export class CityScene extends Phaser.Scene {
     const head = this.add.circle(0, -70, 18, MORANDI_PALETTE.cloud, 0.9)
     const map = this.add.rectangle(-24, -36, 20, 28, MORANDI_PALETTE.warmBeige, 0.75)
     const label = this.add
-      .text(0, 10, 'Traveler', {
+      .text(0, 10, '旅人', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -350,7 +350,7 @@ export class CityScene extends Phaser.Scene {
     const hourHand = this.add.rectangle(0, -54, 3, 18, MORANDI_PALETTE.dustyBlue, 0.85)
     const minuteHand = this.add.rectangle(8, -48, 3, 22, MORANDI_PALETTE.mistPink, 0.7)
     const label = this.add
-      .text(0, 18, 'Time Monster', {
+      .text(0, 18, '時間怪物', {
         color: MORANDI_PALETTE.slateText,
         fontFamily: 'monospace',
         fontSize: '11px',
@@ -414,7 +414,7 @@ export class CityScene extends Phaser.Scene {
 
     if (!this.bossChaseActive) {
       this.bossChaseActive = true
-      this.interactPrompt?.setText('Something drifts along the metro platform...')
+      this.interactPrompt?.setText('有什麼東西正沿著月台飄過去......')
     }
 
     const monsterX = this.timeMonster.x
@@ -469,11 +469,11 @@ export class CityScene extends Phaser.Scene {
     let promptText: string | null = null
 
     if (!this.bossCleared && this.isNearTimeMonster()) {
-      promptText = 'Press E to meet Time Monster'
+      promptText = '按 E 遇見時間怪物'
     } else if (this.isNearBarista()) {
-      promptText = 'Press E to talk with Barista'
+      promptText = '按 E 與咖啡師對話'
     } else if (this.isNearTraveler()) {
-      promptText = 'Press E to talk with Traveler'
+      promptText = '按 E 與旅人對話'
     }
 
     if (promptText) {

@@ -103,7 +103,7 @@ export function DialogueBox({ script, onChoiceResult, onClose }: DialogueBoxProp
             />
           </p>
           {showChoices ? (
-            <div className="dialogue-choices" aria-label="Dialogue choices">
+            <div className="dialogue-choices" aria-label="對話選項">
               {currentNode.choices?.map((choice) => (
                 <button key={choice.id} type="button" onClick={() => chooseOption(choice)}>
                   {choice.label}
@@ -112,7 +112,7 @@ export function DialogueBox({ script, onChoiceResult, onClose }: DialogueBoxProp
             </div>
           ) : (
             <button type="button" className="dialogue-continue" onClick={continueDialogue}>
-              {!isTextRevealed ? 'Show text' : currentNode.nextNodeId ? 'Continue' : 'Close'}
+              {!isTextRevealed ? '顯示文字' : currentNode.nextNodeId ? '繼續' : '關閉'}
             </button>
           )}
         </div>
