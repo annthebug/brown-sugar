@@ -65,7 +65,7 @@ sprite.play('time-monster-pulse')
 python3 scripts/generate-time-monster-sprite.py
 ```
 
-## Next asset tasks
+## Integration
 
-- Switch `CityScene.placeTimeMonsterBoss()` from `boss-characters` atlas to this sheet.
-- Play `time-monster-pulse` idle animation on the boss sprite.
+- `CityScene.placeTimeMonsterBoss()` uses `ASSET_KEYS.timeMonster` + `TIME_MONSTER_FRAMES.idle`.
+- Boss sprite plays `time-monster-pulse` animation (3 fps loop).
