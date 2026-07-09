@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import { getSceneKeyForChapter } from '../../data/chapters'
+import { getPlayableChapter, getSceneKeyForChapter, isChapter } from '../../data/chapters'
 import { useGameStore } from '../../stores/useGameStore'
 import {
   MORANDI_PALETTE,
@@ -132,7 +132,15 @@ export class PreloadScene extends Phaser.Scene {
       return
     }
 
-    const chapter = useGameStore.getState().currentChapter
+    const state = useGameStore.getState()
+    const requestedParam = new URLSearchParams(window.location.search).get('chapter')
+    const requestedChapter = isChapter(requestedParam) ? requestedParam : null
+    const chapter = getPlayableChapter({
+      requestedChapter,
+      currentChapter: state.currentChapter,
+      forestChapterCleared: state.forestChapterCleared,
+      cityChapterCleared: state.cityChapterCleared,
+    })
     const sceneKey = getSceneKeyForChapter(chapter)
     this.scene.start(sceneKey)
   }

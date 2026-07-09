@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
 import { DialogueBox } from '../components/DialogueBox'
 import { MemoryOverlay } from '../components/MemoryOverlay'
 import { PauseMenu } from '../components/PauseMenu'
 import { PhaserGame, type PhaserGameHandle } from '../components/PhaserGame'
+import { CHAPTER_LABELS, getPlayableChapter } from '../data/chapters'
 import { MBTI_QUESTION_COUNT } from '../data/mbti'
 import {
   DIALOGUE_SCRIPTS,
@@ -18,6 +19,24 @@ import { type MemoryEntry, useGalleryStore } from '../stores/useGalleryStore'
 import { useGameStore } from '../stores/useGameStore'
 import { useMbtiStore } from '../stores/useMbtiStore'
 
+const CITY_NPC_DIALOGUES: Record<string, DialogueScriptId> = {
+  cityBarista: 'cityBarista',
+  cityTraveler: 'cityTraveler',
+  timeMonster: 'timeMonster',
+}
+
+function resolveDialogueId(npcId?: string): DialogueScriptId | null {
+  if (!npcId) {
+    return null
+  }
+
+  if (npcId === 'forestElder') {
+    return 'forestElder'
+  }
+
+  return CITY_NPC_DIALOGUES[npcId] ?? null
+}
+
 export function GamePage() {
   const phaserRef = useRef<PhaserGameHandle>(null)
   const [memoryQueue, setMemoryQueue] = useState<MemoryEntry[]>([])
@@ -28,8 +47,10 @@ export function GamePage() {
   const totalMemoryShards = useGameStore((state) => state.totalMemoryShards)
   const currentChapter = useGameStore((state) => state.currentChapter)
   const forestChapterCleared = useGameStore((state) => state.forestChapterCleared)
+  const cityChapterCleared = useGameStore((state) => state.cityChapterCleared)
   const collectMemoryShards = useGameStore((state) => state.collectMemoryShards)
   const completeForestChapter = useGameStore((state) => state.completeForestChapter)
+  const completeCityChapter = useGameStore((state) => state.completeCityChapter)
   const resetProgress = useGameStore((state) => state.resetProgress)
   const unlockNextMemory = useGalleryStore((state) => state.unlockNextMemory)
   const unlockMemoryByNumber = useGalleryStore((state) => state.unlockMemoryByNumber)
@@ -40,6 +61,24 @@ export function GamePage() {
   const mbtiResult = useMbtiStore((state) => state.getMbtiResult())
   const activeMemory = memoryQueue[0]
   const activeDialogue = activeDialogueId ? DIALOGUE_SCRIPTS[activeDialogueId] : null
+
+  const playableChapter = useMemo(
+    () =>
+      getPlayableChapter({
+        requestedChapter: null,
+        currentChapter,
+        forestChapterCleared,
+        cityChapterCleared,
+      }),
+    [cityChapterCleared, currentChapter, forestChapterCleared],
+  )
+
+  const chapterMeta = CHAPTER_LABELS[playableChapter]
+  const chapterProgressHint = cityChapterCleared
+    ? 'City cleared'
+    : forestChapterCleared
+      ? chapterMeta.hint
+      : chapterMeta.hint
 
   const collectShards = useCallback(
     (amount: number) => {
@@ -79,14 +118,25 @@ export function GamePage() {
     })
 
     const unsubscribeTalk = gameEventBus.on('player:talk-start', (payload) => {
-      if (payload.npcId === 'forestElder' || !payload.npcId) {
-        openDialogue('forestElder')
+      const dialogueId = resolveDialogueId(payload.npcId)
+
+      if (dialogueId) {
+        openDialogue(dialogueId)
       }
     })
 
-    const unsubscribeChapter = gameEventBus.on('chapter:forest-cleared', () => {
+    const unsubscribeForestChapter = gameEventBus.on('chapter:forest-cleared', () => {
       completeForestChapter()
       const unlockedMemory = unlockMemoryByNumber(1)
+
+      if (unlockedMemory) {
+        setMemoryQueue((currentQueue) => [...currentQueue, unlockedMemory])
+      }
+    })
+
+    const unsubscribeCityChapter = gameEventBus.on('chapter:city-cleared', () => {
+      completeCityChapter()
+      const unlockedMemory = unlockMemoryByNumber(2)
 
       if (unlockedMemory) {
         setMemoryQueue((currentQueue) => [...currentQueue, unlockedMemory])
@@ -100,9 +150,10 @@ export function GamePage() {
       unsubscribeCollect()
       unsubscribeShard()
       unsubscribeTalk()
-      unsubscribeChapter()
+      unsubscribeForestChapter()
+      unsubscribeCityChapter()
     }
-  }, [collectShards, completeForestChapter, openDialogue, unlockMemoryByNumber])
+  }, [collectShards, completeCityChapter, completeForestChapter, openDialogue, unlockMemoryByNumber])
 
   const handleChoiceResult = useCallback(
     (result: DialogueChoiceResult, choice: DialogueChoice) => {
@@ -113,6 +164,12 @@ export function GamePage() {
             ? choice.label
             : `${choice.label} (already answered — score unchanged)`,
         )
+        return
+      }
+
+      if (result.kind === 'story' && result.trigger === 'time-monster-understood') {
+        gameEventBus.emit('boss:time-monster-understood', {})
+        setLastDialogueChoice(choice.label)
         return
       }
 
@@ -178,8 +235,8 @@ export function GamePage() {
           Home
         </Link>
         <div>
-          <p className="eyebrow">Chapter 1 · Forest</p>
-          <h1 id="game-title">Pale Blue Sky Forest</h1>
+          <p className="eyebrow">{chapterMeta.eyebrow}</p>
+          <h1 id="game-title">{chapterMeta.title}</h1>
         </div>
       </header>
       <div className="game-playfield">
@@ -202,7 +259,7 @@ export function GamePage() {
         <div>
           <p className="panel-label">Chapter progress</p>
           <strong>{currentChapter}</strong>
-          <span>{forestChapterCleared ? 'Forest cleared' : 'Find the Giant Jar'}</span>
+          <span>{chapterProgressHint}</span>
         </div>
         <button type="button" onClick={() => collectShards(1)}>
           Collect shard
@@ -223,8 +280,14 @@ export function GamePage() {
         <button type="button" onClick={() => openDialogue('forestElder')}>
           Talk to Forest Elder
         </button>
-        <button type="button" onClick={() => openDialogue('cityGuide')}>
-          Talk to City Guide
+        <button type="button" onClick={() => openDialogue('cityBarista')}>
+          Talk to Barista
+        </button>
+        <button type="button" onClick={() => openDialogue('cityTraveler')}>
+          Talk to Traveler
+        </button>
+        <button type="button" onClick={() => openDialogue('timeMonster')}>
+          Talk to Time Monster
         </button>
         <button type="button" onClick={() => openDialogue('snowSpirit')}>
           Talk to Snow Spirit
