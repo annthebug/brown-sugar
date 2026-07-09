@@ -88,7 +88,6 @@ export function GamePage() {
   const completeGlassChapter = useGameStore((state) => state.completeGlassChapter)
   const completeRetryChapter = useGameStore((state) => state.completeRetryChapter)
   const completeFinalStage = useGameStore((state) => state.completeFinalStage)
-  const resetProgress = useGameStore((state) => state.resetProgress)
   const unlockNextMemory = useGalleryStore((state) => state.unlockNextMemory)
   const unlockMemoryByNumber = useGalleryStore((state) => state.unlockMemoryByNumber)
   const memories = useGalleryStore((state) => state.memories)
@@ -98,7 +97,6 @@ export function GamePage() {
   const dismissToast = useAchievementStore((state) => state.dismissToast)
   const answeredQuestionIds = useMbtiStore((state) => state.answeredQuestionIds)
   const answerQuestion = useMbtiStore((state) => state.answerQuestion)
-  const resetMbtiScores = useMbtiStore((state) => state.resetScores)
   const isMbtiComplete = useMbtiStore((state) => state.isComplete())
   const mbtiResult = useMbtiStore((state) => state.getMbtiResult())
   const activeMemory = memoryQueue[0]
@@ -392,15 +390,6 @@ export function GamePage() {
           <strong>{CHAPTER_DISPLAY_NAMES[currentChapter]}</strong>
           <span>{chapterProgressHint}</span>
         </div>
-        <button type="button" onClick={() => collectShards(1)}>
-          收集 1 片
-        </button>
-        <button type="button" onClick={() => collectShards(100)}>
-          收集 100 片
-        </button>
-        <button type="button" className="secondary-action" onClick={resetProgress}>
-          重設進度
-        </button>
         <div>
           <p className="panel-label">MBTI 進度</p>
           <strong>
@@ -415,42 +404,6 @@ export function GamePage() {
           </strong>
           <span>這趟旅程的溫柔里程碑。</span>
         </div>
-        <button type="button" onClick={() => openDialogue('forestElder')}>
-          與森林長者對話
-        </button>
-        <button type="button" onClick={() => openDialogue('cityBarista')}>
-          與咖啡師對話
-        </button>
-        <button type="button" onClick={() => openDialogue('cityTraveler')}>
-          與旅人對話
-        </button>
-        <button type="button" onClick={() => openDialogue('timeMonster')}>
-          與時間怪物對話
-        </button>
-        <button type="button" onClick={() => openDialogue('snowSpirit')}>
-          與雪山嚮導對話
-        </button>
-        <button type="button" onClick={() => openDialogue('snowSpiritBoss')}>
-          與雪靈對話（首領）
-        </button>
-        <button type="button" onClick={() => openDialogue('glassMaster')}>
-          與玻璃師傅對話
-        </button>
-        <button type="button" onClick={() => openDialogue('glassMasterBoss')}>
-          與玻璃師傅對話（首領）
-        </button>
-        <button type="button" onClick={() => openDialogue('innerGuide')}>
-          與內在嚮導對話
-        </button>
-        <button type="button" onClick={() => openDialogue('innerDoubtBoss')}>
-          與內在懷疑對話（首領）
-        </button>
-        <button type="button" onClick={() => openDialogue('perfectionismBoss')}>
-          與完美主義對話（首領）
-        </button>
-        <button type="button" className="secondary-action" onClick={resetMbtiScores}>
-          重設 MBTI
-        </button>
       </section>
       {activeDialogue ? (
         <DialogueBox
