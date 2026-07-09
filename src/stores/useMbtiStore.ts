@@ -6,9 +6,12 @@ import { calculateMbtiType, type MbtiDimension, type MbtiScores, type MbtiType }
 export type Dimension = MbtiDimension
 export type Preference = 'first' | 'second'
 
+export type AnsweredPreferenceMap = Record<string, Preference>
+
 type MbtiState = {
   scores: MbtiScores
   answeredQuestionIds: string[]
+  answersByQuestionId: AnsweredPreferenceMap
   answerQuestion: (questionId: string, preference: Preference) => boolean
   resetScores: () => void
   isComplete: () => boolean
@@ -27,6 +30,7 @@ export const useMbtiStore = create<MbtiState>()(
     (set, get) => ({
       scores: initialScores,
       answeredQuestionIds: [],
+      answersByQuestionId: {},
       answerQuestion: (questionId, preference) => {
         const question = getQuestionById(questionId)
 
@@ -45,6 +49,10 @@ export const useMbtiStore = create<MbtiState>()(
 
           return {
             answeredQuestionIds: [...state.answeredQuestionIds, questionId],
+            answersByQuestionId: {
+              ...state.answersByQuestionId,
+              [questionId]: preference,
+            },
             scores: {
               ...state.scores,
               [question.dimension]:
@@ -59,6 +67,7 @@ export const useMbtiStore = create<MbtiState>()(
         set({
           scores: initialScores,
           answeredQuestionIds: [],
+          answersByQuestionId: {},
         }),
       isComplete: () => get().answeredQuestionIds.length >= MBTI_QUESTION_COUNT,
       getMbtiResult: () => {
@@ -97,6 +106,20 @@ export const useMbtiStore = create<MbtiState>()(
                   (questionId): questionId is string => typeof questionId === 'string',
                 )
               : currentState.answeredQuestionIds,
+          answersByQuestionId:
+            typeof persisted === 'object' &&
+            persisted !== null &&
+            'answersByQuestionId' in persisted &&
+            typeof persisted.answersByQuestionId === 'object' &&
+            persisted.answersByQuestionId !== null
+              ? Object.fromEntries(
+                  Object.entries(persisted.answersByQuestionId).filter(
+                    (entry): entry is [string, Preference] =>
+                      typeof entry[0] === 'string' &&
+                      (entry[1] === 'first' || entry[1] === 'second'),
+                  ),
+                )
+              : currentState.answersByQuestionId,
         }
       },
     },

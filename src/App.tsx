@@ -5,9 +5,11 @@ import { GalleryPage } from './routes/GalleryPage'
 import { GamePage } from './routes/GamePage'
 import { HomePage } from './routes/HomePage'
 import { SettingsPage } from './routes/SettingsPage'
+import { useSaveSync } from './services/save'
 
 export function App() {
   useFullscreenSync()
+  useSaveSync()
 
   return (
     <BrowserRouter>
