@@ -58,7 +58,7 @@ sprite.setOrigin(0.5, 1).setScale(0.44)
 python3 scripts/generate-glass-master-sprite.py
 ```
 
-## Next asset tasks
+## Integration
 
-- Switch `GlassStudioScene` guide NPC from `npc-characters` atlas to this sheet.
-- Add `portraitId: 'glassMaster'` for `glassMaster` dialogue script.
+- `GlassStudioScene.placeGlassMasterNpc()` uses `ASSET_KEYS.glassMaster` + `GLASS_MASTER_FRAMES.sideIdle`.
+- `glassMaster` dialogue script uses `portraitId: 'glassMaster'`.
