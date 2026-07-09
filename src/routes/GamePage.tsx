@@ -12,6 +12,7 @@ import {
   type DialogueScriptId,
 } from '../data/dialogues'
 import { gameEventBus } from '../game/events/eventBus'
+import { audioService } from '../services/audio'
 import { type MemoryEntry, useGalleryStore } from '../stores/useGalleryStore'
 import { useGameStore } from '../stores/useGameStore'
 import { useMbtiStore } from '../stores/useMbtiStore'
@@ -56,6 +57,20 @@ export function GamePage() {
   }, [])
 
   useEffect(() => {
+    audioService.init()
+
+    const unsubscribeReady = gameEventBus.on('phaser:ready', (payload) => {
+      audioService.playSceneBgm(payload.scene)
+    })
+    const unsubscribeJump = gameEventBus.on('player:jump', () => {
+      audioService.playSfx('jump')
+    })
+    const unsubscribeMeow = gameEventBus.on('player:meow', () => {
+      audioService.playSfx('meow')
+    })
+    const unsubscribeCollect = gameEventBus.on('memory-shard-collected', () => {
+      audioService.playSfx('memoryCollect')
+    })
     const unsubscribeShard = gameEventBus.on('memory-shard-collected', (payload) => {
       collectShards(payload.amount)
     })
@@ -76,6 +91,10 @@ export function GamePage() {
     })
 
     return () => {
+      unsubscribeReady()
+      unsubscribeJump()
+      unsubscribeMeow()
+      unsubscribeCollect()
       unsubscribeShard()
       unsubscribeTalk()
       unsubscribeChapter()

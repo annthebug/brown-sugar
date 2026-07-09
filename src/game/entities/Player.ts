@@ -164,6 +164,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         body.setVelocityY(JUMP_VEL)
         this.canDoubleJump = true
         this._state = 'jump'
+        gameEventBus.emit('player:jump', { x: this.x, y: this.y })
       } else if (this.canDoubleJump) {
         body.setVelocityY(DOUBLE_JUMP_VEL)
         this.canDoubleJump = false

@@ -1,4 +1,5 @@
 import { AppNav } from '../components/AppNav'
+import { audioService } from '../services/audio'
 import { useSettingsStore } from '../stores/useSettingsStore'
 
 export function SettingsPage() {
@@ -25,7 +26,10 @@ export function SettingsPage() {
             min="0"
             max="100"
             value={bgmVolume}
-            onChange={(event) => setBgmVolume(event.currentTarget.valueAsNumber)}
+            onChange={(event) => {
+              audioService.unlock()
+              setBgmVolume(event.currentTarget.valueAsNumber)
+            }}
           />
         </label>
 
@@ -36,7 +40,10 @@ export function SettingsPage() {
             min="0"
             max="100"
             value={soundVolume}
-            onChange={(event) => setSoundVolume(event.currentTarget.valueAsNumber)}
+            onChange={(event) => {
+              audioService.unlock()
+              setSoundVolume(event.currentTarget.valueAsNumber)
+            }}
           />
         </label>
 

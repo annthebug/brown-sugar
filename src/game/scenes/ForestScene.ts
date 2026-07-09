@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
+import { audioService } from '../../services/audio'
 import { ASSET_KEYS, BLACK_SUGAR_FRAMES, MORANDI_PALETTE } from '../assets/assetManifest'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
@@ -118,6 +119,9 @@ export class ForestScene extends Phaser.Scene {
     this.unsubscribeDialogueClosed = gameEventBus.on('dialogue:closed', () => {
       this.player?.endTalk()
     })
+
+    audioService.init()
+    audioService.playBgm('forest')
   }
 
   update(_time: number, delta: number) {
@@ -136,6 +140,7 @@ export class ForestScene extends Phaser.Scene {
     this.player?.setTalkHandler(null)
     this.inputCtrl?.destroy()
     this.touchCtrl?.destroy()
+    audioService.stopBgm()
   }
 
   private buildBackground() {
