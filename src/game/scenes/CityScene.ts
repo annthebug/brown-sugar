@@ -1,7 +1,13 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, BOSS_FRAMES, CITY_BARISTA_FRAMES, MORANDI_PALETTE, PARK_TRAVELER_FRAMES } from '../assets/assetManifest'
-import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
+import {
+  ASSET_KEYS,
+  CITY_BARISTA_FRAMES,
+  MORANDI_PALETTE,
+  PARK_TRAVELER_FRAMES,
+  TIME_MONSTER_FRAMES,
+} from '../assets/assetManifest'
+import { type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
@@ -369,11 +375,44 @@ export class CityScene extends Phaser.Scene {
     const bossX = METRO_X + 80
     const bossY = 350
 
-    this.timeMonster = placeCharacterSprite(this, bossX, bossY, {
-      atlas: 'boss',
-      frame: BOSS_FRAMES.timeMonster,
-      label: '時間怪物',
-      alpha: this.bossCleared ? 0.35 : 1,
+    this.registerTimeMonsterAnimation()
+
+    const container = this.add.container(bossX, bossY) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.timeMonster, TIME_MONSTER_FRAMES.idle)
+    sprite.setOrigin(0.5, 1).setScale(0.48)
+    sprite.setAlpha(this.bossCleared ? 0.35 : 1)
+    sprite.play('time-monster-pulse')
+
+    const label = this.add
+      .text(0, 8, '時間怪物', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.timeMonster = container
+  }
+
+  private registerTimeMonsterAnimation() {
+    if (this.anims.exists('time-monster-pulse')) {
+      return
+    }
+
+    this.anims.create({
+      key: 'time-monster-pulse',
+      frames: [
+        { key: ASSET_KEYS.timeMonster, frame: TIME_MONSTER_FRAMES.pulse1 },
+        { key: ASSET_KEYS.timeMonster, frame: TIME_MONSTER_FRAMES.pulse2 },
+        { key: ASSET_KEYS.timeMonster, frame: TIME_MONSTER_FRAMES.pulse3 },
+        { key: ASSET_KEYS.timeMonster, frame: TIME_MONSTER_FRAMES.idle },
+      ],
+      frameRate: 3,
+      repeat: -1,
     })
   }
 

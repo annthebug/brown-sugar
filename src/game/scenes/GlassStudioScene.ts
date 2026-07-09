@@ -2,11 +2,11 @@ import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
 import {
   ASSET_KEYS,
-  BOSS_FRAMES,
+  GLASS_MASTER_BOSS_FRAMES,
   GLASS_MASTER_FRAMES,
   MORANDI_PALETTE,
 } from '../assets/assetManifest'
-import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
+import { type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
@@ -397,11 +397,44 @@ export class GlassStudioScene extends Phaser.Scene {
   }
 
   private placeGlassMasterBoss() {
-    this.glassMasterBoss = placeCharacterSprite(this, BOSS_X, 320, {
-      atlas: 'boss',
-      frame: BOSS_FRAMES.glassMasterBoss,
-      label: '玻璃師傅',
-      alpha: this.bossCleared ? 0.35 : 1,
+    this.registerGlassMasterBossAnimation()
+
+    const container = this.add.container(BOSS_X, 320) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.glassMasterBoss, GLASS_MASTER_BOSS_FRAMES.idle)
+    sprite.setOrigin(0.5, 1).setScale(0.48)
+    sprite.setAlpha(this.bossCleared ? 0.35 : 1)
+    sprite.play('glass-master-boss-glow')
+
+    const label = this.add
+      .text(0, 8, '玻璃師傅', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.glassMasterBoss = container
+  }
+
+  private registerGlassMasterBossAnimation() {
+    if (this.anims.exists('glass-master-boss-glow')) {
+      return
+    }
+
+    this.anims.create({
+      key: 'glass-master-boss-glow',
+      frames: [
+        { key: ASSET_KEYS.glassMasterBoss, frame: GLASS_MASTER_BOSS_FRAMES.pulse1 },
+        { key: ASSET_KEYS.glassMasterBoss, frame: GLASS_MASTER_BOSS_FRAMES.pulse2 },
+        { key: ASSET_KEYS.glassMasterBoss, frame: GLASS_MASTER_BOSS_FRAMES.pulse3 },
+        { key: ASSET_KEYS.glassMasterBoss, frame: GLASS_MASTER_BOSS_FRAMES.idle },
+      ],
+      frameRate: 3,
+      repeat: -1,
     })
   }
 

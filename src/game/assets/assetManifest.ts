@@ -14,6 +14,18 @@ import glassMasterTextureUrl from '../../../assets/characters/glass-master-side-
 import glassMasterAtlasUrl from '../../../assets/characters/glass-master-side-sprite-sheet-v1.json?url'
 import innerGuideTextureUrl from '../../../assets/characters/inner-guide-side-sprite-sheet-v1.png'
 import innerGuideAtlasUrl from '../../../assets/characters/inner-guide-side-sprite-sheet-v1.json?url'
+import giantCanTextureUrl from '../../../assets/characters/giant-can-sprite-sheet-v1.png'
+import giantCanAtlasUrl from '../../../assets/characters/giant-can-sprite-sheet-v1.json?url'
+import timeMonsterTextureUrl from '../../../assets/characters/time-monster-sprite-sheet-v1.png'
+import timeMonsterAtlasUrl from '../../../assets/characters/time-monster-sprite-sheet-v1.json?url'
+import snowSpiritTextureUrl from '../../../assets/characters/snow-spirit-sprite-sheet-v1.png'
+import snowSpiritAtlasUrl from '../../../assets/characters/snow-spirit-sprite-sheet-v1.json?url'
+import glassMasterBossTextureUrl from '../../../assets/characters/glass-master-boss-sprite-sheet-v1.png'
+import glassMasterBossAtlasUrl from '../../../assets/characters/glass-master-boss-sprite-sheet-v1.json?url'
+import innerDoubtTextureUrl from '../../../assets/characters/inner-doubt-sprite-sheet-v1.png'
+import innerDoubtAtlasUrl from '../../../assets/characters/inner-doubt-sprite-sheet-v1.json?url'
+import perfectionismTextureUrl from '../../../assets/characters/perfectionism-sprite-sheet-v1.png'
+import perfectionismAtlasUrl from '../../../assets/characters/perfectionism-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -31,6 +43,12 @@ export const ASSET_KEYS = {
   snowGuide: 'snow-guide',
   glassMaster: 'glass-master',
   innerGuide: 'inner-guide',
+  giantCan: 'giant-can',
+  timeMonster: 'time-monster',
+  snowSpirit: 'snow-spirit',
+  glassMasterBoss: 'glass-master-boss',
+  innerDoubt: 'inner-doubt',
+  perfectionism: 'perfectionism',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -112,6 +130,48 @@ export const INNER_GUIDE_FRAMES = {
   sideWalk1: 'inner-guide-side-walk-1',
   sideWalk2: 'inner-guide-side-walk-2',
   sideWalk3: 'inner-guide-side-walk-3',
+} as const
+
+export const GIANT_CAN_FRAMES = {
+  idle: 'giant-can-idle',
+  pulse1: 'giant-can-pulse-1',
+  pulse2: 'giant-can-pulse-2',
+  pulse3: 'giant-can-pulse-3',
+} as const
+
+export const TIME_MONSTER_FRAMES = {
+  idle: 'time-monster-idle',
+  pulse1: 'time-monster-pulse-1',
+  pulse2: 'time-monster-pulse-2',
+  pulse3: 'time-monster-pulse-3',
+} as const
+
+export const SNOW_SPIRIT_FRAMES = {
+  idle: 'snow-spirit-idle',
+  pulse1: 'snow-spirit-pulse-1',
+  pulse2: 'snow-spirit-pulse-2',
+  pulse3: 'snow-spirit-pulse-3',
+} as const
+
+export const GLASS_MASTER_BOSS_FRAMES = {
+  idle: 'glass-master-boss-idle',
+  pulse1: 'glass-master-boss-pulse-1',
+  pulse2: 'glass-master-boss-pulse-2',
+  pulse3: 'glass-master-boss-pulse-3',
+} as const
+
+export const INNER_DOUBT_FRAMES = {
+  idle: 'inner-doubt-idle',
+  pulse1: 'inner-doubt-pulse-1',
+  pulse2: 'inner-doubt-pulse-2',
+  pulse3: 'inner-doubt-pulse-3',
+} as const
+
+export const PERFECTIONISM_FRAMES = {
+  idle: 'perfectionism-idle',
+  pulse1: 'perfectionism-pulse-1',
+  pulse2: 'perfectionism-pulse-2',
+  pulse3: 'perfectionism-pulse-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -274,6 +334,72 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: innerGuideTextureUrl,
       atlasUrl: innerGuideAtlasUrl,
       frames: Object.values(INNER_GUIDE_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.giantCan,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Giant Can Forest boss atlas (idle + 3-frame gentle pulse glow, cat-food can).',
+      textureUrl: giantCanTextureUrl,
+      atlasUrl: giantCanAtlasUrl,
+      frames: Object.values(GIANT_CAN_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.timeMonster,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Time Monster City boss atlas (idle + 3-frame pendulum sway / tick glow).',
+      textureUrl: timeMonsterTextureUrl,
+      atlasUrl: timeMonsterAtlasUrl,
+      frames: Object.values(TIME_MONSTER_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.snowSpirit,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Snow Spirit summit boss atlas (idle + 3-frame head bob / white glow pulse, kodama spirit).',
+      textureUrl: snowSpiritTextureUrl,
+      atlasUrl: snowSpiritAtlasUrl,
+      frames: Object.values(SNOW_SPIRIT_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.glassMasterBoss,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Glass Master Boss workshop atlas (idle + 3-frame furnace glow pulse, front-facing artisan).',
+      textureUrl: glassMasterBossTextureUrl,
+      atlasUrl: glassMasterBossAtlasUrl,
+      frames: Object.values(GLASS_MASTER_BOSS_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.innerDoubt,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Inner Doubt Retry boss atlas (idle + 3-frame wobble / blink bounce, soot-sprite cluster).',
+      textureUrl: innerDoubtTextureUrl,
+      atlasUrl: innerDoubtAtlasUrl,
+      frames: Object.values(INNER_DOUBT_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.perfectionism,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Perfectionism Final boss atlas (idle + 3-frame paper drift / mist pulse, mask spirit).',
+      textureUrl: perfectionismTextureUrl,
+      atlasUrl: perfectionismAtlasUrl,
+      frames: Object.values(PERFECTIONISM_FRAMES),
     },
     {
       kind: 'atlas',

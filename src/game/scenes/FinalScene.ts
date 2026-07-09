@@ -2,11 +2,11 @@ import Phaser from 'phaser'
 import { useMbtiStore } from '../../stores/useMbtiStore'
 import {
   ASSET_KEYS,
-  BOSS_FRAMES,
   INNER_GUIDE_FRAMES,
   MORANDI_PALETTE,
+  PERFECTIONISM_FRAMES,
 } from '../assets/assetManifest'
-import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
+import { type CharacterMarker } from '../entities/CharacterSprite'
 import { MemoryShard } from '../entities/MemoryShard'
 import { gameEventBus } from '../events/eventBus'
 import { Player } from '../entities/Player'
@@ -300,11 +300,44 @@ export class FinalScene extends Phaser.Scene {
   }
 
   private placePerfectionism() {
-    this.perfectionism = placeCharacterSprite(this, PERFECTIONISM_X, 312, {
-      atlas: 'boss',
-      frame: BOSS_FRAMES.perfectionism,
-      label: '完美主義',
-      alpha: 0.7,
+    this.registerPerfectionismAnimation()
+
+    const container = this.add.container(PERFECTIONISM_X, 312) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.perfectionism, PERFECTIONISM_FRAMES.idle)
+    sprite.setOrigin(0.5, 1).setScale(0.48)
+    sprite.setAlpha(0.7)
+    sprite.play('perfectionism-mist')
+
+    const label = this.add
+      .text(0, 8, '完美主義', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.perfectionism = container
+  }
+
+  private registerPerfectionismAnimation() {
+    if (this.anims.exists('perfectionism-mist')) {
+      return
+    }
+
+    this.anims.create({
+      key: 'perfectionism-mist',
+      frames: [
+        { key: ASSET_KEYS.perfectionism, frame: PERFECTIONISM_FRAMES.pulse1 },
+        { key: ASSET_KEYS.perfectionism, frame: PERFECTIONISM_FRAMES.pulse2 },
+        { key: ASSET_KEYS.perfectionism, frame: PERFECTIONISM_FRAMES.pulse3 },
+        { key: ASSET_KEYS.perfectionism, frame: PERFECTIONISM_FRAMES.idle },
+      ],
+      frameRate: 3,
+      repeat: -1,
     })
   }
 

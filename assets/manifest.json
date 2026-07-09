@@ -186,6 +186,96 @@
         ]
       },
       {
+        "key": "giant-can",
+        "type": "atlas",
+        "texture": "characters/giant-can-sprite-sheet-v1.png",
+        "atlas": "characters/giant-can-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Giant Can Forest boss atlas (idle + 3-frame gentle pulse glow, cat-food can).",
+        "frames": [
+          "giant-can-idle",
+          "giant-can-pulse-1",
+          "giant-can-pulse-2",
+          "giant-can-pulse-3"
+        ]
+      },
+      {
+        "key": "time-monster",
+        "type": "atlas",
+        "texture": "characters/time-monster-sprite-sheet-v1.png",
+        "atlas": "characters/time-monster-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Time Monster City boss atlas (idle + 3-frame pendulum sway / tick glow).",
+        "frames": [
+          "time-monster-idle",
+          "time-monster-pulse-1",
+          "time-monster-pulse-2",
+          "time-monster-pulse-3"
+        ]
+      },
+      {
+        "key": "snow-spirit",
+        "type": "atlas",
+        "texture": "characters/snow-spirit-sprite-sheet-v1.png",
+        "atlas": "characters/snow-spirit-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Snow Spirit summit boss atlas (idle + 3-frame head bob / white glow pulse, kodama spirit).",
+        "frames": [
+          "snow-spirit-idle",
+          "snow-spirit-pulse-1",
+          "snow-spirit-pulse-2",
+          "snow-spirit-pulse-3"
+        ]
+      },
+      {
+        "key": "glass-master-boss",
+        "type": "atlas",
+        "texture": "characters/glass-master-boss-sprite-sheet-v1.png",
+        "atlas": "characters/glass-master-boss-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Glass Master Boss workshop atlas (idle + 3-frame furnace glow pulse, front-facing artisan).",
+        "frames": [
+          "glass-master-boss-idle",
+          "glass-master-boss-pulse-1",
+          "glass-master-boss-pulse-2",
+          "glass-master-boss-pulse-3"
+        ]
+      },
+      {
+        "key": "inner-doubt",
+        "type": "atlas",
+        "texture": "characters/inner-doubt-sprite-sheet-v1.png",
+        "atlas": "characters/inner-doubt-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Inner Doubt Retry boss atlas (idle + 3-frame wobble / blink bounce, soot-sprite cluster).",
+        "frames": [
+          "inner-doubt-idle",
+          "inner-doubt-pulse-1",
+          "inner-doubt-pulse-2",
+          "inner-doubt-pulse-3"
+        ]
+      },
+      {
+        "key": "perfectionism",
+        "type": "atlas",
+        "texture": "characters/perfectionism-sprite-sheet-v1.png",
+        "atlas": "characters/perfectionism-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Perfectionism Final boss atlas (idle + 3-frame paper drift / mist pulse, mask spirit).",
+        "frames": [
+          "perfectionism-idle",
+          "perfectionism-pulse-1",
+          "perfectionism-pulse-2",
+          "perfectionism-pulse-3"
+        ]
+      },
+      {
         "key": "boss-characters",
         "type": "atlas",
         "texture": "characters/boss-sprite-sheet-v1.png",

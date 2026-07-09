@@ -2,11 +2,11 @@ import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
 import {
   ASSET_KEYS,
-  BOSS_FRAMES,
   MORANDI_PALETTE,
   SNOW_GUIDE_FRAMES,
+  SNOW_SPIRIT_FRAMES,
 } from '../assets/assetManifest'
-import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
+import { type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
@@ -368,16 +368,49 @@ export class SnowMountainScene extends Phaser.Scene {
       ease: 'Sine.easeInOut',
     })
 
-    this.snowSpirit = placeCharacterSprite(this, bossX, bossY, {
-      atlas: 'boss',
-      frame: BOSS_FRAMES.snowSpirit,
-      label: '雪靈',
-      alpha: this.bossCleared ? 0.35 : 1,
-    })
+    this.registerSnowSpiritAnimation()
+
+    const container = this.add.container(bossX, bossY) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.snowSpirit, SNOW_SPIRIT_FRAMES.idle)
+    sprite.setOrigin(0.5, 1).setScale(0.48)
+    sprite.setAlpha(this.bossCleared ? 0.35 : 1)
+    sprite.play('snow-spirit-pulse')
+
+    const label = this.add
+      .text(0, 8, '雪靈', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.snowSpirit = container
 
     if (this.bossCleared) {
       this.spiritLight?.setAlpha(0.2)
     }
+  }
+
+  private registerSnowSpiritAnimation() {
+    if (this.anims.exists('snow-spirit-pulse')) {
+      return
+    }
+
+    this.anims.create({
+      key: 'snow-spirit-pulse',
+      frames: [
+        { key: ASSET_KEYS.snowSpirit, frame: SNOW_SPIRIT_FRAMES.pulse1 },
+        { key: ASSET_KEYS.snowSpirit, frame: SNOW_SPIRIT_FRAMES.pulse2 },
+        { key: ASSET_KEYS.snowSpirit, frame: SNOW_SPIRIT_FRAMES.pulse3 },
+        { key: ASSET_KEYS.snowSpirit, frame: SNOW_SPIRIT_FRAMES.idle },
+      ],
+      frameRate: 3,
+      repeat: -1,
+    })
   }
 
   private handleInteract() {
