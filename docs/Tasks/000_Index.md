@@ -13,14 +13,14 @@
 | [005](005.md) | 主角黑糖：移動與能力 | 玩法 | ✅ 完成 |
 | [006](006.md) | Memory 系統（收集與解鎖） | 玩法 | ✅ 完成 |
 | [007](007.md) | 對話系統（Visual Novel） | 玩法 | ✅ 完成 |
-| [008](008.md) | MBTI 系統（題庫與計分） | 系統 | 🟨 進行中 |
-| [009](009.md) | 關卡：第一章 Forest | 關卡 | ⬜ 未開始 |
+| [008](008.md) | MBTI 系統（題庫與計分） | 系統 | ✅ 完成 |
+| [009](009.md) | 關卡：第一章 Forest | 關卡 | ✅ 完成 |
 | [010](010.md) | 關卡：第二章 City | 關卡 | ✅ 完成 |
 | [011](011.md) | 關卡：第三章 Snow Mountain | 關卡 | ⬜ 未開始 |
 | [012](012.md) | 關卡：第四章 Glass Studio | 關卡 | ⬜ 未開始 |
 | [013](013.md) | 關卡：第五章 Retry | 關卡 | ⬜ 未開始 |
 | [014](014.md) | Final Stage 與 Boss：Perfectionism | 關卡 | ⬜ 未開始 |
-| [015](015.md) | 音訊系統（Howler.js） | 系統 | ⬜ 未開始 |
+| [015](015.md) | 音訊系統（Howler.js） | 系統 | 🟨 進行中 |
 | [016](016.md) | UI：首頁 / 暫停 / 設定 | UI | 🟨 進行中 |
 | [017](017.md) | 相簿（Gallery） | UI | ✅ 完成 |
 | [018](018.md) | 存檔系統（LocalStorage + Firebase Sync） | 系統 | 🟨 進行中 |
@@ -31,14 +31,15 @@
 
 ## 目前盤點（2026-07-09）
 
-- `package.json` 使用 `phaser@^3.90.0`；基礎 Vite / React / TypeScript、React Router、Zustand stores、`/game` Phaser 掛載與 event bus 已就緒。
-- **Task 005 完成**：`Player.ts` 實作 Jump / Double Jump / Dash / Meow / Talk 與動畫狀態機；`InputController`（鍵盤）+ `TouchControls`（觸控按鈕式 D-pad）已串接 `GameScene`。**`GameScene` 仍為測試場景**（標題文字、裝飾用靜態黑糖 sprite 與可操控 Player 並存），正式關卡待 Task 009 起替換。
-- **Memory Shard 為點擊拾取**：`GameScene.addMemoryShard()` 以 `pointerdown` 觸發 event bus，非 Player 碰撞；拾取不會呼叫 `player.triggerCollect()`。章節關卡實作後可改為碰撞自動拾取。
-- Task 006 / 007 完成：Memory 收集解鎖流程、`MemoryOverlay` GSAP 動畫、Visual Novel 對話與 MBTI 選項 hook 已可用。
-- Task 008 進行中：`useMbtiStore` + Forest Elder 單題 EI 對話計分已有；題庫（`data/mbti.ts`）、計分服務、16 型結果與玻璃碗對照表尚未建立。
-- Task 016 進行中：首頁（Start / Gallery）與設定頁 UI 已有；Pause 選單、Fullscreen API、Continue / Restart、Howler 音量串接尚未實作。
-- Task 017 進行中：`GalleryPage` + `useGalleryStore` + 重播動畫已有；剪影樣式、真實回憶 metadata 與 `assets/memories/` 照片尚待補齊。
-- 章節關卡、Howler 音訊、Firebase Sync、PWA、Vercel 部署與成就系統尚未進入核心實作。
+- `package.json` 使用 `phaser@^3.90.0`、`howler@^2.2.4`；`npm run build` 可通過。
+- **章節關卡（009 / 010 完成）：** `ForestScene`（平台、巡邏怪物、森林老人、巨大罐罐 Boss、Memory Shard 碰撞拾取、通關解鎖 Memory #1 並切換 `CityScene`）；`CityScene`（咖啡店 / 公園 / 捷運區塊、店員 / 旅人 NPC、Time Monster Boss、通關解鎖 Memory #2）。`chapters.ts` 依 `forestChapterCleared` / `cityChapterCleared` 決定可玩章節；第三至五章仍 fallback 至 `ForestScene`，尚無獨立 Scene。
+- **MBTI（008 完成）：** `data/mbti.ts` 共 21 題；`services/mbti.ts` 計算四碼類型與玻璃碗對照；`useMbtiStore` 含 `answeredQuestionIds`、防重複計分、`isComplete()`、`getMbtiResult()`；`EndingPage` 答完後顯示 MBTI 與碗型。第三至五章對話腳本已撰寫，目前除 Forest / City 場景 NPC 外，亦可透過 `GamePage` debug 按鈕觸發。
+- **核心玩法：** `Player` 全能力、`MemoryShard` overlap 拾取、`DialogueBox` 分支對話、`MemoryOverlay` GSAP 動畫、`GalleryPage` 25 張照片相簿（剪影 / 重播）。
+- **音訊（015 進行中）：** `services/audio.ts` 已用 Howler 播放 placeholder BGM / SFX，串接設定音量與首次互動解鎖；尚無各章獨立 BGM 與完整 SFX 清單（腳步、玻璃敲擊、Ending Piano 等）。
+- **UI（016 進行中）：** 首頁已有 Start / Continue / Gallery / Settings；`PauseMenu`（Esc）、Fullscreen API、`useFullscreenSync` 已有；Language 僅 store 值，尚無 i18n 文案套用。
+- **結局（019 進行中）：** `EndingPage` 可預覽 MBTI 結果與玻璃碗 sprite sheet；尚無寶箱動畫、Credits 捲動、Ending Piano。
+- **存檔（018 進行中）：** 各 Zustand store 已 LocalStorage persist；尚無 Firebase / `services/save.ts`。
+- **遺留：** `GameScene` 仍保留於 Phaser config 作測試場景；`GamePage` 仍有 debug 面板（手動 Collect shard、測試對話按鈕等），非最終遊戲 UI。
 
 ## 任務檔案格式
 
