@@ -8,7 +8,12 @@ export type DialogueChoiceResult =
     }
   | {
       kind: 'story'
-      trigger: 'time-monster-understood' | 'snow-spirit-understood' | 'glass-master-understood' | 'inner-doubt-understood'
+      trigger:
+        | 'time-monster-understood'
+        | 'snow-spirit-understood'
+        | 'glass-master-understood'
+        | 'inner-doubt-understood'
+        | 'perfectionism-understood'
     }
 
 export type DialogueChoice = {
@@ -1283,6 +1288,92 @@ export const DIALOGUE_SCRIPTS = {
         speakerName: 'Inner Doubt',
         avatarLabel: 'ID',
         text: 'Keep going. The true shape is already forming.',
+      },
+    },
+  },
+  perfectionismBoss: {
+    id: 'perfectionism-boss',
+    title: 'Perfectionism',
+    startNodeId: 'perfectionism-intro',
+    nodes: {
+      'perfectionism-intro': {
+        id: 'perfectionism-intro',
+        speakerName: 'Perfectionism',
+        avatarLabel: 'PF',
+        text: 'Not good enough.',
+        nextNodeId: 'perfectionism-round-1',
+      },
+      'perfectionism-round-1': {
+        id: 'perfectionism-round-1',
+        speakerName: 'Perfectionism',
+        avatarLabel: 'PF',
+        text: 'Redo it.',
+        nextNodeId: 'perfectionism-round-2',
+      },
+      'perfectionism-round-2': {
+        id: 'perfectionism-round-2',
+        speakerName: 'Perfectionism',
+        avatarLabel: 'PF',
+        text: 'Again.',
+        nextNodeId: 'perfectionism-choice-1',
+      },
+      'perfectionism-choice-1': {
+        id: 'perfectionism-choice-1',
+        speakerName: 'Brown Sugar',
+        avatarLabel: 'BS',
+        text: 'I hear you. But I do not need to disappear inside endless trying.',
+        choices: [
+          {
+            id: 'perfectionism-choice-1-a',
+            label: 'This bowl can hold love without becoming flawless.',
+            nextNodeId: 'perfectionism-soften',
+          },
+          {
+            id: 'perfectionism-choice-1-b',
+            label: 'I can stop here and still mean every part of it.',
+            nextNodeId: 'perfectionism-soften',
+          },
+        ],
+      },
+      'perfectionism-soften': {
+        id: 'perfectionism-soften',
+        speakerName: 'Perfectionism',
+        avatarLabel: 'PF',
+        text: 'If you stop... what remains?',
+        nextNodeId: 'perfectionism-choice-2',
+      },
+      'perfectionism-choice-2': {
+        id: 'perfectionism-choice-2',
+        speakerName: 'Brown Sugar',
+        avatarLabel: 'BS',
+        text: 'What remains when the pressure quiets down?',
+        choices: [
+          {
+            id: 'perfectionism-choice-2-a',
+            label: 'The care that made me begin.',
+            nextNodeId: 'perfectionism-understand',
+            result: { kind: 'story', trigger: 'perfectionism-understood' },
+          },
+          {
+            id: 'perfectionism-choice-2-b',
+            label: 'The heart that wanted to give something true.',
+            nextNodeId: 'perfectionism-understand',
+            result: { kind: 'story', trigger: 'perfectionism-understood' },
+          },
+        ],
+      },
+      'perfectionism-understand': {
+        id: 'perfectionism-understand',
+        speakerName: 'Perfectionism',
+        avatarLabel: 'PF',
+        text: 'Then I do not need to shout anymore.',
+        nextNodeId: 'perfectionism-farewell',
+      },
+      'perfectionism-farewell': {
+        id: 'perfectionism-farewell',
+        speakerName: 'Perfectionism',
+        avatarLabel: 'PF',
+        text: 'Let the gift be enough.',
       },
     },
   },
