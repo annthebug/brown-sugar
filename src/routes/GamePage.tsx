@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { AchievementToastStack } from '../components/AchievementToastStack'
 import { AppNav } from '../components/AppNav'
 import { DialogueBox } from '../components/DialogueBox'
 import { MemoryOverlay } from '../components/MemoryOverlay'
@@ -14,7 +15,9 @@ import {
   type DialogueScriptId,
 } from '../data/dialogues'
 import { gameEventBus } from '../game/events/eventBus'
+import { ACHIEVEMENT_DEFINITIONS } from '../data/achievements'
 import { type MemoryEntry, useGalleryStore } from '../stores/useGalleryStore'
+import { useAchievementStore } from '../stores/useAchievementStore'
 import { useGameStore } from '../stores/useGameStore'
 import { useMbtiStore } from '../stores/useMbtiStore'
 
@@ -88,6 +91,11 @@ export function GamePage() {
   const resetProgress = useGameStore((state) => state.resetProgress)
   const unlockNextMemory = useGalleryStore((state) => state.unlockNextMemory)
   const unlockMemoryByNumber = useGalleryStore((state) => state.unlockMemoryByNumber)
+  const memories = useGalleryStore((state) => state.memories)
+  const unlockedAchievementIds = useAchievementStore((state) => state.unlockedIds)
+  const toastQueue = useAchievementStore((state) => state.toastQueue)
+  const unlockAchievement = useAchievementStore((state) => state.unlockAchievement)
+  const dismissToast = useAchievementStore((state) => state.dismissToast)
   const answeredQuestionIds = useMbtiStore((state) => state.answeredQuestionIds)
   const answerQuestion = useMbtiStore((state) => state.answerQuestion)
   const resetMbtiScores = useMbtiStore((state) => state.resetScores)
@@ -142,6 +150,39 @@ export function GamePage() {
   const openDialogue = useCallback((dialogueId: DialogueScriptId) => {
     setActiveDialogueId(dialogueId)
   }, [])
+
+  useEffect(() => {
+    if (totalMemoryShards >= 1) {
+      unlockAchievement('first-shard')
+    }
+
+    if (memories.some((memory) => memory.unlocked)) {
+      unlockAchievement('first-memory')
+    }
+
+    if (forestChapterCleared) {
+      unlockAchievement('forest-chapter')
+    }
+
+    if (memories.length > 0 && memories.every((memory) => memory.unlocked)) {
+      unlockAchievement('all-memories')
+    }
+
+    if (isMbtiComplete) {
+      unlockAchievement('mbti-complete')
+    }
+
+    if (gameCompleted) {
+      unlockAchievement('journey-complete')
+    }
+  }, [
+    forestChapterCleared,
+    gameCompleted,
+    isMbtiComplete,
+    memories,
+    totalMemoryShards,
+    unlockAchievement,
+  ])
 
   useEffect(() => {
     const unsubscribeShard = gameEventBus.on('memory-shard-collected', (payload) => {
@@ -375,6 +416,13 @@ export function GamePage() {
           </strong>
           <span>{isMbtiComplete && mbtiResult ? `Result: ${mbtiResult}` : lastDialogueChoice}</span>
         </div>
+        <div>
+          <p className="panel-label">Achievements</p>
+          <strong>
+            {unlockedAchievementIds.length} / {ACHIEVEMENT_DEFINITIONS.length}
+          </strong>
+          <span>Gentle milestones for this journey.</span>
+        </div>
         <button type="button" onClick={() => openDialogue('forestElder')}>
           Talk to Forest Elder
         </button>
@@ -421,6 +469,7 @@ export function GamePage() {
       ) : null}
       {activeMemory ? <MemoryOverlay memory={activeMemory} onContinue={continueMemory} /> : null}
       {isPaused ? <PauseMenu onResume={resumeGame} onRestart={restartChapter} /> : null}
+      <AchievementToastStack toasts={toastQueue} onDismiss={dismissToast} />
     </main>
   )
 }

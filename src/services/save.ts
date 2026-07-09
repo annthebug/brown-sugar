@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { ACHIEVEMENT_MAP, type AchievementId } from '../data/achievements'
 import { getQuestionById, type MbtiPreferenceLetter } from '../data/mbti'
+import { useAchievementStore } from '../stores/useAchievementStore'
 import type { Chapter } from '../stores/useGameStore'
 import { useGameStore } from '../stores/useGameStore'
 import { useGalleryStore } from '../stores/useGalleryStore'
@@ -139,25 +141,10 @@ function chapterFromNumber(value: number, fallback: Chapter): Chapter {
   }
 }
 
-function getAchievements() {
-  const game = useGameStore.getState()
-  const achievements: string[] = []
-
-  if (game.forestChapterCleared) achievements.push('chapter-1-cleared')
-  if (game.cityChapterCleared) achievements.push('chapter-2-cleared')
-  if (game.snowChapterCleared) achievements.push('chapter-3-cleared')
-  if (game.glassChapterCleared) achievements.push('chapter-4-cleared')
-  if (game.retryChapterCleared) achievements.push('chapter-5-cleared')
-  if (game.storyFlags.hasImperfectBowl) achievements.push('imperfect-bowl')
-  if (game.storyFlags.hasTrueBowl) achievements.push('true-bowl')
-  if (game.gameCompleted) achievements.push('game-completed')
-
-  return achievements
-}
-
 function buildSaveDocument(meta: SaveMeta): SaveDocument {
   const game = useGameStore.getState()
   const gallery = useGalleryStore.getState()
+  const achievements = useAchievementStore.getState()
 
   return {
     userId: meta.userId,
@@ -166,7 +153,7 @@ function buildSaveDocument(meta: SaveMeta): SaveDocument {
     memoryShards: game.memoryShards,
     totalMemoryShards: game.totalMemoryShards,
     unlockedMemories: gallery.memories.filter((memory) => memory.unlocked).map((memory) => memory.id),
-    achievements: getAchievements(),
+    achievements: achievements.unlockedIds,
     storyFlags: game.storyFlags,
     chapterFlags: {
       forestChapterCleared: game.forestChapterCleared,
@@ -224,6 +211,7 @@ function buildMbtiDocument(meta: SaveMeta): MbtiDocument {
 function getSaveFingerprint() {
   const game = useGameStore.getState()
   const gallery = useGalleryStore.getState()
+  const achievements = useAchievementStore.getState()
 
   return JSON.stringify({
     currentChapter: game.currentChapter,
@@ -237,6 +225,7 @@ function getSaveFingerprint() {
     memoryShards: game.memoryShards,
     totalMemoryShards: game.totalMemoryShards,
     unlockedMemories: gallery.memories.filter((memory) => memory.unlocked).map((memory) => memory.id),
+    achievements: achievements.unlockedIds,
   })
 }
 
@@ -253,6 +242,7 @@ function getMbtiFingerprint() {
 function hasLocalGameProgress() {
   const game = useGameStore.getState()
   const gallery = useGalleryStore.getState()
+  const achievements = useAchievementStore.getState()
 
   return (
     game.currentChapter !== 'Forest' ||
@@ -264,7 +254,8 @@ function hasLocalGameProgress() {
     game.glassChapterCleared ||
     game.retryChapterCleared ||
     game.gameCompleted ||
-    gallery.memories.some((memory) => memory.unlocked)
+    gallery.memories.some((memory) => memory.unlocked) ||
+    achievements.unlockedIds.length > 0
   )
 }
 
@@ -297,6 +288,7 @@ function ensureInitialMeta() {
 function applyRemoteSaveDocument(saveDoc: SaveDocument) {
   const currentGame = useGameStore.getState()
   const currentGallery = useGalleryStore.getState()
+  const currentAchievements = useAchievementStore.getState()
 
   useGameStore.setState({
     ...currentGame,
@@ -325,6 +317,15 @@ function applyRemoteSaveDocument(saveDoc: SaveDocument) {
           ? new Date(saveDoc.updatedAt).toISOString()
           : memory.unlockedAt,
     })),
+  })
+
+  useAchievementStore.setState({
+    ...currentAchievements,
+    unlockedIds: (saveDoc.achievements ?? []).filter(
+      (achievementId): achievementId is AchievementId =>
+        typeof achievementId === 'string' && ACHIEVEMENT_MAP.has(achievementId as AchievementId),
+    ),
+    toastQueue: [],
   })
 }
 
@@ -494,6 +495,17 @@ function startSaveSync() {
     markSaveUpdated('mbti')
   })
 
+  const unsubscribeAchievements = useAchievementStore.subscribe(() => {
+    const next = getSaveFingerprint()
+
+    if (next === lastSaveFingerprint) {
+      return
+    }
+
+    lastSaveFingerprint = next
+    markSaveUpdated('save')
+  })
+
   const handleOnline = () => {
     void syncWithCloud()
   }
@@ -505,6 +517,7 @@ function startSaveSync() {
     unsubscribeGame()
     unsubscribeGallery()
     unsubscribeMbti()
+    unsubscribeAchievements()
     window.removeEventListener('online', handleOnline)
     started = false
   }
