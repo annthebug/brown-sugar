@@ -105,6 +105,22 @@
         ]
       },
       {
+        "key": "park-traveler",
+        "type": "atlas",
+        "texture": "characters/park-traveler-side-sprite-sheet-v1.png",
+        "atlas": "characters/park-traveler-side-sprite-sheet-v1.json",
+        "portrait": "characters/park-traveler-portrait-v1.png",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Park Traveler side-view platformer atlas (idle + 3-frame walk, facing right).",
+        "frames": [
+          "park-traveler-side-idle",
+          "park-traveler-side-walk-1",
+          "park-traveler-side-walk-2",
+          "park-traveler-side-walk-3"
+        ]
+      },
+      {
         "key": "npc-characters",
         "type": "atlas",
         "texture": "characters/npc-sprite-sheet-v1.png",

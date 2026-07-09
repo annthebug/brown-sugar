@@ -6,6 +6,8 @@ import forestElderSideTextureUrl from '../../../assets/characters/forest-elder-s
 import forestElderSideAtlasUrl from '../../../assets/characters/forest-elder-side-sprite-sheet-v1.json?url'
 import cityBaristaTextureUrl from '../../../assets/characters/city-barista-side-sprite-sheet-v1.png'
 import cityBaristaAtlasUrl from '../../../assets/characters/city-barista-side-sprite-sheet-v1.json?url'
+import parkTravelerTextureUrl from '../../../assets/characters/park-traveler-side-sprite-sheet-v1.png'
+import parkTravelerAtlasUrl from '../../../assets/characters/park-traveler-side-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -19,6 +21,7 @@ export const ASSET_KEYS = {
   forestElder: 'forest-elder',
   forestElderSide: 'forest-elder-side',
   cityBarista: 'city-barista',
+  parkTraveler: 'park-traveler',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -72,6 +75,13 @@ export const CITY_BARISTA_FRAMES = {
   sideWalk1: 'city-barista-side-walk-1',
   sideWalk2: 'city-barista-side-walk-2',
   sideWalk3: 'city-barista-side-walk-3',
+} as const
+
+export const PARK_TRAVELER_FRAMES = {
+  sideIdle: 'park-traveler-side-idle',
+  sideWalk1: 'park-traveler-side-walk-1',
+  sideWalk2: 'park-traveler-side-walk-2',
+  sideWalk3: 'park-traveler-side-walk-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -190,6 +200,17 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: cityBaristaTextureUrl,
       atlasUrl: cityBaristaAtlasUrl,
       frames: Object.values(CITY_BARISTA_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.parkTraveler,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Park Traveler side-view platformer atlas (idle + 3-frame walk, facing right).',
+      textureUrl: parkTravelerTextureUrl,
+      atlasUrl: parkTravelerAtlasUrl,
+      frames: Object.values(PARK_TRAVELER_FRAMES),
     },
     {
       kind: 'atlas',
