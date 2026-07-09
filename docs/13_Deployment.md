@@ -18,7 +18,7 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=
 VITE_FIREBASE_APP_ID=
 ```
 
-## 建置指令（規劃）
+## 建置指令
 
 | 指令 | 用途 |
 | --- | --- |
@@ -28,14 +28,24 @@ VITE_FIREBASE_APP_ID=
 | `npm run preview` | 本機預覽正式版 |
 | `npm run lint` | 程式碼檢查 |
 
-> 註：目前 repo 尚未有 `package.json`，上述為專案落地後的預期指令。
+本機環境變數請複製 `.env.example` 為 `.env.local`（已被 `.gitignore` 排除，不進版控）。
 
 ## Vercel 設定
 
-- Framework Preset：Vite。
-- Build Command：`npm run build`。
-- Output Directory：`dist`。
-- Environment Variables：如上表。
+專案根目錄已包含 `vercel.json`：
+
+- Framework Preset：Vite
+- Build Command：`npm run build`
+- Output Directory：`dist`
+- SPA Rewrite：非靜態檔請求導向 `index.html`（支援 React Router）
+- Environment Variables：見上表；可參考 `.env.example`
+
+### 首次連結步驟
+
+1. 於 [Vercel Dashboard](https://vercel.com/dashboard) → **Add New Project** → 選擇本 GitHub repo。
+2. 確認 Build / Output 與 `vercel.json` 一致後 Deploy。
+3. 於 Project Settings → Environment Variables 填入 Firebase `VITE_*` 變數（選填；未設定時僅停用雲端同步）。
+4. 之後每次 push 分支會產生 Preview；merge 至 `main` 會更新 Production。
 
 ## PWA 部署注意
 
