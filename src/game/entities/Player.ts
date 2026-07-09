@@ -23,6 +23,12 @@ const DASH_COOLDOWN_MS = 900
 const MEOW_LOCK_MS = 600
 const COLLECT_LOCK_MS = 500
 const PLAYER_SCALE = 0.44
+const PLAYER_DISPLAY_FRAME_TRIM_PX = 1
+
+function applyPlayerDisplayFrameTrim(sprite: Phaser.Physics.Arcade.Sprite) {
+  const cropInset = PLAYER_DISPLAY_FRAME_TRIM_PX / PLAYER_SCALE
+  sprite.setCrop(cropInset, 0, sprite.width - cropInset * 2, sprite.height)
+}
 
 /**
  * Registers all Black Sugar animations on the scene's animation manager.
@@ -92,8 +98,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this)
     scene.physics.add.existing(this)
 
-    this.setOrigin(0.5, 1)
-      .setScale(PLAYER_SCALE)
+    this.setOrigin(0.5, 1).setScale(PLAYER_SCALE)
+    applyPlayerDisplayFrameTrim(this)
 
     // Use the sprite's natural frame bounds as the physics body.
     // Custom hitbox will be tuned once real art dimensions are confirmed.
