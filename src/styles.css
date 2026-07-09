@@ -39,7 +39,7 @@ a {
 .page-shell {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.88) 0 5rem, transparent 5.2rem),
     radial-gradient(circle at 28% 16%, rgba(255, 255, 255, 0.72) 0 3.5rem, transparent 3.7rem),
