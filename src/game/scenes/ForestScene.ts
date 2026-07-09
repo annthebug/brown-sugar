@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, BOSS_FRAMES, FOREST_ELDER_FRAMES, MORANDI_PALETTE } from '../assets/assetManifest'
-import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
+import { ASSET_KEYS, FOREST_ELDER_FRAMES, GIANT_CAN_FRAMES, MORANDI_PALETTE } from '../assets/assetManifest'
+import { type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { PatrolCritter } from '../entities/PatrolCritter'
@@ -290,11 +290,26 @@ export class ForestScene extends Phaser.Scene {
     const jarX = 2280
     const jarY = 322
 
-    this.bossJar = placeCharacterSprite(this, jarX, jarY, {
-      atlas: 'boss',
-      frame: BOSS_FRAMES.giantCan,
-      label: '巨罐',
-    })
+    this.registerGiantCanAnimation()
+
+    const container = this.add.container(jarX, jarY) as CharacterMarker
+    const sprite = this.add.sprite(0, 0, ASSET_KEYS.giantCan, GIANT_CAN_FRAMES.idle)
+    sprite.setOrigin(0.5, 1).setScale(0.48)
+    sprite.play('giant-can-pulse')
+
+    const label = this.add
+      .text(0, 8, '巨罐', {
+        color: MORANDI_PALETTE.slateText,
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5)
+
+    container.add([sprite, label])
+    container.sprite = sprite
+    container.label = label
+    this.bossJar = container
 
     this.bossPrompt = this.add
       .text(jarX, jarY - 150, '按 E 分享一個溫柔片刻', {
@@ -306,6 +321,24 @@ export class ForestScene extends Phaser.Scene {
       })
       .setOrigin(0.5)
       .setVisible(false)
+  }
+
+  private registerGiantCanAnimation() {
+    if (this.anims.exists('giant-can-pulse')) {
+      return
+    }
+
+    this.anims.create({
+      key: 'giant-can-pulse',
+      frames: [
+        { key: ASSET_KEYS.giantCan, frame: GIANT_CAN_FRAMES.pulse1 },
+        { key: ASSET_KEYS.giantCan, frame: GIANT_CAN_FRAMES.pulse2 },
+        { key: ASSET_KEYS.giantCan, frame: GIANT_CAN_FRAMES.pulse3 },
+        { key: ASSET_KEYS.giantCan, frame: GIANT_CAN_FRAMES.idle },
+      ],
+      frameRate: 3,
+      repeat: -1,
+    })
   }
 
   private handleInteract() {

@@ -63,7 +63,7 @@ sprite.play('giant-can-pulse')
 python3 scripts/generate-giant-can-sprite.py
 ```
 
-## Next asset tasks
+## Integration
 
-- Switch `ForestScene.placeGiantJarBoss()` from `boss-characters` atlas to this sheet.
-- Play `giant-can-pulse` idle animation on the boss sprite.
+- `ForestScene.placeGiantJarBoss()` uses `ASSET_KEYS.giantCan` + `GIANT_CAN_FRAMES.idle`.
+- Boss sprite plays `giant-can-pulse` animation (3 fps loop).
