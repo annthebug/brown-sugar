@@ -23,7 +23,8 @@ const MATERIAL_TARGET = 5
 const GLASS_BLUE = 0xb8d4e8
 
 const INNER_GUIDE_X = 220
-const INNER_DOUBT_X = 2440
+const INNER_DOUBT_X = 2260
+const INNER_DOUBT_Y = 285
 
 type PlatformSpec = {
   x: number
@@ -354,7 +355,7 @@ export class RetryScene extends Phaser.Scene {
   private placeInnerDoubtBoss() {
     this.registerInnerDoubtAnimation()
 
-    const container = this.add.container(INNER_DOUBT_X, 308) as CharacterMarker
+    const container = this.add.container(INNER_DOUBT_X, INNER_DOUBT_Y) as CharacterMarker
     const sprite = this.add.sprite(0, 0, ASSET_KEYS.innerDoubt, INNER_DOUBT_FRAMES.idle)
     sprite.setOrigin(0.5, 1).setScale(0.48)
     sprite.setAlpha(this.bossCleared ? 0.3 : this.bossUnlocked ? 1 : 0.45)
