@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AppNav } from '../components/AppNav'
 import { DialogueBox } from '../components/DialogueBox'
 import { MemoryOverlay } from '../components/MemoryOverlay'
-import { PhaserGame } from '../components/PhaserGame'
+import { PauseMenu } from '../components/PauseMenu'
+import { PhaserGame, type PhaserGameHandle } from '../components/PhaserGame'
 import { MBTI_QUESTION_COUNT } from '../data/mbti'
 import {
   DIALOGUE_SCRIPTS,
@@ -18,9 +19,11 @@ import { useGameStore } from '../stores/useGameStore'
 import { useMbtiStore } from '../stores/useMbtiStore'
 
 export function GamePage() {
+  const phaserRef = useRef<PhaserGameHandle>(null)
   const [memoryQueue, setMemoryQueue] = useState<MemoryEntry[]>([])
   const [activeDialogueId, setActiveDialogueId] = useState<DialogueScriptId | null>(null)
   const [lastDialogueChoice, setLastDialogueChoice] = useState<string>('No dialogue choice yet')
+  const [isPaused, setIsPaused] = useState(false)
   const memoryShards = useGameStore((state) => state.memoryShards)
   const totalMemoryShards = useGameStore((state) => state.totalMemoryShards)
   const currentChapter = useGameStore((state) => state.currentChapter)
@@ -127,6 +130,46 @@ export function GamePage() {
     setMemoryQueue((currentQueue) => currentQueue.slice(1))
   }
 
+  const openPauseMenu = useCallback(() => {
+    setIsPaused(true)
+    phaserRef.current?.pauseActiveScene()
+  }, [])
+
+  const resumeGame = useCallback(() => {
+    setIsPaused(false)
+    phaserRef.current?.resumeActiveScene()
+  }, [])
+
+  const restartChapter = useCallback(() => {
+    setIsPaused(false)
+    setActiveDialogueId(null)
+    setMemoryQueue([])
+    phaserRef.current?.restartActiveScene()
+  }, [])
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') {
+        return
+      }
+
+      event.preventDefault()
+
+      if (isPaused) {
+        resumeGame()
+        return
+      }
+
+      openPauseMenu()
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isPaused, openPauseMenu, resumeGame])
+
   return (
     <main className="game-shell" aria-labelledby="game-title">
       <AppNav />
@@ -139,7 +182,17 @@ export function GamePage() {
           <h1 id="game-title">Pale Blue Sky Forest</h1>
         </div>
       </header>
-      <PhaserGame />
+      <div className="game-playfield">
+        <PhaserGame ref={phaserRef} isPaused={isPaused} />
+        <button
+          type="button"
+          className="game-pause-button"
+          aria-label="Pause game"
+          onClick={openPauseMenu}
+        >
+          Pause
+        </button>
+      </div>
       <section className="store-panel" aria-label="Game store controls">
         <div>
           <p className="panel-label">Memory Shards</p>
@@ -194,6 +247,7 @@ export function GamePage() {
         />
       ) : null}
       {activeMemory ? <MemoryOverlay memory={activeMemory} onContinue={continueMemory} /> : null}
+      {isPaused ? <PauseMenu onResume={resumeGame} onRestart={restartChapter} /> : null}
     </main>
   )
 }

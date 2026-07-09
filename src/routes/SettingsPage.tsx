@@ -60,8 +60,13 @@ export function SettingsPage() {
           </select>
         </label>
 
-        <button type="button" onClick={toggleFullscreen}>
-          Fullscreen preference: {fullscreen ? 'On' : 'Off'}
+        <button
+          type="button"
+          onClick={() => {
+            void toggleFullscreen()
+          }}
+        >
+          Fullscreen: {fullscreen ? 'On' : 'Off'}
         </button>
       </section>
     </main>
