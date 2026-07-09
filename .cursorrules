@@ -38,3 +38,10 @@
 - 實作對應 docs/Tasks/ 任務編號。
 - 每個邏輯變更獨立 commit。
 - 不擅自刪除既有文件或資產。
+
+## 瀏覽器驗證
+- Do not repeatedly verify the UI.
+- Make all requested code changes first.
+- Run browser verification only once after all code changes are complete.
+- If browser verification fails, report the error instead of entering an endless fix-and-verify loop.
+- Stop after one verification attempt unless the user explicitly asks for another.
