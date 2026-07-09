@@ -662,6 +662,108 @@ h1 {
   font-weight: 900;
 }
 
+.ending-card {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.ending-mbti-panel {
+  border: 2px solid rgba(111, 138, 148, 0.22);
+  border-radius: 22px;
+  padding: 1.25rem;
+  background: rgba(223, 233, 226, 0.72);
+}
+
+.ending-mbti-progress {
+  margin: 0.35rem 0 0;
+  color: #50676f;
+  font-weight: 700;
+}
+
+.ending-mbti-pending {
+  margin: 0.75rem 0 0;
+}
+
+.ending-bowl-reveal {
+  display: grid;
+  grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.ending-bowl-frame {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid rgba(111, 138, 148, 0.28);
+  background-color: rgba(248, 251, 249, 0.72);
+  background-repeat: no-repeat;
+  background-size: 400% 400%;
+  box-shadow: inset 0 0 0 12px rgba(216, 237, 244, 0.45);
+}
+
+.ending-bowl-meta {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.ending-mbti-type {
+  color: #385867;
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.ending-bowl-name {
+  margin: 0;
+  color: #50676f;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.ending-bowl-asset {
+  margin: 0.25rem 0 0;
+  color: #7d8f86;
+  font-size: 0.92rem;
+}
+
+.ending-bowl-asset code {
+  color: #385867;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.88rem;
+}
+
+.ending-score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.ending-score-grid div {
+  border: 2px solid rgba(111, 138, 148, 0.22);
+  border-radius: 22px;
+  padding: 1rem;
+  background: rgba(223, 233, 226, 0.72);
+}
+
+.ending-score-grid dt,
+.ending-score-grid dd {
+  margin: 0;
+}
+
+.ending-score-grid dt {
+  color: #7d8f86;
+  font-weight: 800;
+}
+
+.ending-score-grid dd {
+  margin-top: 0.35rem;
+  color: #385867;
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
 @media (max-width: 820px) {
   .home-shell {
     grid-template-columns: 1fr;
@@ -682,7 +784,9 @@ h1 {
 
   .store-panel,
   .memory-grid,
-  .ending-summary {
+  .ending-summary,
+  .ending-score-grid,
+  .ending-bowl-reveal {
     grid-template-columns: 1fr;
   }
 
