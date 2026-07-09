@@ -90,7 +90,7 @@ export function DialogueBox({ script, onChoiceResult, onClose }: DialogueBoxProp
   }
 
   const showChoices = isTextRevealed && currentNode.choices && currentNode.choices.length > 0
-  const avatarImageUrl = resolveDialogueAvatarUrl(currentNode)
+  const avatarImageUrl = resolveDialogueAvatarUrl(currentNode, script)
 
   return (
     <section className="dialogue-overlay" aria-label={script.title}>

@@ -36,12 +36,22 @@ export type DialogueNode = {
   choices?: readonly DialogueChoice[]
 }
 
+export type DialoguePortraitId = 'forestElder' | 'cityBarista'
+
 export type DialogueScript = {
   id: string
   title: string
   startNodeId: string
+  portraitId?: DialoguePortraitId
   nodes: Record<string, DialogueNode>
 }
+
+export const NPC_PORTRAIT_URLS = {
+  cityBarista: new URL(
+    '../../assets/characters/city-barista-portrait-v1.png',
+    import.meta.url,
+  ).href,
+} as const
 
 export const FOREST_ELDER_PORTRAIT_URLS = {
   calm: new URL(
@@ -58,13 +68,20 @@ export const FOREST_ELDER_PORTRAIT_URLS = {
   ).href,
 } as const satisfies Record<DialoguePortraitMood, string>
 
-export function resolveDialogueAvatarUrl(node: DialogueNode): string | undefined {
+export function resolveDialogueAvatarUrl(
+  node: DialogueNode,
+  script?: DialogueScript,
+): string | undefined {
   if (node.avatarImageUrl) {
     return node.avatarImageUrl
   }
 
-  if (node.mood) {
+  if (node.mood && script?.portraitId === 'forestElder') {
     return FOREST_ELDER_PORTRAIT_URLS[node.mood]
+  }
+
+  if (script?.portraitId === 'cityBarista') {
+    return NPC_PORTRAIT_URLS.cityBarista
   }
 
   return undefined
@@ -93,6 +110,7 @@ export const DIALOGUE_SCRIPTS = {
   forestElder: {
     id: 'forest-elder',
     title: '森林長者',
+    portraitId: 'forestElder',
     startNodeId: 'forest-ei-01',
     nodes: {
       'forest-ei-01': {
@@ -302,6 +320,7 @@ export const DIALOGUE_SCRIPTS = {
   cityBarista: {
     id: 'city-barista',
     title: '咖啡師',
+    portraitId: 'cityBarista',
     startNodeId: 'city-tf-01',
     nodes: {
       'city-tf-01': {
