@@ -46,7 +46,7 @@
         "atlas": "characters/npc-sprite-sheet-v1.json",
         "placeholder": true,
         "purpose": "preload",
-        "description": "Chapter NPC placeholder atlas for forest elder, barista, traveler, guide, glass master, and inner voice.",
+        "description": "Ghibli-inspired Morandi NPC atlas v2 (Kamaji-style elder, café barista, Kiki-style traveler, hooded guide, glass artisan, river spirit).",
         "frames": [
           "forest-elder-idle",
           "coffee-barista-idle",
@@ -63,7 +63,7 @@
         "atlas": "characters/boss-sprite-sheet-v1.json",
         "placeholder": true,
         "purpose": "preload",
-        "description": "Chapter boss placeholder atlas for giant can, time monster, snow spirit, glass master, inner doubt, and perfectionism.",
+        "description": "Ghibli-inspired Morandi boss atlas v2 (jar spirit, clock spirit, kodama, furnace artisan, soot sprites, mask mist).",
         "frames": [
           "giant-can-idle",
           "time-monster-idle",
