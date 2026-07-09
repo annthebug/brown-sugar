@@ -348,6 +348,14 @@ export class ForestScene extends Phaser.Scene {
     })
 
     gameEventBus.emit('chapter:forest-cleared', { scene: this.scene.key })
+
+    this.time.delayedCall(2200, () => {
+      if (!this.scene.isActive()) {
+        return
+      }
+
+      this.scene.start('CityScene')
+    })
   }
 
   private updateBossPrompt() {

@@ -1,10 +1,15 @@
 import type { Preference } from '../stores/useMbtiStore'
 
-export type DialogueChoiceResult = {
-  kind: 'mbti'
-  questionId: string
-  preference: Preference
-}
+export type DialogueChoiceResult =
+  | {
+      kind: 'mbti'
+      questionId: string
+      preference: Preference
+    }
+  | {
+      kind: 'story'
+      trigger: 'time-monster-understood'
+    }
 
 export type DialogueChoice = {
   id: string
@@ -239,6 +244,266 @@ export const DIALOGUE_SCRIPTS = {
         speakerName: 'Forest Elder',
         avatarLabel: 'FE',
         text: 'Take this thought with you. Not every answer needs to be loud to be true.',
+      },
+    },
+  },
+  cityBarista: {
+    id: 'city-barista',
+    title: 'Coffee Barista',
+    startNodeId: 'city-tf-01',
+    nodes: {
+      'city-tf-01': {
+        id: 'city-tf-01',
+        speakerName: 'Barista',
+        avatarLabel: 'BR',
+        text: 'The last train just left. A friend is still waiting on the platform. What do you say first?',
+        choices: [
+          mbtiChoice(
+            'city-tf-01-a',
+            'Let us check the next route and timing.',
+            'city-tf-01-r1',
+            'city-tf-01',
+            'first',
+          ),
+          mbtiChoice(
+            'city-tf-01-b',
+            'It is okay. We can find a softer way home together.',
+            'city-tf-01-r2',
+            'city-tf-01',
+            'second',
+          ),
+        ],
+      },
+      'city-tf-01-r1': {
+        id: 'city-tf-01-r1',
+        speakerName: 'Barista',
+        avatarLabel: 'BR',
+        text: 'A clear plan can calm a busy street.',
+        nextNodeId: 'city-tf-02',
+      },
+      'city-tf-01-r2': {
+        id: 'city-tf-01-r2',
+        speakerName: 'Barista',
+        avatarLabel: 'BR',
+        text: 'Warm words can calm a busy street.',
+        nextNodeId: 'city-tf-02',
+      },
+      'city-tf-02': {
+        id: 'city-tf-02',
+        speakerName: 'Barista',
+        avatarLabel: 'BR',
+        text: 'Two plans could work. How do you choose?',
+        choices: [
+          mbtiChoice(
+            'city-tf-02-a',
+            'I compare which one is faster and simpler.',
+            'city-tf-02-r1',
+            'city-tf-02',
+            'first',
+          ),
+          mbtiChoice(
+            'city-tf-02-b',
+            'I choose the one that keeps everyone comfortable.',
+            'city-tf-02-r2',
+            'city-tf-02',
+            'second',
+          ),
+        ],
+      },
+      'city-tf-02-r1': {
+        id: 'city-tf-02-r1',
+        speakerName: 'Barista',
+        avatarLabel: 'BR',
+        text: 'Efficiency has its own kindness in the city.',
+        nextNodeId: 'city-tf-03',
+      },
+      'city-tf-02-r2': {
+        id: 'city-tf-02-r2',
+        speakerName: 'Barista',
+        avatarLabel: 'BR',
+        text: 'Care has its own wisdom in the city.',
+        nextNodeId: 'city-tf-03',
+      },
+      'city-tf-03': {
+        id: 'city-tf-03',
+        speakerName: 'Barista',
+        avatarLabel: 'BR',
+        text: 'A message arrives late at night. What matters more?',
+        choices: [
+          mbtiChoice(
+            'city-tf-03-a',
+            'Whether the words are clear and honest.',
+            'city-tf-03-r1',
+            'city-tf-03',
+            'first',
+          ),
+          mbtiChoice(
+            'city-tf-03-b',
+            'Whether the tone still feels gentle.',
+            'city-tf-03-r2',
+            'city-tf-03',
+            'second',
+          ),
+        ],
+      },
+      'city-tf-03-r1': {
+        id: 'city-tf-03-r1',
+        speakerName: 'Barista',
+        avatarLabel: 'BR',
+        text: 'Truth can be a quiet kind of comfort.',
+        nextNodeId: 'city-barista-farewell',
+      },
+      'city-tf-03-r2': {
+        id: 'city-tf-03-r2',
+        speakerName: 'Barista',
+        avatarLabel: 'BR',
+        text: 'Warmth can be a quiet kind of comfort.',
+        nextNodeId: 'city-barista-farewell',
+      },
+      'city-barista-farewell': {
+        id: 'city-barista-farewell',
+        speakerName: 'Barista',
+        avatarLabel: 'BR',
+        text: 'Distance stretches the hours, but a cup can still hold you both.',
+      },
+    },
+  },
+  cityTraveler: {
+    id: 'city-traveler',
+    title: 'Park Traveler',
+    startNodeId: 'city-jp-01',
+    nodes: {
+      'city-jp-01': {
+        id: 'city-jp-01',
+        speakerName: 'Traveler',
+        avatarLabel: 'TR',
+        text: 'Your afternoon is suddenly free. What sounds best?',
+        choices: [
+          mbtiChoice(
+            'city-jp-01-a',
+            'Finish the errands I already planned.',
+            'city-jp-01-r1',
+            'city-jp-01',
+            'first',
+          ),
+          mbtiChoice(
+            'city-jp-01-b',
+            'Follow whichever corner looks interesting.',
+            'city-jp-01-r2',
+            'city-jp-01',
+            'second',
+          ),
+        ],
+      },
+      'city-jp-01-r1': {
+        id: 'city-jp-01-r1',
+        speakerName: 'Traveler',
+        avatarLabel: 'TR',
+        text: 'A steady list can make a free hour feel generous.',
+        nextNodeId: 'city-jp-02',
+      },
+      'city-jp-01-r2': {
+        id: 'city-jp-01-r2',
+        speakerName: 'Traveler',
+        avatarLabel: 'TR',
+        text: 'A wandering hour can become its own gift.',
+        nextNodeId: 'city-jp-02',
+      },
+      'city-jp-02': {
+        id: 'city-jp-02',
+        speakerName: 'Traveler',
+        avatarLabel: 'TR',
+        text: 'A cozy café has one empty seat. How do you decide?',
+        choices: [
+          mbtiChoice(
+            'city-jp-02-a',
+            'I check the menu and pick before sitting.',
+            'city-jp-02-r1',
+            'city-jp-02',
+            'first',
+          ),
+          mbtiChoice(
+            'city-jp-02-b',
+            'I sit first and let the mood choose for me.',
+            'city-jp-02-r2',
+            'city-jp-02',
+            'second',
+          ),
+        ],
+      },
+      'city-jp-02-r1': {
+        id: 'city-jp-02-r1',
+        speakerName: 'Traveler',
+        avatarLabel: 'TR',
+        text: 'Deciding early leaves more room to enjoy the cup.',
+        nextNodeId: 'city-traveler-farewell',
+      },
+      'city-jp-02-r2': {
+        id: 'city-jp-02-r2',
+        speakerName: 'Traveler',
+        avatarLabel: 'TR',
+        text: 'Leaving space open can make the cup taste softer.',
+        nextNodeId: 'city-traveler-farewell',
+      },
+      'city-traveler-farewell': {
+        id: 'city-traveler-farewell',
+        speakerName: 'Traveler',
+        avatarLabel: 'TR',
+        text: 'Some routes are not on any map. They are still worth walking.',
+      },
+    },
+  },
+  timeMonster: {
+    id: 'time-monster',
+    title: 'Time Monster',
+    startNodeId: 'time-intro',
+    nodes: {
+      'time-intro': {
+        id: 'time-intro',
+        speakerName: 'Time Monster',
+        avatarLabel: 'TM',
+        text: 'You chased me along the platform. I am not here to frighten you. I am the hours between two places.',
+        nextNodeId: 'time-wait',
+      },
+      'time-wait': {
+        id: 'time-wait',
+        speakerName: 'Time Monster',
+        avatarLabel: 'TM',
+        text: 'Waiting feels heavy when someone you love is far away. I carry that weight too.',
+        nextNodeId: 'time-choice',
+      },
+      'time-choice': {
+        id: 'time-choice',
+        speakerName: 'Brown Sugar',
+        avatarLabel: 'BS',
+        text: 'What do you want to say to the waiting?',
+        choices: [
+          {
+            id: 'time-choice-a',
+            label: 'The distance is real, but so is the care we keep.',
+            nextNodeId: 'time-understand',
+            result: { kind: 'story', trigger: 'time-monster-understood' },
+          },
+          {
+            id: 'time-choice-b',
+            label: 'I will meet the hours gently, one soft moment at a time.',
+            nextNodeId: 'time-understand',
+            result: { kind: 'story', trigger: 'time-monster-understood' },
+          },
+        ],
+      },
+      'time-understand': {
+        id: 'time-understand',
+        speakerName: 'Time Monster',
+        avatarLabel: 'TM',
+        text: 'Then I do not have to loom so large. I can become a bridge instead.',
+        nextNodeId: 'time-farewell',
+      },
+      'time-farewell': {
+        id: 'time-farewell',
+        speakerName: 'Time Monster',
+        avatarLabel: 'TM',
+        text: 'Go on, little cat. The city will keep your place warm until you arrive.',
       },
     },
   },

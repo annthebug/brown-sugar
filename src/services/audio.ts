@@ -33,6 +33,7 @@ const SFX_PLAYBACK: Record<SfxName, number> = {
 
 const SCENE_BGM: Readonly<Record<string, BgmTrack | null>> = {
   ForestScene: 'forest',
+  CityScene: 'forest',
   GameScene: 'forest',
 }
 
