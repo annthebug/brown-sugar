@@ -36,6 +36,7 @@ import endingChestBodyUrl from '../../../assets/ui/ending-chest-body-v1.png'
 import endingChestLidUrl from '../../../assets/ui/ending-chest-lid-v1.png'
 import endingChestLockUrl from '../../../assets/ui/ending-chest-lock-v1.png'
 import endingChestGlowUrl from '../../../assets/ui/ending-chest-glow-v1.png'
+import endingBlackSugarSleepUrl from '../../../assets/ui/ending-black-sugar-sleep-v1.png'
 import mbtiGlassBowlsUrl from '../../../assets/bowls/mbti-glass-bowls-sheet-v1.png'
 
 export const ASSET_KEYS = {
@@ -61,8 +62,11 @@ export const ASSET_KEYS = {
   endingChestLid: 'ui-ending-chest-lid',
   endingChestLock: 'ui-ending-chest-lock',
   endingChestGlow: 'ui-ending-chest-glow',
+  endingBlackSugarSleep: 'ui-ending-black-sugar-sleep',
   mbtiGlassBowls: 'bowls-mbti-glass-sheet',
 } as const
+
+export const ENDING_BLACK_SUGAR_SLEEP_URL = endingBlackSugarSleepUrl
 
 export const ENDING_CHEST_LAYER_URLS = {
   body: endingChestBodyUrl,
@@ -495,6 +499,15 @@ export const GAME_ASSET_MANIFEST = {
       purpose: 'preload',
       description: 'Ending treasure chest inner pale blue glass glow layer.',
       url: endingChestGlowUrl,
+    },
+    {
+      kind: 'image',
+      category: 'ui',
+      key: ASSET_KEYS.endingBlackSugarSleep,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Ending rest scene illustration of Black Sugar sleeping on a floral rug.',
+      url: endingBlackSugarSleepUrl,
     },
   ],
   memories: [],
