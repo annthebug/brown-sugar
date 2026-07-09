@@ -234,6 +234,15 @@ export class ForestScene extends Phaser.Scene {
     container.sprite = sprite
     container.label = label
     this.elderNpc = container
+
+    this.tweens.add({
+      targets: sprite,
+      y: -2,
+      duration: 1200,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
+    })
   }
 
   private placePatrolCritters() {
