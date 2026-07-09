@@ -501,30 +501,55 @@ h1 {
 
 .memory-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
   gap: 1rem;
+}
+
+.gallery-summary {
+  margin: 0 0 1rem;
 }
 
 .memory-card,
 .ending-summary div {
   border: 2px solid rgba(111, 138, 148, 0.22);
   border-radius: 22px;
-  padding: 1rem;
+  padding: 0.65rem;
   background: rgba(223, 233, 226, 0.72);
 }
 
 .memory-card {
-  display: grid;
-  gap: 0.85rem;
+  display: block;
 }
 
-.memory-card p {
-  margin: 0.35rem 0 0;
-  color: #50676f;
-  line-height: 1.5;
+.memory-card--locked {
+  background: rgba(216, 237, 244, 0.58);
+}
+
+.memory-card-button {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+}
+
+.memory-card-button:not(:disabled):hover,
+.memory-card-button:not(:disabled):focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(56, 88, 103, 0.16);
+}
+
+.memory-card-button:disabled {
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .memory-photo-frame {
+  position: relative;
   display: grid;
   overflow: hidden;
   aspect-ratio: 4 / 3;
@@ -536,6 +561,11 @@ h1 {
     #d8edf4;
 }
 
+.memory-card--locked .memory-photo-frame {
+  border-color: rgba(143, 178, 191, 0.42);
+  background: linear-gradient(160deg, rgba(143, 178, 191, 0.42), rgba(183, 201, 189, 0.34));
+}
+
 .memory-photo-frame img {
   display: block;
   width: 100%;
@@ -543,18 +573,54 @@ h1 {
   object-fit: cover;
 }
 
-.memory-photo-frame span {
-  color: rgba(80, 103, 111, 0.5);
-  font-size: clamp(3rem, 9vw, 5rem);
-  font-weight: 900;
+.memory-photo-silhouette {
+  filter: blur(10px) saturate(0.35) brightness(0.72);
+  transform: scale(1.08);
+  opacity: 0.72;
 }
 
-.memory-card button:disabled {
-  cursor: not-allowed;
-  background: rgba(159, 191, 202, 0.38);
-  color: rgba(80, 103, 111, 0.62);
-  box-shadow: none;
-  transform: none;
+.memory-lock-badge {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(
+    180deg,
+    rgba(143, 178, 191, 0.18) 0%,
+    rgba(111, 138, 148, 0.42) 100%
+  );
+}
+
+.memory-lock-icon {
+  position: relative;
+  display: block;
+  width: 1.5rem;
+  height: 1.9rem;
+  border: 3px solid rgba(248, 251, 249, 0.92);
+  border-radius: 0.35rem;
+}
+
+.memory-lock-icon::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -0.95rem;
+  width: 1.1rem;
+  height: 1rem;
+  border: 3px solid rgba(248, 251, 249, 0.92);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  transform: translateX(-50%);
+}
+
+.memory-overlay-card--photo-only {
+  gap: 1rem;
+}
+
+.memory-overlay-card--photo-only button {
+  position: relative;
+  z-index: 1;
+  justify-self: end;
 }
 
 .memory-overlay {

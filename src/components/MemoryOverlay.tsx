@@ -11,12 +11,11 @@ export function MemoryOverlay({ memory, onContinue }: MemoryOverlayProps) {
   const overlayRef = useRef<HTMLDivElement | null>(null)
   const pixelRef = useRef<HTMLDivElement | null>(null)
   const photoRef = useRef<HTMLDivElement | null>(null)
-  const textRef = useRef<HTMLDivElement | null>(null)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
   useLayoutEffect(() => {
     const context = gsap.context(() => {
-      gsap.set([photoRef.current, textRef.current, buttonRef.current], {
+      gsap.set([photoRef.current, buttonRef.current], {
         opacity: 0,
         y: 18,
       })
@@ -32,7 +31,6 @@ export function MemoryOverlay({ memory, onContinue }: MemoryOverlayProps) {
         )
         .to(pixelRef.current, { opacity: 0.34, duration: 0.42 })
         .to(photoRef.current, { opacity: 1, y: 0, duration: 0.58 }, '-=0.18')
-        .to(textRef.current, { opacity: 1, y: 0, duration: 0.44 }, '-=0.22')
         .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.34 }, '-=0.12')
     }, overlayRef)
 
@@ -53,15 +51,10 @@ export function MemoryOverlay({ memory, onContinue }: MemoryOverlayProps) {
 
   return (
     <div className="memory-overlay" ref={overlayRef} role="dialog" aria-modal="true">
-      <div className="memory-overlay-card">
+      <div className="memory-overlay-card memory-overlay-card--photo-only">
         <div ref={pixelRef} className="memory-pixel-veil" aria-hidden="true" />
         <div ref={photoRef} className="memory-overlay-photo">
-          <img src={memory.photoUrl} alt={memory.title} />
-        </div>
-        <div ref={textRef} className="memory-overlay-copy">
-          <p className="eyebrow">{memory.dateLabel}</p>
-          <h2>{memory.title}</h2>
-          <p>{memory.caption}</p>
+          <img src={memory.photoUrl} alt={`Memory ${memory.order}`} />
         </div>
         <button ref={buttonRef} type="button" onClick={handleContinue}>
           Continue
