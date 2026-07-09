@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, MORANDI_PALETTE } from '../assets/assetManifest'
+import { ASSET_KEYS, BOSS_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
@@ -52,8 +53,8 @@ export class GlassStudioScene extends Phaser.Scene {
   private touchCtrl?: TouchControls
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
-  private glassMasterNpc?: Phaser.GameObjects.Container
-  private glassMasterBoss?: Phaser.GameObjects.Container
+  private glassMasterNpc?: CharacterMarker
+  private glassMasterBoss?: CharacterMarker
   private furnaceGlow?: Phaser.GameObjects.Arc
   private blowGlassGlow?: Phaser.GameObjects.Arc
   private blowGlassPipe?: Phaser.GameObjects.Container
@@ -312,22 +313,12 @@ export class GlassStudioScene extends Phaser.Scene {
   }
 
   private placeGlassMasterNpc() {
-    const npcY = GROUND_TOP
-
-    this.glassMasterNpc = this.add.container(MASTER_NPC_X, npcY)
-    const apron = this.add.rectangle(0, -34, 50, 64, MORANDI_PALETTE.dustyBlue, 0.48)
-    const head = this.add.circle(0, -72, 18, MORANDI_PALETTE.cloud, 0.92)
-    const goggles = this.add.rectangle(0, -74, 36, 10, GLASS_TUBE_BLUE, 0.55)
-    const label = this.add
-      .text(0, 10, '玻璃師傅', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.glassMasterNpc.add([apron, head, goggles, label])
+    this.glassMasterNpc = placeCharacterSprite(this, MASTER_NPC_X, GROUND_TOP, {
+      atlas: 'npc',
+      frame: NPC_FRAMES.glassMaster,
+      label: '玻璃師傅',
+      scale: 0.9,
+    })
   }
 
   private placeFurnace() {
@@ -380,26 +371,13 @@ export class GlassStudioScene extends Phaser.Scene {
   }
 
   private placeGlassMasterBoss() {
-    const bossY = 268
-
-    this.glassMasterBoss = this.add.container(BOSS_X, bossY)
-    const apron = this.add.rectangle(0, -34, 52, 64, MORANDI_PALETTE.dustyBlue, 0.5)
-    const head = this.add.circle(0, -72, 18, MORANDI_PALETTE.cloud, 0.92)
-    const glow = this.add.ellipse(0, -40, 72, 88, SOFT_ORANGE, 0.12)
-    const label = this.add
-      .text(0, 16, '玻璃師傅', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.glassMasterBoss.add([glow, apron, head, label])
-
-    if (this.bossCleared) {
-      this.glassMasterBoss.setAlpha(0.35)
-    }
+    this.glassMasterBoss = placeCharacterSprite(this, BOSS_X, 320, {
+      atlas: 'boss',
+      frame: BOSS_FRAMES.glassMasterBoss,
+      label: '玻璃師傅',
+      scale: 1,
+      alpha: this.bossCleared ? 0.35 : 1,
+    })
   }
 
   private handleInteract() {

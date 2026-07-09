@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, MORANDI_PALETTE } from '../assets/assetManifest'
+import { ASSET_KEYS, BOSS_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
@@ -42,9 +43,9 @@ export class CityScene extends Phaser.Scene {
   private touchCtrl?: TouchControls
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
-  private baristaNpc?: Phaser.GameObjects.Container
-  private travelerNpc?: Phaser.GameObjects.Container
-  private timeMonster?: Phaser.GameObjects.Container
+  private baristaNpc?: CharacterMarker
+  private travelerNpc?: CharacterMarker
+  private timeMonster?: CharacterMarker
   private interactPrompt?: Phaser.GameObjects.Text
   private bossCleared = false
   private bossChaseActive = false
@@ -299,86 +300,34 @@ export class CityScene extends Phaser.Scene {
   }
 
   private placeCoffeeBarista() {
-    const npcX = CAFE_X + 48
-    const npcY = GROUND_TOP
-
-    this.baristaNpc = this.add.container(npcX, npcY)
-    const apron = this.add.rectangle(0, -30, 44, 58, MORANDI_PALETTE.mistPink, 0.62)
-    const head = this.add.circle(0, -68, 18, MORANDI_PALETTE.cloud, 0.9)
-    const cup = this.add.rectangle(22, -38, 16, 22, MORANDI_PALETTE.warmBeige, 0.88)
-    const label = this.add
-      .text(0, 10, '咖啡師', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.baristaNpc.add([apron, head, cup, label])
+    this.baristaNpc = placeCharacterSprite(this, CAFE_X + 48, GROUND_TOP, {
+      atlas: 'npc',
+      frame: NPC_FRAMES.coffeeBarista,
+      label: '咖啡師',
+      scale: 0.9,
+    })
   }
 
   private placeParkTraveler() {
-    const npcX = PARK_X
-    const npcY = GROUND_TOP
-
-    this.travelerNpc = this.add.container(npcX, npcY)
-    const coat = this.add.rectangle(0, -32, 50, 62, MORANDI_PALETTE.sageGreen, 0.55)
-    const scarf = this.add.rectangle(0, -54, 36, 12, MORANDI_PALETTE.mistPink, 0.5)
-    const head = this.add.circle(0, -70, 18, MORANDI_PALETTE.cloud, 0.9)
-    const map = this.add.rectangle(-24, -36, 20, 28, MORANDI_PALETTE.warmBeige, 0.75)
-    const label = this.add
-      .text(0, 10, '旅人', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.travelerNpc.add([coat, scarf, head, map, label])
+    this.travelerNpc = placeCharacterSprite(this, PARK_X, GROUND_TOP, {
+      atlas: 'npc',
+      frame: NPC_FRAMES.parkTraveler,
+      label: '旅人',
+      scale: 0.9,
+    })
   }
 
   private placeTimeMonsterBoss() {
     const bossX = METRO_X + 80
-    const bossY = 318
+    const bossY = 350
 
-    this.timeMonster = this.add.container(bossX, bossY)
-    const body = this.add.ellipse(0, -36, 88, 108, MORANDI_PALETTE.dustyBlue, 0.28)
-    body.setStrokeStyle(3, MORANDI_PALETTE.cloud, 0.72)
-    const clockFace = this.add.circle(0, -48, 28, MORANDI_PALETTE.cloud, 0.55)
-    const hourHand = this.add.rectangle(0, -54, 3, 18, MORANDI_PALETTE.dustyBlue, 0.85)
-    const minuteHand = this.add.rectangle(8, -48, 3, 22, MORANDI_PALETTE.mistPink, 0.7)
-    const label = this.add
-      .text(0, 18, '時間怪物', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.timeMonster.add([body, clockFace, hourHand, minuteHand, label])
-
-    this.tweens.add({
-      targets: hourHand,
-      angle: 360,
-      duration: 12000,
-      repeat: -1,
-      ease: 'Linear',
+    this.timeMonster = placeCharacterSprite(this, bossX, bossY, {
+      atlas: 'boss',
+      frame: BOSS_FRAMES.timeMonster,
+      label: '時間怪物',
+      scale: 1,
+      alpha: this.bossCleared ? 0.35 : 1,
     })
-
-    this.tweens.add({
-      targets: minuteHand,
-      angle: 360,
-      duration: 4800,
-      repeat: -1,
-      ease: 'Linear',
-    })
-
-    if (this.bossCleared) {
-      this.timeMonster.setAlpha(0.35)
-    }
   }
 
   private handleInteract() {
@@ -437,13 +386,15 @@ export class CityScene extends Phaser.Scene {
     this.bossEncounterReady = false
     this.player.playEmote('happy')
 
-    this.tweens.add({
-      targets: this.timeMonster,
-      alpha: 0.35,
-      y: '+=8',
-      duration: 1400,
-      ease: 'Sine.easeInOut',
-    })
+    if (this.timeMonster) {
+      this.tweens.add({
+        targets: this.timeMonster.sprite,
+        alpha: 0.35,
+        y: '+=8',
+        duration: 1400,
+        ease: 'Sine.easeInOut',
+      })
+    }
 
     gameEventBus.emit('chapter:city-cleared', { scene: this.scene.key })
 

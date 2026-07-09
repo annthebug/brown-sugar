@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, MORANDI_PALETTE } from '../assets/assetManifest'
+import { ASSET_KEYS, BOSS_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
@@ -15,7 +16,6 @@ const GROUND_TOP = GROUND_Y - GROUND_HEIGHT / 2
 const INTERACT_RADIUS = 92
 const MATERIAL_TARGET = 5
 const GLASS_BLUE = 0xb8d4e8
-const MIST_VIOLET = 0xc4b8d4
 
 const INNER_GUIDE_X = 220
 const INNER_DOUBT_X = 2440
@@ -59,8 +59,8 @@ export class RetryScene extends Phaser.Scene {
   private touchCtrl?: TouchControls
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
-  private innerGuideNpc?: Phaser.GameObjects.Container
-  private innerDoubtBoss?: Phaser.GameObjects.Container
+  private innerGuideNpc?: CharacterMarker
+  private innerDoubtBoss?: CharacterMarker
   private interactPrompt?: Phaser.GameObjects.Text
   private progressText?: Phaser.GameObjects.Text
   private cutsceneText?: Phaser.GameObjects.Text
@@ -317,56 +317,22 @@ export class RetryScene extends Phaser.Scene {
   }
 
   private placeInnerGuide() {
-    const npcY = GROUND_TOP
-
-    this.innerGuideNpc = this.add.container(INNER_GUIDE_X, npcY)
-    const robe = this.add.rectangle(0, -34, 46, 62, MORANDI_PALETTE.mistPink, 0.38)
-    const head = this.add.circle(0, -72, 17, MORANDI_PALETTE.cloud, 0.9)
-    const glow = this.add.ellipse(0, -40, 64, 80, MORANDI_PALETTE.warmBeige, 0.14)
-    const label = this.add
-      .text(0, 10, '內在嚮導', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.innerGuideNpc.add([glow, robe, head, label])
+    this.innerGuideNpc = placeCharacterSprite(this, INNER_GUIDE_X, GROUND_TOP, {
+      atlas: 'npc',
+      frame: NPC_FRAMES.innerVoice,
+      label: '內在嚮導',
+      scale: 0.9,
+    })
   }
 
   private placeInnerDoubtBoss() {
-    const bossY = 256
-
-    this.innerDoubtBoss = this.add.container(INNER_DOUBT_X, bossY)
-    const aura = this.add.ellipse(0, -36, 88, 104, MIST_VIOLET, 0.22)
-    aura.setStrokeStyle(2, MORANDI_PALETTE.dustyBlue, 0.35)
-    const core = this.add.circle(0, -48, 20, MORANDI_PALETTE.cloud, 0.45)
-    const label = this.add
-      .text(0, 16, '內在懷疑', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.innerDoubtBoss.add([aura, core, label])
-    this.innerDoubtBoss.setAlpha(this.bossUnlocked ? 1 : 0.45)
-
-    this.tweens.add({
-      targets: aura,
-      alpha: 0.35,
-      scale: 1.08,
-      duration: 1400,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
+    this.innerDoubtBoss = placeCharacterSprite(this, INNER_DOUBT_X, 308, {
+      atlas: 'boss',
+      frame: BOSS_FRAMES.innerDoubt,
+      label: '內在懷疑',
+      scale: 1,
+      alpha: this.bossCleared ? 0.3 : this.bossUnlocked ? 1 : 0.45,
     })
-
-    if (this.bossCleared) {
-      this.innerDoubtBoss.setAlpha(0.3)
-    }
   }
 
   private handleInteract() {

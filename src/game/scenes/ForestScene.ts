@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { ASSET_KEYS, BLACK_SUGAR_FRAMES, MORANDI_PALETTE } from '../assets/assetManifest'
+import { ASSET_KEYS, BOSS_FRAMES, MORANDI_PALETTE, NPC_FRAMES } from '../assets/assetManifest'
+import { placeCharacterSprite, type CharacterMarker } from '../entities/CharacterSprite'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { PatrolCritter } from '../entities/PatrolCritter'
@@ -39,8 +40,8 @@ export class ForestScene extends Phaser.Scene {
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
   private critters: PatrolCritter[] = []
-  private elderNpc?: Phaser.GameObjects.Container
-  private bossJar?: Phaser.GameObjects.Container
+  private elderNpc?: CharacterMarker
+  private bossJar?: CharacterMarker
   private bossPrompt?: Phaser.GameObjects.Text
   private bossCleared = false
   private unsubscribeDialogueClosed?: () => void
@@ -211,29 +212,12 @@ export class ForestScene extends Phaser.Scene {
   }
 
   private placeForestElder() {
-    const elderX = 1080
-    const elderY = 354
-
-    this.elderNpc = this.add.container(elderX, elderY)
-    const robe = this.add.rectangle(0, -34, 54, 68, MORANDI_PALETTE.dustyBlue, 0.82)
-    const hood = this.add.circle(0, -72, 22, MORANDI_PALETTE.cloud, 0.92)
-    const staff = this.add.rectangle(28, -28, 8, 72, MORANDI_PALETTE.warmBeige, 0.95)
-    const label = this.add
-      .text(0, 12, '森林長者', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.elderNpc.add([robe, hood, staff, label])
-
-    this.add
-      .sprite(elderX, elderY - 4, ASSET_KEYS.blackSugar, BLACK_SUGAR_FRAMES.frontIdle)
-      .setOrigin(0.5, 1)
-      .setScale(0.34)
-      .setAlpha(0.22)
+    this.elderNpc = placeCharacterSprite(this, 1080, 354, {
+      atlas: 'npc',
+      frame: NPC_FRAMES.forestElder,
+      label: '森林長者',
+      scale: 0.95,
+    })
   }
 
   private placePatrolCritters() {
@@ -279,22 +263,14 @@ export class ForestScene extends Phaser.Scene {
 
   private placeGiantJarBoss() {
     const jarX = 2280
-    const jarY = 298
+    const jarY = 322
 
-    this.bossJar = this.add.container(jarX, jarY)
-    const jarBody = this.add.ellipse(0, -42, 120, 148, MORANDI_PALETTE.dustyBlue, 0.35)
-    jarBody.setStrokeStyle(4, MORANDI_PALETTE.cloud, 0.88)
-    const jarLid = this.add.rectangle(0, -118, 84, 18, MORANDI_PALETTE.warmBeige, 0.92)
-    const label = this.add
-      .text(0, 24, '巨罐', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '12px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-
-    this.bossJar.add([jarBody, jarLid, label])
+    this.bossJar = placeCharacterSprite(this, jarX, jarY, {
+      atlas: 'boss',
+      frame: BOSS_FRAMES.giantCan,
+      label: '巨罐',
+      scale: 1.1,
+    })
 
     this.bossPrompt = this.add
       .text(jarX, jarY - 150, '按 E 分享一個溫柔片刻', {
