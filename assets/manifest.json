@@ -186,6 +186,21 @@
         ]
       },
       {
+        "key": "giant-can",
+        "type": "atlas",
+        "texture": "characters/giant-can-sprite-sheet-v1.png",
+        "atlas": "characters/giant-can-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Giant Can Forest boss atlas (idle + 3-frame gentle pulse glow, cat-food can).",
+        "frames": [
+          "giant-can-idle",
+          "giant-can-pulse-1",
+          "giant-can-pulse-2",
+          "giant-can-pulse-3"
+        ]
+      },
+      {
         "key": "boss-characters",
         "type": "atlas",
         "texture": "characters/boss-sprite-sheet-v1.png",
