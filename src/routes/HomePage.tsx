@@ -29,8 +29,8 @@ export function HomePage() {
     <main className="home-shell" aria-labelledby="home-title">
       <AppNav />
       <section className="hero-card">
-        <p className="eyebrow">像素 RPG 故事冒險</p>
-        <h1 id="home-title">尋找完美的碗</h1>
+        <p className="eyebrow">Pixel RPG Story Adventure</p>
+        <h1 id="home-title">Quest for the Perfect Bowl</h1>
         <p className="hero-copy">
           跟著黑糖在淡藍天空下旅行，收集回憶碎片，找回那只玻璃抹茶碗。
         </p>

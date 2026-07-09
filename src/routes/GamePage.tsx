@@ -375,7 +375,7 @@ export function GamePage() {
         </Link>
         <div>
           <p className="eyebrow">{chapterMeta.eyebrow}</p>
-          <h1 id="game-title">{chapterMeta.title}</h1>
+          <h1 id="game-title">Quest for the Perfect Bowl</h1>
         </div>
       </header>
       <div className="game-playfield">
