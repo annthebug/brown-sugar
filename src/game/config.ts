@@ -3,7 +3,9 @@ import { BootScene } from './scenes/BootScene'
 import { CityScene } from './scenes/CityScene'
 import { ForestScene } from './scenes/ForestScene'
 import { GameScene } from './scenes/GameScene'
+import { GlassStudioScene } from './scenes/GlassStudioScene'
 import { PreloadScene } from './scenes/PreloadScene'
+import { RetryScene } from './scenes/RetryScene'
 import { SnowMountainScene } from './scenes/SnowMountainScene'
 
 export const GAME_WIDTH = 960
@@ -28,6 +30,6 @@ export function createGameConfig(parent: HTMLElement): Phaser.Types.Core.GameCon
         debug: false,
       },
     },
-    scene: [BootScene, PreloadScene, ForestScene, CityScene, SnowMountainScene, GameScene],
+    scene: [BootScene, PreloadScene, ForestScene, CityScene, SnowMountainScene, GlassStudioScene, RetryScene, GameScene],
   }
 }

@@ -8,7 +8,7 @@ export type DialogueChoiceResult =
     }
   | {
       kind: 'story'
-      trigger: 'time-monster-understood' | 'snow-spirit-understood'
+      trigger: 'time-monster-understood' | 'snow-spirit-understood' | 'glass-master-understood'
     }
 
 export type DialogueChoice = {
@@ -1029,6 +1029,60 @@ export const DIALOGUE_SCRIPTS = {
         speakerName: 'Glass Master',
         avatarLabel: 'GM',
         text: 'Every bowl keeps learning until it is ready to be found.',
+      },
+    },
+  },
+  glassMasterBoss: {
+    id: 'glass-master-boss',
+    title: 'Glass Master',
+    startNodeId: 'glass-boss-intro',
+    nodes: {
+      'glass-boss-intro': {
+        id: 'glass-boss-intro',
+        speakerName: 'Glass Master',
+        avatarLabel: 'GM',
+        text: 'You kept the breath steady. The molten glass is listening.',
+        nextNodeId: 'glass-boss-shape',
+      },
+      'glass-boss-shape': {
+        id: 'glass-boss-shape',
+        speakerName: 'Glass Master',
+        avatarLabel: 'GM',
+        text: 'A bowl is not only a shape. It is the patience you carry while shaping it.',
+        nextNodeId: 'glass-boss-choice',
+      },
+      'glass-boss-choice': {
+        id: 'glass-boss-choice',
+        speakerName: 'Brown Sugar',
+        avatarLabel: 'BS',
+        text: 'What should I hold onto while the glass cools?',
+        choices: [
+          {
+            id: 'glass-boss-choice-a',
+            label: 'The care I put into each breath, even if the rim wobbles.',
+            nextNodeId: 'glass-boss-understand',
+            result: { kind: 'story', trigger: 'glass-master-understood' },
+          },
+          {
+            id: 'glass-boss-choice-b',
+            label: 'The hope that meaning can live inside an imperfect curve.',
+            nextNodeId: 'glass-boss-understand',
+            result: { kind: 'story', trigger: 'glass-master-understood' },
+          },
+        ],
+      },
+      'glass-boss-understand': {
+        id: 'glass-boss-understand',
+        speakerName: 'Glass Master',
+        avatarLabel: 'GM',
+        text: 'Then take this first bowl. It may not match the memory yet — but it is yours to learn from.',
+        nextNodeId: 'glass-boss-farewell',
+      },
+      'glass-boss-farewell': {
+        id: 'glass-boss-farewell',
+        speakerName: 'Glass Master',
+        avatarLabel: 'GM',
+        text: 'When you are ready, we will try again together.',
       },
     },
   },
