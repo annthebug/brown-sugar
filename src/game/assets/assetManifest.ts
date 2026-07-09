@@ -22,6 +22,8 @@ import snowSpiritTextureUrl from '../../../assets/characters/snow-spirit-sprite-
 import snowSpiritAtlasUrl from '../../../assets/characters/snow-spirit-sprite-sheet-v1.json?url'
 import glassMasterBossTextureUrl from '../../../assets/characters/glass-master-boss-sprite-sheet-v1.png'
 import glassMasterBossAtlasUrl from '../../../assets/characters/glass-master-boss-sprite-sheet-v1.json?url'
+import innerDoubtTextureUrl from '../../../assets/characters/inner-doubt-sprite-sheet-v1.png'
+import innerDoubtAtlasUrl from '../../../assets/characters/inner-doubt-sprite-sheet-v1.json?url'
 import npcTextureUrl from '../../../assets/characters/npc-sprite-sheet-v1.png'
 import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url'
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
@@ -43,6 +45,7 @@ export const ASSET_KEYS = {
   timeMonster: 'time-monster',
   snowSpirit: 'snow-spirit',
   glassMasterBoss: 'glass-master-boss',
+  innerDoubt: 'inner-doubt',
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
@@ -152,6 +155,13 @@ export const GLASS_MASTER_BOSS_FRAMES = {
   pulse1: 'glass-master-boss-pulse-1',
   pulse2: 'glass-master-boss-pulse-2',
   pulse3: 'glass-master-boss-pulse-3',
+} as const
+
+export const INNER_DOUBT_FRAMES = {
+  idle: 'inner-doubt-idle',
+  pulse1: 'inner-doubt-pulse-1',
+  pulse2: 'inner-doubt-pulse-2',
+  pulse3: 'inner-doubt-pulse-3',
 } as const
 
 export const NPC_FRAMES = {
@@ -358,6 +368,17 @@ export const GAME_ASSET_MANIFEST = {
       textureUrl: glassMasterBossTextureUrl,
       atlasUrl: glassMasterBossAtlasUrl,
       frames: Object.values(GLASS_MASTER_BOSS_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'characters',
+      key: ASSET_KEYS.innerDoubt,
+      placeholder: false,
+      purpose: 'preload',
+      description: 'Inner Doubt Retry boss atlas (idle + 3-frame wobble / blink bounce, soot-sprite cluster).',
+      textureUrl: innerDoubtTextureUrl,
+      atlasUrl: innerDoubtAtlasUrl,
+      frames: Object.values(INNER_DOUBT_FRAMES),
     },
     {
       kind: 'atlas',

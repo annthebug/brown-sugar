@@ -246,6 +246,21 @@
         ]
       },
       {
+        "key": "inner-doubt",
+        "type": "atlas",
+        "texture": "characters/inner-doubt-sprite-sheet-v1.png",
+        "atlas": "characters/inner-doubt-sprite-sheet-v1.json",
+        "placeholder": false,
+        "purpose": "preload",
+        "description": "Inner Doubt Retry boss atlas (idle + 3-frame wobble / blink bounce, soot-sprite cluster).",
+        "frames": [
+          "inner-doubt-idle",
+          "inner-doubt-pulse-1",
+          "inner-doubt-pulse-2",
+          "inner-doubt-pulse-3"
+        ]
+      },
+      {
         "key": "boss-characters",
         "type": "atlas",
         "texture": "characters/boss-sprite-sheet-v1.png",
