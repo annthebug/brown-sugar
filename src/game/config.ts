@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import { BootScene } from './scenes/BootScene'
+import { ForestScene } from './scenes/ForestScene'
 import { GameScene } from './scenes/GameScene'
 import { PreloadScene } from './scenes/PreloadScene'
 
@@ -25,6 +26,6 @@ export function createGameConfig(parent: HTMLElement): Phaser.Types.Core.GameCon
         debug: false,
       },
     },
-    scene: [BootScene, PreloadScene, GameScene],
+    scene: [BootScene, PreloadScene, ForestScene, GameScene],
   }
 }

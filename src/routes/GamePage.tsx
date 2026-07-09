@@ -22,9 +22,13 @@ export function GamePage() {
   const [lastDialogueChoice, setLastDialogueChoice] = useState<string>('No dialogue choice yet')
   const memoryShards = useGameStore((state) => state.memoryShards)
   const totalMemoryShards = useGameStore((state) => state.totalMemoryShards)
+  const currentChapter = useGameStore((state) => state.currentChapter)
+  const forestChapterCleared = useGameStore((state) => state.forestChapterCleared)
   const collectMemoryShards = useGameStore((state) => state.collectMemoryShards)
+  const completeForestChapter = useGameStore((state) => state.completeForestChapter)
   const resetProgress = useGameStore((state) => state.resetProgress)
   const unlockNextMemory = useGalleryStore((state) => state.unlockNextMemory)
+  const unlockMemoryByNumber = useGalleryStore((state) => state.unlockMemoryByNumber)
   const answeredQuestionIds = useMbtiStore((state) => state.answeredQuestionIds)
   const answerQuestion = useMbtiStore((state) => state.answerQuestion)
   const resetMbtiScores = useMbtiStore((state) => state.resetScores)
@@ -56,15 +60,27 @@ export function GamePage() {
       collectShards(payload.amount)
     })
 
-    const unsubscribeTalk = gameEventBus.on('player:talk-start', () => {
-      openDialogue('forestElder')
+    const unsubscribeTalk = gameEventBus.on('player:talk-start', (payload) => {
+      if (payload.npcId === 'forestElder' || !payload.npcId) {
+        openDialogue('forestElder')
+      }
+    })
+
+    const unsubscribeChapter = gameEventBus.on('chapter:forest-cleared', () => {
+      completeForestChapter()
+      const unlockedMemory = unlockMemoryByNumber(1)
+
+      if (unlockedMemory) {
+        setMemoryQueue((currentQueue) => [...currentQueue, unlockedMemory])
+      }
     })
 
     return () => {
       unsubscribeShard()
       unsubscribeTalk()
+      unsubscribeChapter()
     }
-  }, [collectShards, openDialogue])
+  }, [collectShards, completeForestChapter, openDialogue, unlockMemoryByNumber])
 
   const handleChoiceResult = useCallback(
     (result: DialogueChoiceResult, choice: DialogueChoice) => {
@@ -85,6 +101,7 @@ export function GamePage() {
 
   const closeDialogue = useCallback(() => {
     setActiveDialogueId(null)
+    gameEventBus.emit('dialogue:closed', {})
   }, [])
 
   const continueMemory = () => {
@@ -99,8 +116,8 @@ export function GamePage() {
           Home
         </Link>
         <div>
-          <p className="eyebrow">Task 003 · Router + Zustand</p>
-          <h1 id="game-title">Pale Blue Sky Scene</h1>
+          <p className="eyebrow">Chapter 1 · Forest</p>
+          <h1 id="game-title">Pale Blue Sky Forest</h1>
         </div>
       </header>
       <PhaserGame />
@@ -109,6 +126,11 @@ export function GamePage() {
           <p className="panel-label">Memory Shards</p>
           <strong>{memoryShards} / 100</strong>
           <span>{totalMemoryShards} total</span>
+        </div>
+        <div>
+          <p className="panel-label">Chapter progress</p>
+          <strong>{currentChapter}</strong>
+          <span>{forestChapterCleared ? 'Forest cleared' : 'Find the Giant Jar'}</span>
         </div>
         <button type="button" onClick={() => collectShards(1)}>
           Collect shard

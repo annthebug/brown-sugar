@@ -84,6 +84,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   // Timed lock-outs (ms remaining)
   private meowLock = 0
   private collectLock = 0
+  private talkHandler: (() => void) | null = null
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, ASSET_KEYS.blackSugar, BLACK_SUGAR_FRAMES.sideIdle)
@@ -186,7 +187,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     // ── Talk ─────────────────────────────────────────────────────────────
 
     if (input.talkJustDown && onGround) {
-      this.triggerTalk()
+      if (this.talkHandler) {
+        this.talkHandler()
+      } else {
+        this.triggerTalk()
+      }
     }
 
     // ── Animation sync ───────────────────────────────────────────────────
@@ -195,6 +200,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   // ── Public action triggers (callable by the scene) ───────────────────
+
+  setTalkHandler(handler: (() => void) | null) {
+    this.talkHandler = handler
+  }
 
   triggerCollect() {
     if (this._state === 'collect') return
@@ -207,11 +216,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     })
   }
 
-  triggerTalk() {
+  triggerTalk(npcId?: string) {
     if (this._state === 'talk') return
     this._state = 'talk'
     this.play('bs-idle', true)
-    gameEventBus.emit('player:talk-start', {})
+    gameEventBus.emit('player:talk-start', { npcId })
   }
 
   endTalk() {

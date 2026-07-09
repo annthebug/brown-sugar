@@ -1,7 +1,13 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-type Chapter = 'Forest' | 'City' | 'Snow Mountain' | 'Glass Studio' | 'Retry' | 'Final Stage'
+export type Chapter =
+  | 'Forest'
+  | 'City'
+  | 'Snow Mountain'
+  | 'Glass Studio'
+  | 'Retry'
+  | 'Final Stage'
 
 export type MemoryShardCollectionResult = {
   memoryShards: number
@@ -11,10 +17,12 @@ export type MemoryShardCollectionResult = {
 
 type GameState = {
   currentChapter: Chapter
+  forestChapterCleared: boolean
   memoryShards: number
   totalMemoryShards: number
   collectMemoryShards: (amount?: number) => MemoryShardCollectionResult
   collectMemoryShard: () => MemoryShardCollectionResult
+  completeForestChapter: () => void
   resetProgress: () => void
 }
 
@@ -24,6 +32,7 @@ export const useGameStore = create<GameState>()(
   persist(
     (set, get) => ({
       currentChapter: 'Forest',
+      forestChapterCleared: false,
       memoryShards: 0,
       totalMemoryShards: 0,
       collectMemoryShards: (amount = 1) => {
@@ -42,11 +51,42 @@ export const useGameStore = create<GameState>()(
         }
       },
       collectMemoryShard: () => get().collectMemoryShards(1),
+      completeForestChapter: () => {
+        if (get().forestChapterCleared) {
+          return
+        }
+
+        set({
+          forestChapterCleared: true,
+          currentChapter: 'City',
+        })
+      },
       resetProgress: () =>
-        set({ currentChapter: 'Forest', memoryShards: 0, totalMemoryShards: 0 }),
+        set({
+          currentChapter: 'Forest',
+          forestChapterCleared: false,
+          memoryShards: 0,
+          totalMemoryShards: 0,
+        }),
     }),
     {
       name: 'perfect-bowl-game',
+      merge: (persistedState, currentState) => {
+        const persisted =
+          typeof persistedState === 'object' && persistedState !== null ? persistedState : {}
+
+        return {
+          ...currentState,
+          ...persisted,
+          forestChapterCleared:
+            typeof persisted === 'object' &&
+            persisted !== null &&
+            'forestChapterCleared' in persisted &&
+            typeof persisted.forestChapterCleared === 'boolean'
+              ? persisted.forestChapterCleared
+              : currentState.forestChapterCleared,
+        }
+      },
     },
   ),
 )

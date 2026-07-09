@@ -15,6 +15,7 @@ type GalleryState = {
   memories: MemoryEntry[]
   unlockMemory: (id: string) => MemoryEntry | null
   unlockNextMemory: () => MemoryEntry | null
+  unlockMemoryByNumber: (memoryNumber: number) => MemoryEntry | null
   resetGallery: () => void
 }
 
@@ -70,6 +71,15 @@ export const useGalleryStore = create<GalleryState>()(
         }
 
         return get().unlockMemory(nextMemory.id)
+      },
+      unlockMemoryByNumber: (memoryNumber) => {
+        const memory = get().memories[memoryNumber - 1] ?? null
+
+        if (!memory) {
+          return null
+        }
+
+        return get().unlockMemory(memory.id)
       },
       resetGallery: () => set({ memories: initialMemories }),
     }),
