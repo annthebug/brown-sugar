@@ -27,6 +27,7 @@ export type DialogueNode = {
   id: string
   speakerName: string
   avatarLabel: string
+  avatarImageUrl?: string
   text: string
   nextNodeId?: string
   choices?: readonly DialogueChoice[]
@@ -38,6 +39,13 @@ export type DialogueScript = {
   startNodeId: string
   nodes: Record<string, DialogueNode>
 }
+
+export const NPC_PORTRAIT_URLS = {
+  forestElder: new URL(
+    '../../assets/characters/forest-elder-portrait-v1.png',
+    import.meta.url,
+  ).href,
+} as const
 
 function mbtiChoice(
   id: string,
@@ -68,6 +76,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-ei-01',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '今天的小徑很柔軟。黑糖，如果森林忽然安靜下來，你會怎麼找到前行的方向呢？',
         choices: [
           mbtiChoice(
@@ -90,6 +99,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-ei-01-r1',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '聲音也能成為一盞小燈。森林會記得那些願意溫柔開口的貓咪。',
         nextNodeId: 'forest-ei-02',
       },
@@ -97,6 +107,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-ei-01-r2',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '安靜的停頓也能成為指南針。森林會記得那些先傾聽再邁步的貓咪。',
         nextNodeId: 'forest-ei-02',
       },
@@ -104,6 +115,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-ei-02',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '當眼前出現一條新的小路時，你最先會怎麼做？',
         choices: [
           mbtiChoice(
@@ -126,6 +138,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-ei-02-r1',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '有人走過的步伐，能讓路顯得更溫暖。繼續聽見你身邊的世界吧。',
         nextNodeId: 'forest-sn-01',
       },
@@ -133,6 +146,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-ei-02-r2',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '按照自己的節奏也很好。森林信任懂得自己步調的貓咪。',
         nextNodeId: 'forest-sn-01',
       },
@@ -140,6 +154,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-sn-01',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '一塊覆著青苔的石頭標記著路徑。你最先注意到什麼呢？',
         choices: [
           mbtiChoice(
@@ -162,6 +177,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-sn-01-r1',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '小小的細節裡，也能藏著完整的地圖。你很會看見眼前真實存在的事物。',
         nextNodeId: 'forest-sn-02',
       },
@@ -169,6 +185,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-sn-01-r2',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '故事常常住在安靜的地方。你能感受到石頭記得的那些片刻。',
         nextNodeId: 'forest-sn-02',
       },
@@ -176,6 +193,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-sn-02',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '長者攤開兩顆漿果。你的第一個念頭會是什麼？',
         choices: [
           mbtiChoice(
@@ -198,6 +216,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-sn-02-r1',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '你會先留意真實存在的樣子，再去想像更多。這會讓腳步更安心。',
         nextNodeId: 'forest-sn-03',
       },
@@ -205,6 +224,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-sn-02-r2',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '你總能很快感受到其中的意義。森林很喜歡這樣柔軟的心。',
         nextNodeId: 'forest-sn-03',
       },
@@ -212,6 +232,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-sn-03',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '雨水讓前方的腳印變得模糊柔軟。你會怎麼讀懂它們呢？',
         choices: [
           mbtiChoice(
@@ -234,6 +255,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-sn-03-r1',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '當路徑不太明朗時，清楚的事實也能是一種溫柔。',
         nextNodeId: 'farewell',
       },
@@ -241,6 +263,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'forest-sn-03-r2',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '當路徑不太明朗時，留給可能性的空間也能是一種溫柔。',
         nextNodeId: 'farewell',
       },
@@ -248,6 +271,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'farewell',
         speakerName: '森林長者',
         avatarLabel: '森',
+        avatarImageUrl: NPC_PORTRAIT_URLS.forestElder,
         text: '把這句話帶著走吧。不是每個真實的答案，都需要很大聲。',
       },
     },
