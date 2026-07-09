@@ -101,9 +101,6 @@ export function GamePage() {
   useEffect(() => {
     audioService.init()
 
-    const unsubscribeReady = gameEventBus.on('phaser:ready', (payload) => {
-      audioService.playSceneBgm(payload.scene)
-    })
     const unsubscribeJump = gameEventBus.on('player:jump', () => {
       audioService.playSfx('jump')
     })
@@ -144,7 +141,6 @@ export function GamePage() {
     })
 
     return () => {
-      unsubscribeReady()
       unsubscribeJump()
       unsubscribeMeow()
       unsubscribeCollect()

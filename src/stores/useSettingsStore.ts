@@ -4,11 +4,9 @@ import { persist } from 'zustand/middleware'
 type Language = 'zh-Hant' | 'en'
 
 type SettingsState = {
-  bgmVolume: number
   soundVolume: number
   language: Language
   fullscreen: boolean
-  setBgmVolume: (volume: number) => void
   setSoundVolume: (volume: number) => void
   setLanguage: (language: Language) => void
   setFullscreen: (enabled: boolean) => void
@@ -34,11 +32,9 @@ async function exitAppFullscreen() {
 export const useSettingsStore = create<SettingsState>()(
   persist(
     (set, get) => ({
-      bgmVolume: 70,
       soundVolume: 80,
       language: 'zh-Hant',
       fullscreen: false,
-      setBgmVolume: (volume) => set({ bgmVolume: clampVolume(volume) }),
       setSoundVolume: (volume) => set({ soundVolume: clampVolume(volume) }),
       setLanguage: (language) => set({ language }),
       setFullscreen: (enabled) => set({ fullscreen: enabled }),

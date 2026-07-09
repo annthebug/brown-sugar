@@ -47,7 +47,7 @@
 
 ### UI 元素
 - 按鈕、對話框、HUD、相簿框、設定面板。
-- 圖示：BGM / Sound / Language / Fullscreen。
+- 圖示：Sound / Language / Fullscreen。
 - UI 素材需使用半透明淺色面板、灰藍描邊與莫蘭迪輔色狀態。
 
 ## 命名與存放規範

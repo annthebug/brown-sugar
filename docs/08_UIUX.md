@@ -35,7 +35,6 @@
 - Exit
 
 ### 設定（Setting）
-- BGM
 - Sound
 - Language
 - Fullscreen
@@ -81,7 +80,7 @@ Pixel → Fade → 真正照片 → 一句文字 → Continue → Pixel
 ## 無障礙 / 體驗細節
 
 - 提供 Fullscreen 選項。
-- 音量可分別調整 BGM 與 Sound。
+- 音量可調整 Sound。
 - 支援語言切換（Language）。
 
 ## 相關文件

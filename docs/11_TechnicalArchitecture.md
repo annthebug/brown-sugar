@@ -48,7 +48,7 @@
 
 - `useGameStore`：進度、章節、Memory Shards。
 - `useMbtiStore`：MBTI 計分與結果。
-- `useSettingsStore`：BGM、Sound、Language、Fullscreen。
+- `useSettingsStore`：Sound、Language、Fullscreen。
 - `useGalleryStore`：已解鎖回憶。
 
 ## 路由（React Router）

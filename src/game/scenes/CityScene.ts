@@ -1,6 +1,5 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
-import { audioService } from '../../services/audio'
 import { ASSET_KEYS, MORANDI_PALETTE } from '../assets/assetManifest'
 import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
@@ -143,9 +142,6 @@ export class CityScene extends Phaser.Scene {
     this.unsubscribeBossDialogueDone = gameEventBus.on('boss:time-monster-understood', () => {
       this.bossEncounterReady = true
     })
-
-    audioService.init()
-    audioService.playBgm('forest')
   }
 
   update(_time: number, delta: number) {
@@ -165,7 +161,6 @@ export class CityScene extends Phaser.Scene {
     this.player?.setTalkHandler(null)
     this.inputCtrl?.destroy()
     this.touchCtrl?.destroy()
-    audioService.stopBgm()
   }
 
   private buildBackground() {
