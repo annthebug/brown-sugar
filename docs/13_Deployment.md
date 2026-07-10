@@ -34,11 +34,16 @@ VITE_FIREBASE_APP_ID=
 
 專案根目錄已包含 `vercel.json`：
 
-- Framework Preset：Vite
+- Framework Preset：**Vite**
 - Build Command：`npm run build`
-- Output Directory：`dist`
-- SPA Rewrite：非靜態檔請求導向 `index.html`（支援 React Router）
+- Output Directory：`dist`（與 `vite.config.ts` `build.outDir` 一致）
+- **SPA Rewrite**：無副檔名之路徑（如 `/game`、`/gallery`）導向 `index.html`；`assets/`、`icons/` 與含副檔名之靜態檔由檔案系統直接提供，避免重新整理 404
+- `cleanUrls: false`、`trailingSlash: false`：與 React Router `BrowserRouter` 路徑一致
 - Environment Variables：見上表；可參考 `.env.example`
+
+### 手機驗收
+
+實機 QA 步驟見 **[mobile-qa-checklist.md](mobile-qa-checklist.md)**（iPhone Safari、Android Chrome、觸控、對話、暫停、PWA、SPA 重新整理）。
 
 ### 首次連結步驟
 
@@ -76,10 +81,13 @@ merge 到主分支 → Vercel 產出 Production
 - [ ] Firebase 環境變數已於 Vercel 設定
 - [ ] Firestore / Storage Security Rules 已設定
 - [ ] PWA 可安裝且離線可啟動
+- [ ] `/game`、`/gallery` 重新整理不 404（SPA rewrite）
+- [ ] [手機 QA 清單](mobile-qa-checklist.md) 於 Preview URL 通過
 - [ ] 桌機與行動裝置操作皆正常
 - [ ] 存檔與雲端同步正常
 
 ## 相關文件
 
+- 手機 QA：[mobile-qa-checklist.md](mobile-qa-checklist.md)
 - 技術架構：[11_TechnicalArchitecture](11_TechnicalArchitecture.md)
 - 資料庫：[12_Database](12_Database.md)
