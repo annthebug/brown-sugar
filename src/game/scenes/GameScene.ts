@@ -3,6 +3,7 @@ import { MORANDI_PALETTE } from '../assets/assetManifest'
 import { gameEventBus } from '../events/eventBus'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
+import { shouldShowTouchControls } from '../input/touchInputEnvironment'
 import { TouchControls } from '../input/TouchControls'
 
 // Ground geometry — shared between visual and physics body
@@ -76,7 +77,7 @@ export class GameScene extends Phaser.Scene {
     this.inputCtrl = new InputController(this)
 
     // Show touch controls only on touch-capable devices
-    const isTouch = this.sys.game.device.input.touch
+    const isTouch = shouldShowTouchControls(this)
     this.touchCtrl = new TouchControls(this, this.inputCtrl)
     this.touchCtrl.setVisible(isTouch)
 
