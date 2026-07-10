@@ -11,6 +11,7 @@ import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
+import { shouldShowTouchControls } from '../input/touchInputEnvironment'
 import { TouchControls } from '../input/TouchControls'
 
 const WORLD_WIDTH = 2640
@@ -111,7 +112,7 @@ export class RetryScene extends Phaser.Scene {
     this.placeInnerDoubtBoss()
 
     this.inputCtrl = new InputController(this)
-    const isTouch = this.sys.game.device.input.touch
+    const isTouch = shouldShowTouchControls(this)
     this.touchCtrl = new TouchControls(this, this.inputCtrl)
     this.touchCtrl.setVisible(isTouch)
 

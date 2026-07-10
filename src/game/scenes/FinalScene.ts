@@ -11,6 +11,7 @@ import { MemoryShard } from '../entities/MemoryShard'
 import { gameEventBus } from '../events/eventBus'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
+import { shouldShowTouchControls } from '../input/touchInputEnvironment'
 import { TouchControls } from '../input/TouchControls'
 
 const WORLD_WIDTH = 2520
@@ -86,7 +87,7 @@ export class FinalScene extends Phaser.Scene {
     this.placePerfectionism()
 
     this.inputCtrl = new InputController(this)
-    const isTouch = this.sys.game.device.input.touch
+    const isTouch = shouldShowTouchControls(this)
     this.touchCtrl = new TouchControls(this, this.inputCtrl)
     this.touchCtrl.setVisible(isTouch)
 
