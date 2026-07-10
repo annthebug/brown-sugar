@@ -4,7 +4,6 @@ import { gameEventBus } from '../events/eventBus'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
-import { TouchControls } from '../input/TouchControls'
 
 // Ground geometry — shared between visual and physics body
 const GROUND_CENTER_Y_OFFSET = 56   // px from bottom to ground rect centre
@@ -13,7 +12,6 @@ const GROUND_HEIGHT = 112
 export class GameScene extends Phaser.Scene {
   private player?: Player
   private inputCtrl?: InputController
-  private touchCtrl?: TouchControls
 
   constructor() {
     super('GameScene')
@@ -76,10 +74,7 @@ export class GameScene extends Phaser.Scene {
     // ── Input ───────────────────────────────────────────────────────────
     this.inputCtrl = new InputController(this)
 
-    // Show touch controls only on touch-capable devices
     const isTouch = shouldShowTouchControls(this)
-    this.touchCtrl = new TouchControls(this, this.inputCtrl)
-    this.touchCtrl.setVisible(isTouch)
 
     // ── Debug hint (desktop) ────────────────────────────────────────────
     if (!isTouch) {
@@ -112,7 +107,6 @@ export class GameScene extends Phaser.Scene {
 
   shutdown() {
     this.inputCtrl?.destroy()
-    this.touchCtrl?.destroy()
   }
 
   private addCloud(x: number, y: number, scale: number) {
