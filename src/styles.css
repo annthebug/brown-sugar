@@ -268,6 +268,37 @@ h1 {
   position: relative;
 }
 
+.game-playfield-pause {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top, 0px));
+  right: max(12px, env(safe-area-inset-right, 0px));
+  z-index: 9;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  border: 2px solid rgba(90, 120, 132, 0.26);
+  border-radius: 999px;
+  background: rgba(159, 191, 202, 0.92);
+  color: #f8fbf9;
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: 0 10px 24px rgba(89, 128, 141, 0.22);
+  backdrop-filter: blur(8px);
+}
+
+.game-playfield-pause:hover,
+.game-playfield-pause:focus-visible {
+  box-shadow: 0 14px 30px rgba(89, 128, 141, 0.28);
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.game-playfield-pause:focus-visible {
+  outline: 2px solid rgba(143, 178, 191, 0.72);
+  outline-offset: 2px;
+}
+
 .pause-overlay {
   position: fixed;
   inset: 0;
@@ -1375,6 +1406,11 @@ body.game-play-active {
     env(safe-area-inset-bottom, 0px)
     0;
   overflow: hidden;
+}
+
+.game-shell--mobile .game-playfield-pause {
+  top: 12px;
+  right: 12px;
 }
 
 .game-shell--mobile::before,
