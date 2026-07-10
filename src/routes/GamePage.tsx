@@ -442,7 +442,7 @@ export function GamePage() {
       {activeMemory ? <MemoryOverlay memory={activeMemory} onContinue={continueMemory} /> : null}
       {isPaused ? <PauseMenu onResume={resumeGame} onRestart={restartChapter} /> : null}
       <TouchControlsOverlay
-        visible={shouldShowTouchControls && !isPaused && !activeMemory}
+        visible={shouldShowTouchControls && !isPaused && !activeMemory && !activeDialogue}
       />
       <AchievementToastStack toasts={toastQueue} onDismiss={dismissToast} />
     </main>
