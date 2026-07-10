@@ -31,7 +31,7 @@
 | Forest | 淡藍天空、低飽和樹木、草地、木箱 |
 | City | 淡藍天空、霧杏咖啡店、公園、捷運 |
 | Snow Mountain | 淡藍天空、雪景、合掌村、日式建築 |
-| Glass Studio | 淡藍窗光、柔橘火爐、玻璃管、工作台 |
+| Glass Studio | 淡藍窗光、柔橘火爐（`glass-furnace` atlas）、吹製工作台（`glass-blow-station` atlas）、玻璃管液滴脈動動畫 |
 | Retry | 淡藍環境光、重製工坊 |
 | Final Stage | 霧藍留白、抽象雲層與內心之境 |
 
