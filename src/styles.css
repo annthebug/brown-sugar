@@ -1416,6 +1416,9 @@ body.game-play-active {
 
 .pause-overlay--mobile-game .pause-menu-actions a,
 .pause-overlay--mobile-game .pause-menu-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: min(100%, 18rem);
   min-height: 3rem;
   font-size: 1.02rem;
