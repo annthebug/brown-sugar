@@ -345,6 +345,9 @@ h1 {
 .pause-menu-actions button {
   width: 100%;
   min-width: 0;
+  display: inline-grid;
+  place-items: center;
+  text-align: center;
 }
 
 .journey-panel {
