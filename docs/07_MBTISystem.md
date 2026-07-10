@@ -78,7 +78,7 @@ interface MbtiQuestion {
 | Snow Mountain | S/N、E/I | 3~4 |
 | Glass Studio | T/F | 3~4 |
 | Retry（第五章） | 綜合補題（內在嚮導） | 3 |
-| Final Stage | — | **不重複出題**；若未完成應引導回 Retry |
+| Final Stage | 補答入口（內在嚮導，未完成時） | 0（共用腳本，不重複計分） |
 
 ## 相關文件
 

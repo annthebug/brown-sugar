@@ -10,7 +10,7 @@
 
 - 不引入 Howler.js 或其他音訊函式庫。
 - 不建立 `services/audio.ts` 或 `assets/audio/` 資源。
-- 設定頁僅保留 Language、Fullscreen 等與音訊無關的選項。
+- 設定頁保留 Fullscreen 等選項；介面為繁體中文（無音訊相關設定）。
 
 ## 相關文件
 

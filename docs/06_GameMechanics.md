@@ -49,24 +49,27 @@ Pixel → Fade → 真正照片 → 一句文字 → Continue → Pixel
 | 玩法 | 橘色光暈／玻璃液滴脈動；在亮度峰值（≥ 約 72%）時再按 Talk |
 | 目標 | 成功 **3 次**；時機錯誤則進度歸零 |
 | 完成後 | 與玻璃師傅 Boss 對話 → 不理想玻璃碗演出（黑糖 🥺） |
-| 視覺 | 需有火爐與吹製台 **場景素材** 及吹製中 **動畫**（見 [glass-studio-props](assets/glass-studio-props.md)） |
-| 火爐互動 | 按 Talk 感受爐火溫度；黑糖應播放 `happy` emote + 繁中提示 |
+| 視覺（v1） | 火爐／吹製台以 Phaser 幾何形狀 + 橘色光暈 tween；不要求獨立場景 sprite 圖集 |
+| 火爐互動 | 按 Talk 顯示繁中提示文案 |
 
-## 存檔機制
+## 存檔機制（v1）
 
 | 方式 | 說明 |
 | --- | --- |
-| Auto Save | 關鍵節點自動存檔 |
-| LocalStorage | 本機即時保存進度 |
-| Firebase Sync | 雲端同步，跨裝置延續 |
+| LocalStorage | 本機即時保存（Zustand persist + `services/save.ts`） |
+| Firebase Sync | **選用**；設定 `VITE_FIREBASE_*` 時雲端同步 |
+| Auto Save | 狀態變更 debounce 寫入 |
 
-## 成就機制
+## 成就機制（v1）
 
-- 收集全部照片
-- 全 MBTI（觸發所有題目）
-- 全部 Memory
-- Speed Run（限時通關）
-- No Damage（無受傷通關）
+- 晨光微亮（首片碎片）
+- 柔軟倒影（首段回憶）
+- 森林約定（通關森林）
+- 我們的相簿（全部回憶）
+- 心意盛開（MBTI 完成）
+- 溫柔歸來的碗（旅程完成）
+
+> Speed Run、No Damage **不在 v1 範圍**。
 
 ## 相關文件
 

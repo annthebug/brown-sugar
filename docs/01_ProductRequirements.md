@@ -54,10 +54,10 @@ Web（Desktop / iPad / iPhone / Android），PWA 可安裝。
 - 最後寶箱打開為真正拍攝的玻璃碗照片；黑糖躺在碗旁睡著，Credits 捲動。
 
 ### 系統功能
-- 存檔：Auto Save、LocalStorage、Firebase Sync。
+- 存檔：LocalStorage 即時保存；Firebase 雲端同步（選用，需環境變數）。
 - 相簿：每張照片含日期、一句話、動畫。
-- 成就：收集全部照片、全 MBTI、全部 Memory、Speed Run、No Damage。
-- 設定：Language、Fullscreen。
+- 成就：六項里程碑（首片碎片、首段回憶、森林通關、全相簿、MBTI 完成、旅程完成）。
+- 設定：繁體中文、Fullscreen。
 
 ## 非功能需求（Non-Functional Requirements）
 
@@ -81,3 +81,8 @@ Web（Desktop / iPad / iPhone / Android），PWA 可安裝。
 - 多人連線 / 對戰。
 - 內購 / 金流。
 - 排行榜社群功能。
+- 遊戲內音訊（BGM／SFX）。
+- 英文／多語系 i18n（v1 僅繁體中文）。
+- Speed Run、No Damage 成就。
+- 玻璃工坊獨立場景 sprite 圖集（火爐／吹製台專用 atlas）。
+- 手機遊戲內固定暫停／返回首頁按鈕。

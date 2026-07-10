@@ -6,15 +6,15 @@
 - **Firebase Storage**：媒體資源（回憶照片、玻璃碗照片）。
 - **LocalStorage**：本機即時進度（離線可用）。
 
-## 存檔策略
+## 存檔策略（v1）
 
 | 層級 | 用途 |
 | --- | --- |
-| LocalStorage | 即時、離線進度 |
-| Firestore | 雲端同步、跨裝置 |
-| Auto Save | 關鍵節點自動觸發 |
+| LocalStorage | 即時、離線進度（必備） |
+| Firestore | 雲端同步、跨裝置（**選用**，需 Firebase 設定） |
+| Auto Save | `services/save.ts` debounce 聚合寫入 |
 
-- 進度以 LocalStorage 為主，於連線時同步至 Firestore（Firebase Sync）。
+- 進度以 LocalStorage 為主；連線且已設定 Firebase 時同步至 Firestore。
 
 ## 資料模型
 
