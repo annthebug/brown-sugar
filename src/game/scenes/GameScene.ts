@@ -55,7 +55,7 @@ export class GameScene extends Phaser.Scene {
       .setOrigin(0.5)
 
     this.add
-      .text(width / 2, title.y + 42, 'Phaser 遊戲場景・淡藍天空', {
+      .text(width / 2, title.y + 42, '遊戲場景・淡藍天空', {
         color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '16px',

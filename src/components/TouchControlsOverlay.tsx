@@ -121,10 +121,10 @@ export function TouchControlsOverlay({ visible }: TouchControlsOverlayProps) {
         <HoldButton label="▶" touchKey="right" />
       </div>
       <div className="touch-controls-cluster touch-controls-cluster--right">
-        <TapButton label="Talk" touchKey="talk" className="touch-btn-talk" />
-        <HoldButton label="Jump" touchKey="jump" className="touch-btn-jump" size="large" />
-        <TapButton label="Dash" touchKey="dash" className="touch-btn-dash" />
-        <TapButton label="Meow" touchKey="meow" className="touch-btn-meow" />
+        <TapButton label="對話" touchKey="talk" className="touch-btn-talk" />
+        <HoldButton label="跳躍" touchKey="jump" className="touch-btn-jump" size="large" />
+        <TapButton label="衝刺" touchKey="dash" className="touch-btn-dash" />
+        <TapButton label="喵叫" touchKey="meow" className="touch-btn-meow" />
       </div>
     </div>
   )
