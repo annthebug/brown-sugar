@@ -2,6 +2,8 @@ import Phaser from 'phaser'
 import { useGameStore } from '../../stores/useGameStore'
 import {
   ASSET_KEYS,
+  GLASS_BLOW_STATION_FRAMES,
+  GLASS_FURNACE_FRAMES,
   GLASS_MASTER_BOSS_FRAMES,
   GLASS_MASTER_FRAMES,
   MORANDI_PALETTE,
@@ -21,8 +23,6 @@ const GROUND_HEIGHT = 112
 const GROUND_TOP = GROUND_Y - GROUND_HEIGHT / 2
 const INTERACT_RADIUS = 92
 
-const SOFT_ORANGE = 0xe8b898
-const SOFT_ORANGE_GLOW = 0xd4a88a
 const GLASS_TUBE_BLUE = 0xb8d4e8
 const WINDOW_GLOW = 0xd8edf4
 
@@ -60,9 +60,7 @@ export class GlassStudioScene extends Phaser.Scene {
   private shards: MemoryShard[] = []
   private glassMasterNpc?: CharacterMarker
   private glassMasterBoss?: CharacterMarker
-  private furnaceGlow?: Phaser.GameObjects.Arc
-  private blowGlassGlow?: Phaser.GameObjects.Arc
-  private blowGlassPipe?: Phaser.GameObjects.Container
+  private blowGlassSprite?: Phaser.GameObjects.Sprite
   private imperfectBowl?: Phaser.GameObjects.Container
   private interactPrompt?: Phaser.GameObjects.Text
   private blowGlassHint?: Phaser.GameObjects.Text
@@ -101,6 +99,7 @@ export class GlassStudioScene extends Phaser.Scene {
 
     this.placeMemoryShards()
     this.placeGlassMasterNpc()
+    this.registerPropAnimations()
     this.placeFurnace()
     this.placeBlowGlassStation()
     this.placeGlassMasterBoss()
@@ -346,53 +345,52 @@ export class GlassStudioScene extends Phaser.Scene {
     })
   }
 
+  private registerPropAnimations() {
+    if (!this.anims.exists('furnace-glow')) {
+      this.anims.create({
+        key: 'furnace-glow',
+        frames: [
+          { key: ASSET_KEYS.glassFurnace, frame: GLASS_FURNACE_FRAMES.glow1 },
+          { key: ASSET_KEYS.glassFurnace, frame: GLASS_FURNACE_FRAMES.glow2 },
+          { key: ASSET_KEYS.glassFurnace, frame: GLASS_FURNACE_FRAMES.glow3 },
+          { key: ASSET_KEYS.glassFurnace, frame: GLASS_FURNACE_FRAMES.glow2 },
+          { key: ASSET_KEYS.glassFurnace, frame: GLASS_FURNACE_FRAMES.glow1 },
+        ],
+        frameRate: 1.1,
+        repeat: -1,
+      })
+    }
+
+    if (!this.anims.exists('glass-blob-pulse')) {
+      this.anims.create({
+        key: 'glass-blob-pulse',
+        frames: [
+          { key: ASSET_KEYS.glassBlowStation, frame: GLASS_BLOW_STATION_FRAMES.blobPulse1 },
+          { key: ASSET_KEYS.glassBlowStation, frame: GLASS_BLOW_STATION_FRAMES.blobPulse2 },
+          { key: ASSET_KEYS.glassBlowStation, frame: GLASS_BLOW_STATION_FRAMES.blobPulse3 },
+          { key: ASSET_KEYS.glassBlowStation, frame: GLASS_BLOW_STATION_FRAMES.blobPulse2 },
+        ],
+        frameRate: 3,
+        repeat: -1,
+      })
+    }
+  }
+
   private placeFurnace() {
-    const furnace = this.add.container(FURNACE_X, GROUND_TOP - 20)
-
-    const base = this.add.rectangle(0, -48, 120, 72, MORANDI_PALETTE.dustyBlue, 0.42)
-    base.setStrokeStyle(2, MORANDI_PALETTE.dustyBlue, 0.35)
-    const opening = this.add.rectangle(0, -68, 64, 36, 0x3a4a52, 0.35)
-
-    this.furnaceGlow = this.add.circle(0, -68, 22, SOFT_ORANGE, 0.55)
-    this.furnaceGlow.setStrokeStyle(2, SOFT_ORANGE_GLOW, 0.6)
-
-    this.tweens.add({
-      targets: this.furnaceGlow,
-      alpha: 0.85,
-      scale: 1.12,
-      duration: 900,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
-    })
-
-    const chimney = this.add.rectangle(42, -108, 18, 48, MORANDI_PALETTE.dustyBlue, 0.38)
-    furnace.add([base, opening, this.furnaceGlow, chimney])
-    furnace.setDepth(2)
+    const sprite = this.add.sprite(FURNACE_X, GROUND_TOP - 20, ASSET_KEYS.glassFurnace, GLASS_FURNACE_FRAMES.idle)
+    sprite.setOrigin(0.5, 1).setScale(0.58).setDepth(2)
+    sprite.play('furnace-glow')
   }
 
   private placeBlowGlassStation() {
-    const stationY = GROUND_TOP - 8
+    const initialFrame =
+      this.blowGlassState === 'success'
+        ? GLASS_BLOW_STATION_FRAMES.blobSet
+        : GLASS_BLOW_STATION_FRAMES.benchIdle
 
-    this.blowGlassPipe = this.add.container(BLOW_GLASS_X, stationY)
-
-    const bench = this.add.rectangle(0, -20, 160, 28, MORANDI_PALETTE.warmBeige, 0.72)
-    bench.setStrokeStyle(2, MORANDI_PALETTE.dustyBlue, 0.35)
-
-    const pipe = this.add.rectangle(-20, -52, 8, 56, MORANDI_PALETTE.dustyBlue, 0.5)
-    const gather = this.add.ellipse(18, -58, 36, 28, GLASS_TUBE_BLUE, 0.45)
-    gather.setStrokeStyle(2, MORANDI_PALETTE.dustyBlue, 0.4)
-
-    this.blowGlassGlow = this.add.circle(18, -58, 14, SOFT_ORANGE_GLOW, 0.35)
-    this.blowGlassGlow.setVisible(false)
-
-    const tubeA = this.add.rectangle(52, -72, 10, 80, GLASS_TUBE_BLUE, 0.38)
-    tubeA.setStrokeStyle(1, MORANDI_PALETTE.dustyBlue, 0.35)
-    const tubeB = this.add.rectangle(78, -64, 10, 64, GLASS_TUBE_BLUE, 0.32)
-    tubeB.setStrokeStyle(1, MORANDI_PALETTE.dustyBlue, 0.3)
-
-    this.blowGlassPipe.add([bench, pipe, gather, this.blowGlassGlow, tubeA, tubeB])
-    this.blowGlassPipe.setDepth(3)
+    const sprite = this.add.sprite(BLOW_GLASS_X, GROUND_TOP - 8, ASSET_KEYS.glassBlowStation, initialFrame)
+    sprite.setOrigin(0.5, 1).setScale(0.58).setDepth(3)
+    this.blowGlassSprite = sprite
   }
 
   private placeGlassMasterBoss() {
@@ -466,7 +464,7 @@ export class GlassStudioScene extends Phaser.Scene {
     this.blowGlassState = 'active'
     this.blowGlassHits = 0
     this.blowGlassPhase = 0
-    this.blowGlassGlow?.setVisible(true)
+    this.blowGlassSprite?.play('glass-blob-pulse')
     this.blowGlassHint?.setText(`${this.blowGlassTimingHint()}（0/3）`).setVisible(true)
   }
 
@@ -475,16 +473,11 @@ export class GlassStudioScene extends Phaser.Scene {
   }
 
   private updateBlowGlassMinigame(talkJustDown: boolean) {
-    if (this.blowGlassState !== 'active' || !this.blowGlassGlow) {
+    if (this.blowGlassState !== 'active' || !this.blowGlassSprite) {
       return
     }
 
     this.blowGlassPhase = (Math.sin(this.time.now / 380) + 1) / 2
-    const scale = 0.85 + this.blowGlassPhase * 0.35
-    const alpha = 0.3 + this.blowGlassPhase * 0.55
-
-    this.blowGlassGlow.setScale(scale)
-    this.blowGlassGlow.setAlpha(alpha)
 
     if (!talkJustDown || !this.isNearBlowGlass()) {
       return
@@ -509,7 +502,8 @@ export class GlassStudioScene extends Phaser.Scene {
 
   private completeBlowGlassMinigame() {
     this.blowGlassState = 'success'
-    this.blowGlassGlow?.setVisible(false)
+    this.blowGlassSprite?.stop()
+    this.blowGlassSprite?.setFrame(GLASS_BLOW_STATION_FRAMES.blobSet)
     this.blowGlassHint?.setText('玻璃正屏住呼吸，去和玻璃師傅說話吧。').setVisible(true)
 
     this.time.delayedCall(3200, () => {
@@ -638,11 +632,11 @@ export class GlassStudioScene extends Phaser.Scene {
   }
 
   private isNearBlowGlass() {
-    if (!this.player || !this.blowGlassPipe) {
+    if (!this.player || !this.blowGlassSprite) {
       return false
     }
 
-    return Phaser.Math.Distance.Between(this.player.x, this.player.y, this.blowGlassPipe.x, this.blowGlassPipe.y) <= INTERACT_RADIUS + 12
+    return Phaser.Math.Distance.Between(this.player.x, this.player.y, this.blowGlassSprite.x, this.blowGlassSprite.y) <= INTERACT_RADIUS + 12
   }
 
   private isNearGlassMasterBoss() {
