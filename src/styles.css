@@ -379,6 +379,42 @@ h1 {
   text-align: right;
 }
 
+.game-header-chapter {
+  min-width: 0;
+}
+
+.game-header-title--compact {
+  max-width: none;
+  font-size: clamp(1.35rem, 5vw, 1.75rem);
+  line-height: 1.15;
+  text-align: left;
+}
+
+.game-header-pause {
+  flex-shrink: 0;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  border: 2px solid rgba(90, 120, 132, 0.26);
+  border-radius: 999px;
+  background: #9fbfca;
+  color: #f8fbf9;
+  font-weight: 800;
+  box-shadow: 0 10px 24px rgba(89, 128, 141, 0.22);
+}
+
+.game-header-pause:hover,
+.game-header-pause:focus-visible {
+  box-shadow: 0 14px 30px rgba(89, 128, 141, 0.28);
+  filter: brightness(1.04);
+  transform: translateY(-2px);
+}
+
+.game-header-pause:focus-visible {
+  outline: 3px solid rgba(215, 184, 160, 0.7);
+  outline-offset: 4px;
+}
+
 .game-card {
   display: grid;
   gap: 1rem;
@@ -1117,4 +1153,61 @@ h1 {
     width: 3.25rem;
     height: 3.25rem;
   }
+}
+
+body.game-play-active {
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+.game-shell--mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-height: 100dvh;
+  height: 100dvh;
+  padding:
+    calc(0.65rem + env(safe-area-inset-top, 0px))
+    calc(0.75rem + env(safe-area-inset-right, 0px))
+    calc(0.65rem + env(safe-area-inset-bottom, 0px))
+    calc(0.75rem + env(safe-area-inset-left, 0px));
+  overflow: hidden;
+}
+
+.game-shell--mobile .game-header {
+  flex-shrink: 0;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.75rem;
+}
+
+.game-shell--mobile .game-playfield {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.game-shell--mobile .game-card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.game-shell--mobile .phaser-container {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  border-radius: 16px;
+}
+
+.game-shell--mobile .game-status {
+  display: none;
 }

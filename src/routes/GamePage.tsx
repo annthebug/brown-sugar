@@ -6,6 +6,7 @@ import { DialogueBox } from '../components/DialogueBox'
 import { MemoryOverlay } from '../components/MemoryOverlay'
 import { PauseMenu } from '../components/PauseMenu'
 import { PhaserGame, type PhaserGameHandle } from '../components/PhaserGame'
+import { useIsMobileGameShell } from '../hooks/useIsMobileGameShell'
 import { CHAPTER_DISPLAY_NAMES, CHAPTER_LABELS, getPlayableChapter } from '../data/chapters'
 import { MBTI_QUESTION_COUNT } from '../data/mbti'
 import {
@@ -67,6 +68,7 @@ function resolveDialogueId(npcId?: string): DialogueScriptId | null {
 
 export function GamePage() {
   const navigate = useNavigate()
+  const isMobileGameShell = useIsMobileGameShell()
   const phaserRef = useRef<PhaserGameHandle>(null)
   const [memoryQueue, setMemoryQueue] = useState<MemoryEntry[]>([])
   const [activeDialogueId, setActiveDialogueId] = useState<DialogueScriptId | null>(null)
@@ -364,21 +366,57 @@ export function GamePage() {
     }
   }, [isPaused, openPauseMenu, resumeGame])
 
+  useEffect(() => {
+    if (!isMobileGameShell) {
+      return
+    }
+
+    document.body.classList.add('game-play-active')
+
+    return () => {
+      document.body.classList.remove('game-play-active')
+    }
+  }, [isMobileGameShell])
+
+  const gameShellClassName = isMobileGameShell ? 'game-shell game-shell--mobile' : 'game-shell'
+
   return (
-    <main className="game-shell" aria-labelledby="game-title">
-      <AppNav />
+    <main className={gameShellClassName} aria-labelledby="game-title">
+      {isMobileGameShell ? null : <AppNav />}
       <header className="game-header">
-        <Link to="/" className="back-link">
-          首頁
-        </Link>
-        <div>
-          <p className="eyebrow">{chapterMeta.eyebrow}</p>
-          <h1 id="game-title">Quest for the Perfect Bowl</h1>
-        </div>
+        {isMobileGameShell ? (
+          <>
+            <div className="game-header-chapter">
+              <p className="eyebrow">{chapterMeta.eyebrow}</p>
+              <h1 id="game-title" className="game-header-title--compact">
+                {chapterMeta.title}
+              </h1>
+            </div>
+            <button
+              type="button"
+              className="game-header-pause"
+              onClick={openPauseMenu}
+              aria-label="暫停遊戲"
+            >
+              暫停
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/" className="back-link">
+              首頁
+            </Link>
+            <div>
+              <p className="eyebrow">{chapterMeta.eyebrow}</p>
+              <h1 id="game-title">Quest for the Perfect Bowl</h1>
+            </div>
+          </>
+        )}
       </header>
       <div className="game-playfield">
         <PhaserGame ref={phaserRef} isPaused={isPaused} />
       </div>
+      {isMobileGameShell ? null : (
       <section className="store-panel" aria-label="遊戲控制面板">
         <div>
           <p className="panel-label">回憶碎片</p>
@@ -405,6 +443,7 @@ export function GamePage() {
           <span>這趟旅程的溫柔里程碑。</span>
         </div>
       </section>
+      )}
       {activeDialogue ? (
         <DialogueBox
           script={activeDialogue}
