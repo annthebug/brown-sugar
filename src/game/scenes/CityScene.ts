@@ -12,6 +12,7 @@ import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
+import { interactPrompt } from '../input/interactPrompt'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
 import { TouchControls } from '../input/TouchControls'
 
@@ -57,6 +58,7 @@ export class CityScene extends Phaser.Scene {
   private bossCleared = false
   private bossChaseActive = false
   private bossEncounterReady = false
+  private prefersTouchControls = false
   private unsubscribeDialogueClosed?: () => void
   private unsubscribeBossDialogueDone?: () => void
 
@@ -68,6 +70,7 @@ export class CityScene extends Phaser.Scene {
     this.bossCleared = useGameStore.getState().cityChapterCleared
     this.bossChaseActive = false
     this.bossEncounterReady = false
+    this.prefersTouchControls = shouldShowTouchControls(this)
     this.shards = []
 
     this.physics.world.setBounds(0, 0, WORLD_WIDTH, WORLD_HEIGHT)
@@ -85,7 +88,7 @@ export class CityScene extends Phaser.Scene {
     this.placeTimeMonsterBoss()
 
     this.inputCtrl = new InputController(this)
-    const isTouch = shouldShowTouchControls(this)
+    const isTouch = this.prefersTouchControls
     this.touchCtrl = new TouchControls(this, this.inputCtrl)
     this.touchCtrl.setVisible(isTouch)
 
@@ -509,15 +512,15 @@ export class CityScene extends Phaser.Scene {
     if (!this.bossCleared && this.isNearTimeMonster()) {
       this.baristaNpc?.label.setVisible(false)
       this.travelerNpc?.label.setVisible(false)
-      promptText = '按 E 遇見時間怪物'
+      promptText = interactPrompt(this.prefersTouchControls, '遇見時間怪物')
     } else if (this.isNearBarista()) {
       this.baristaNpc?.label.setVisible(true)
       this.travelerNpc?.label.setVisible(false)
-      promptText = '按 E 與咖啡師對話'
+      promptText = interactPrompt(this.prefersTouchControls, '與咖啡師對話')
     } else if (this.isNearTraveler()) {
       this.baristaNpc?.label.setVisible(false)
       this.travelerNpc?.label.setVisible(true)
-      promptText = '按 E 與旅人對話'
+      promptText = interactPrompt(this.prefersTouchControls, '與旅人對話')
     }
 
     if (promptText) {

@@ -17,9 +17,9 @@
 | [009](009.md) | 關卡：第一章 Forest | 關卡 | ✅ 完成 |
 | [010](010.md) | 關卡：第二章 City | 關卡 | ✅ 完成 |
 | [011](011.md) | 關卡：第三章 Snow Mountain | 關卡 | ✅ 完成 |
-| [012](012.md) | 關卡：第四章 Glass Studio | 關卡 | ⬜ 未開始 |
-| [013](013.md) | 關卡：第五章 Retry | 關卡 | ⬜ 未開始 |
-| [014](014.md) | Final Stage 與 Boss：Perfectionism | 關卡 | ⬜ 未開始 |
+| [012](012.md) | 關卡：第四章 Glass Studio | 關卡 | ✅ 完成 |
+| [013](013.md) | 關卡：第五章 Retry | 關卡 | ✅ 完成 |
+| [014](014.md) | Final Stage 與 Boss：Perfectionism | 關卡 | ✅ 完成 |
 | [015](015.md) | 音訊系統 | 系統 | ❌ 已取消 |
 | [016](016.md) | UI：首頁 / 暫停 / 設定 | UI | 🟨 進行中 |
 | [017](017.md) | 相簿（Gallery） | UI | ✅ 完成 |

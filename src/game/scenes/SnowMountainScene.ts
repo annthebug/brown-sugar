@@ -11,6 +11,7 @@ import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
+import { interactPrompt } from '../input/interactPrompt'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
 import { TouchControls } from '../input/TouchControls'
 
@@ -67,6 +68,7 @@ export class SnowMountainScene extends Phaser.Scene {
   private bossEncounterReady = false
   private spiritTrailActive = false
   private checkpointIndex = 0
+  private prefersTouchControls = false
   private checkpointZones: Phaser.GameObjects.Zone[] = []
   private snowflakeTimer?: Phaser.Time.TimerEvent
   private unsubscribeDialogueClosed?: () => void
@@ -81,6 +83,7 @@ export class SnowMountainScene extends Phaser.Scene {
     this.bossEncounterReady = false
     this.spiritTrailActive = false
     this.checkpointIndex = 0
+    this.prefersTouchControls = shouldShowTouchControls(this)
     this.shards = []
     this.checkpointZones = []
 
@@ -100,7 +103,7 @@ export class SnowMountainScene extends Phaser.Scene {
     this.placeSnowSpiritBoss()
 
     this.inputCtrl = new InputController(this)
-    const isTouch = shouldShowTouchControls(this)
+    const isTouch = this.prefersTouchControls
     this.touchCtrl = new TouchControls(this, this.inputCtrl)
     this.touchCtrl.setVisible(isTouch)
 
@@ -504,9 +507,9 @@ export class SnowMountainScene extends Phaser.Scene {
     this.guideNpc?.label.setVisible(false)
 
     if (!this.bossCleared && this.isNearSnowSpirit()) {
-      promptText = '按 E 遇見雪靈'
+      promptText = interactPrompt(this.prefersTouchControls, '遇見雪靈')
     } else if (this.isNearGuide()) {
-      promptText = '按 E 與雪山嚮導對話'
+      promptText = interactPrompt(this.prefersTouchControls, '與雪山嚮導對話')
       this.guideNpc?.label.setVisible(true)
     } else if (this.spiritTrailActive && !this.bossCleared) {
       promptText = '跟著靈光前進'

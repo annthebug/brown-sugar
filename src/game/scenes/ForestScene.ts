@@ -7,6 +7,7 @@ import { MemoryShard } from '../entities/MemoryShard'
 import { PatrolCritter } from '../entities/PatrolCritter'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
+import { interactPrompt } from '../input/interactPrompt'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
 import { TouchControls } from '../input/TouchControls'
 
@@ -45,6 +46,7 @@ export class ForestScene extends Phaser.Scene {
   private bossJar?: CharacterMarker
   private bossPrompt?: Phaser.GameObjects.Text
   private bossCleared = false
+  private prefersTouchControls = false
   private unsubscribeDialogueClosed?: () => void
 
   constructor() {
@@ -53,6 +55,7 @@ export class ForestScene extends Phaser.Scene {
 
   create() {
     this.bossCleared = useGameStore.getState().forestChapterCleared
+    this.prefersTouchControls = shouldShowTouchControls(this)
     this.shards = []
     this.critters = []
 
@@ -75,7 +78,7 @@ export class ForestScene extends Phaser.Scene {
     }
 
     this.inputCtrl = new InputController(this)
-    const isTouch = shouldShowTouchControls(this)
+    const isTouch = this.prefersTouchControls
     this.touchCtrl = new TouchControls(this, this.inputCtrl)
     this.touchCtrl.setVisible(isTouch)
 
@@ -313,7 +316,7 @@ export class ForestScene extends Phaser.Scene {
     this.bossJar = container
 
     this.bossPrompt = this.add
-      .text(jarX, jarY - 150, '按 E 分享一個溫柔片刻', {
+      .text(jarX, jarY - 150, interactPrompt(this.prefersTouchControls, '分享一個溫柔片刻'), {
         color: MORANDI_PALETTE.mutedText,
         fontFamily: 'monospace',
         fontSize: '12px',
@@ -402,7 +405,7 @@ export class ForestScene extends Phaser.Scene {
     if (nearBoss) {
       this.elderNpc?.label.setVisible(false)
       this.bossPrompt.setPosition(this.player.x, this.player.y - 88)
-      this.bossPrompt.setText('按 E 理解巨罐')
+      this.bossPrompt.setText(interactPrompt(this.prefersTouchControls, '理解巨罐'))
       this.bossPrompt.setVisible(true)
       return
     }
@@ -410,7 +413,7 @@ export class ForestScene extends Phaser.Scene {
     if (nearElder) {
       this.elderNpc?.label.setVisible(true)
       this.bossPrompt.setPosition(this.player.x, this.player.y - 88)
-      this.bossPrompt.setText('按 E 與森林長者對話')
+      this.bossPrompt.setText(interactPrompt(this.prefersTouchControls, '與森林長者對話'))
       this.bossPrompt.setVisible(true)
       return
     }
