@@ -2,7 +2,6 @@ import Phaser from 'phaser'
 import { useMbtiStore } from '../../stores/useMbtiStore'
 import {
   ASSET_KEYS,
-  INNER_GUIDE_FRAMES,
   MORANDI_PALETTE,
   PERFECTIONISM_FRAMES,
 } from '../assets/assetManifest'
@@ -21,7 +20,6 @@ const GROUND_HEIGHT = 112
 const GROUND_TOP = GROUND_Y - GROUND_HEIGHT / 2
 const INTERACT_RADIUS = 92
 const RESONANCE_POINT_X = 1040
-const INNER_GUIDE_X = 1450
 const PERFECTIONISM_X = 2280
 
 type PlatformSpec = {
@@ -47,12 +45,10 @@ export class FinalScene extends Phaser.Scene {
   private inputCtrl?: InputController
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
-  private innerGuide?: CharacterMarker
   private perfectionism?: CharacterMarker
   private resonanceBloom?: Phaser.GameObjects.Container
   private interactPrompt?: Phaser.GameObjects.Text
   private cutsceneText?: Phaser.GameObjects.Text
-  private guidanceReceived = false
   private resonanceAwakened = false
   private bossEncounterReady = false
   private bossCleared = false
@@ -66,7 +62,6 @@ export class FinalScene extends Phaser.Scene {
   }
 
   create() {
-    this.guidanceReceived = false
     this.resonanceAwakened = false
     this.bossEncounterReady = false
     this.bossCleared = false
@@ -84,7 +79,6 @@ export class FinalScene extends Phaser.Scene {
 
     this.placeMemoryShards()
     this.placeResonancePoint()
-    this.placeInnerGuide()
     this.placePerfectionism()
 
     this.inputCtrl = new InputController(this)
@@ -268,36 +262,6 @@ export class FinalScene extends Phaser.Scene {
     this.resonanceBloom.setAlpha(0.55)
   }
 
-  private placeInnerGuide() {
-    const container = this.add.container(INNER_GUIDE_X, GROUND_TOP) as CharacterMarker
-    const sprite = this.add.sprite(0, 0, ASSET_KEYS.innerGuide, INNER_GUIDE_FRAMES.sideIdle)
-    sprite.setOrigin(0.5, 1).setScale(0.44)
-
-    const label = this.add
-      .text(0, 8, '內在嚮導', {
-        color: MORANDI_PALETTE.slateText,
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-      .setVisible(false)
-
-    container.add([sprite, label])
-    container.sprite = sprite
-    container.label = label
-    this.innerGuide = container
-
-    this.tweens.add({
-      targets: sprite,
-      y: -2,
-      duration: 1200,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
-    })
-  }
-
   private placePerfectionism() {
     this.registerPerfectionismAnimation()
 
@@ -345,12 +309,6 @@ export class FinalScene extends Phaser.Scene {
       return
     }
 
-    if (this.isNearInnerGuide()) {
-      this.guidanceReceived = true
-      this.player.triggerTalk('innerGuide')
-      return
-    }
-
     if (!this.isNearPerfectionism()) {
       return
     }
@@ -360,8 +318,8 @@ export class FinalScene extends Phaser.Scene {
       return
     }
 
-    if (!this.guidanceReceived && !useMbtiStore.getState().isComplete()) {
-      this.showMomentText('還有幾個溫柔的問題尚未回答。\n先與內在嚮導對話吧。')
+    if (!useMbtiStore.getState().isComplete()) {
+      this.showMomentText('還有一些溫柔的問題在第五章等著你。')
       return
     }
 
@@ -437,19 +395,15 @@ export class FinalScene extends Phaser.Scene {
     }
 
     let promptText: string | null = null
-    this.innerGuide?.label.setVisible(false)
 
     if (this.isNearPerfectionism()) {
       if (!this.resonanceAwakened) {
         promptText = '還有一聲輕柔回音在等你的喵叫'
-      } else if (!this.guidanceReceived && !useMbtiStore.getState().isComplete()) {
-        promptText = interactPrompt(this.prefersTouchControls, '與內在嚮導對話')
+      } else if (!useMbtiStore.getState().isComplete()) {
+        promptText = '還有一些溫柔的問題在第五章等著你'
       } else {
         promptText = interactPrompt(this.prefersTouchControls, '面對完美主義')
       }
-    } else if (this.isNearInnerGuide()) {
-      promptText = interactPrompt(this.prefersTouchControls, '聽聽內心')
-      this.innerGuide?.label.setVisible(true)
     } else if (!this.resonanceAwakened && this.isNearResonancePoint()) {
       promptText = `${formatMeowVerb(this.prefersTouchControls)} 讓霧氣回應你`
     }
@@ -470,14 +424,6 @@ export class FinalScene extends Phaser.Scene {
     }
 
     return Phaser.Math.Distance.Between(this.player.x, this.player.y, RESONANCE_POINT_X, GROUND_TOP) <= INTERACT_RADIUS + 18
-  }
-
-  private isNearInnerGuide() {
-    if (!this.player || !this.innerGuide) {
-      return false
-    }
-
-    return Phaser.Math.Distance.Between(this.player.x, this.player.y, this.innerGuide.x, this.innerGuide.y) <= INTERACT_RADIUS
   }
 
   private isNearPerfectionism() {
