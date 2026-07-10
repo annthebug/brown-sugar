@@ -776,6 +776,7 @@ h1 {
   inset: auto clamp(1rem, 4vw, 3rem) clamp(1rem, 4vw, 3rem);
   display: grid;
   pointer-events: none;
+  touch-action: auto;
 }
 
 .dialogue-box {
@@ -791,6 +792,7 @@ h1 {
   box-shadow: 0 24px 70px rgba(56, 88, 103, 0.24);
   backdrop-filter: blur(16px);
   pointer-events: auto;
+  touch-action: manipulation;
 }
 
 .dialogue-avatar {
@@ -1281,7 +1283,7 @@ h1 {
     padding:
       0
       max(0.75rem, env(safe-area-inset-right, 0px))
-      calc(env(safe-area-inset-bottom, 0px) + 8.5rem)
+      max(0.75rem, env(safe-area-inset-bottom, 0px))
       max(0.75rem, env(safe-area-inset-left, 0px));
   }
 
@@ -1291,7 +1293,7 @@ h1 {
     max-width: none;
     border-radius: 22px 22px 0 0;
     padding: 1rem 1rem 1.1rem;
-    max-height: min(52vh, 28rem);
+    max-height: min(72dvh, calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 1.5rem));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -1315,6 +1317,17 @@ h1 {
   .dialogue-continue {
     width: 100%;
     justify-self: stretch;
+  }
+
+  @media (orientation: landscape) {
+    .dialogue-overlay {
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    .dialogue-box {
+      max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 0.5rem);
+      border-radius: 18px;
+    }
   }
 
   .achievement-list {
