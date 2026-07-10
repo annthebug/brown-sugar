@@ -440,7 +440,13 @@ export function GamePage() {
         />
       ) : null}
       {activeMemory ? <MemoryOverlay memory={activeMemory} onContinue={continueMemory} /> : null}
-      {isPaused ? <PauseMenu onResume={resumeGame} onRestart={restartChapter} /> : null}
+      {isPaused ? (
+        <PauseMenu
+          onResume={resumeGame}
+          onRestart={restartChapter}
+          isMobileGameShell={isMobileGameShell}
+        />
+      ) : null}
       <TouchControlsOverlay
         visible={shouldShowTouchControls && !isPaused && !activeMemory && !activeDialogue}
       />

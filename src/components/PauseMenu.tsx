@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom'
 type PauseMenuProps = {
   onResume: () => void
   onRestart: () => void
+  isMobileGameShell?: boolean
 }
 
-export function PauseMenu({ onResume, onRestart }: PauseMenuProps) {
+export function PauseMenu({ onResume, onRestart, isMobileGameShell = false }: PauseMenuProps) {
+  const overlayClassName = isMobileGameShell
+    ? 'pause-overlay pause-overlay--mobile-game'
+    : 'pause-overlay'
+
   return (
-    <section className="pause-overlay" aria-label="暫停選單">
+    <section className={overlayClassName} aria-label="暫停選單">
       <article className="pause-menu">
         <p className="eyebrow">已暫停</p>
         <h2>先慢慢呼吸一下</h2>
