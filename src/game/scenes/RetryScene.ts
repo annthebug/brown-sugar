@@ -11,6 +11,7 @@ import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
+import { formatMeowVerb, interactPrompt } from '../input/interactPrompt'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
 import { TouchControls } from '../input/TouchControls'
 
@@ -79,6 +80,7 @@ export class RetryScene extends Phaser.Scene {
   private bossCleared = false
   private bossEncounterReady = false
   private bossUnlocked = false
+  private prefersTouchControls = false
   private unsubscribeDialogueClosed?: () => void
   private unsubscribeBossDialogueDone?: () => void
   private unsubscribeMeow?: () => void
@@ -95,6 +97,7 @@ export class RetryScene extends Phaser.Scene {
     this.materialSprites = new Map()
     this.materialZones = []
     this.meowMaterialRevealed = false
+    this.prefersTouchControls = shouldShowTouchControls(this)
     this.shards = []
 
     this.physics.world.setBounds(0, 0, WORLD_WIDTH, WORLD_HEIGHT)
@@ -112,7 +115,7 @@ export class RetryScene extends Phaser.Scene {
     this.placeInnerDoubtBoss()
 
     this.inputCtrl = new InputController(this)
-    const isTouch = shouldShowTouchControls(this)
+    const isTouch = this.prefersTouchControls
     this.touchCtrl = new TouchControls(this, this.inputCtrl)
     this.touchCtrl.setVisible(isTouch)
 
@@ -589,11 +592,11 @@ export class RetryScene extends Phaser.Scene {
     this.innerGuideNpc?.label.setVisible(false)
 
     if (this.bossUnlocked && !this.bossCleared && this.isNearInnerDoubt()) {
-      promptText = '按 E 面對內在懷疑'
+      promptText = interactPrompt(this.prefersTouchControls, '面對內在懷疑')
     } else if (this.getNearbyInteractMaterial()) {
-      promptText = '按 E 收集材料'
+      promptText = interactPrompt(this.prefersTouchControls, '收集材料')
     } else if (this.isNearInnerGuide()) {
-      promptText = '按 E 聆聽內在嚮導'
+      promptText = interactPrompt(this.prefersTouchControls, '聆聽內在嚮導')
       this.innerGuideNpc?.label.setVisible(true)
     } else {
       const whisper = MATERIALS.find((material) => material.mode === 'meow')
@@ -603,7 +606,7 @@ export class RetryScene extends Phaser.Scene {
         !this.collectedMaterials.has(whisper.id) &&
         Phaser.Math.Distance.Between(this.player.x, this.player.y, whisper.x, whisper.y) <= INTERACT_RADIUS + 20
       ) {
-        promptText = '按 M 喵叫——也許會有回應'
+        promptText = `${formatMeowVerb(this.prefersTouchControls)} 喵叫——也許會有回應`
       }
     }
 

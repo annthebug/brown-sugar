@@ -11,6 +11,7 @@ import { MemoryShard } from '../entities/MemoryShard'
 import { gameEventBus } from '../events/eventBus'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
+import { formatMeowVerb, interactPrompt } from '../input/interactPrompt'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
 import { TouchControls } from '../input/TouchControls'
 
@@ -57,6 +58,7 @@ export class FinalScene extends Phaser.Scene {
   private resonanceAwakened = false
   private bossEncounterReady = false
   private bossCleared = false
+  private prefersTouchControls = false
   private unsubscribeDialogueClosed?: () => void
   private unsubscribeBossDialogueDone?: () => void
   private unsubscribeMeow?: () => void
@@ -70,6 +72,7 @@ export class FinalScene extends Phaser.Scene {
     this.resonanceAwakened = false
     this.bossEncounterReady = false
     this.bossCleared = false
+    this.prefersTouchControls = shouldShowTouchControls(this)
     this.shards = []
 
     this.physics.world.setBounds(0, 0, WORLD_WIDTH, WORLD_HEIGHT)
@@ -87,7 +90,7 @@ export class FinalScene extends Phaser.Scene {
     this.placePerfectionism()
 
     this.inputCtrl = new InputController(this)
-    const isTouch = shouldShowTouchControls(this)
+    const isTouch = this.prefersTouchControls
     this.touchCtrl = new TouchControls(this, this.inputCtrl)
     this.touchCtrl.setVisible(isTouch)
 
@@ -358,12 +361,12 @@ export class FinalScene extends Phaser.Scene {
     }
 
     if (!this.resonanceAwakened) {
-      this.showMomentText('A quiet echo still waits.\nTry a soft meow nearby.')
+      this.showMomentText('還有一聲輕柔回音在等著。\n在附近輕輕喵叫看看。')
       return
     }
 
     if (!this.guidanceReceived && !useMbtiStore.getState().isComplete()) {
-      this.showMomentText('A few gentle answers remain.\nListen to Inner Guide first.')
+      this.showMomentText('還有幾個溫柔的問題尚未回答。\n先與內在嚮導對話吧。')
       return
     }
 
@@ -381,7 +384,7 @@ export class FinalScene extends Phaser.Scene {
     }
 
     this.resonanceAwakened = true
-    this.showMomentText('The mist answers back.\nA calm path opens forward.')
+    this.showMomentText('霧氣輕輕回應。\n前方的路變得安靜了。')
   }
 
   private updateResonanceBloom(delta: number) {
@@ -445,15 +448,15 @@ export class FinalScene extends Phaser.Scene {
       if (!this.resonanceAwakened) {
         promptText = '還有一聲輕柔回音在等你的喵叫'
       } else if (!this.guidanceReceived && !useMbtiStore.getState().isComplete()) {
-        promptText = '先按 E 與內在嚮導對話'
+        promptText = interactPrompt(this.prefersTouchControls, '與內在嚮導對話')
       } else {
-        promptText = '按 E 面對完美主義'
+        promptText = interactPrompt(this.prefersTouchControls, '面對完美主義')
       }
     } else if (this.isNearInnerGuide()) {
-      promptText = '按 E 聽聽內心'
+      promptText = interactPrompt(this.prefersTouchControls, '聽聽內心')
       this.innerGuide?.label.setVisible(true)
     } else if (!this.resonanceAwakened && this.isNearResonancePoint()) {
-      promptText = '按 M 讓霧氣回應你'
+      promptText = `${formatMeowVerb(this.prefersTouchControls)} 讓霧氣回應你`
     }
 
     if (promptText) {

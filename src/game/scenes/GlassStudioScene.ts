@@ -11,6 +11,7 @@ import { gameEventBus } from '../events/eventBus'
 import { MemoryShard } from '../entities/MemoryShard'
 import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
+import { formatInteractVerb, interactPrompt } from '../input/interactPrompt'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
 import { TouchControls } from '../input/TouchControls'
 
@@ -73,6 +74,7 @@ export class GlassStudioScene extends Phaser.Scene {
   private blowGlassState: BlowGlassState = 'idle'
   private blowGlassHits = 0
   private blowGlassPhase = 0
+  private prefersTouchControls = false
   private furnaceMessageTimer?: Phaser.Time.TimerEvent
   private unsubscribeDialogueClosed?: () => void
   private unsubscribeBossDialogueDone?: () => void
@@ -87,6 +89,7 @@ export class GlassStudioScene extends Phaser.Scene {
     this.blowGlassState = this.bossCleared ? 'success' : 'idle'
     this.blowGlassHits = 0
     this.blowGlassPhase = 0
+    this.prefersTouchControls = shouldShowTouchControls(this)
     this.shards = []
 
     this.physics.world.setBounds(0, 0, WORLD_WIDTH, WORLD_HEIGHT)
@@ -105,7 +108,7 @@ export class GlassStudioScene extends Phaser.Scene {
     this.placeGlassMasterBoss()
 
     this.inputCtrl = new InputController(this)
-    const isTouch = shouldShowTouchControls(this)
+    const isTouch = this.prefersTouchControls
     this.touchCtrl = new TouchControls(this, this.inputCtrl)
     this.touchCtrl.setVisible(isTouch)
 
@@ -469,7 +472,11 @@ export class GlassStudioScene extends Phaser.Scene {
     this.blowGlassHits = 0
     this.blowGlassPhase = 0
     this.blowGlassGlow?.setVisible(true)
-    this.blowGlassHint?.setText('在光芒最亮時按下 E（0/3）').setVisible(true)
+    this.blowGlassHint?.setText(`${this.blowGlassTimingHint()}（0/3）`).setVisible(true)
+  }
+
+  private blowGlassTimingHint() {
+    return `在光芒最亮時${formatInteractVerb(this.prefersTouchControls)}`
   }
 
   private updateBlowGlassMinigame(talkJustDown: boolean) {
@@ -491,7 +498,7 @@ export class GlassStudioScene extends Phaser.Scene {
     if (this.blowGlassPhase >= BLOW_GLASS_TIMING_THRESHOLD) {
       this.blowGlassHits += 1
       this.blowGlassHint?.setText(
-        `在光芒最亮時按下 E（${this.blowGlassHits}/${BLOW_GLASS_TARGET_HITS}）`,
+        `${this.blowGlassTimingHint()}（${this.blowGlassHits}/${BLOW_GLASS_TARGET_HITS}）`,
       )
 
       if (this.blowGlassHits >= BLOW_GLASS_TARGET_HITS) {
@@ -560,7 +567,7 @@ export class GlassStudioScene extends Phaser.Scene {
       ease: 'Back.easeOut',
     })
 
-    this.cutsceneText?.setText('The bowl is here...\nbut the shape is not quite right.').setVisible(true)
+    this.cutsceneText?.setText('碗出現了……\n但形狀還不太對。').setVisible(true)
 
     this.tweens.add({
       targets: this.glassMasterBoss,
@@ -589,15 +596,15 @@ export class GlassStudioScene extends Phaser.Scene {
     this.glassMasterNpc?.label.setVisible(false)
 
     if (!this.bossCleared && this.blowGlassState === 'success' && this.isNearGlassMasterBoss()) {
-      promptText = '按 E 與玻璃師傅完成這一步'
+      promptText = interactPrompt(this.prefersTouchControls, '與玻璃師傅完成這一步')
     } else if (!this.bossCleared && this.blowGlassState === 'active' && this.isNearBlowGlass()) {
-      promptText = '在光芒最亮時按下 E'
+      promptText = this.blowGlassTimingHint()
     } else if (!this.bossCleared && this.blowGlassState === 'idle' && this.isNearBlowGlass()) {
-      promptText = '按 E 試著吹製玻璃'
+      promptText = interactPrompt(this.prefersTouchControls, '試著吹製玻璃')
     } else if (this.isNearFurnace()) {
-      promptText = '按 E 感受溫暖爐火'
+      promptText = interactPrompt(this.prefersTouchControls, '感受溫暖爐火')
     } else if (this.isNearGlassMasterNpc()) {
-      promptText = '按 E 與玻璃師傅對話'
+      promptText = interactPrompt(this.prefersTouchControls, '與玻璃師傅對話')
       this.glassMasterNpc?.label.setVisible(true)
     }
 
