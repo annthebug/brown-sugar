@@ -41,6 +41,17 @@ Pixel → Fade → 真正照片 → 一句文字 → Continue → Pixel
 - 選擇累積四維分數（E/I、S/N、T/F、J/P）。
 - 詳見 [07_MBTISystem](07_MBTISystem.md)。
 
+## 玻璃工坊：吹玻璃小遊戲（第四章）
+
+| 項目 | 規格 |
+| --- | --- |
+| 觸發 | 靠近吹製台，按 Talk／E（`blowGlassState === 'idle'`） |
+| 玩法 | 橘色光暈／玻璃液滴脈動；在亮度峰值（≥ 約 72%）時再按 Talk |
+| 目標 | 成功 **3 次**；時機錯誤則進度歸零 |
+| 完成後 | 與玻璃師傅 Boss 對話 → 不理想玻璃碗演出（黑糖 🥺） |
+| 視覺 | 需有火爐與吹製台 **場景素材** 及吹製中 **動畫**（見 [glass-studio-props](assets/glass-studio-props.md)） |
+| 火爐互動 | 按 Talk 感受爐火溫度；黑糖應播放 `happy` emote + 繁中提示 |
+
 ## 存檔機制
 
 | 方式 | 說明 |

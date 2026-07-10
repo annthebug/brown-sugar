@@ -77,7 +77,8 @@ interface MbtiQuestion {
 | City | T/F、J/P | 4~5 |
 | Snow Mountain | S/N、E/I | 3~4 |
 | Glass Studio | T/F | 3~4 |
-| Retry / Final | 綜合補題 | 2~6 |
+| Retry（第五章） | 綜合補題（內在嚮導） | 3 |
+| Final Stage | — | **不重複出題**；若未完成應引導回 Retry |
 
 ## 相關文件
 
