@@ -49,8 +49,20 @@ VITE_FIREBASE_APP_ID=
 
 ## PWA 部署注意
 
-- 確認 service worker 與 manifest 正確產生。
-- 快取策略需在版本更新時失效舊資源。
+- 使用 **vite-plugin-pwa** 於建置時產生 `manifest.webmanifest`、`sw.js` 與 `registerSW.js`。
+- **Manifest**：`name` Quest for the Perfect Bowl、`short_name` Perfect Bowl、`display: standalone`、`orientation: landscape`、`theme_color` / `background_color` `#d8edf4`。
+- **圖示**：`public/icons/icon-192.png`、`icon-512.png`、`apple-touch-icon.png`（黑糖像素 placeholder）。
+- **Service Worker**：Workbox 預快取 `index.html`、JS、CSS 與主要靜態資源；`navigateFallback` 導向 `index.html` 支援 React Router 離線路由；圖片採 `StaleWhileRevalidate`。
+- **版本更新**：`registerType: autoUpdate`；新版本部署後 SW 自動更新並替換舊快取。
+- **Vercel**：靜態檔（`sw.js`、`manifest.webmanifest`、`icons/`）優先於 SPA rewrite 提供；無需額外設定。
+- **本機驗證**：`npm run build && npm run preview`，於 Chrome DevTools → Application 檢查 Manifest / Service Workers；Network 設 Offline 後重新整理應可開啟首頁。
+
+### 加入主畫面
+
+| 平台 | 步驟 |
+| --- | --- |
+| Android Chrome | 網址列或選單 →「安裝應用程式」/「加入主畫面」 |
+| iOS Safari | 分享 →「加入主畫面」；需 `apple-touch-icon` 與 `apple-mobile-web-app-capable` |
 
 ## 部署流程
 
