@@ -31,6 +31,10 @@ import npcAtlasUrl from '../../../assets/characters/npc-sprite-sheet-v1.json?url
 import bossTextureUrl from '../../../assets/characters/boss-sprite-sheet-v1.png'
 import bossAtlasUrl from '../../../assets/characters/boss-sprite-sheet-v1.json?url'
 import paleBlueSkyUrl from '../../../assets/scenes/pale-blue-sky-placeholder.png'
+import glassFurnaceTextureUrl from '../../../assets/scenes/glass-furnace-sprite-sheet-v1.png'
+import glassFurnaceAtlasUrl from '../../../assets/scenes/glass-furnace-sprite-sheet-v1.json?url'
+import glassBlowStationTextureUrl from '../../../assets/scenes/glass-blow-station-sheet-v1.png'
+import glassBlowStationAtlasUrl from '../../../assets/scenes/glass-blow-station-sheet-v1.json?url'
 import loadingPanelUrl from '../../../assets/ui/loading-panel-placeholder.png'
 import endingChestBodyUrl from '../../../assets/ui/ending-chest-body-v1.png'
 import endingChestLidUrl from '../../../assets/ui/ending-chest-lid-v1.png'
@@ -57,6 +61,8 @@ export const ASSET_KEYS = {
   npcCharacters: 'npc-characters',
   bossCharacters: 'boss-characters',
   paleBlueSky: 'scene-pale-blue-sky',
+  glassFurnace: 'glass-furnace',
+  glassBlowStation: 'glass-blow-station',
   loadingPanel: 'ui-loading-panel',
   endingChestBody: 'ui-ending-chest-body',
   endingChestLid: 'ui-ending-chest-lid',
@@ -193,6 +199,21 @@ export const PERFECTIONISM_FRAMES = {
   pulse3: 'perfectionism-pulse-3',
 } as const
 
+export const GLASS_FURNACE_FRAMES = {
+  idle: 'glass-furnace-idle',
+  glow1: 'glass-furnace-glow-1',
+  glow2: 'glass-furnace-glow-2',
+  glow3: 'glass-furnace-glow-3',
+} as const
+
+export const GLASS_BLOW_STATION_FRAMES = {
+  benchIdle: 'glass-blow-bench-idle',
+  blobPulse1: 'glass-blob-pulse-1',
+  blobPulse2: 'glass-blob-pulse-2',
+  blobPulse3: 'glass-blob-pulse-3',
+  blobSet: 'glass-blob-set',
+} as const
+
 export const NPC_FRAMES = {
   forestElder: 'forest-elder-idle',
   coffeeBarista: 'coffee-barista-idle',
@@ -238,7 +259,7 @@ export type GameAsset = AtlasAsset | ImageAsset
 
 export type GameAssetManifest = {
   characters: readonly AtlasAsset[]
-  scenes: readonly ImageAsset[]
+  scenes: readonly (ImageAsset | AtlasAsset)[]
   ui: readonly ImageAsset[]
   memories: readonly ImageAsset[]
   bowls: readonly ImageAsset[]
@@ -452,6 +473,28 @@ export const GAME_ASSET_MANIFEST = {
       purpose: 'preload',
       description: 'Pale blue sky placeholder background for the current GameScene.',
       url: paleBlueSkyUrl,
+    },
+    {
+      kind: 'atlas',
+      category: 'scenes',
+      key: ASSET_KEYS.glassFurnace,
+      placeholder: true,
+      purpose: 'preload',
+      description: 'Glass Studio brick furnace atlas (idle + 3-frame soft orange door glow).',
+      textureUrl: glassFurnaceTextureUrl,
+      atlasUrl: glassFurnaceAtlasUrl,
+      frames: Object.values(GLASS_FURNACE_FRAMES),
+    },
+    {
+      kind: 'atlas',
+      category: 'scenes',
+      key: ASSET_KEYS.glassBlowStation,
+      placeholder: true,
+      purpose: 'preload',
+      description: 'Glass Studio blow bench atlas (bench + pipe + 3-frame molten blob pulse + set frame).',
+      textureUrl: glassBlowStationTextureUrl,
+      atlasUrl: glassBlowStationAtlasUrl,
+      frames: Object.values(GLASS_BLOW_STATION_FRAMES),
     },
   ],
   ui: [

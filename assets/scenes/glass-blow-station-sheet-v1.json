@@ -1,0 +1,114 @@
+{
+  "frames": {
+    "glass-blow-bench-idle": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 192
+      }
+    },
+    "glass-blob-pulse-1": {
+      "frame": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 192
+      }
+    },
+    "glass-blob-pulse-2": {
+      "frame": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 192
+      }
+    },
+    "glass-blob-pulse-3": {
+      "frame": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 192
+      }
+    },
+    "glass-blob-set": {
+      "frame": {
+        "x": 1024,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 192
+      }
+    }
+  },
+  "meta": {
+    "app": "quest-for-the-perfect-bowl",
+    "version": "1.0",
+    "image": "glass-blow-station-sheet-v1.png",
+    "size": {
+      "w": 1280,
+      "h": 192
+    },
+    "scale": "1"
+  }
+}

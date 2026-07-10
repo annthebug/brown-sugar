@@ -301,6 +301,37 @@
         "placeholder": true,
         "purpose": "preload",
         "description": "Pale blue sky placeholder background for the current GameScene."
+      },
+      {
+        "key": "glass-furnace",
+        "type": "atlas",
+        "texture": "scenes/glass-furnace-sprite-sheet-v1.png",
+        "atlas": "scenes/glass-furnace-sprite-sheet-v1.json",
+        "placeholder": true,
+        "purpose": "preload",
+        "description": "Glass Studio brick furnace atlas (idle + 3-frame soft orange door glow).",
+        "frames": [
+          "glass-furnace-idle",
+          "glass-furnace-glow-1",
+          "glass-furnace-glow-2",
+          "glass-furnace-glow-3"
+        ]
+      },
+      {
+        "key": "glass-blow-station",
+        "type": "atlas",
+        "texture": "scenes/glass-blow-station-sheet-v1.png",
+        "atlas": "scenes/glass-blow-station-sheet-v1.json",
+        "placeholder": true,
+        "purpose": "preload",
+        "description": "Glass Studio blow bench atlas (bench + pipe + 3-frame molten blob pulse + set frame).",
+        "frames": [
+          "glass-blow-bench-idle",
+          "glass-blob-pulse-1",
+          "glass-blob-pulse-2",
+          "glass-blob-pulse-3",
+          "glass-blob-set"
+        ]
       }
     ],
     "ui": [
