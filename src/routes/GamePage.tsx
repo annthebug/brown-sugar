@@ -381,38 +381,23 @@ export function GamePage() {
   const gameShellClassName = isMobileGameShell ? 'game-shell game-shell--mobile' : 'game-shell'
 
   return (
-    <main className={gameShellClassName} aria-labelledby="game-title">
+    <main
+      className={gameShellClassName}
+      aria-labelledby={isMobileGameShell ? undefined : 'game-title'}
+      aria-label={isMobileGameShell ? `${chapterMeta.title} 遊戲畫面` : undefined}
+    >
       {isMobileGameShell ? null : <AppNav />}
-      <header className="game-header">
-        {isMobileGameShell ? (
-          <>
-            <div className="game-header-chapter">
-              <p className="eyebrow">{chapterMeta.eyebrow}</p>
-              <h1 id="game-title" className="game-header-title--compact">
-                {chapterMeta.title}
-              </h1>
-            </div>
-            <button
-              type="button"
-              className="game-header-pause"
-              onClick={openPauseMenu}
-              aria-label="暫停遊戲"
-            >
-              暫停
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/" className="back-link">
-              首頁
-            </Link>
-            <div>
-              <p className="eyebrow">{chapterMeta.eyebrow}</p>
-              <h1 id="game-title">Quest for the Perfect Bowl</h1>
-            </div>
-          </>
-        )}
-      </header>
+      {isMobileGameShell ? null : (
+        <header className="game-header">
+          <Link to="/" className="back-link">
+            首頁
+          </Link>
+          <div>
+            <p className="eyebrow">{chapterMeta.eyebrow}</p>
+            <h1 id="game-title">Quest for the Perfect Bowl</h1>
+          </div>
+        </header>
+      )}
       <div className="game-playfield">
         <PhaserGame ref={phaserRef} isPaused={isPaused} />
       </div>
