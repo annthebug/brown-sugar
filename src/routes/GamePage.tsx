@@ -4,6 +4,7 @@ import { AchievementToastStack } from '../components/AchievementToastStack'
 import { AppNav } from '../components/AppNav'
 import { DialogueBox } from '../components/DialogueBox'
 import { MemoryOverlay } from '../components/MemoryOverlay'
+import { MobileGamePauseButton } from '../components/MobileGamePauseButton'
 import { PauseMenu } from '../components/PauseMenu'
 import { PhaserGame, type PhaserGameHandle } from '../components/PhaserGame'
 import { TouchControlsOverlay } from '../components/TouchControlsOverlay'
@@ -381,6 +382,9 @@ export function GamePage() {
     }
   }, [isMobileGameShell])
 
+  const showMobilePauseButton =
+    isMobileGameShell && !isPaused && !activeMemory && !activeDialogue
+
   const gameShellClassName = isMobileGameShell ? 'game-shell game-shell--mobile' : 'game-shell'
 
   return (
@@ -403,6 +407,7 @@ export function GamePage() {
       )}
       <div className="game-playfield">
         <PhaserGame ref={phaserRef} isPaused={isPaused} />
+        <MobileGamePauseButton visible={showMobilePauseButton} onPause={openPauseMenu} />
       </div>
       {isMobileGameShell ? null : (
       <section className="store-panel" aria-label="遊戲控制面板">
