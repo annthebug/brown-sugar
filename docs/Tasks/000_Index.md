@@ -17,33 +17,86 @@
 | [009](009.md) | 關卡：第一章 Forest | 關卡 | ✅ 完成 |
 | [010](010.md) | 關卡：第二章 City | 關卡 | ✅ 完成 |
 | [011](011.md) | 關卡：第三章 Snow Mountain | 關卡 | ✅ 完成 |
-| [012](012.md) | 關卡：第四章 Glass Studio | 關卡 | ✅ 完成 |
+| [012](012.md) | 關卡：第四章 Glass Studio | 關卡 | ✅ 完成（見下方已知缺口） |
 | [013](013.md) | 關卡：第五章 Retry | 關卡 | ✅ 完成 |
-| [014](014.md) | Final Stage 與 Boss：Perfectionism | 關卡 | ✅ 完成 |
+| [014](014.md) | Final Stage 與 Boss：Perfectionism | 關卡 | ✅ 完成（見下方已知缺口） |
 | [015](015.md) | 音訊系統 | 系統 | ❌ 已取消 |
-| [016](016.md) | UI：首頁 / 暫停 / 設定 | UI | 🟨 進行中 |
+| [016](016.md) | UI：首頁 / 暫停 / 設定 | UI | 🟨 進行中（手機暫停鈕待補） |
 | [017](017.md) | 相簿（Gallery） | UI | ✅ 完成 |
 | [018](018.md) | 存檔系統（LocalStorage + Firebase Sync） | 系統 | 🟨 進行中 |
 | [019](019.md) | 結局：玻璃碗生成、寶箱、Credits | 玩法 | 🟨 進行中 |
-| [020](020.md) | 成就系統 | 系統 | ⬜ 未開始 |
+| [020](020.md) | 成就系統 | 系統 | 🟨 進行中 |
 | [021](021.md) | PWA 設定 | 平台 | ✅ 完成 |
 | [022](022.md) | 部署至 Vercel | 部署 | ✅ 完成 |
 
-## 修復計畫（2026-07-10）
+## 修復計畫（2026-07-10）— 待實作
 
-- [BUGFIX_PLAN_2026-07-10.md](BUGFIX_PLAN_2026-07-10.md) — 內在嚮導重複、玻璃工坊素材、爐火 emote、繁中文案、手機返回首頁（含分步 prompt）。
+完整分析、設計決策與分步 prompt 見 **[BUGFIX_PLAN_2026-07-10.md](BUGFIX_PLAN_2026-07-10.md)**。
 
-## 目前盤點（2026-07-09）
+| # | 問題 | 影響任務 | 狀態 |
+| --- | --- | --- | --- |
+| 1 | 內在嚮導在 Retry 與 Final 各出現一次；**最終章不應有內在嚮導** | 013、014 | ⬜ 待修 |
+| 2 | 玻璃工坊爐火／吹製台無像素素材；吹製需可見動畫 | 004、012 | ⬜ 待修 |
+| 3 | 感受爐火時黑糖無 emote 反應 | 012 | ⬜ 待修 |
+| 4 | 少數場景 cutscene／提示仍殘留英文（主標題不變） | 007、016 | ⬜ 待修 |
+| 5 | 手機沉浸式遊戲頁無返回首頁入口（缺暫停鈕） | 016 | ⬜ 待修 |
 
-- `package.json` 使用 `phaser@^3.90.0`；`npm run build` 可通過。
-- **章節關卡（009 / 010 完成）：** `ForestScene`（平台、巡邏怪物、森林老人、巨大罐罐 Boss、Memory Shard 碰撞拾取、通關解鎖 Memory #1 並切換 `CityScene`）；`CityScene`（咖啡店 / 公園 / 捷運區塊、店員 / 旅人 NPC、Time Monster Boss、通關解鎖 Memory #2）。`chapters.ts` 依 `forestChapterCleared` / `cityChapterCleared` 決定可玩章節；第三至五章仍 fallback 至 `ForestScene`，尚無獨立 Scene。
-- **MBTI（008 完成）：** `data/mbti.ts` 共 21 題；`services/mbti.ts` 計算四碼類型與玻璃碗對照；`useMbtiStore` 含 `answeredQuestionIds`、防重複計分、`isComplete()`、`getMbtiResult()`；`EndingPage` 答完後顯示 MBTI 與碗型。第三至五章對話腳本已撰寫，目前除 Forest / City 場景 NPC 外，亦可透過 `GamePage` debug 按鈕觸發。
-- **核心玩法：** `Player` 全能力、`MemoryShard` overlap 拾取、`DialogueBox` 分支對話、`MemoryOverlay` GSAP 動畫、`GalleryPage` 25 張照片相簿（剪影 / 重播）。
-- **音訊：** 已取消（遊戲完全無音訊，無 Howler、無 `services/audio.ts`）。
-- **UI（016 進行中）：** 首頁已有 Start / Continue / Gallery / Settings；`PauseMenu`（Esc）、Fullscreen API、`useFullscreenSync` 已有；Language 僅 store 值，尚無 i18n 文案套用。
-- **結局（019 進行中）：** `EndingPage` 可預覽 MBTI 結果與玻璃碗 sprite sheet；尚無寶箱動畫、Credits 捲動。
-- **存檔（018 進行中）：** 各 Zustand store 已 LocalStorage persist；尚無 Firebase / `services/save.ts`。
-- **遺留：** `GameScene` 仍保留於 Phaser config 作測試場景；`GamePage` 仍有 debug 面板（手動 Collect shard、測試對話按鈕等），非最終遊戲 UI。
+相關規格更新：`05_Characters.md`、`06_GameMechanics.md`、`07_MBTISystem.md`、`08_UIUX.md`、`09_Assets.md`、`assets/glass-studio-props.md`。
+
+## 目前盤點（2026-07-10）
+
+### 章節關卡（009–014 完成）
+
+- `ForestScene`、`CityScene`、`SnowMountainScene`、`GlassStudioScene`、`RetryScene`、`FinalScene` 均已實作並於 `chapters.ts` 對應。
+- 各章含 Memory Shard 拾取、NPC／Boss 對話、章節通關旗標（`forestChapterCleared` … `finalChapterCleared`）。
+- `GlassStudioScene`：吹玻璃節奏小遊戲（Talk 峰值 3 次）已可玩；火爐／吹製台目前為 Phaser 幾何佔位（待補素材，見修復計畫 #2）。
+- `RetryScene`：材料收集 + 內在嚮導（MBTI 最後 3 題）+ Inner Doubt Boss。
+- `FinalScene`：共鳴點（Meow）+ 內在嚮導 + Perfectionism Boss（內在嚮導應移除，見修復計畫 #1）。
+
+### MBTI（008 完成）
+
+- `data/mbti.ts` 共 21 題，分散六章 NPC 對話；`services/mbti.ts` 計算四碼與玻璃碗對照。
+- `useMbtiStore`：`answeredQuestionIds`、防重複計分、`isComplete()`、`getMbtiResult()`。
+- `dialogues.ts` 主線對話已為繁體中文；`speakerName`／`title` 為角色稱謂（如「內在嚮導」「玻璃師傅」）。
+
+### 核心玩法
+
+- `Player`：Jump、Double Jump、Dash、Meow、Talk、Collect；`playEmote('happy' | 'sad')`。
+- `DialogueBox` 分支對話、`MemoryOverlay` GSAP 過場、`GalleryPage` 相簿（剪影／重播）。
+- 桌機：`InputController` 鍵盤；手機：`TouchControlsOverlay` 固定視窗 overlay + `useIsMobileGameShell` 沉浸式殼層。
+
+### 音訊
+
+- **已取消**：遊戲完全無音訊，無 Howler、無 `services/audio.ts`。
+
+### UI（016 進行中）
+
+- 首頁：開始旅程、繼續、相簿、設定（繁體中文）；`PauseMenu`（Esc／暫停後可返回首頁）。
+- 桌機 `GamePage`：頂部「首頁」連結 + 精簡進度面板（無 debug 按鈕）。
+- 手機 `game-shell--mobile`：隱藏 `AppNav`、header、進度面板；**尚無暫停鈕**（見修復計畫 #5）。
+- 設定：繁體中文、Fullscreen API、`useFullscreenSync`。
+- PWA（021）、`vercel.json` 部署（022）已完成。
+
+### 結局（019 進行中）
+
+- `EndingPage`：MBTI 玻璃碗 sprite、寶箱分層素材、黑糖入睡圖、GSAP Credits 捲動已有基礎實作。
+- 通關後由 `FinalScene` 導向 `/ending`（`gameCompleted`）。
+
+### 存檔（018 進行中）
+
+- 各 Zustand store LocalStorage persist。
+- `services/save.ts`、`services/firebase.ts` 已建立；Firebase 需 `.env` 設定後啟用雲端同步。
+
+### 成就（020 進行中）
+
+- `data/achievements.ts`、`useAchievementStore`、`AchievementPanel`／`AchievementToastStack` 已實作部分成就（如首片碎片、章節通關、MBTI 完成、旅程完成）。
+- Speed Run、No Damage 等待補。
+
+### 遺留／技術債
+
+- `GameScene` 仍保留於 Phaser config 作測試場景。
+- `RetryScene` 部分 cutscene 文案仍為英文（見修復計畫 #4）。
+- Task 個別檔案（016、018、019、020）內「目前盤點」日期可能落後本索引，以本檔 **2026-07-10** 盤點為準。
 
 ## 任務檔案格式
 
