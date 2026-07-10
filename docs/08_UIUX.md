@@ -71,6 +71,26 @@ Pixel → Fade → 真正照片 → 一句文字 → Continue → Pixel
 | Desktop | 鍵盤 + 滑鼠 |
 | iPad / iPhone / Android | 虛擬搖桿 + 動作按鈕（觸控） |
 
+### 手機版規格（≤ 820px）
+
+目標裝置：**iPhone Safari**、**Android Chrome**。視覺維持淡藍天空 + 莫蘭迪色系。
+
+| 項目 | 規格 |
+| --- | --- |
+| 斷點 | `max-width: 820px`（與 `(pointer: coarse)` 並用於觸控 UI） |
+| 觸控目標 | 可點擊區域 **≥ 44×44 px**（按鈕、導覽、對話選項、暫停選單） |
+| Safe area | `viewport-fit=cover` + `env(safe-area-inset-*)`；`index.html` 設 `theme-color: #d8edf4` |
+| 首頁 | 單欄排列；主要 CTA 全寬、加大行高 |
+| 對話框 | 全寬底部固定（bottom sheet）；底部預留虛擬按鈕區（約 8.5rem），避免遮住 Phaser TouchControls |
+| 暫停選單 | 全螢幕覆蓋、大按鈕縱向排列，拇指易點 |
+| 相簿／設定／結局 | 單欄卡片；圖片 `width: 100%` 自適應 |
+| 遊戲頁 | 沉浸式殼層（見 M1）；虛擬搖桿左下、動作鈕右下（見 M2） |
+
+### PWA / 主畫面
+
+- `apple-mobile-web-app-capable`：可加入主畫面後以全螢幕 Web App 開啟。
+- `theme-color`：瀏覽器 UI 與天空背景一致（`#d8edf4`）。
+
 ## PWA
 
 - 可安裝至主畫面。
