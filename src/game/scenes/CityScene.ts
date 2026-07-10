@@ -14,7 +14,6 @@ import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
 import { interactPrompt } from '../input/interactPrompt'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
-import { TouchControls } from '../input/TouchControls'
 
 const WORLD_WIDTH = 2640
 const WORLD_HEIGHT = 540
@@ -48,7 +47,6 @@ const METRO_X = 2180
 export class CityScene extends Phaser.Scene {
   private player?: Player
   private inputCtrl?: InputController
-  private touchCtrl?: TouchControls
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
   private baristaNpc?: CharacterMarker
@@ -89,8 +87,6 @@ export class CityScene extends Phaser.Scene {
 
     this.inputCtrl = new InputController(this)
     const isTouch = this.prefersTouchControls
-    this.touchCtrl = new TouchControls(this, this.inputCtrl)
-    this.touchCtrl.setVisible(isTouch)
 
     this.player.setTalkHandler(() => {
       this.handleInteract()
@@ -171,7 +167,6 @@ export class CityScene extends Phaser.Scene {
     this.unsubscribeBossDialogueDone?.()
     this.player?.setTalkHandler(null)
     this.inputCtrl?.destroy()
-    this.touchCtrl?.destroy()
   }
 
   private buildBackground() {

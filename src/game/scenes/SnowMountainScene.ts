@@ -13,7 +13,6 @@ import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
 import { interactPrompt } from '../input/interactPrompt'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
-import { TouchControls } from '../input/TouchControls'
 
 const WORLD_WIDTH = 2760
 const WORLD_HEIGHT = 540
@@ -57,7 +56,6 @@ const CHECKPOINTS = [
 export class SnowMountainScene extends Phaser.Scene {
   private player?: Player
   private inputCtrl?: InputController
-  private touchCtrl?: TouchControls
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
   private guideNpc?: CharacterMarker
@@ -104,8 +102,6 @@ export class SnowMountainScene extends Phaser.Scene {
 
     this.inputCtrl = new InputController(this)
     const isTouch = this.prefersTouchControls
-    this.touchCtrl = new TouchControls(this, this.inputCtrl)
-    this.touchCtrl.setVisible(isTouch)
 
     this.player.setTalkHandler(() => {
       this.handleInteract()
@@ -188,7 +184,6 @@ export class SnowMountainScene extends Phaser.Scene {
     this.snowflakeTimer?.destroy()
     this.player?.setTalkHandler(null)
     this.inputCtrl?.destroy()
-    this.touchCtrl?.destroy()
     this.checkpointZones.forEach((zone) => zone.destroy())
     this.checkpointZones = []
   }

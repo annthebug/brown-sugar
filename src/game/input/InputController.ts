@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { getTouchInputState, setTouchInput, type TouchInputKey } from './touchInputBridge'
 
 export type InputSnapshot = {
   left: boolean
@@ -12,8 +13,6 @@ export type InputSnapshot = {
   talk: boolean
   talkJustDown: boolean
 }
-
-type TouchKey = 'left' | 'right' | 'jump' | 'dash' | 'meow' | 'talk'
 
 /**
  * Unified input source for keyboard and touch — consumers only see InputSnapshot,
@@ -29,15 +28,6 @@ export class InputController {
     m: Phaser.Input.Keyboard.Key
     e: Phaser.Input.Keyboard.Key
     enter: Phaser.Input.Keyboard.Key
-  }
-
-  private touch: Record<TouchKey, boolean> = {
-    left: false,
-    right: false,
-    jump: false,
-    dash: false,
-    meow: false,
-    talk: false,
   }
 
   private prev = {
@@ -62,12 +52,13 @@ export class InputController {
     }
   }
 
-  setTouchInput(key: TouchKey, value: boolean) {
-    this.touch[key] = value
+  setTouchInput(key: TouchInputKey, value: boolean) {
+    setTouchInput(key, value)
   }
 
   snapshot(): InputSnapshot {
-    const { keys: k, touch: t } = this
+    const { keys: k } = this
+    const t = getTouchInputState()
 
     const left = k.left.isDown || t.left
     const right = k.right.isDown || t.right

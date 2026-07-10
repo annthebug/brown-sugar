@@ -13,7 +13,6 @@ import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
 import { formatMeowVerb, interactPrompt } from '../input/interactPrompt'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
-import { TouchControls } from '../input/TouchControls'
 
 const WORLD_WIDTH = 2520
 const WORLD_HEIGHT = 540
@@ -46,7 +45,6 @@ const FINAL_PLATFORMS: PlatformSpec[] = [
 export class FinalScene extends Phaser.Scene {
   private player?: Player
   private inputCtrl?: InputController
-  private touchCtrl?: TouchControls
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
   private innerGuide?: CharacterMarker
@@ -91,8 +89,6 @@ export class FinalScene extends Phaser.Scene {
 
     this.inputCtrl = new InputController(this)
     const isTouch = this.prefersTouchControls
-    this.touchCtrl = new TouchControls(this, this.inputCtrl)
-    this.touchCtrl.setVisible(isTouch)
 
     this.player.setTalkHandler(() => {
       this.handleInteract()
@@ -192,7 +188,6 @@ export class FinalScene extends Phaser.Scene {
     this.unsubscribeMeow?.()
     this.player?.setTalkHandler(null)
     this.inputCtrl?.destroy()
-    this.touchCtrl?.destroy()
   }
 
   private buildBackground() {

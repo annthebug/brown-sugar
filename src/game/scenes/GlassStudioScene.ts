@@ -13,7 +13,6 @@ import { Player } from '../entities/Player'
 import { InputController } from '../input/InputController'
 import { formatInteractVerb, interactPrompt } from '../input/interactPrompt'
 import { shouldShowTouchControls } from '../input/touchInputEnvironment'
-import { TouchControls } from '../input/TouchControls'
 
 const WORLD_WIDTH = 2520
 const WORLD_HEIGHT = 540
@@ -57,7 +56,6 @@ type BlowGlassState = 'idle' | 'active' | 'success'
 export class GlassStudioScene extends Phaser.Scene {
   private player?: Player
   private inputCtrl?: InputController
-  private touchCtrl?: TouchControls
   private platforms?: Phaser.Physics.Arcade.StaticGroup
   private shards: MemoryShard[] = []
   private glassMasterNpc?: CharacterMarker
@@ -109,8 +107,6 @@ export class GlassStudioScene extends Phaser.Scene {
 
     this.inputCtrl = new InputController(this)
     const isTouch = this.prefersTouchControls
-    this.touchCtrl = new TouchControls(this, this.inputCtrl)
-    this.touchCtrl.setVisible(isTouch)
 
     this.player.setTalkHandler(() => {
       this.handleInteract()
@@ -218,7 +214,6 @@ export class GlassStudioScene extends Phaser.Scene {
     this.furnaceMessageTimer?.destroy()
     this.player?.setTalkHandler(null)
     this.inputCtrl?.destroy()
-    this.touchCtrl?.destroy()
   }
 
   private buildBackground() {

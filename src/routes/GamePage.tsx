@@ -6,7 +6,9 @@ import { DialogueBox } from '../components/DialogueBox'
 import { MemoryOverlay } from '../components/MemoryOverlay'
 import { PauseMenu } from '../components/PauseMenu'
 import { PhaserGame, type PhaserGameHandle } from '../components/PhaserGame'
+import { TouchControlsOverlay } from '../components/TouchControlsOverlay'
 import { useIsMobileGameShell } from '../hooks/useIsMobileGameShell'
+import { useShouldShowTouchControls } from '../hooks/useShouldShowTouchControls'
 import { CHAPTER_DISPLAY_NAMES, CHAPTER_LABELS, getPlayableChapter } from '../data/chapters'
 import { MBTI_QUESTION_COUNT } from '../data/mbti'
 import {
@@ -69,6 +71,7 @@ function resolveDialogueId(npcId?: string): DialogueScriptId | null {
 export function GamePage() {
   const navigate = useNavigate()
   const isMobileGameShell = useIsMobileGameShell()
+  const shouldShowTouchControls = useShouldShowTouchControls()
   const phaserRef = useRef<PhaserGameHandle>(null)
   const [memoryQueue, setMemoryQueue] = useState<MemoryEntry[]>([])
   const [activeDialogueId, setActiveDialogueId] = useState<DialogueScriptId | null>(null)
@@ -438,6 +441,9 @@ export function GamePage() {
       ) : null}
       {activeMemory ? <MemoryOverlay memory={activeMemory} onContinue={continueMemory} /> : null}
       {isPaused ? <PauseMenu onResume={resumeGame} onRestart={restartChapter} /> : null}
+      <TouchControlsOverlay
+        visible={shouldShowTouchControls && !isPaused && !activeMemory}
+      />
       <AchievementToastStack toasts={toastQueue} onDismiss={dismissToast} />
     </main>
   )
