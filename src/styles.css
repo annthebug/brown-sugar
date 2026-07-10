@@ -1321,12 +1321,34 @@ h1 {
 
   @media (orientation: landscape) {
     .dialogue-overlay {
-      padding-bottom: env(safe-area-inset-bottom, 0px);
+      inset: 0;
+      padding:
+        env(safe-area-inset-top, 0px)
+        env(safe-area-inset-right, 0px)
+        env(safe-area-inset-bottom, 0px)
+        env(safe-area-inset-left, 0px);
+      align-items: stretch;
     }
 
     .dialogue-box {
-      max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 0.5rem);
-      border-radius: 18px;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      min-height: 0;
+      border-radius: 0;
+      overflow: hidden;
+    }
+
+    .dialogue-content {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      min-height: 0;
+    }
+
+    .dialogue-text {
+      min-height: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
   }
 
@@ -1479,20 +1501,4 @@ body.game-play-active {
 .touch-btn-meow {
   grid-column: 2;
   grid-row: 2;
-}
-
-.touch-controls-portrait-hint {
-  position: absolute;
-  top: calc(env(safe-area-inset-top, 0px) + 22vh);
-  left: 50%;
-  margin: 0;
-  padding: 0.5rem 0.9rem;
-  border-radius: 999px;
-  background: rgba(248, 251, 249, 0.55);
-  color: #385867;
-  font-family: monospace;
-  font-size: clamp(14px, 2.5vw, 16px);
-  font-weight: 700;
-  opacity: 0.62;
-  transform: translateX(-50%);
 }

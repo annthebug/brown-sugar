@@ -18,29 +18,6 @@ type TapButtonProps = {
   className?: string
 }
 
-function useIsPortrait() {
-  const [isPortrait, setIsPortrait] = useState(() =>
-    typeof window !== 'undefined' ? window.innerHeight > window.innerWidth : false,
-  )
-
-  useEffect(() => {
-    const update = () => {
-      setIsPortrait(window.innerHeight > window.innerWidth)
-    }
-
-    update()
-    window.addEventListener('resize', update)
-    window.addEventListener('orientationchange', update)
-
-    return () => {
-      window.removeEventListener('resize', update)
-      window.removeEventListener('orientationchange', update)
-    }
-  }, [])
-
-  return isPortrait
-}
-
 function HoldButton({ label, touchKey, className, size = 'normal' }: HoldButtonProps) {
   const [active, setActive] = useState(false)
 
@@ -123,8 +100,6 @@ function TapButton({ label, touchKey, className }: TapButtonProps) {
 }
 
 export function TouchControlsOverlay({ visible }: TouchControlsOverlayProps) {
-  const isPortrait = useIsPortrait()
-
   useEffect(() => {
     if (!visible) {
       resetTouchInput()
@@ -141,7 +116,6 @@ export function TouchControlsOverlay({ visible }: TouchControlsOverlayProps) {
 
   return (
     <div className="touch-controls-overlay" aria-hidden="true">
-      {isPortrait ? <p className="touch-controls-portrait-hint">建議橫向遊玩</p> : null}
       <div className="touch-controls-cluster touch-controls-cluster--left">
         <HoldButton label="◀" touchKey="left" />
         <HoldButton label="▶" touchKey="right" />
