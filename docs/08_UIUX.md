@@ -35,7 +35,7 @@
 - Exit
 
 ### 設定（Setting）
-- Language
+- Language（繁體中文）
 - Fullscreen
 
 ### 相簿（Gallery）
@@ -69,7 +69,7 @@ Pixel → Fade → 真正照片 → 一句文字 → Continue → Pixel
 | 裝置 | 操作 |
 | --- | --- |
 | Desktop | 鍵盤 + 滑鼠 |
-| iPad / iPhone / Android | 虛擬搖桿 + 動作按鈕（觸控） |
+| iPad / iPhone / Android | 按鈕式 D-pad + 動作按鈕（`TouchControlsOverlay`） |
 
 ### 手機版規格（≤ 820px）
 
@@ -81,10 +81,10 @@ Pixel → Fade → 真正照片 → 一句文字 → Continue → Pixel
 | 觸控目標 | 可點擊區域 **≥ 44×44 px**（按鈕、導覽、對話選項、暫停選單） |
 | Safe area | `viewport-fit=cover` + `env(safe-area-inset-*)`；`index.html` 設 `theme-color: #d8edf4` |
 | 首頁 | 單欄排列；主要 CTA 全寬、加大行高 |
-| 對話框 | 全寬底部固定（bottom sheet）；底部預留虛擬按鈕區（約 8.5rem），避免遮住 Phaser TouchControls |
+| 對話框 | 直向：全寬底部 sheet；橫向：全螢幕滿版。對話進行時隱藏觸控按鈕 |
 | 暫停選單 | 全螢幕覆蓋、大按鈕縱向排列，拇指易點 |
 | 相簿／設定／結局 | 單欄卡片；圖片 `width: 100%` 自適應 |
-| 遊戲頁 | 沉浸式殼層（見 M1）；虛擬搖桿左下、動作鈕右下（見 M2） |
+| 遊戲頁 | 沉浸式殼層；`TouchControlsOverlay` 固定於視窗左下／右下 |
 
 ### PWA / 主畫面
 
@@ -99,7 +99,7 @@ Pixel → Fade → 真正照片 → 一句文字 → Continue → Pixel
 ## 無障礙 / 體驗細節
 
 - 提供 Fullscreen 選項。
-- 支援語言切換（Language）。
+- 語系固定繁體中文（專屬禮物，無多語系切換）。
 
 ## 相關文件
 

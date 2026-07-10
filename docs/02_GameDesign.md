@@ -77,8 +77,8 @@
 
 ## 系統整合
 
-- 存檔：Auto Save + LocalStorage + Firebase Sync。
-- 成就：收集全部照片、全 MBTI、全部 Memory、Speed Run、No Damage。
+- 存檔：Auto Save + LocalStorage + Firebase Sync（選用）。
+- 成就：六項旅程里程碑（見 [06_GameMechanics](06_GameMechanics.md)）。
 
 ## 相關文件
 

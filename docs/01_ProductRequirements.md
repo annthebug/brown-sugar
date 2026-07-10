@@ -50,14 +50,14 @@ Web（Desktop / iPad / iPhone / Android），PWA 可安裝。
 - 計分四維：E/I、S/N、T/F、J/P，完成後直接計算結果。
 
 ### 結局
-- 依 MBTI 生成不同玻璃碗（花紋皆不同）。
-- 最後寶箱打開為真正拍攝的玻璃碗照片；黑糖躺在碗旁睡著，Credits 捲動。
+- 依 MBTI 顯示對應玻璃碗（16 款花紋，`mbti-glass-bowls-sheet` 裁切預覽）。
+- 黑糖躺在碗旁睡著；Credits 捲動結束旅程。
 
 ### 系統功能
-- 存檔：Auto Save、LocalStorage、Firebase Sync。
+- 存檔：Auto Save、LocalStorage、Firebase Sync（選用）。
 - 相簿：每張照片含日期、一句話、動畫。
-- 成就：收集全部照片、全 MBTI、全部 Memory、Speed Run、No Damage。
-- 設定：Language、Fullscreen。
+- 成就：六項旅程里程碑（首片碎片、首段回憶、森林章節、全相簿、MBTI 完成、旅程結局）。
+- 設定：Language（繁體中文）、Fullscreen。
 
 ## 非功能需求（Non-Functional Requirements）
 
@@ -81,3 +81,8 @@ Web（Desktop / iPad / iPhone / Android），PWA 可安裝。
 - 多人連線 / 對戰。
 - 內購 / 金流。
 - 排行榜社群功能。
+- 多語系 i18n（本版固定繁體中文）。
+- 音訊（BGM / SFX）。
+- 結局寶箱開啟動畫、實拍玻璃碗照片替換 sprite 預覽。
+- 競技型成就（Speed Run、No Damage）。
+- Tiled tilemap 匯入（關卡採 placeholder 幾何平台）。

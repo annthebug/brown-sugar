@@ -43,8 +43,8 @@
 - Pixel → 照片 過場素材。
 
 ### 玻璃碗（結局）
-- 16 型 MBTI 各一款玻璃碗花紋（如 守護者之碗、冒險者之碗、策略家的玻璃碗、Dream Bowl 等）。
-- Pixel Treasure Chest（寶箱）開啟動畫。
+- 16 型 MBTI 各一款玻璃碗花紋（`mbti-glass-bowls-sheet` 4×4 網格）。
+- `ending-chest-*` 四層素材已備於 manifest，列為選用／日後擴充，本版結局不以寶箱動畫呈現。
 
 ### UI 元素
 - 按鈕、對話框、HUD、相簿框、設定面板。
