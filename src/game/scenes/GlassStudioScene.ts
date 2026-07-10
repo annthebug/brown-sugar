@@ -522,6 +522,14 @@ export class GlassStudioScene extends Phaser.Scene {
       return
     }
 
+    if (
+      this.player &&
+      this.player.playerState !== 'talk' &&
+      this.player.playerState !== 'dash'
+    ) {
+      this.player.playEmote('happy')
+    }
+
     this.interactPrompt.setText('爐火吐出溫暖而耐心的氣息。')
     this.interactPrompt.setPosition(FURNACE_X, GROUND_TOP - 130)
     this.interactPrompt.setVisible(true)
