@@ -132,7 +132,7 @@ export function EndingPage() {
                 <div
                   className="ending-bowl-影格"
                   role="img"
-                  aria-label={`${mbtiResult} glass bowl`}
+                  aria-label={`${mbtiResult} 玻璃碗`}
                   style={generatedBowlStyle}
                 />
                 <div className="ending-bowl-meta">
@@ -160,7 +160,7 @@ export function EndingPage() {
               <div
                 className="ending-photo-bowl"
                 role="img"
-                aria-label={mbtiResult ? `${mbtiResult} final glass bowl keepsake` : 'Final glass bowl keepsake'}
+                aria-label={mbtiResult ? `${mbtiResult} 最終玻璃碗` : '最終玻璃碗'}
                 style={generatedBowlStyle}
               />
               <p className="ending-photo-copy">

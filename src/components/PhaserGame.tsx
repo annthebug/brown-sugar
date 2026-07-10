@@ -126,7 +126,7 @@ export const PhaserGame = forwardRef<PhaserGameHandle, PhaserGameProps>(function
   }, [isPaused])
 
   return (
-    <section className="game-card" aria-label="Phaser 遊戲預覽">
+    <section className="game-card" aria-label="遊戲預覽">
       <div ref={containerRef} className="phaser-container" />
       <p className="game-status" role="status">
         {status}

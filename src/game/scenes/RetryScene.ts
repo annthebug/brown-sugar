@@ -519,7 +519,7 @@ export class RetryScene extends Phaser.Scene {
     this.innerDoubtBoss?.sprite.setAlpha(1)
 
     this.cutsceneText
-      ?.setText('All materials gathered.\nInner Doubt waits at the far edge.')
+      ?.setText('材料都齊了。\n內在懷疑在遠方等著你。')
       .setVisible(true)
 
     this.time.delayedCall(2800, () => {
@@ -557,7 +557,7 @@ export class RetryScene extends Phaser.Scene {
     })
 
     this.cutsceneText
-      ?.setText('The true glass bowl takes shape —\ngentle, clear, and whole.')
+      ?.setText('真正的玻璃碗慢慢成形——\n溫柔、清澈而完整。')
       .setVisible(true)
 
     this.tweens.add({
