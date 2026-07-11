@@ -74,6 +74,7 @@ export function GamePage() {
   const isMobileGameShell = useIsMobileGameShell()
   const shouldShowTouchControls = useShouldShowTouchControls()
   const phaserRef = useRef<PhaserGameHandle>(null)
+  const pendingEndingNavigationRef = useRef(false)
   const [memoryQueue, setMemoryQueue] = useState<MemoryEntry[]>([])
   const [activeDialogueId, setActiveDialogueId] = useState<DialogueScriptId | null>(null)
   const [lastDialogueChoice, setLastDialogueChoice] = useState<string>('尚未做出對話選擇')
@@ -248,6 +249,14 @@ export function GamePage() {
 
     const unsubscribeFinalChapter = gameEventBus.on('chapter:final-cleared', () => {
       completeFinalStage()
+      const unlockedMemory = unlockMemoryByNumber(6)
+
+      if (unlockedMemory) {
+        pendingEndingNavigationRef.current = true
+        setMemoryQueue((currentQueue) => [...currentQueue, unlockedMemory])
+        return
+      }
+
       navigate('/ending')
     })
 
@@ -326,9 +335,18 @@ export function GamePage() {
     gameEventBus.emit('dialogue:closed', {})
   }, [])
 
-  const continueMemory = () => {
-    setMemoryQueue((currentQueue) => currentQueue.slice(1))
-  }
+  const continueMemory = useCallback(() => {
+    setMemoryQueue((currentQueue) => {
+      const nextQueue = currentQueue.slice(1)
+
+      if (nextQueue.length === 0 && pendingEndingNavigationRef.current) {
+        pendingEndingNavigationRef.current = false
+        navigate('/ending')
+      }
+
+      return nextQueue
+    })
+  }, [navigate])
 
   const openPauseMenu = useCallback(() => {
     setIsPaused(true)
