@@ -12,6 +12,7 @@ export type PlayerState =
   | 'meow'
   | 'collect'
   | 'talk'
+  | 'emote'
 
 // ─── Tuning constants ──────────────────────────────────────────────────────
 const WALK_SPEED = 210
@@ -22,6 +23,7 @@ const DASH_DURATION_MS = 170
 const DASH_COOLDOWN_MS = 900
 const MEOW_LOCK_MS = 600
 const COLLECT_LOCK_MS = 500
+const EMOTE_LOCK_MS = 900
 const PLAYER_SCALE = 0.44
 const PLAYER_DISPLAY_FRAME_TRIM_PX = 1
 
@@ -90,6 +92,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   // Timed lock-outs (ms remaining)
   private meowLock = 0
   private collectLock = 0
+  private emoteLock = 0
   private talkHandler: (() => void) | null = null
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
@@ -120,6 +123,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.dashCooldown > 0) this.dashCooldown -= delta
     if (this.meowLock > 0) this.meowLock -= delta
     if (this.collectLock > 0) this.collectLock -= delta
+    if (this.emoteLock > 0) this.emoteLock -= delta
 
     // Landing: reset aerial state
     if (onGround && !this.wasOnGround) {
@@ -145,6 +149,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     // Collect lock
     if (this.collectLock > 0) {
+      body.setVelocityX(0)
+      return
+    }
+
+    // Emote lock
+    if (this.emoteLock > 0) {
       body.setVelocityX(0)
       return
     }
@@ -236,7 +246,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   playEmote(emote: 'happy' | 'sad') {
+    if (this._state === 'talk' || this._state === 'dash' || this.isDashing) {
+      return
+    }
+
+    this.emoteLock = EMOTE_LOCK_MS
+    this._state = 'emote'
     this.play(emote === 'happy' ? 'bs-happy' : 'bs-sad', true)
+
+    this.scene.time.delayedCall(EMOTE_LOCK_MS, () => {
+      if (this._state === 'emote') {
+        this._state = 'idle'
+      }
+    })
   }
 
   get playerState(): PlayerState {
@@ -294,6 +316,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this._state === 'meow') return
     if (this._state === 'collect') return
     if (this._state === 'talk') return
+    if (this._state === 'emote') return
 
     if (!onGround) {
       if (this.anims.currentAnim?.key !== 'bs-jump') {
