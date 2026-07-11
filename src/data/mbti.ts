@@ -62,7 +62,7 @@ export const MBTI_QUESTIONS = [
     chapter: 2,
     dimension: 'TF',
     npc: '咖啡師',
-    prompt: '如果朋友錯過了最後一班電車，你會先說什麼呢？',
+    prompt: '如果朋友錯過了最後一班電車，你會先怎麼做呢？',
     preferences: { first: 'T', second: 'F' },
   },
   {
@@ -78,7 +78,7 @@ export const MBTI_QUESTIONS = [
     chapter: 2,
     dimension: 'TF',
     npc: '咖啡師',
-    prompt: '深夜收到一則訊息時，什麼對你來說更重要呢？',
+    prompt: '深夜收到一則訊息時，你會先注意什麼呢？',
     preferences: { first: 'T', second: 'F' },
   },
   {
@@ -136,7 +136,7 @@ export const MBTI_QUESTIONS = [
     chapter: 4,
     dimension: 'TF',
     npc: '玻璃師傅',
-    prompt: '一只碗出現了一道細細的小裂痕。對你來說，最重要的是什麼呢？',
+    prompt: '一只碗出現了一道細細的小裂痕。你會先從哪個角度看待它呢？',
     preferences: { first: 'T', second: 'F' },
   },
   {

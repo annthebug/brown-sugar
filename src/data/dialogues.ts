@@ -199,14 +199,14 @@ export const DIALOGUE_SCRIPTS = {
         choices: [
           mbtiChoice(
             'forest-ei-02-a',
-            '我會先沿著已經留下的腳印前進。',
+            '我會先看看有沒有人剛走過，或試著和路上的人聊聊。',
             'forest-ei-02-r1',
             'forest-ei-02',
             'first',
           ),
           mbtiChoice(
             'forest-ei-02-b',
-            '我會先感受風的方向，再選擇自己的步伐。',
+            '我會先找個安靜的地方，獨自整理思緒再決定方向。',
             'forest-ei-02-r2',
             'forest-ei-02',
             'second',
@@ -218,7 +218,7 @@ export const DIALOGUE_SCRIPTS = {
         speakerName: '森林長者',
         avatarLabel: '森',
         mood: 'warm',
-        text: '有人走過的步伐，能讓路顯得更溫暖。繼續聽見你身邊的世界吧。',
+        text: '願意向外界伸出手，有時候路就會變得清楚一點。森林會記得這樣的貓咪。',
         nextNodeId: 'forest-sn-01',
       },
       'forest-ei-02-r2': {
@@ -226,7 +226,7 @@ export const DIALOGUE_SCRIPTS = {
         speakerName: '森林長者',
         avatarLabel: '森',
         mood: 'warm',
-        text: '按照自己的節奏也很好。森林信任懂得自己步調的貓咪。',
+        text: '先在自己的心裡站穩，也是一種很可靠的前行。森林信任懂得傾聽內在聲音的貓咪。',
         nextNodeId: 'forest-sn-01',
       },
       'forest-sn-01': {
@@ -284,7 +284,7 @@ export const DIALOGUE_SCRIPTS = {
           ),
           mbtiChoice(
             'forest-sn-02-b',
-            '它們像是一對很適合拿來送給誰的小禮物。',
+            '它們像是一段還沒說完的故事，等著被接續下去。',
             'forest-sn-02-r2',
             'forest-sn-02',
             'second',
@@ -304,7 +304,7 @@ export const DIALOGUE_SCRIPTS = {
         speakerName: '森林長者',
         avatarLabel: '森',
         mood: 'warm',
-        text: '你總能很快感受到其中的意義。森林很喜歡這樣柔軟的心。',
+        text: '你總能很快看見事物背後還沒說完的部分。森林很喜歡這樣寬廣的心。',
         nextNodeId: 'forest-sn-03',
       },
       'forest-sn-03': {
@@ -365,18 +365,18 @@ export const DIALOGUE_SCRIPTS = {
         id: 'city-tf-01',
         speakerName: '咖啡師',
         avatarLabel: '咖',
-        text: '最後一班列車剛離開，朋友還站在月台上等著。你會先說什麼呢？',
+        text: '最後一班列車剛離開，朋友還站在月台上等著。你會先怎麼做呢？',
         choices: [
           mbtiChoice(
             'city-tf-01-a',
-            '我們先一起看看下一班車和接下來的路線吧。',
+            '我先幫大家理清下一班車時間，看看哪條路最快、最省時。',
             'city-tf-01-r1',
             'city-tf-01',
             'first',
           ),
           mbtiChoice(
             'city-tf-01-b',
-            '沒關係，我們可以一起慢慢找一條更安心的回家路。',
+            '我先問問朋友累不累、會不會害怕，再一起慢慢走。',
             'city-tf-01-r2',
             'city-tf-01',
             'second',
@@ -387,14 +387,14 @@ export const DIALOGUE_SCRIPTS = {
         id: 'city-tf-01-r1',
         speakerName: '咖啡師',
         avatarLabel: '咖',
-        text: '清楚的安排，能讓忙碌的街道也安靜一點。',
+        text: '先把事情理清，有時候也是一種安靜的幫助。',
         nextNodeId: 'city-tf-02',
       },
       'city-tf-01-r2': {
         id: 'city-tf-01-r2',
         speakerName: '咖啡師',
         avatarLabel: '咖',
-        text: '溫暖的話語，能讓忙碌的街道也安靜一點。',
+        text: '先照顧彼此的感受，有時候也是一種安靜的幫助。',
         nextNodeId: 'city-tf-02',
       },
       'city-tf-02': {
@@ -437,18 +437,18 @@ export const DIALOGUE_SCRIPTS = {
         id: 'city-tf-03',
         speakerName: '咖啡師',
         avatarLabel: '咖',
-        text: '深夜收到一則訊息時，什麼對你來說更重要呢？',
+        text: '深夜收到一則訊息時，你會先注意什麼呢？',
         choices: [
           mbtiChoice(
             'city-tf-03-a',
-            '內容是不是足夠清楚、真誠。',
+            '訊息有沒有把重點講清楚，邏輯上說不說得通。',
             'city-tf-03-r1',
             'city-tf-03',
             'first',
           ),
           mbtiChoice(
             'city-tf-03-b',
-            '語氣是不是依然溫柔。',
+            '對方是不是需要被理解，我是不是該先好好接住他。',
             'city-tf-03-r2',
             'city-tf-03',
             'second',
@@ -459,14 +459,14 @@ export const DIALOGUE_SCRIPTS = {
         id: 'city-tf-03-r1',
         speakerName: '咖啡師',
         avatarLabel: '咖',
-        text: '真誠本身，也能是一種安靜的安慰。',
+        text: '把事情說清楚，也能是一種安靜的安慰。',
         nextNodeId: 'city-barista-farewell',
       },
       'city-tf-03-r2': {
         id: 'city-tf-03-r2',
         speakerName: '咖啡師',
         avatarLabel: '咖',
-        text: '溫度本身，也能是一種安靜的安慰。',
+        text: '好好接住對方，也能是一種安靜的安慰。',
         nextNodeId: 'city-barista-farewell',
       },
       'city-barista-farewell': {
@@ -626,18 +626,18 @@ export const DIALOGUE_SCRIPTS = {
         id: 'city-tf-01',
         speakerName: '城市嚮導',
         avatarLabel: '城',
-        text: '如果朋友錯過了最後一班電車，你會先說什麼呢？',
+        text: '如果朋友錯過了最後一班電車，你會先怎麼做呢？',
         choices: [
           mbtiChoice(
             'city-tf-01-a',
-            '我們先一起看看下一班車和接下來的路線吧。',
+            '我先幫大家理清下一班車時間，看看哪條路最快、最省時。',
             'city-tf-01-r1',
             'city-tf-01',
             'first',
           ),
           mbtiChoice(
             'city-tf-01-b',
-            '沒關係，我們可以一起慢慢找一條更安心的回家路。',
+            '我先問問朋友累不累、會不會害怕，再一起慢慢走。',
             'city-tf-01-r2',
             'city-tf-01',
             'second',
@@ -648,14 +648,14 @@ export const DIALOGUE_SCRIPTS = {
         id: 'city-tf-01-r1',
         speakerName: '城市嚮導',
         avatarLabel: '城',
-        text: '清楚的安排，能讓忙碌的街道也安靜一點。',
+        text: '先把事情理清，有時候也是一種安靜的幫助。',
         nextNodeId: 'city-tf-02',
       },
       'city-tf-01-r2': {
         id: 'city-tf-01-r2',
         speakerName: '城市嚮導',
         avatarLabel: '城',
-        text: '溫暖的話語，能讓忙碌的街道也安靜一點。',
+        text: '先照顧彼此的感受，有時候也是一種安靜的幫助。',
         nextNodeId: 'city-tf-02',
       },
       'city-tf-02': {
@@ -795,7 +795,7 @@ export const DIALOGUE_SCRIPTS = {
           ),
           mbtiChoice(
             'snow-sn-01-b',
-            '旅人們常停下腳步的地方，那一點淡淡的光。',
+            '這片雪地底下，好像還藏著一條還沒被看見的路。',
             'snow-sn-01-r2',
             'snow-sn-01',
             'second',
@@ -813,7 +813,7 @@ export const DIALOGUE_SCRIPTS = {
         id: 'snow-sn-01-r2',
         speakerName: '雪靈',
         avatarLabel: '雪',
-        text: '那些心裡感受到的東西，也能替冰冷的腳步帶路。',
+        text: '那些還沒被看見的可能，也能替冰冷的腳步帶路。',
         nextNodeId: 'snow-sn-02',
       },
       'snow-sn-02': {
@@ -996,18 +996,18 @@ export const DIALOGUE_SCRIPTS = {
         id: 'glass-tf-01',
         speakerName: '玻璃師傅',
         avatarLabel: '玻',
-        text: '一只碗出現了一道細細的小裂痕。對你來說，最重要的是什麼呢？',
+        text: '一只碗出現了一道細細的小裂痕。你會先從哪個角度看待它呢？',
         choices: [
           mbtiChoice(
             'glass-tf-01-a',
-            '它是不是還能安穩地盛住茶。',
+            '照標準來看，這道裂痕會不會影響它穩穩盛住茶。',
             'glass-tf-01-r1',
             'glass-tf-01',
             'first',
           ),
           mbtiChoice(
             'glass-tf-01-b',
-            '它是不是依然保有作為禮物的心意。',
+            '收禮的人會不會依然感受到，當初那份被好好對待的心意。',
             'glass-tf-01-r2',
             'glass-tf-01',
             'second',
@@ -1036,14 +1036,14 @@ export const DIALOGUE_SCRIPTS = {
         choices: [
           mbtiChoice(
             'glass-tf-02-a',
-            '我會先試試哪一種能讓玻璃保持最清澈。',
+            '我會比較哪一種釉色更透、更穩，成品是否更不容易再出問題。',
             'glass-tf-02-r1',
             'glass-tf-02',
             'first',
           ),
           mbtiChoice(
             'glass-tf-02-b',
-            '我會選最像那段回憶感覺的那一種。',
+            '我會選讓收碗的人一看就覺得被好好記得的那一種。',
             'glass-tf-02-r2',
             'glass-tf-02',
             'second',
@@ -1108,14 +1108,14 @@ export const DIALOGUE_SCRIPTS = {
         choices: [
           mbtiChoice(
             'glass-jp-02-a',
-            '我會先記下來，再細心調整下一件作品。',
+            '我會先記下來，照原定流程調整下一件作品。',
             'glass-jp-02-r1',
             'glass-jp-02',
             'first',
           ),
           mbtiChoice(
             'glass-jp-02-b',
-            '我會順著它走，看看這道紋路想帶我去哪裡。',
+            '我會先不急著定案，留一點時間看看它還會變成什麼樣。',
             'glass-jp-02-r2',
             'glass-jp-02',
             'second',
@@ -1126,14 +1126,14 @@ export const DIALOGUE_SCRIPTS = {
         id: 'glass-jp-02-r1',
         speakerName: '玻璃師傅',
         avatarLabel: '玻',
-        text: '穩穩的專注，能把驚喜慢慢磨成美麗的樣子。',
+        text: '照著計畫一步一步來，能把驚喜慢慢磨成美麗的樣子。',
         nextNodeId: 'glass-farewell',
       },
       'glass-jp-02-r2': {
         id: 'glass-jp-02-r2',
         speakerName: '玻璃師傅',
         avatarLabel: '玻',
-        text: '好奇心，能把驚喜慢慢磨成美麗的樣子。',
+        text: '保留一點彈性，也能把驚喜慢慢磨成美麗的樣子。',
         nextNodeId: 'glass-farewell',
       },
       'glass-farewell': {
@@ -1212,14 +1212,14 @@ export const DIALOGUE_SCRIPTS = {
         choices: [
           mbtiChoice(
             'final-tf-01-a',
-            '知道自己已經盡力把每一步都走好了。',
+            '想通每一步為什麼這樣做，心裡對整條路有清楚的脈絡。',
             'final-tf-01-r1',
             'final-tf-01',
             'first',
           ),
           mbtiChoice(
             'final-tf-01-b',
-            '知道這段旅程，早已溫柔地改變了我。',
+            '感受到這段路對自己、對身邊的人，其實早已有了分量。',
             'final-tf-01-r2',
             'final-tf-01',
             'second',
@@ -1230,14 +1230,14 @@ export const DIALOGUE_SCRIPTS = {
         id: 'final-tf-01-r1',
         speakerName: '內在嚮導',
         avatarLabel: '心',
-        text: '認真而細心的努力，會慢慢長成安靜的勇氣。',
+        text: '把事情想透，會慢慢長成安靜的勇氣。',
         nextNodeId: 'final-jp-01',
       },
       'final-tf-01-r2': {
         id: 'final-tf-01-r2',
         speakerName: '內在嚮導',
         avatarLabel: '心',
-        text: '柔和而緩慢的成長，會慢慢長成安靜的勇氣。',
+        text: '感受到意義所在，會慢慢長成安靜的勇氣。',
         nextNodeId: 'final-jp-01',
       },
       'final-jp-01': {
