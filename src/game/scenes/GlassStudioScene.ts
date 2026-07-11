@@ -31,8 +31,7 @@ const FURNACE_X = 820
 const BLOW_GLASS_X = 1680
 const BOSS_X = 2280
 
-const BLOW_GLASS_TARGET_HITS = 3
-const BLOW_GLASS_TIMING_THRESHOLD = 0.72
+const BLOW_GLASS_TARGET_HITS = 5
 
 type PlatformSpec = {
   x: number
@@ -69,7 +68,6 @@ export class GlassStudioScene extends Phaser.Scene {
   private bossEncounterReady = false
   private blowGlassState: BlowGlassState = 'idle'
   private blowGlassHits = 0
-  private blowGlassPhase = 0
   private prefersTouchControls = false
   private furnaceMessageTimer?: Phaser.Time.TimerEvent
   private unsubscribeDialogueClosed?: () => void
@@ -84,7 +82,6 @@ export class GlassStudioScene extends Phaser.Scene {
     this.bossEncounterReady = false
     this.blowGlassState = this.bossCleared ? 'success' : 'idle'
     this.blowGlassHits = 0
-    this.blowGlassPhase = 0
     this.prefersTouchControls = shouldShowTouchControls(this)
     this.shards = []
 
@@ -463,13 +460,12 @@ export class GlassStudioScene extends Phaser.Scene {
   private startBlowGlassMinigame() {
     this.blowGlassState = 'active'
     this.blowGlassHits = 0
-    this.blowGlassPhase = 0
     this.blowGlassSprite?.play('glass-blob-pulse')
-    this.blowGlassHint?.setText(`${this.blowGlassTimingHint()}（0/3）`).setVisible(true)
+    this.blowGlassHint?.setText(`${this.blowGlassInteractHint()}（0/${BLOW_GLASS_TARGET_HITS}）`).setVisible(true)
   }
 
-  private blowGlassTimingHint() {
-    return `在光芒最亮時${formatInteractVerb(this.prefersTouchControls)}`
+  private blowGlassInteractHint() {
+    return `連續${formatInteractVerb(this.prefersTouchControls)}吹製`
   }
 
   private updateBlowGlassMinigame(talkJustDown: boolean) {
@@ -477,27 +473,18 @@ export class GlassStudioScene extends Phaser.Scene {
       return
     }
 
-    this.blowGlassPhase = (Math.sin(this.time.now / 380) + 1) / 2
-
     if (!talkJustDown || !this.isNearBlowGlass()) {
       return
     }
 
-    if (this.blowGlassPhase >= BLOW_GLASS_TIMING_THRESHOLD) {
-      this.blowGlassHits += 1
-      this.blowGlassHint?.setText(
-        `${this.blowGlassTimingHint()}（${this.blowGlassHits}/${BLOW_GLASS_TARGET_HITS}）`,
-      )
+    this.blowGlassHits += 1
+    this.blowGlassHint?.setText(
+      `${this.blowGlassInteractHint()}（${this.blowGlassHits}/${BLOW_GLASS_TARGET_HITS}）`,
+    )
 
-      if (this.blowGlassHits >= BLOW_GLASS_TARGET_HITS) {
-        this.completeBlowGlassMinigame()
-      }
-
-      return
+    if (this.blowGlassHits >= BLOW_GLASS_TARGET_HITS) {
+      this.completeBlowGlassMinigame()
     }
-
-    this.blowGlassHits = 0
-    this.blowGlassHint?.setText('溫柔呼吸，再試一次（0/3）')
   }
 
   private completeBlowGlassMinigame() {
@@ -595,7 +582,7 @@ export class GlassStudioScene extends Phaser.Scene {
     if (!this.bossCleared && this.blowGlassState === 'success' && this.isNearGlassMasterBoss()) {
       promptText = interactPrompt(this.prefersTouchControls, '與玻璃師傅完成這一步')
     } else if (!this.bossCleared && this.blowGlassState === 'active' && this.isNearBlowGlass()) {
-      promptText = this.blowGlassTimingHint()
+      promptText = this.blowGlassInteractHint()
     } else if (!this.bossCleared && this.blowGlassState === 'idle' && this.isNearBlowGlass()) {
       promptText = interactPrompt(this.prefersTouchControls, '試著吹製玻璃')
     } else if (this.isNearFurnace()) {
