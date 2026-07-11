@@ -228,10 +228,15 @@ export class FinalScene extends Phaser.Scene {
 
   private placeMemoryShards() {
     const shardPositions = [
+      { x: 220, y: GROUND_TOP - 36 },
       { x: 420, y: 356 },
+      { x: 640, y: 316 },
       { x: 940, y: 254 },
+      { x: 1280, y: 312 },
       { x: 1660, y: 228 },
+      { x: 1940, y: 298 },
       { x: 2240, y: 244 },
+      { x: 1450, y: GROUND_TOP - 36 },
     ]
 
     shardPositions.forEach(({ x, y }) => {
